@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>IoT-SPMS | Kinetic Pulse Parking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#262c37",
+                      "on-primary-container": "#001e58",
+                      "error": "#ff716c",
+                      "secondary-container": "#3d475b",
+                      "on-surface": "#f1f3fe",
+                      "on-error-container": "#ffa8a3",
+                      "on-error": "#490006",
+                      "on-secondary-fixed": "#353f54",
+                      "on-tertiary-container": "#3f5169",
+                      "primary-container": "#799dff",
+                      "inverse-surface": "#f9f9ff",
+                      "secondary-fixed-dim": "#cad4ee",
+                      "on-primary-fixed-variant": "#00276c",
+                      "surface-container": "#151a22",
+                      "surface-container-high": "#1b2029",
+                      "on-background": "#f1f3fe",
+                      "primary-fixed-dim": "#638eff",
+                      "tertiary": "#e5eeff",
+                      "on-surface-variant": "#a8abb5",
+                      "error-container": "#9f0519",
+                      "inverse-primary": "#0055d8",
+                      "tertiary-fixed": "#cee1ff",
+                      "error-dim": "#d7383b",
+                      "primary-dim": "#2f6cf0",
+                      "tertiary-container": "#cee1ff",
+                      "tertiary-dim": "#c0d3f0",
+                      "primary-fixed": "#799dff",
+                      "secondary-fixed": "#d8e2fc",
+                      "surface-dim": "#0a0e15",
+                      "surface-variant": "#202630",
+                      "tertiary-fixed-dim": "#c0d3f0",
+                      "background": "#0a0e15",
+                      "inverse-on-surface": "#51555e",
+                      "on-primary": "#002971",
+                      "surface-container-highest": "#202630",
+                      "outline": "#72757e",
+                      "on-secondary": "#485267",
+                      "on-tertiary-fixed": "#2c3f56",
+                      "surface-tint": "#8eabff",
+                      "surface-container-low": "#0f131b",
+                      "on-tertiary-fixed-variant": "#495b74",
+                      "secondary": "#d8e2fc",
+                      "on-secondary-fixed-variant": "#515c71",
+                      "on-tertiary": "#475a72",
+                      "surface-container-lowest": "#000000",
+                      "surface": "#0a0e15",
+                      "secondary-dim": "#cad4ee",
+                      "on-primary-fixed": "#000000",
+                      "on-secondary-container": "#c6d0e9",
+                      "outline-variant": "#444850",
+                      "primary": "#8eabff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "body": ["Manrope"],
+                      "label": ["Manrope"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #0a0e15; color: #f1f3fe; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .glass { background: rgba(32, 38, 48, 0.6); backdrop-filter: blur(12px); }
+        .pulse-glow { box-shadow: 0 0 20px rgba(47, 108, 240, 0.15); }
+        .gradient-text { background: linear-gradient(to bottom right, #2f6cf0, #8eabff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-mesh { background-image: radial-gradient(at 0% 0%, rgba(47, 108, 240, 0.15) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(142, 171, 255, 0.1) 0px, transparent 50%); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0a0e15]/60 backdrop-blur-xl border-b border-[#444850]/15 shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex justify-between items-center px-8 h-20 w-full">
+<div class="text-2xl font-bold bg-gradient-to-br from-[#2f6cf0] to-[#8eabff] bg-clip-text text-transparent font-['Space_Grotesk'] tracking-tight">
+            IoT-SPMS
+        </div>
+<div class="hidden md:flex items-center space-x-10">
+<a class="font-['Space_Grotesk'] tracking-tight text-[#8eabff] border-b-2 border-[#2f6cf0] pb-1 hover:text-[#f1f3fe] transition-colors duration-300" href="#">Solutions</a>
+<a class="font-['Space_Grotesk'] tracking-tight text-[#a8abb5] hover:text-[#f1f3fe] transition-colors duration-300" href="#">Features</a>
+<a class="font-['Space_Grotesk'] tracking-tight text-[#a8abb5] hover:text-[#f1f3fe] transition-colors duration-300" href="#">Monitoring</a>
+<a class="font-['Space_Grotesk'] tracking-tight text-[#a8abb5] hover:text-[#f1f3fe] transition-colors duration-300" href="#">Pricing</a>
+</div>
+<button class="bg-gradient-to-br from-[#2f6cf0] to-[#8eabff] text-on-primary-container px-6 py-2.5 rounded-full font-bold scale-95 active:scale-90 transition-transform">
+            Login
+        </button>
+</nav>
+<!-- Hero Section -->
+<header class="relative pt-32 pb-20 px-8 hero-mesh min-h-screen flex flex-col justify-center items-center text-center">
+<div class="max-w-5xl mx-auto">
+<span class="inline-block px-4 py-1.5 rounded-full bg-surface-container-high text-primary-fixed text-sm font-bold tracking-widest uppercase mb-6 border border-outline-variant/20">
+                The Kinetic Pulse of Smart Infrastructure
+            </span>
+<h1 class="text-6xl md:text-8xl font-headline font-bold mb-8 tracking-tighter leading-[0.95]">
+                Smart Parking for <br/><span class="gradient-text">Modern Campus</span>
+</h1>
+<p class="text-xl text-on-surface-variant max-w-2xl mx-auto mb-12 font-body leading-relaxed">
+                Automate and optimize with IoT-SPMS. A high-fidelity digital cockpit for real-time occupancy monitoring and intelligent traffic navigation.
+            </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-gradient-to-br from-primary-dim to-primary px-10 py-4 rounded-full text-on-primary font-extrabold text-lg transition-all hover:scale-105 active:scale-95 pulse-glow">
+                    Deploy System
+                </button>
+<button class="glass px-10 py-4 rounded-full text-on-surface font-bold text-lg border border-outline-variant/30 transition-all hover:bg-surface-bright active:scale-95">
+                    View Live Demo
+                </button>
+</div>
+</div>
+<div class="mt-20 w-full max-w-6xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-outline-variant/20 bg-surface-container-low p-2">
+<img class="w-full h-auto rounded-2xl object-cover" data-alt="futuristic dark control room with large dashboard screens displaying real-time 3D parking maps and data analytics in glowing blue and cyan neon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaFcmkmA9WIaXgKMw90Shf0mz_xB66bUO1O2dmAE23F1muqZGjzLlW7aYeMJRpYQCzcQBKuKz9YB0GBdmSDMK9PBms17WTpNtSmOTmebya4rPYZH6-jGkMUriUzzAwxLnnA-8SROoeE7RtejY16Kq_sUPbpHCIo58G7JyStiZPRzE4GlIqy1-0LqHkpZ3kYY-zvF5JYL652YkTCTZ5iwHsZGfGA_RQPBN01o0IfOBAd39vukywnoFiRybRiHT-DXshSbELmrOlgXNy"/>
+</div>
+</header>
+<!-- Introduction Section -->
+<section class="py-32 px-8 bg-surface-container">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div>
+<h2 class="text-4xl font-headline font-bold mb-8 text-on-surface">The Mission: <br/><span class="text-primary-dim">Intelligent Flow Management</span></h2>
+<div class="space-y-8">
+<div class="flex gap-6">
+<div class="w-12 h-12 rounded-xl bg-primary-dim/20 flex items-center justify-center shrink-0 border border-primary-dim/30">
+<span class="material-symbols-outlined text-primary-dim">precision_manufacturing</span>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-2">Advanced Automation</h4>
+<p class="text-on-surface-variant">Removing human error through autonomous sensor networks and automated barrier controls.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="w-12 h-12 rounded-xl bg-primary-dim/20 flex items-center justify-center shrink-0 border border-primary-dim/30">
+<span class="material-symbols-outlined text-primary-dim">verified_user</span>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-2">High-Security Control</h4>
+<p class="text-on-surface-variant">Integrated ANPR systems and real-time surveillance ensuring the highest standards of safety.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="w-12 h-12 rounded-xl bg-primary-dim/20 flex items-center justify-center shrink-0 border border-primary-dim/30">
+<span class="material-symbols-outlined text-primary-dim">account_balance_wallet</span>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-2">Financial Integrity</h4>
+<p class="text-on-surface-variant">Automated revenue tracking and financial management for seamless audits and transparent reporting.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -inset-4 bg-primary-dim/10 blur-3xl rounded-full"></div>
+<img class="relative rounded-3xl w-full h-[500px] object-cover border border-outline-variant/30 shadow-2xl" data-alt="ultra-modern glass automated payment kiosk in a futuristic parking garage with sleek metallic surfaces and glowing interface screens" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3DnxVzfv4lMlKz5y4H9_UHeLx7s1n3heeuxhLLM_83O0e-9BAAmpVAR2UcEAVWVKIAYlbNAwkp2q87MrPWl2yGlPyfNm1ycqFAQFVI5Gxa8pLoftn-_oBbo-Z4AU_jk3AepBcgrlHoHydaSVMZzCcxbuoETCQFEJvcCojzN6L74X4T8Klo5z7bsMqQjNbjlEFjCQieS4dgvDCkJhdc43XNMgAIdPXebabvdV4WyPxMok0xNDSoqV6KdAbS3P9v4ZZimz2soOOewqD"/>
+</div>
+</div>
+</section>
+<!-- Key Solutions Bento Grid -->
+<section class="py-32 px-8 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-20">
+<h2 class="text-5xl font-headline font-bold mb-4">Precision Engineering Solutions</h2>
+<p class="text-on-surface-variant text-lg">Optimizing every pulse of the parking lifecycle.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Solution 1: Congestion -->
+<div class="md:col-span-8 bg-surface-container-low rounded-full p-10 border border-outline-variant/10 relative overflow-hidden group">
+<div class="relative z-10">
+<div class="w-16 h-16 rounded-2xl bg-surface-container-high flex items-center justify-center mb-8 shadow-inner">
+<span class="material-symbols-outlined text-4xl text-primary">traffic</span>
+</div>
+<h3 class="text-3xl font-headline font-bold mb-4">Solve Congestion</h3>
+<p class="text-on-surface-variant max-w-md text-lg mb-8">Control entry/exit points smoothly during peak hours with intelligent queuing algorithms and dynamic throughput management.</p>
+<button class="text-primary font-bold flex items-center gap-2 group-hover:gap-4 transition-all">
+                            Explore Logistics <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<img class="absolute top-0 right-0 h-full w-1/2 object-cover opacity-30 grayscale hover:grayscale-0 transition-all duration-700" data-alt="automated secure entry gates at a parking garage entrance at dusk with glowing blue LED strips and high-tech security cameras" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbI85VCuUZPYqWElxgOk2L8BwbsWKHyhasJCbuV0etpJT_gdqOiMZ_Zh5_cScSxpuc3cULMY-wJDN4DJzS9fc5bzaSycs4BFYBqQ8UhAHgTIEFKzgVhoq0C4MQjezM0UziNaRu3BoEJKzeDQkdSEaylt0X6WLyVN0lynufhf1iUF99wTGgY1hPJq-vbKBI-g0m81y8I5umFQoh8GRrRAB5oX9YHrQdsZcvyfBDpgYh9Mzh2tYcEqFMAC_4n4jTvlkBo5gMfBrzwiNo"/>
+</div>
+<!-- Solution 2: Space Optimization -->
+<div class="md:col-span-4 bg-surface-container-high rounded-full p-10 border border-outline-variant/10 flex flex-col justify-between">
+<div>
+<div class="w-14 h-14 rounded-2xl bg-surface-container-highest flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-3xl text-primary">sensors</span>
+</div>
+<h3 class="text-2xl font-headline font-bold mb-4">Space Optimization</h3>
+<p class="text-on-surface-variant">Live vacancy tracking to end 'aimless searching' using IoT ultrasonic sensor fusion.</p>
+</div>
+<div class="mt-8 pt-8 border-t border-outline-variant/20">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 bg-primary rounded-full animate-ping"></div>
+<span class="text-sm font-mono text-primary">ACTIVE SCANNING...</span>
+</div>
+</div>
+</div>
+<!-- Solution 3: Real-time Visibility -->
+<div class="md:col-span-4 bg-surface-container-high rounded-full p-10 border border-outline-variant/10">
+<div class="w-14 h-14 rounded-2xl bg-surface-container-highest flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-3xl text-primary">analytics</span>
+</div>
+<h3 class="text-2xl font-headline font-bold mb-4">Real-time Visibility</h3>
+<p class="text-on-surface-variant mb-6">Deep-dive dashboard and visual reports for current capacity and historical peak analysis.</p>
+<div class="bg-surface-container-highest/50 rounded-xl p-4 h-32 flex items-end gap-2">
+<div class="bg-primary-dim w-full h-[40%] rounded-t-sm"></div>
+<div class="bg-primary w-full h-[70%] rounded-t-sm"></div>
+<div class="bg-primary-dim w-full h-[55%] rounded-t-sm"></div>
+<div class="bg-primary w-full h-[90%] rounded-t-sm"></div>
+</div>
+</div>
+<!-- Solution 4: Unified Finance -->
+<div class="md:col-span-8 bg-surface-container-low rounded-full p-10 border border-outline-variant/10 flex flex-col md:flex-row gap-10 items-center">
+<div class="flex-1">
+<div class="w-16 h-16 rounded-2xl bg-surface-container-high flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-4xl text-primary">payments</span>
+</div>
+<h3 class="text-3xl font-headline font-bold mb-4">Unified Finance</h3>
+<p class="text-on-surface-variant text-lg">Integrated fee management for audit and reconciliation. End-to-end encryption for every transaction pulse.</p>
+</div>
+<div class="flex-1 w-full h-full min-h-[200px] rounded-2xl overflow-hidden border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="modern close-up of a digital payment terminal showing a 'Payment Successful' message with sleek blue lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO4RqzgD5Lmrra7rFOB6a_AhklbH7vI9K1CLJsy2oKCTnYLP1KTA46coomTc61szoB5-TF-12VeEZ8UxF3vFt-shuj6NafUwmYT4E-vMRNP7MVBau64Gom2L29D1-xZHv_NcDm19TWa0JH3AOpxuVn9SUueVFuEZk8x9DXolOOwTCnB9w5xgyVmFmakRCuM_ffEVIQWlYVUYPd8f9qMOJVq8-PbLQfi8U-vdW0i2l9aWBVdufsWw930SuEZRxWwbvpW5vUkzSQfBi3"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Visual Showcase Section -->
+<section class="py-32 px-8 overflow-hidden">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+<div class="max-w-xl">
+<h2 class="text-5xl font-headline font-bold mb-6 italic tracking-tight">The Future of <br/>Campus Mobility</h2>
+<p class="text-on-surface-variant text-lg">Our hardware integrates seamlessly with campus aesthetics while delivering industrial-grade performance.</p>
+</div>
+<div class="flex gap-4">
+<div class="px-6 py-3 rounded-full border border-primary text-primary font-bold">150+ Deployment Sites</div>
+<div class="px-6 py-3 rounded-full border border-outline-variant text-on-surface-variant font-bold">99.9% Uptime</div>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10 opacity-60"></div>
+<img class="w-full h-[600px] object-cover rounded-3xl shadow-2xl transition-transform duration-1000 group-hover:scale-105" data-alt="interior of a modern concrete parking garage at night with bright green and red LED indicators above parking spots and glowing signage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhrEFlNGo0x0VqiY84-8yi8QT9Ls2wqyYW6W-_D8scdI18nrS9s4_Q_A_UZIvNEGhhrj_XyGvX8h2Kcp-lNzGxluUqVSPo1-R1hWmQKK1aC75ZHDe5-2LLky72qY5qH15N6PV3NmDTL713FE23J1JevVcxuYo0mt8AKd9YzgfV4DQGPE5mo0hAeL3ygeejgAYsR7gFzSrtlx3RQ8pekECX1jRj-IZAfZhRT0lvprbAL3sd2a_8Lkf7jWwOC5T37dg4bOfqScfdiTnr"/>
+<div class="absolute bottom-10 left-10 z-20">
+<h3 class="text-3xl font-headline font-bold">Smart Garage V.4</h3>
+<p class="text-primary font-mono mt-2">Equipped with Luminous Depth sensors</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-12 px-8 border-t border-[#444850]/15 bg-[#0a0e15] font-['Manrope'] text-sm">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="text-[#a8abb5] uppercase tracking-widest text-xs font-bold mb-6">IoT-SPMS Kinetic Pulse</div>
+<p class="text-[#a8abb5] leading-relaxed">Revolutionizing campus parking through sensor fusion and intelligent data architecture.</p>
+</div>
+<div class="col-span-1">
+<h4 class="text-[#f1f3fe] font-bold mb-6 uppercase tracking-widest text-xs">Resources</h4>
+<ul class="space-y-4">
+<li><a class="text-[#a8abb5] hover:text-[#8eabff] transition-colors" href="#">API Docs</a></li>
+<li><a class="text-[#a8abb5] hover:text-[#8eabff] transition-colors" href="#">System Status</a></li>
+<li><a class="text-[#a8abb5] hover:text-[#8eabff] transition-colors" href="#">Developer Portal</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="text-[#f1f3fe] font-bold mb-6 uppercase tracking-widest text-xs">Legal</h4>
+<ul class="space-y-4">
+<li><a class="text-[#a8abb5] hover:text-[#8eabff] transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-[#a8abb5] hover:text-[#8eabff] transition-colors" href="#">Terms of Service</a></li>
+<li><a class="text-[#a8abb5] hover:text-[#8eabff] transition-colors" href="#">Cookie Policy</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="text-[#f1f3fe] font-bold mb-6 uppercase tracking-widest text-xs">Newsletter</h4>
+<div class="flex gap-2">
+<input class="bg-[#1b2029] border-none rounded-xl text-on-surface w-full focus:ring-1 focus:ring-primary-dim" placeholder="Enter email" type="text"/>
+<button class="bg-primary-dim p-2 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-[#444850]/10 flex flex-col md:row justify-between items-center opacity-80 hover:opacity-100 transition-opacity">
+<div class="text-[#a8abb5]">© 2026 IoT-SPMS Kinetic Pulse. All rights reserved. System Status: Operational</div>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="text-[#a8abb5] hover:text-[#8eabff]" href="#">LinkedIn</a>
+<a class="text-[#a8abb5] hover:text-[#8eabff]" href="#">Twitter / X</a>
+<a class="text-[#a8abb5] hover:text-[#8eabff]" href="#">GitHub</a>
+</div>
+</div>
+</footer>
+</body></html>
