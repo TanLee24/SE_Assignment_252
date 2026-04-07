@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KINETIC PARKING | Analytics &amp; Reporting</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#181c23",
+                        "on-tertiary-fixed-variant": "#004f54",
+                        "on-primary-container": "#fffcff",
+                        "on-tertiary": "#00363a",
+                        "on-secondary": "#002b75",
+                        "outline-variant": "#424654",
+                        "surface-bright": "#353941",
+                        "tertiary-fixed-dim": "#00dbe7",
+                        "surface-container-high": "#262a32",
+                        "on-primary-fixed": "#001849",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#31353d",
+                        "surface": "#10131b",
+                        "on-primary-fixed-variant": "#003fa4",
+                        "on-secondary-fixed": "#001849",
+                        "primary-container": "#2f6cf0",
+                        "on-surface": "#dfe2ed",
+                        "on-secondary-fixed-variant": "#21428f",
+                        "surface-tint": "#b3c5ff",
+                        "primary-fixed-dim": "#b3c5ff",
+                        "error": "#ffb4ab",
+                        "background": "#10131b",
+                        "primary": "#b3c5ff",
+                        "surface-variant": "#31353d",
+                        "outline": "#8d90a0",
+                        "secondary-container": "#244592",
+                        "on-background": "#dfe2ed",
+                        "on-tertiary-container": "#f3feff",
+                        "inverse-on-surface": "#2d3038",
+                        "tertiary-container": "#008188",
+                        "on-secondary-container": "#9eb6ff",
+                        "secondary-fixed": "#dbe1ff",
+                        "on-surface-variant": "#c3c6d7",
+                        "surface-container-lowest": "#0a0e15",
+                        "on-primary": "#002b75",
+                        "on-error": "#690005",
+                        "inverse-surface": "#dfe2ed",
+                        "surface-dim": "#10131b",
+                        "on-tertiary-fixed": "#002022",
+                        "tertiary": "#00dbe7",
+                        "secondary": "#b3c5ff",
+                        "inverse-primary": "#0054d6",
+                        "tertiary-fixed": "#74f5ff",
+                        "surface-container": "#1c2027",
+                        "primary-fixed": "#dbe1ff",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#b3c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #10131b; color: #dfe2ed; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .luminous-depth {
+            background: linear-gradient(145deg, rgba(28, 32, 39, 0.8) 0%, rgba(16, 19, 27, 0.9) 100%);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-[#10131b]/80 backdrop-blur-xl flex justify-between items-center px-6 h-16 border-b border-outline-variant/10 shadow-[0px_20px_40px_rgba(0,0,0,0.2)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold bg-gradient-to-br from-[#b3c5ff] to-[#2f6cf0] bg-clip-text text-transparent font-headline tracking-tight">KINETIC PARKING</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-[#dfe2ed]/60 hover:text-[#b3c5ff] transition-colors duration-200 font-headline tracking-tight" href="#">Dashboard</a>
+<a class="text-[#b3c5ff] border-b-2 border-[#2f6cf0] pb-1 font-headline tracking-tight transition-all" href="#">Analytics</a>
+<a class="text-[#dfe2ed]/60 hover:text-[#b3c5ff] transition-colors duration-200 font-headline tracking-tight" href="#">System Map</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-surface-container-highest flex items-center px-4 py-1.5 rounded-full ring-1 ring-outline-variant/15">
+<span class="material-symbols-outlined text-sm opacity-50 mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-on-surface placeholder:text-on-surface-variant/40 w-48" placeholder="Search report..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-[#dfe2ed]/60 hover:text-[#b3c5ff] transition-colors">notifications</button>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant/15">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-[#b3c5ff]">Admin</p>
+<p class="text-[10px] opacity-50 uppercase tracking-widest">System Analyst</p>
+</div>
+<img alt="Admin" class="w-8 h-8 rounded-full border-2 border-primary-container/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZGMIH39Z5JP8CFegScuz9xdkb2LQHVhPiKAZJniYvDR29oq4XqOVUbtvX2dLV4ozn5QjeTCIT0T8IQGU3mj-2O7g_MACQRiEC70rZNlLG3R4fKRTJgwwGXisqsEriiZwxlDffmGuSdAuRXiEgiv7QZdIhYv6hX46fY9moFOetqU_icaZmyi28G34URhObsYzJWdgSQUxwQW8k_nsimbk88GLaTbIz6BqtLjOvMezhX3kPH9rZLk6Uo7IRvj4QwHbq1-bYDCplnw"/>
+</div>
+</div>
+</header>
+<!-- Side Navigation -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface-container-lowest border-r border-outline-variant/10 hidden lg:flex flex-col py-8 px-4 gap-2">
+<div class="mb-8 px-4">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
+<span class="text-xs font-bold tracking-widest text-on-surface-variant uppercase">Network Live</span>
+</div>
+<h3 class="text-on-surface font-bold font-headline">Node-01 Metrics</h3>
+<p class="text-[10px] text-tertiary font-bold">Reporting Active</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-4 py-3 px-4 text-[#dfe2ed]/50 hover:bg-[#31353d]/30 hover:text-[#dfe2ed] transition-all duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-4 bg-gradient-to-r from-[#2f6cf0]/20 to-transparent text-[#b3c5ff] border-l-4 border-[#2f6cf0] transition-all duration-300" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm font-medium">Traffic Reports</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-4 text-[#dfe2ed]/50 hover:bg-[#31353d]/30 hover:text-[#dfe2ed] transition-all duration-300" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-medium">Revenue Hub</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-4 text-[#dfe2ed]/50 hover:bg-[#31353d]/30 hover:text-[#dfe2ed] transition-all duration-300" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="text-sm font-medium">Audit Trails</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 flex flex-col gap-1">
+<button class="bg-surface-container-highest text-on-surface border border-outline-variant/20 py-3 rounded-xl font-bold text-sm mb-4 hover:bg-surface-bright transition-colors">Export Report</button>
+<a class="flex items-center gap-4 py-2 px-4 text-[#dfe2ed]/50 hover:text-error" href="#">
+<span class="material-symbols-outlined text-sm">logout</span>
+<span class="text-xs">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="lg:ml-64 pt-24 px-8 pb-12 min-h-screen">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-6">
+<div>
+<h1 class="text-4xl font-headline font-bold tracking-tight text-on-surface mb-2">Analytics &amp; <span class="text-primary">Reporting</span></h1>
+<p class="text-on-surface-variant/70 font-body">Detailed traffic and financial telemetry for the current period.</p>
+</div>
+<!-- Time Filter Toggle -->
+<div class="flex bg-surface-container-lowest p-1 rounded-full ring-1 ring-outline-variant/20 shadow-lg">
+<button class="px-6 py-2 text-xs font-bold font-headline tracking-widest text-[#dfe2ed]/40 hover:text-[#dfe2ed] transition-all rounded-full">DAY</button>
+<button class="px-6 py-2 text-xs font-bold font-headline tracking-widest text-on-primary bg-primary-container rounded-full shadow-[0_4_12px_rgba(47,108,240,0.4)] transition-all">WEEK</button>
+<button class="px-6 py-2 text-xs font-bold font-headline tracking-widest text-[#dfe2ed]/40 hover:text-[#dfe2ed] transition-all rounded-full">MONTH</button>
+</div>
+</header>
+<!-- KPI Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+<!-- Peak Occupancy Rate -->
+<section class="luminous-depth rounded-2xl p-6 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold text-tertiary tracking-[0.2em] uppercase">Peak Occupancy</span>
+<span class="material-symbols-outlined text-tertiary/40">signal_cellular_alt</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-5xl font-headline font-bold text-on-surface tracking-tighter">98.4</span>
+<span class="text-xl text-tertiary font-bold">%</span>
+</div>
+<div class="mt-4 flex items-center gap-1 text-[10px] font-bold text-on-surface-variant/60">
+<span class="material-symbols-outlined text-xs text-tertiary">trending_up</span>
+<span>+12% vs last week</span>
+</div>
+</section>
+<!-- Total Vehicle Entries -->
+<section class="luminous-depth rounded-2xl p-6">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold text-primary tracking-[0.2em] uppercase">Total Entries</span>
+<span class="material-symbols-outlined text-primary/40">login</span>
+</div>
+<div class="flex items-baseline">
+<span class="text-5xl font-headline font-bold text-on-surface tracking-tighter">15,342</span>
+</div>
+<div class="mt-4 text-[10px] font-bold text-on-surface-variant/60">
+                    Average: 2,191 / day
+                </div>
+</section>
+<!-- Total Vehicle Exits -->
+<section class="luminous-depth rounded-2xl p-6">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold text-primary-fixed-dim tracking-[0.2em] uppercase">Total Exits</span>
+<span class="material-symbols-outlined text-primary-fixed-dim/40">logout</span>
+</div>
+<div class="flex items-baseline">
+<span class="text-5xl font-headline font-bold text-on-surface tracking-tighter">14,890</span>
+</div>
+<div class="mt-4 text-[10px] font-bold text-on-surface-variant/60 text-error">
+                    -3% net occupancy delta
+                </div>
+</section>
+<!-- Average Duration -->
+<section class="luminous-depth rounded-2xl p-6">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-bold text-[#b3c5ff] tracking-[0.2em] uppercase">Avg Duration</span>
+<span class="material-symbols-outlined text-[#b3c5ff]/40">schedule</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-5xl font-headline font-bold text-on-surface tracking-tighter">04:22</span>
+<span class="text-xs text-[#b3c5ff] font-bold">hrs</span>
+</div>
+<div class="mt-4 text-[10px] font-bold text-on-surface-variant/60">
+                    Typical stay: Long-term
+                </div>
+</section>
+</div>
+<!-- Main Analytics Area -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Traffic Flow Analysis Chart -->
+<section class="col-span-12 lg:col-span-8 luminous-depth rounded-2xl p-8">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="text-xl font-headline font-bold text-on-surface">Traffic Flow Analysis</h3>
+<p class="text-xs text-on-surface-variant/60">Entry vs Exit counts by hour (Hourly Peak Detection)</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-[10px] font-bold uppercase text-on-surface-variant/80">Entries</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="text-[10px] font-bold uppercase text-on-surface-variant/80">Exits</span>
+</div>
+</div>
+</div>
+<div class="h-96 w-full">
+<canvas id="trafficFlowChart"></canvas>
+</div>
+</section>
+<!-- Financial Reports Card -->
+<section class="col-span-12 lg:col-span-4 luminous-depth rounded-2xl p-8 flex flex-col">
+<div class="flex items-center gap-3 mb-2">
+<div class="p-2 bg-tertiary-container/20 rounded-lg">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface">Financial Report</h3>
+</div>
+<p class="text-xs text-on-surface-variant/60 mb-8">Estimated revenue from automated billing</p>
+<div class="space-y-6 mb-auto">
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant/40 uppercase tracking-[0.2em] mb-1">Total Estimated Revenue</p>
+<p class="text-5xl font-headline font-bold text-on-surface">$8,650<span class="text-xl text-tertiary font-bold ml-1">.40</span></p>
+</div>
+<div class="bg-surface-container-highest/30 rounded-xl p-4 border border-outline-variant/10">
+<div class="flex justify-between items-center mb-3">
+<span class="text-xs text-on-surface-variant">Student Fees</span>
+<span class="text-xs font-bold">$2,140</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mb-4">
+<div class="bg-primary w-[25%] h-1 rounded-full"></div>
+</div>
+<div class="flex justify-between items-center mb-3">
+<span class="text-xs text-on-surface-variant">Faculty Subscriptions</span>
+<span class="text-xs font-bold">$4,820</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mb-4">
+<div class="bg-secondary w-[55%] h-1 rounded-full"></div>
+</div>
+<div class="flex justify-between items-center mb-3">
+<span class="text-xs text-on-surface-variant">Visitor Hourly</span>
+<span class="text-xs font-bold">$1,690</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full">
+<div class="bg-tertiary w-[20%] h-1 rounded-full"></div>
+</div>
+</div>
+</div>
+<button class="mt-8 w-full bg-gradient-to-br from-[#b3c5ff] to-[#2f6cf0] text-on-primary py-4 rounded-xl font-bold text-sm shadow-[0_8_20_rgba(47,108,240,0.3)] hover:scale-[1.02] active:scale-95 transition-all uppercase tracking-widest">
+                    Generate Invoice PDF
+                </button>
+</section>
+</div>
+<!-- Recent Logs Table (No-Line Rule Applied) -->
+<section class="mt-10 luminous-depth rounded-2xl p-8">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-headline font-bold text-on-surface">Activity Stream</h3>
+<button class="text-primary text-xs font-bold hover:underline">View All Logs</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-highest/30">
+<tr>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest rounded-l-xl">Timestamp</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Event</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Node ID</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Tag ID</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-widest rounded-r-xl">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y-0"> <!-- No-Line rule -->
+<tr class="hover:bg-surface-container-highest/20 transition-colors">
+<td class="px-6 py-4 text-xs">Today, 14:22:45</td>
+<td class="px-6 py-4 text-xs font-bold">Vehicle Entry</td>
+<td class="px-6 py-4 text-xs opacity-60">NODE-01-ENT-A</td>
+<td class="px-6 py-4 text-xs font-mono">#RFID-8829</td>
+<td class="px-6 py-4"><span class="px-2 py-1 rounded bg-tertiary-container/20 text-tertiary text-[10px] font-bold">SUCCESS</span></td>
+</tr>
+<tr class="hover:bg-surface-container-highest/20 transition-colors">
+<td class="px-6 py-4 text-xs">Today, 14:18:12</td>
+<td class="px-6 py-4 text-xs font-bold">Billing Applied</td>
+<td class="px-6 py-4 text-xs opacity-60">SYSTEM-PAY-X</td>
+<td class="px-6 py-4 text-xs font-mono">#RFID-1024</td>
+<td class="px-6 py-4"><span class="px-2 py-1 rounded bg-primary-container/20 text-primary text-[10px] font-bold">PENDING</span></td>
+</tr>
+<tr class="hover:bg-surface-container-highest/20 transition-colors">
+<td class="px-6 py-4 text-xs">Today, 13:55:01</td>
+<td class="px-6 py-4 text-xs font-bold">Vehicle Exit</td>
+<td class="px-6 py-4 text-xs opacity-60">NODE-01-EXT-B</td>
+<td class="px-6 py-4 text-xs font-mono">#RFID-9941</td>
+<td class="px-6 py-4"><span class="px-2 py-1 rounded bg-tertiary-container/20 text-tertiary text-[10px] font-bold">SUCCESS</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<footer class="md:hidden fixed bottom-0 w-full h-16 bg-surface-container-low flex justify-around items-center px-4 z-50 border-t border-outline-variant/10">
+<button class="flex flex-col items-center gap-1 text-on-surface-variant/50">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold">OVERVIEW</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold">ANALYTICS</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant/50">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-[10px] font-bold">REVENUE</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant/50">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold">CONFIG</span>
+</button>
+</footer>
+<script>
+        // Chart.js Configuration for Traffic Flow
+        const ctxTraffic = document.getElementById('trafficFlowChart').getContext('2d');
+        
+        const entryGradient = ctxTraffic.createLinearGradient(0, 0, 0, 400);
+        entryGradient.addColorStop(0, 'rgba(47, 108, 240, 0.4)');
+        entryGradient.addColorStop(1, 'rgba(47, 108, 240, 0)');
+
+        const exitGradient = ctxTraffic.createLinearGradient(0, 0, 0, 400);
+        exitGradient.addColorStop(0, 'rgba(0, 219, 231, 0.2)');
+        exitGradient.addColorStop(1, 'rgba(0, 219, 231, 0)');
+
+        new Chart(ctxTraffic, {
+            type: 'line',
+            data: {
+                labels: ['06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'],
+                datasets: [
+                    {
+                        label: 'Entries',
+                        data: [120, 840, 950, 620, 780, 1100, 1400, 400, 150],
+                        borderColor: '#2f6cf0',
+                        borderWidth: 3,
+                        fill: true,
+                        backgroundColor: entryGradient,
+                        tension: 0.4,
+                        pointBackgroundColor: '#2f6cf0',
+                        pointBorderColor: '#10131b',
+                        pointHoverRadius: 6,
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'Exits',
+                        data: [50, 200, 400, 550, 480, 890, 1200, 1500, 600],
+                        borderColor: '#00dbe7',
+                        borderWidth: 2,
+                        fill: true,
+                        backgroundColor: exitGradient,
+                        borderDash: [5, 5],
+                        tension: 0.4,
+                        pointBackgroundColor: '#00dbe7',
+                        pointBorderColor: '#10131b',
+                        pointHoverRadius: 4,
+                        pointRadius: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#1c2027',
+                        titleFont: { family: 'Space Grotesk', size: 12 },
+                        bodyFont: { family: 'Manrope', size: 11 },
+                        padding: 12,
+                        cornerRadius: 8,
+                        borderColor: 'rgba(255,255,255,0.1)',
+                        borderWidth: 1
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#dfe2ed66', font: { family: 'Manrope', size: 10 } }
+                    },
+                    y: {
+                        grid: { 
+                            color: '#42465415',
+                            drawBorder: false
+                        },
+                        ticks: { color: '#dfe2ed66', font: { family: 'Manrope', size: 10 } }
+                    }
+                }
+            }
+        });
+    </script>
+</body></html>
