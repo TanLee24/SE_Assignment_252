@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Access Management | HCMUT Smart Parking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    let currentUserEditing = null;
+
+    const roleStyles = {
+        'Learner (Student, PhD)': 'bg-secondary-container text-primary-fixed',
+        'Admin': 'bg-tertiary-container text-tertiary-fixed',
+        'Faculty & Staff': 'bg-primary-container/40 text-primary-fixed',
+        'Operator': 'bg-outline-variant/30 text-on-surface'
+    };
+
+    function toggleModal(userId, userName, currentRole) {
+        const modal = document.getElementById('role-modal');
+        if (modal.classList.contains('hidden')) {
+            currentUserEditing = userId;
+            modal.querySelector('h3 + p span').textContent = userName;
+            modal.querySelector('select').value = currentRole;
+            modal.classList.remove('hidden');
+        } else {
+            modal.classList.add('hidden');
+            currentUserEditing = null;
+        }
+    }
+
+    function saveRole() {
+        if (!currentUserEditing) return;
+        
+        const newRole = document.querySelector('#role-modal select').value;
+        
+        // Update Local Storage
+        const savedRoles = JSON.parse(localStorage.getItem('user_roles') || '{}');
+        savedRoles[currentUserEditing] = newRole;
+        localStorage.setItem('user_roles', JSON.stringify(savedRoles));
+
+        // Update UI
+        updateUserRowUI(currentUserEditing, newRole);
+
+        toggleModal();
+        showToast();
+    }
+
+    function updateUserRowUI(userId, role) {
+        const row = document.querySelector(`[data-user-id="${userId}"]`);
+        if (row) {
+            const badge = row.querySelector('span.rounded-full');
+            badge.textContent = role;
+            badge.className = `px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter ${roleStyles[role] || ''}`;
+            
+            // Update the onclick attribute of the edit button to reflect new role
+            const name = row.querySelector('.font-semibold').textContent;
+            const editBtn = row.querySelector('button');
+            editBtn.setAttribute('onclick', `toggleModal('${userId}', '${name}', '${role}')`);
+        }
+    }
+
+    function showToast() {
+        const toast = document.getElementById('toast-notification');
+        toast.classList.remove('hidden');
+        setTimeout(() => {
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+        }, 10);
+
+        setTimeout(() => {
+            toast.classList.remove('opacity-100');
+            toast.classList.add('opacity-0');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 300);
+        }, 3000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedRoles = JSON.parse(localStorage.getItem('user_roles') || '{}');
+        Object.keys(savedRoles).forEach(userId => {
+            updateUserRowUI(userId, savedRoles[userId]);
+        });
+
+        // Initial setup for buttons that weren't dynamic
+        document.querySelectorAll('[data-user-id]').forEach(row => {
+            const userId = row.getAttribute('data-user-id');
+            const name = row.querySelector('.font-semibold').textContent;
+            const role = row.querySelector('span.rounded-full').textContent.trim();
+            const editBtn = row.querySelector('button');
+            editBtn.setAttribute('onclick', `toggleModal('${userId}', '${name}', '${role}')`);
+        });
+    });
+</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #10131b;
+            color: #dfe2ed;
+            font-family: 'Manrope', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(49, 53, 61, 0.6);
+            backdrop-filter: blur(12px);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-line-table > div {
+            border-bottom: none !important;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface overflow-hidden">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-md flex justify-between items-center px-6 py-3 border-b border-slate-800/20 shadow-[0px_20px_40px_rgba(47,108,240,0.08)]">
+<div class="flex items-center gap-4">
+<span class="font-['Space_Grotesk'] text-xl font-bold bg-gradient-to-br from-blue-300 to-blue-600 bg-clip-text text-transparent">HCMUT Smart Parking</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-8 font-['Space_Grotesk'] text-sm tracking-wide">
+<a class="text-blue-400 border-b-2 border-blue-500 pb-1 hover:text-cyan-400 transition-all duration-300" href="#">Access Management</a>
+<a class="text-slate-400 hover:text-cyan-400 transition-all duration-300" href="#">Data Sync</a>
+<a class="text-slate-400 hover:text-cyan-400 transition-all duration-300" href="#">Analytics</a>
+<a class="text-slate-400 hover:text-cyan-400 transition-all duration-300" href="#">Audit Logs</a>
+</div>
+<div class="flex items-center gap-4 text-slate-400">
+<span class="material-symbols-outlined hover:text-cyan-400 transition-all duration-300 cursor-pointer" data-icon="sensors">sensors</span>
+<span class="material-symbols-outlined hover:text-cyan-400 transition-all duration-300 cursor-pointer" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined hover:text-cyan-400 transition-all duration-300 cursor-pointer" data-icon="settings">settings</span>
+<img alt="Admin Avatar" class="w-8 h-8 rounded-full border border-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBw3PDxgTfSfqqSjAlJPgCJ4wZo847Dx0MTgDWcfFVVvNA992qsvMdwfLSwnBqbecPXmvjwI1QlcuDxymg86VHZNemA6fE1yV2vyPMxsQ39-y149hlRahkmk9CC4qDfM0GVEaceEy4hJ-Y7MZe1eTUxjhYK0XVqE6LHRBTUvvvBNFhQPORQe8puSOpGVlsVwUOXdVICqcu1AdSXAF5_yYhhPqsyOx-OkBamqOJTfo4_le-kGQ-ZYx0nDzWD7OgPfRZ0wXkYkm13IA"/>
+</div>
+</div>
+</nav>
+<!-- Side Navigation Shell -->
+<aside class="fixed left-0 top-0 h-screen w-72 bg-slate-950 flex flex-col gap-1 pt-20 px-4 hidden lg:flex">
+<div class="px-4 py-6 mb-4">
+<div class="flex items-center gap-3 mb-1">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="terminal">terminal</span>
+</div>
+<span class="font-['Space_Grotesk'] text-lg font-bold text-slate-100">Parking Command</span>
+</div>
+<span class="text-[10px] uppercase tracking-widest text-slate-500 font-bold ml-11">Terminal V2.4</span>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="bg-gradient-to-r from-blue-600/20 to-transparent text-blue-400 border-l-4 border-blue-500 px-4 py-3 flex items-center gap-3 font-['Manrope'] font-medium hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span>Access Management</span>
+</a>
+<a class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:text-slate-300 hover:bg-slate-900/50 transition-colors font-['Manrope'] font-medium hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="sync">sync</span>
+<span>Data Sync</span>
+</a>
+<a class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:text-slate-300 hover:bg-slate-900/50 transition-colors font-['Manrope'] font-medium hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Analytics</span>
+</a>
+<a class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:text-slate-300 hover:bg-slate-900/50 transition-colors font-['Manrope'] font-medium hover:translate-x-1 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span>Audit Logs</span>
+</a>
+</nav>
+<div class="mt-auto mb-8 px-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_#00dbe7]"></span>
+<span class="text-xs font-['Manrope'] text-tertiary">System Health: OK</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="lg:ml-72 pt-24 px-8 pb-12 h-screen overflow-y-auto no-scrollbar">
+<header class="mb-10">
+<h1 class="font-headline text-5xl font-bold mb-2 tracking-tight">User Access Management</h1>
+<p class="text-on-surface-variant font-body">Manage credentials and IoT node permissions for campus smart parking.</p>
+</header>
+<!-- Terminal-style Search Bar Section -->
+<section class="mb-8">
+<div class="relative group max-w-2xl">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-primary-fixed-dim/50" data-icon="search">search</span>
+</div>
+<input class="w-full border-none rounded-t-lg py-4 pl-12 pr-4 font-body focus:ring-0 focus:border-b-2 focus:border-primary-container transition-all border-b-2 border-transparent text-white placeholder:text-slate-400 bg-slate-900" id="search-input" placeholder="Search by MSSV or Email..." style="color: #f1f3fe;" type="text"/>
+<div class="absolute bottom-0 left-0 h-0.5 w-0 bg-primary-container group-focus-within:w-full transition-all duration-500"></div>
+</div>
+</section>
+<!-- User Data Table Section (No-Line Rule) -->
+<section class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-2xl">
+<div class="grid grid-cols-5 px-6 py-4 text-xs font-label uppercase tracking-widest text-outline">
+<div>ID / MSSV</div>
+<div>Name</div>
+<div>Email</div>
+<div>Role</div>
+<div class="text-right">Actions</div>
+</div>
+<div class="space-y-4 p-6 no-line-table">
+<!-- Row 1: Learner -->
+<div class="grid grid-cols-5 items-center px-6 py-4 bg-surface-container-low rounded-md hover:bg-surface-container-high transition-colors group" data-user-id="2010452">
+<div class="font-headline text-primary-fixed-dim">2010452</div>
+<div class="font-body font-semibold">Nguyen Hoang Nam</div>
+<div class="font-body text-sm text-on-surface-variant">nam.nguyen@hcmut.edu.vn</div>
+<div>
+<span class="px-4 py-1 rounded-full bg-secondary-container text-primary-fixed text-[10px] font-bold uppercase tracking-tighter">Learner (Student, PhD)</span>
+</div>
+<div class="text-right">
+<button class="text-primary-fixed-dim hover:text-primary transition-all flex items-center justify-end gap-2 ml-auto group-hover:scale-105 active:scale-95" onclick="toggleModal()">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+<span class="text-sm font-bold">Edit Role</span>
+</button>
+</div>
+</div>
+<!-- Row 2: Admin -->
+<div class="grid grid-cols-5 items-center px-6 py-4 bg-surface-container-low/50 rounded-md hover:bg-surface-container-high transition-colors group" data-user-id="ADMIN_01">
+<div class="font-headline text-primary-fixed-dim">ADMIN_01</div>
+<div class="font-body font-semibold">Dr. Tran Van An</div>
+<div class="font-body text-sm text-on-surface-variant">an.tran@hcmut.edu.vn</div>
+<div>
+<span class="px-4 py-1 rounded-full bg-tertiary-container text-tertiary-fixed text-[10px] font-bold uppercase tracking-tighter">Admin</span>
+</div>
+<div class="text-right">
+<button class="text-primary-fixed-dim hover:text-primary transition-all flex items-center justify-end gap-2 ml-auto group-hover:scale-105 active:scale-95" onclick="toggleModal()">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+<span class="text-sm font-bold">Edit Role</span>
+</button>
+</div>
+</div>
+<!-- Row 3: Faculty & Staff -->
+<div class="grid grid-cols-5 items-center px-6 py-4 bg-surface-container-low rounded-md hover:bg-surface-container-high transition-colors group" data-user-id="FAC_992">
+<div class="font-headline text-primary-fixed-dim">FAC_992</div>
+<div class="font-body font-semibold">Prof. Le Thi Mai</div>
+<div class="font-body text-sm text-on-surface-variant">mai.le@hcmut.edu.vn</div>
+<div>
+<span class="px-4 py-1 rounded-full bg-primary-container/40 text-primary-fixed text-[10px] font-bold uppercase tracking-tighter">Faculty &amp; Staff</span>
+</div>
+<div class="text-right">
+<button class="text-primary-fixed-dim hover:text-primary transition-all flex items-center justify-end gap-2 ml-auto group-hover:scale-105 active:scale-95" onclick="toggleModal()">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+<span class="text-sm font-bold">Edit Role</span>
+</button>
+</div>
+</div>
+<!-- Row 4: Operator -->
+<div class="grid grid-cols-5 items-center px-6 py-4 bg-surface-container-low/50 rounded-md hover:bg-surface-container-high transition-colors group" data-user-id="OP_512">
+<div class="font-headline text-primary-fixed-dim">OP_512</div>
+<div class="font-body font-semibold">John Smith</div>
+<div class="font-body text-sm text-on-surface-variant">j.smith@sys.io</div>
+<div>
+<span class="px-4 py-1 rounded-full bg-outline-variant/30 text-on-surface text-[10px] font-bold uppercase tracking-tighter">Operator</span>
+</div>
+<div class="text-right">
+<button class="text-primary-fixed-dim hover:text-primary transition-all flex items-center justify-end gap-2 ml-auto group-hover:scale-105 active:scale-95" onclick="toggleModal()">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+<span class="text-sm font-bold">Edit Role</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Glassmorphism Modal Overlay (Preview) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-950/60 backdrop-blur-md hidden" id="role-modal">
+<div class="w-full max-w-md rounded-2xl p-8 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] border border-outline-variant/15 relative bg-slate-900">
+<h3 class="font-headline text-2xl font-bold mb-2">Update User Role</h3>
+<p class="text-on-surface-variant text-sm mb-8 font-body">Assign a new security tier for <span class="text-primary-fixed-dim font-bold">Nguyen Hoang Nam</span>.</p>
+<div class="space-y-6 border-slate-700">
+<div>
+<label class="block text-[10px] font-label uppercase tracking-widest text-outline mb-3">Security Level</label>
+<div class="relative">
+<select class="w-full bg-slate-900 border border-slate-700 rounded-xl py-3.5 px-4 font-body focus:ring-2 focus:ring-primary/50 focus:border-primary appearance-none outline-none transition-all text-slate-100">
+<option class="bg-slate-900 text-slate-100">Learner (Student, PhD)</option>
+<option class="bg-slate-900 text-slate-100">Faculty &amp; Staff</option>
+<option class="bg-slate-900 text-slate-100">Operator</option>
+<option class="bg-slate-900 text-slate-100">Admin</option>
+</select>
+<div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<div class="flex gap-4 pt-4">
+<button class="flex-1 py-3.5 px-6 rounded-xl border border-outline-variant/20 text-sm font-bold hover:bg-white/10 transition-all font-body bg-slate-900" onclick="toggleModal()">
+                        Cancel
+                    </button>
+<button class="flex-1 py-3.5 px-6 rounded-xl bg-gradient-to-br from-primary-container to-blue-700 text-white font-bold text-sm hover:shadow-[0_0_30px_rgba(47,108,240,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all font-body" onclick="saveRole()">
+                        Save Role
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Toast Notification -->
+<div class="fixed bottom-8 right-8 z-[110] flex items-center gap-3 bg-surface-container-high/90 backdrop-blur-md border border-tertiary/20 rounded-xl pl-4 pr-6 py-4 shadow-[0px_20px_40px_rgba(0,0,0,0.4)] hidden opacity-0 transition-opacity duration-300" id="toast-notification">
+<div class="w-8 h-8 rounded-full bg-tertiary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
+</div>
+<div class="flex flex-col">
+<p class="font-['Manrope'] font-bold text-sm text-on-surface">Role Updated Successfully</p>
+<p class="font-['Manrope'] text-[10px] text-on-surface-variant">System access synchronized.</p>
+</div>
+</div>
+<!-- Bottom Nav for Mobile -->
+<div class="md:hidden fixed bottom-0 left-0 w-full bg-slate-950/90 backdrop-blur-lg flex justify-around items-center py-3 border-t border-slate-800/20 z-50">
+<div class="flex flex-col items-center gap-1 text-blue-400">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+<span class="text-[10px] font-bold">Access</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="sync">sync</span>
+<span class="text-[10px]">Sync</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-[10px]">Stats</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span class="text-[10px]">Logs</span>
+</div>
+</div>
+<script>
+    let currentUserEditing = null;
+
+    const roleStyles = {
+        'Learner (Student, PhD)': 'bg-secondary-container text-primary-fixed',
+        'Admin': 'bg-tertiary-container text-tertiary-fixed',
+        'Faculty & Staff': 'bg-primary-container/40 text-primary-fixed',
+        'Operator': 'bg-outline-variant/30 text-on-surface'
+    };
+
+    function toggleModal(userId, userName, currentRole) {
+        const modal = document.getElementById('role-modal');
+        if (modal.classList.contains('hidden')) {
+            currentUserEditing = userId;
+            modal.querySelector('h3 + p span').textContent = userName;
+            modal.querySelector('select').value = currentRole;
+            modal.classList.remove('hidden');
+        } else {
+            modal.classList.add('hidden');
+            currentUserEditing = null;
+        }
+    }
+
+    function saveRole() {
+        if (!currentUserEditing) return;
+        
+        const newRole = document.querySelector('#role-modal select').value;
+        
+        // Update Local Storage
+        const savedRoles = JSON.parse(localStorage.getItem('user_roles') || '{}');
+        savedRoles[currentUserEditing] = newRole;
+        localStorage.setItem('user_roles', JSON.stringify(savedRoles));
+
+        // Update UI
+        updateUserRowUI(currentUserEditing, newRole);
+
+        toggleModal();
+        showToast();
+    }
+
+    function updateUserRowUI(userId, role) {
+        const row = document.querySelector(`[data-user-id="${userId}"]`);
+        if (row) {
+            const badge = row.querySelector('span.rounded-full');
+            badge.textContent = role;
+            badge.className = `px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter ${roleStyles[role] || ''}`;
+            
+            // Update the onclick attribute of the edit button to reflect new role
+            const name = row.querySelector('.font-semibold').textContent;
+            const editBtn = row.querySelector('button');
+            editBtn.setAttribute('onclick', `toggleModal('${userId}', '${name}', '${role}')`);
+        }
+    }
+
+    function showToast() {
+        const toast = document.getElementById('toast-notification');
+        toast.classList.remove('hidden');
+        setTimeout(() => {
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+        }, 10);
+
+        setTimeout(() => {
+            toast.classList.remove('opacity-100');
+            toast.classList.add('opacity-0');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 300);
+        }, 3000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedRoles = JSON.parse(localStorage.getItem('user_roles') || '{}');
+        Object.keys(savedRoles).forEach(userId => {
+            updateUserRowUI(userId, savedRoles[userId]);
+        });
+
+        // Initial setup for buttons that weren't dynamic
+        document.querySelectorAll('[data-user-id]').forEach(row => {
+            const userId = row.getAttribute('data-user-id');
+            const name = row.querySelector('.font-semibold').textContent;
+            const role = row.querySelector('span.rounded-full').textContent.trim();
+            const editBtn = row.querySelector('button');
+            editBtn.setAttribute('onclick', `toggleModal('${userId}', '${name}', '${role}')`);
+        });
+    });
+
+    function filterUsers() {
+        const query = document.getElementById('search-input').value.toLowerCase();
+        const rows = document.querySelectorAll('[data-user-id]');
+        
+        rows.forEach(row => {
+            const userId = row.getAttribute('data-user-id').toLowerCase();
+            const name = row.querySelector('.font-semibold').textContent.toLowerCase();
+            
+            if (userId.includes(query) || name.includes(query)) {
+                row.style.display = 'grid';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', filterUsers);
+    }</script>
+</body></html>

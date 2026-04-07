@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Data Synchronization | HCMUT Smart Parking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;family=Fira+Code:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#353941",
+                        "on-primary-fixed-variant": "#003fa4",
+                        "on-background": "#dfe2ed",
+                        "on-secondary-fixed-variant": "#21428f",
+                        "on-secondary-container": "#9eb6ff",
+                        "surface-container-lowest": "#0a0e15",
+                        "on-primary-fixed": "#001849",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#00dbe7",
+                        "secondary": "#b3c5ff",
+                        "on-error": "#690005",
+                        "on-secondary": "#002b75",
+                        "surface": "#10131b",
+                        "on-tertiary-fixed": "#002022",
+                        "surface-tint": "#b3c5ff",
+                        "secondary-fixed-dim": "#b3c5ff",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed": "#001849",
+                        "tertiary-container": "#008188",
+                        "surface-container-low": "#181c23",
+                        "surface-container-highest": "#31353d",
+                        "outline": "#8d90a0",
+                        "on-surface": "#dfe2ed",
+                        "background": "#10131b",
+                        "primary-container": "#2f6cf0",
+                        "inverse-on-surface": "#2d3038",
+                        "primary": "#b3c5ff",
+                        "outline-variant": "#424654",
+                        "on-tertiary-container": "#f3feff",
+                        "surface-dim": "#10131b",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#00363a",
+                        "inverse-surface": "#dfe2ed",
+                        "primary-fixed": "#dbe1ff",
+                        "on-primary-container": "#fffcff",
+                        "secondary-fixed": "#dbe1ff",
+                        "on-surface-variant": "#c3c6d7",
+                        "surface-container-high": "#262a32",
+                        "surface-container": "#1c2027",
+                        "primary-fixed-dim": "#b3c5ff",
+                        "surface-variant": "#31353d",
+                        "tertiary-fixed": "#74f5ff",
+                        "tertiary": "#00dbe7",
+                        "secondary-container": "#244592",
+                        "on-tertiary-fixed-variant": "#004f54",
+                        "on-primary": "#002b75",
+                        "inverse-primary": "#0054d6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"],
+                        "mono": ["Fira Code"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #10131b;
+            color: #dfe2ed;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ping-pulse {
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        @keyframes ping {
+            75%, 100% {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0a0e15;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #424654;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col py-6 space-y-2 h-screen w-64 docked left-0 border-r border-[#424654]/15 bg-[#0a0e15] shrink-0 sticky top-0">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container">settings_input_component</span>
+</div>
+<div>
+<h1 class="text-lg font-bold text-[#dfe2ed] font-['Space_Grotesk'] leading-tight">Parking Admin</h1>
+<p class="text-[10px] uppercase tracking-widest text-[#dfe2ed]/50 font-['Manrope']">Precision IoT Control</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-6 py-3 text-[#dfe2ed]/50 hover:bg-[#31353d]/30 hover:text-[#b3c5ff] transition-all group" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-['Manrope']">Overview</span>
+</a>
+<a class="flex items-center px-6 py-3 text-[#dfe2ed]/50 hover:bg-[#31353d]/30 hover:text-[#b3c5ff] transition-all group" href="#">
+<span class="material-symbols-outlined mr-3">map</span>
+<span class="font-['Manrope']">Live Map</span>
+</a>
+<a class="flex items-center px-6 py-3 text-[#dfe2ed]/50 hover:bg-[#31353d]/30 hover:text-[#b3c5ff] transition-all group" href="#">
+<span class="material-symbols-outlined mr-3">sensors</span>
+<span class="font-['Manrope']">Sensor Health</span>
+</a>
+<a class="flex items-center px-6 py-3 text-[#dfe2ed]/50 hover:bg-[#31353d]/30 hover:text-[#b3c5ff] transition-all group" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+<span class="font-['Manrope']">User Management</span>
+</a>
+<a class="flex items-center px-6 py-3 text-[#dfe2ed]/50 hover:bg-[#31353d]/30 hover:text-[#b3c5ff] transition-all group" href="#">
+<span class="material-symbols-outlined mr-3">terminal</span>
+<span class="font-['Manrope']">System Logs</span>
+</a>
+</nav>
+<div class="px-4 mt-auto space-y-1">
+<button class="w-full py-3 mb-4 rounded-xl bg-error/10 text-error font-bold text-sm flex items-center justify-center gap-2 hover:bg-error/20 transition-all border border-error/20">
+<span class="material-symbols-outlined text-sm">lock</span>
+                Emergency Lock
+            </button>
+<a class="flex items-center px-4 py-2 text-[#dfe2ed]/50 hover:text-[#b3c5ff] transition-all" href="#">
+<span class="material-symbols-outlined mr-3">help</span>
+<span class="text-sm">Support</span>
+</a>
+<a class="flex items-center px-4 py-2 text-[#dfe2ed]/50 hover:text-[#b3c5ff] transition-all" href="#">
+<span class="material-symbols-outlined mr-3">logout</span>
+<span class="text-sm">Sign Out</span>
+</a>
+</div>
+</aside>
+<div class="flex-1 flex flex-col min-w-0">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center px-8 h-16 w-full bg-[#10131b] dark:bg-[#10131b]/80 backdrop-blur-xl border-b border-[#424654]/15 z-50 sticky top-0 shadow-[0px_20px_40px_rgba(47,108,240,0.08)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-[#dfe2ed] font-['Space_Grotesk']">HCMUT Smart Parking</span>
+<nav class="hidden lg:flex gap-6">
+<a class="text-[#dfe2ed]/70 hover:text-[#dfe2ed] transition-colors text-sm font-medium" href="#">Dashboard</a>
+<a class="text-[#dfe2ed]/70 hover:text-[#dfe2ed] transition-colors text-sm font-medium" href="#">Users</a>
+<a class="text-[#2f6cf0] border-b-2 border-[#2f6cf0] pb-1 font-bold text-sm" href="#">Data Sync</a>
+<a class="text-[#dfe2ed]/70 hover:text-[#dfe2ed] transition-colors text-sm font-medium" href="#">Analytics</a>
+<a class="text-[#dfe2ed]/70 hover:text-[#dfe2ed] transition-colors text-sm font-medium" href="#">Logs</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="bg-surface-container-highest border-none rounded-full pl-10 pr-4 py-1.5 text-xs w-64 focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Search system..." type="text"/>
+</div>
+<button class="p-2 hover:bg-[#31353d]/50 rounded-full transition-all active:scale-95 duration-100">
+<span class="material-symbols-outlined text-[#dfe2ed]/70">notifications</span>
+</button>
+<button class="p-2 hover:bg-[#31353d]/50 rounded-full transition-all active:scale-95 duration-100">
+<span class="material-symbols-outlined text-[#dfe2ed]/70">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest flex items-center justify-center border border-[#424654]/15">
+<img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="close-up portrait of professional man with beard and spectacles looking directly into camera with neutral expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUhLOt-dra5e7KuQo_X_xCEM0uDKWXbLZyuk8B0-yO6dUngJCoIa9d5okwJUa1iNlnHr33dm90Hx_O8f1nwflAvNgLZ1qg5KbvH3bEuwbbE0VobXL7CZMrvLuQPK52qTTPtxOgLz6yAKiBs_0TpRfNKhFcOugWf98d11UQXY07WWcdABm674eJmSYerVQjGpOEXr8w5PE_sOcKmM78fAqdiVXoD9m1V4Ru-kHCSGklR270KjkxyqRwvzxu6gbBBpJ-ef4DCyM4Kg"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="p-8 flex-1 bg-surface space-y-8 max-w-7xl mx-auto w-full">
+<header>
+<h2 class="text-4xl font-bold font-headline tracking-tight mb-2">Data Synchronization</h2>
+<p class="text-on-surface-variant max-w-2xl">Manage real-time communication between local IoT sensors and the central HCMUT DataCore cloud repository.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Connection Status Card -->
+<section class="lg:col-span-4 bg-surface-container-low rounded-lg p-8 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-6">
+<span class="text-[10px] font-bold tracking-[0.2em] text-tertiary uppercase font-label">Status Monitor</span>
+</div>
+<h3 class="text-xl font-bold font-headline text-on-surface mb-8">DATACORE CONNECTION</h3>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="relative w-4 h-4 flex items-center justify-center">
+<div class="absolute w-2 h-2 bg-tertiary rounded-full z-10"></div>
+<div class="absolute w-2 h-2 bg-tertiary rounded-full ping-pulse opacity-75"></div>
+</div>
+<div>
+<p class="text-sm text-on-surface font-medium leading-none mb-1">Status: Connected to HCMUT_DATACORE</p>
+<p class="text-xs text-on-surface-variant">Central Node v2.4.1</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container">update</span>
+<div>
+<p class="text-sm text-on-surface font-medium leading-none mb-1">Last Synced: 14:30 07/04/2026</p>
+<p class="text-xs text-on-surface-variant">Frequency: 15 minutes</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/10">
+<div class="flex items-center justify-between text-xs">
+<span class="text-on-surface-variant">Packet Loss</span>
+<span class="text-tertiary font-mono">0.002%</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full mt-2 overflow-hidden">
+<div class="h-full bg-tertiary w-[98%]"></div>
+</div>
+</div>
+</section>
+<!-- Control Panel Card -->
+<section class="lg:col-span-8 bg-surface-container-low rounded-lg p-8 flex flex-col justify-center items-center relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
+<div class="text-center relative z-10">
+<p class="text-[10px] font-bold tracking-[0.3em] text-on-surface-variant uppercase font-label mb-2">Active Database Records</p>
+<h4 class="text-7xl font-bold font-headline text-primary-container tracking-tighter mb-8" id="record-count">15,342</h4>
+<button class="group relative px-10 py-5 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-bold text-lg shadow-[0px_10px_30px_rgba(47,108,240,0.3)] hover:shadow-[0px_0px_20px_rgba(47,108,240,0.6)] transition-all flex items-center gap-4" id="sync-btn" onclick="startSync()">
+<span class="material-symbols-outlined" id="btn-icon">sync</span>
+<span id="btn-text">Initiate Synchronization</span>
+</button>
+<p class="mt-6 text-sm text-on-surface-variant italic">Manual sync overrides automated intervals.</p>
+</div>
+</section>
+<!-- Terminal Console Card -->
+<section class="lg:col-span-12 bg-surface-container-low rounded-lg p-8">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">terminal</span>
+<h3 class="text-xl font-bold font-headline text-on-surface">SYNC PROGRESS LOG</h3>
+</div>
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-error/30"></div>
+<div class="w-3 h-3 rounded-full bg-secondary/30"></div>
+<div class="w-3 h-3 rounded-full bg-tertiary/30"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-md p-6 h-64 overflow-y-auto font-mono text-sm text-on-surface-variant custom-scrollbar border border-outline-variant/5" id="terminal">
+<div class="opacity-50 mb-2">// System ready. Awaiting user command...</div>
+<div class="flex gap-2 mb-1">
+<span class="text-tertiary">&gt;</span>
+<span>Listening for synchronization trigger...</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Success Toast -->
+<div class="fixed bottom-8 right-8 bg-surface-container-highest border border-tertiary/20 p-4 rounded-xl shadow-2xl translate-y-20 opacity-0 transition-all duration-500 z-[100] flex items-center gap-4" id="success-toast">
+<div class="w-10 h-10 rounded-full bg-tertiary/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div>
+<p class="font-bold text-on-surface text-sm">Sync Successful</p>
+<p class="text-xs text-on-surface-variant">HCMUT_DATACORE is up to date.</p>
+</div>
+<button class="ml-4 text-on-surface-variant hover:text-on-surface" onclick="hideToast()">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<script>
+        function appendLog(text) {
+            const terminal = document.getElementById('terminal');
+            const logEntry = document.createElement('div');
+            logEntry.className = 'flex gap-2 mb-1 animate-pulse';
+            logEntry.innerHTML = `<span class="text-primary-container font-bold">[${new Date().toLocaleTimeString('en-GB', {hour12: false})}]</span> <span>${text}</span>`;
+            terminal.appendChild(logEntry);
+            terminal.scrollTop = terminal.scrollHeight;
+            
+            setTimeout(() => {
+                logEntry.classList.remove('animate-pulse');
+            }, 500);
+        }
+
+        function startSync() {
+            const btn = document.getElementById('sync-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnIcon = document.getElementById('btn-icon');
+            
+            // Disable button
+            btn.disabled = true;
+            btn.classList.add('opacity-70', 'cursor-not-allowed');
+            btnIcon.classList.add('animate-spin');
+            btnText.innerText = 'Synchronizing...';
+
+            // Logs
+            setTimeout(() => appendLog('Establishing secure API link to HCMUT_DATACORE...'), 0);
+            
+            setTimeout(() => {
+                appendLog('Connection successful. Downloading read-only data stream...');
+            }, 2000);
+
+            setTimeout(() => {
+                appendLog('Scanning and reconciling records...');
+            }, 5000);
+
+            setTimeout(() => {
+                appendLog('Updated 15,342 records in Local Cache.');
+                completeSync();
+            }, 8000);
+        }
+
+        function completeSync() {
+            const btn = document.getElementById('sync-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnIcon = document.getElementById('btn-icon');
+            const toast = document.getElementById('success-toast');
+
+            // Reset button
+            btn.disabled = false;
+            btn.classList.remove('opacity-70', 'cursor-not-allowed');
+            btnIcon.classList.remove('animate-spin');
+            btnText.innerText = 'Initiate Synchronization';
+
+            // Show Toast
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                hideToast();
+            }, 5000);
+        }
+
+        function hideToast() {
+            const toast = document.getElementById('success-toast');
+            toast.classList.add('translate-y-20', 'opacity-0');
+            toast.classList.remove('translate-y-0', 'opacity-100');
+        }
+    </script>
+</body></html>
