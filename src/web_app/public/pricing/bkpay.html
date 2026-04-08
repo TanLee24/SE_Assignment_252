@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>BKPay | Thanh toán</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-surface-variant": "#c3c6d7",
+            "inverse-surface": "#dfe2ed",
+            tertiary: "#00dbe7",
+            surface: "#10131b",
+            "surface-container-lowest": "#0a0e15",
+            "primary-container": "#2f6cf0",
+            "surface-container-low": "#181c23",
+            "surface-container-high": "#262a32",
+            "surface-container": "#1c2027",
+            "surface-variant": "#31353d",
+            "surface-bright": "#353941",
+            outline: "#8d90a0",
+            "outline-variant": "#424654",
+            primary: "#b3c5ff",
+            error: "#ffb4ab",
+            "error-container": "#93000a",
+            "on-surface": "#dfe2ed",
+            "on-background": "#dfe2ed",
+            background: "#10131b",
+          },
+          borderRadius: {
+            DEFAULT: "1rem",
+            lg: "2rem",
+            xl: "3rem",
+            full: "9999px",
+          },
+          fontFamily: {
+            headline: ["Space Grotesk"],
+            body: ["Manrope"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: 'Manrope', sans-serif;
+      background-color: #10131b;
+      color: #dfe2ed;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .glass {
+      background: rgba(49, 53, 61, 0.35);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(66, 70, 84, 0.15);
+    }
+
+    .mesh-bg {
+      background-color: #0a0e15;
+      background-image:
+        radial-gradient(at 0% 0%, rgba(47, 108, 240, 0.12) 0px, transparent 55%),
+        radial-gradient(at 100% 100%, rgba(0, 219, 231, 0.08) 0px, transparent 55%),
+        radial-gradient(at 50% 50%, rgba(16, 19, 27, 1) 0px, transparent 100%);
+    }
+  </style>
+</head>
+
+<body class="mesh-bg min-h-screen">
+  <header class="w-full border-b border-outline-variant/15 bg-[#10131b]/70 backdrop-blur-xl">
+    <div class="max-w-3xl mx-auto h-16 px-6 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-primary-container flex items-center justify-center">
+          <span class="material-symbols-outlined text-[#10131b]" style="font-variation-settings: 'FILL' 1;">payments</span>
+        </div>
+        <div>
+          <p class="font-headline font-bold tracking-tight">BKPay</p>
+          <p class="text-xs text-on-surface-variant">Cổng thanh toán (mô phỏng)</p>
+        </div>
+      </div>
+      <a id="backLink" class="text-xs text-on-surface-variant hover:text-on-surface transition-colors" href="payment.html">Quay lại</a>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 pt-10 pb-16">
+    <div class="glass rounded-xl p-6 md:p-8">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <p class="text-xs tracking-widest uppercase text-outline">Giao dịch</p>
+          <h1 class="mt-2 font-headline text-2xl md:text-3xl font-bold">Thanh toán phí gửi xe</h1>
+          <p id="txMeta" class="mt-2 text-sm text-on-surface-variant">—</p>
+        </div>
+        <div class="text-right">
+          <p class="text-xs tracking-widest uppercase text-outline">Số tiền</p>
+          <p id="txAmount" class="mt-2 text-2xl font-extrabold">—</p>
+        </div>
+      </div>
+
+      <div class="mt-6 bg-surface-container-low rounded-lg p-4">
+        <p class="text-xs text-outline tracking-widest uppercase">Lưu ý</p>
+        <p class="mt-2 text-sm text-on-surface-variant">
+          Đây là trang mô phỏng BKPay. Bạn sẽ không cần nhập thông tin thẻ/tài khoản.
+        </p>
+      </div>
+
+      <div id="demoPayBox" class="hidden mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+        <div class="bg-surface-container-low rounded-lg p-4">
+          <p class="text-xs text-outline tracking-widest uppercase">Thanh toán</p>
+          <p class="mt-2 text-sm text-on-surface-variant">Quét QR hoặc mở link để tiếp tục (demo).</p>
+          <a id="payLink"
+            class="mt-4 inline-flex h-10 px-4 items-center justify-center rounded-full bg-surface-container-high text-on-surface font-bold border border-outline-variant/20 hover:bg-surface-bright active:scale-95 transition-all"
+            href="#" target="_blank" rel="noopener">
+            Mở link thanh toán
+          </a>
+          <p id="payUrlText" class="mt-3 text-xs text-on-surface-variant select-none">payqr</p>
+        </div>
+
+        <div class="bg-surface-container-low rounded-lg p-4 flex flex-col items-center">
+          <p class="text-xs text-outline tracking-widest uppercase w-full">QR</p>
+          <img id="qrImg" class="mt-3 w-48 h-48 rounded-lg bg-surface-container-high p-2" alt="QR thanh toán" />
+          <p class="mt-2 text-xs text-on-surface-variant text-center">Scan QR để mở link (demo).</p>
+        </div>
+      </div>
+
+      <div id="errorBox" class="hidden mt-6 rounded-lg p-4 border bg-error-container/30 border-error/30">
+        <p class="font-bold text-on-surface">Không tìm thấy giao dịch</p>
+        <p class="text-sm text-on-surface-variant mt-1">Vui lòng quay lại và tạo lại giao dịch.</p>
+      </div>
+
+      <div class="mt-6 flex flex-col sm:flex-row gap-3">
+        <button id="successBtn"
+          class="h-12 px-6 rounded-full bg-gradient-to-br from-primary to-primary-container text-[#10131b] font-bold tracking-wide active:scale-95 transition-all">
+          Xác nhận thanh toán
+        </button>
+        <button id="failBtn"
+          class="h-12 px-6 rounded-full bg-surface-container-high text-on-surface font-bold border border-outline-variant/20 hover:bg-surface-bright active:scale-95 transition-all">
+          Thất bại
+        </button>
+        <button id="cancelBtn"
+          class="h-12 px-6 rounded-full bg-surface-container-high text-on-surface font-bold border border-outline-variant/20 hover:bg-surface-bright active:scale-95 transition-all">
+          Hủy
+        </button>
+      </div>
+
+      <p class="mt-4 text-xs text-on-surface-variant">
+        Khi bấm xác nhận, BKPay sẽ redirect về IoT-SPMS1 và trả “webhook” (mô phỏng) để cập nhật hóa đơn.
+      </p>
+    </div>
+  </main>
+
+  <script>
+    const STORAGE = {
+      txs: 'spms_transactions_v1',
+      audit: 'spms_audit_logs_v1',
+    };
+
+    const RICKROLL_URL = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+
+    function parseJson(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) return fallback;
+        return JSON.parse(raw);
+      } catch {
+        return fallback;
+      }
+    }
+
+    function writeJson(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function nowIso() {
+      return new Date().toISOString();
+    }
+
+    function addAudit({ severity, actor, action, status, details }) {
+      const logs = parseJson(STORAGE.audit, []);
+      logs.unshift({ ts: nowIso(), severity, actor, action, status, details });
+      writeJson(STORAGE.audit, logs);
+    }
+
+    function formatMoneyVnd(amount) {
+      const safe = Number(amount) || 0;
+      return safe.toLocaleString('vi-VN') + ' đ';
+    }
+
+    function getTx(txId) {
+      const txs = parseJson(STORAGE.txs, []);
+      if (!Array.isArray(txs)) return null;
+      return txs.find(t => t.id === txId) || null;
+    }
+
+    function resolveReturnUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const returnTo = params.get('return_to') || 'payment.html';
+      if (returnTo.includes('://') || returnTo.startsWith('//')) return 'payment.html';
+      return returnTo;
+    }
+
+    function redirectResult(txId, result) {
+      const returnTo = resolveReturnUrl();
+      const base = returnTo.includes('?') ? `${returnTo}&` : `${returnTo}?`;
+      window.location.href = `${base}tx=${encodeURIComponent(txId)}&result=${encodeURIComponent(result)}`;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const txId = params.get('tx');
+
+    const backLink = document.getElementById('backLink');
+    backLink.href = resolveReturnUrl();
+
+    const tx = txId ? getTx(txId) : null;
+    if (!tx) {
+      document.getElementById('errorBox').classList.remove('hidden');
+      document.getElementById('successBtn').disabled = true;
+      document.getElementById('failBtn').disabled = true;
+      document.getElementById('cancelBtn').disabled = true;
+    } else {
+      document.getElementById('txMeta').textContent = `tx=${tx.id} • invoice=${tx.invoiceId} • status=${tx.status}`;
+      document.getElementById('txAmount').textContent = formatMoneyVnd(tx.amount);
+
+      const demoPayUrl = (() => {
+        try {
+          const url = new URL(RICKROLL_URL);
+          url.searchParams.set('tx', tx.id);
+          return url.toString();
+        } catch {
+          return RICKROLL_URL;
+        }
+      })();
+
+      const demoPayBox = document.getElementById('demoPayBox');
+      demoPayBox.classList.remove('hidden');
+
+      const payLink = document.getElementById('payLink');
+      payLink.href = demoPayUrl;
+      document.getElementById('payUrlText').textContent = 'payqr';
+
+      const qrImg = document.getElementById('qrImg');
+      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(demoPayUrl)}`;
+
+      addAudit({
+        severity: 'INFO',
+        actor: 'BKPay',
+        action: 'UserRedirectedToBKPay',
+        status: 'Success',
+        details: `Người dùng được chuyển hướng sang BKPay cho giao dịch ${tx.id}.`
+      });
+    }
+
+    document.getElementById('successBtn').addEventListener('click', () => {
+      if (!tx) return;
+      redirectResult(tx.id, 'success');
+    });
+
+    document.getElementById('failBtn').addEventListener('click', () => {
+      if (!tx) return;
+      redirectResult(tx.id, 'failed');
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', () => {
+      if (!tx) return;
+      redirectResult(tx.id, 'cancelled');
+    });
+  </script>
+</body>
+
+</html>

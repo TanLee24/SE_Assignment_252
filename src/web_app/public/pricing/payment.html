@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>IoT-SPMS | Pricing</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-surface-variant": "#c3c6d7",
+            "inverse-surface": "#dfe2ed",
+            tertiary: "#00dbe7",
+            "surface-tint": "#b3c5ff",
+            "primary-fixed-dim": "#b3c5ff",
+            "tertiary-fixed": "#74f5ff",
+            surface: "#10131b",
+            "surface-container-lowest": "#0a0e15",
+            "primary-container": "#2f6cf0",
+            "surface-container-low": "#181c23",
+            "on-tertiary-fixed": "#002022",
+            "surface-container-high": "#262a32",
+            "on-background": "#dfe2ed",
+            "inverse-on-surface": "#2d3038",
+            outline: "#8d90a0",
+            "surface-variant": "#31353d",
+            "on-tertiary-fixed-variant": "#004f54",
+            "on-primary-fixed": "#001849",
+            "primary-fixed": "#dbe1ff",
+            "on-surface": "#dfe2ed",
+            "on-secondary-container": "#9eb6ff",
+            "tertiary-fixed-dim": "#00dbe7",
+            "secondary-fixed": "#dbe1ff",
+            "inverse-primary": "#0054d6",
+            "surface-container": "#1c2027",
+            "on-tertiary": "#00363a",
+            "on-error-container": "#ffdad6",
+            "on-secondary": "#002b75",
+            "outline-variant": "#424654",
+            "surface-bright": "#353941",
+            "secondary-fixed-dim": "#b3c5ff",
+            "on-secondary-fixed-variant": "#21428f",
+            "tertiary-container": "#008188",
+            "on-primary": "#002b75",
+            "error-container": "#93000a",
+            secondary: "#b3c5ff",
+            primary: "#b3c5ff",
+            "on-tertiary-container": "#f3feff",
+            "on-primary-fixed-variant": "#003fa4",
+            "secondary-container": "#244592",
+            "on-primary-container": "#fffcff",
+            "surface-dim": "#10131b",
+            error: "#ffb4ab",
+            "on-error": "#690005",
+            "surface-container-highest": "#31353d",
+            "on-secondary-fixed": "#001849",
+            background: "#10131b",
+          },
+          borderRadius: {
+            DEFAULT: "1rem",
+            lg: "2rem",
+            xl: "3rem",
+            full: "9999px",
+          },
+          fontFamily: {
+            headline: ["Space Grotesk"],
+            body: ["Manrope"],
+            label: ["Manrope"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: 'Manrope', sans-serif;
+      background-color: #10131b;
+      color: #dfe2ed;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .glass {
+      background: rgba(49, 53, 61, 0.35);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(66, 70, 84, 0.15);
+    }
+
+    .mesh-bg {
+      background-color: #0a0e15;
+      background-image:
+        radial-gradient(at 0% 0%, rgba(47, 108, 240, 0.15) 0px, transparent 55%),
+        radial-gradient(at 100% 100%, rgba(0, 219, 231, 0.1) 0px, transparent 55%),
+        radial-gradient(at 50% 50%, rgba(16, 19, 27, 1) 0px, transparent 100%);
+    }
+  </style>
+</head>
+
+<body class="bg-surface text-on-surface">
+  <header class="fixed top-0 w-full z-50 bg-[#10131b]/80 backdrop-blur-xl border-b border-outline-variant/15">
+    <div class="h-16 px-6 flex items-center justify-between max-w-6xl mx-auto">
+      <a class="font-headline font-bold tracking-tight bg-gradient-to-r from-primary to-primary-container bg-clip-text text-transparent flex flex-col leading-none"
+        href="../index.html">
+        <span class="text-xl">IoT-SPMS</span>
+        <span id="pricingBrandSub" class="mt-1 text-[10px] tracking-widest uppercase text-on-surface-variant">Pricing • Hóa đơn</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <a class="text-xs text-on-surface-variant hover:text-on-surface transition-colors"
+          href="../login.html">Đăng xuất</a>
+        <span class="text-xs text-outline">|</span>
+        <a class="text-xs text-on-surface-variant hover:text-on-surface transition-colors"
+          href="../admin/admin_dashboard.html">Admin</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="mesh-bg min-h-screen pt-24 pb-12 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-8">
+        <h1 id="pricingTitle" class="font-headline text-3xl md:text-4xl font-bold tracking-tight">Pricing</h1>
+        <p id="pricingSubtitle" class="text-on-surface-variant text-sm mt-2 max-w-2xl">—</p>
+
+        <nav class="mt-6 flex flex-wrap gap-2" aria-label="Pricing navigation">
+          <a href="#invoices" data-view="invoices"
+            class="pricing-tab inline-flex items-center justify-center h-10 px-4 rounded-full text-xs font-bold border border-outline-variant/20 bg-surface-container-low text-on-surface hover:bg-surface-container-high active:scale-95 transition-all">
+            Hóa đơn
+          </a>
+          <a href="#transactions" data-view="transactions"
+            class="pricing-tab inline-flex items-center justify-center h-10 px-4 rounded-full text-xs font-bold border border-outline-variant/20 bg-surface-container-low text-on-surface hover:bg-surface-container-high active:scale-95 transition-all">
+            Giao dịch
+          </a>
+          <a href="#policy" data-view="policy"
+            class="pricing-tab inline-flex items-center justify-center h-10 px-4 rounded-full text-xs font-bold border border-outline-variant/20 bg-surface-container-low text-on-surface hover:bg-surface-container-high active:scale-95 transition-all">
+            Chính sách
+          </a>
+        </nav>
+      </div>
+
+      <div id="banner" class="hidden mb-6 rounded-lg p-4 border"></div>
+
+      <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 space-y-6">
+          <div id="view-invoices" class="glass rounded-xl p-6">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <p class="text-xs tracking-widest uppercase text-outline">Hóa đơn</p>
+              <h2 id="invoiceTitle" class="mt-2 font-headline text-2xl font-bold">—</h2>
+              <p id="invoiceMeta" class="text-sm text-on-surface-variant mt-1">—</p>
+            </div>
+            <div class="text-right">
+              <p class="text-xs tracking-widest uppercase text-outline">Trạng thái</p>
+              <div id="invoiceStatus" class="mt-2 inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold">—</div>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-surface-container-low rounded-lg p-4">
+              <p class="text-xs text-outline tracking-widest uppercase">Tổng tiền</p>
+              <p id="invoiceAmount" class="mt-2 text-2xl font-bold">—</p>
+            </div>
+            <div class="bg-surface-container-low rounded-lg p-4">
+              <p class="text-xs text-outline tracking-widest uppercase">Mã hóa đơn</p>
+              <p id="invoiceId" class="mt-2 text-sm font-mono">—</p>
+            </div>
+            <div class="bg-surface-container-low rounded-lg p-4">
+              <p class="text-xs text-outline tracking-widest uppercase">Cập nhật</p>
+              <p id="invoiceUpdated" class="mt-2 text-sm">—</p>
+            </div>
+          </div>
+
+          <div class="mt-6 flex flex-col sm:flex-row gap-3">
+            <button id="payBtn"
+              class="h-12 px-6 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-bold tracking-wide active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+              Thanh toán qua BKPay
+            </button>
+            <button id="refreshBtn"
+              class="h-12 px-6 rounded-full bg-surface-container-high text-on-surface font-bold border border-outline-variant/20 hover:bg-surface-bright active:scale-95 transition-all">
+              Làm mới
+            </button>
+          </div>
+
+          <p class="mt-4 text-xs text-on-surface-variant">
+            Luồng thanh toán (mô phỏng UC-BP03): tạo giao dịch → redirect BKPay → BKPay trả webhook → cập nhật hóa đơn.
+          </p>
+          </div>
+
+          <div id="view-transactions" class="hidden glass rounded-xl p-6">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="text-xs tracking-widest uppercase text-outline">Giao dịch</p>
+                <h2 class="mt-2 font-headline text-2xl font-bold">Lịch sử giao dịch</h2>
+                <p class="text-sm text-on-surface-variant mt-1">Tổng hợp từ dữ liệu demo (localStorage).</p>
+              </div>
+              <button id="txRefreshBtn"
+                class="h-10 px-4 rounded-full bg-surface-container-high text-on-surface text-xs font-bold border border-outline-variant/20 hover:bg-surface-bright active:scale-95 transition-all">
+                Làm mới
+              </button>
+            </div>
+
+            <div class="mt-6 overflow-hidden rounded-lg border border-outline-variant/20">
+              <table class="w-full text-left">
+                <thead class="bg-surface-container-low text-on-surface-variant text-xs tracking-widest uppercase">
+                  <tr>
+                    <th class="px-4 py-3">Thời gian</th>
+                    <th class="px-4 py-3">Mã giao dịch</th>
+                    <th class="px-4 py-3">Số tiền</th>
+                    <th class="px-4 py-3">Trạng thái</th>
+                  </tr>
+                </thead>
+                <tbody id="txTbody" class="bg-surface divide-y divide-outline-variant/10"></tbody>
+              </table>
+            </div>
+
+            <p id="txEmpty" class="hidden mt-4 text-sm text-on-surface-variant">Chưa có giao dịch nào.</p>
+          </div>
+
+          <div id="view-policy" class="hidden glass rounded-xl p-6">
+            <p class="text-xs tracking-widest uppercase text-outline">Chính sách</p>
+            <h2 class="mt-2 font-headline text-2xl font-bold">Chính sách giá (demo)</h2>
+            <p class="text-sm text-on-surface-variant mt-2">
+              Đây là khu vực mô phỏng phần Pricing/Billing. Trong hệ thống thật, chính sách giá được cấu hình bởi Admin (UC-BP01)
+              và hoá đơn được tổng hợp tự động (UC-BP02).
+            </p>
+
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-surface-container-low rounded-lg p-4 border border-outline-variant/15">
+                <p class="text-xs tracking-widest uppercase text-outline">Chu kỳ</p>
+                <p class="mt-2 font-bold">Hàng tháng</p>
+                <p class="mt-1 text-sm text-on-surface-variant">Tạo Billing Record ở trạng thái Chưa thanh toán.</p>
+              </div>
+              <div class="bg-surface-container-low rounded-lg p-4 border border-outline-variant/15">
+                <p class="text-xs tracking-widest uppercase text-outline">Thanh toán</p>
+                <p class="mt-2 font-bold">BKPay</p>
+                <p class="mt-1 text-sm text-on-surface-variant">Redirect + webhook (mô phỏng) để cập nhật hoá đơn.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="glass rounded-xl p-6">
+          <p class="text-xs tracking-widest uppercase text-outline">Thông tin</p>
+          <div class="mt-4 space-y-4 text-sm text-on-surface-variant">
+            <div class="flex gap-3">
+              <span class="material-symbols-outlined text-primary">encrypted</span>
+              <p>Kết nối IoT-SPMS1 ↔ BKPay có chữ ký (HMAC) để chống giả mạo (mô phỏng).</p>
+            </div>
+            <div class="flex gap-3">
+              <span class="material-symbols-outlined text-primary">credit_card_off</span>
+              <p>Không lưu thông tin nhạy cảm về thẻ/tài khoản ví điện tử.</p>
+            </div>
+            <div class="flex gap-3">
+              <span class="material-symbols-outlined text-primary">receipt_long</span>
+              <p>Log giao tiếp API được ghi để phục vụ đối soát.</p>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-outline-variant/20">
+            <p class="text-xs tracking-widest uppercase text-outline">Hành động demo</p>
+            <div class="mt-3 flex flex-col gap-3">
+              <button id="resetBtn"
+                class="h-11 px-5 rounded-full bg-error-container/30 text-error font-bold border border-error/20 hover:bg-error-container/40 active:scale-95 transition-all">
+                Reset dữ liệu demo
+              </button>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const STORAGE = {
+      invoices: 'spms_invoices_v1',
+      txs: 'spms_transactions_v1',
+      audit: 'spms_audit_logs_v1',
+    };
+
+    const ACTOR = {
+      user: 'user_portal_demo',
+      system: 'IoT-SPMS1',
+      bkpay: 'BKPay',
+    };
+
+    function nowIso() {
+      return new Date().toISOString();
+    }
+
+    function formatMoneyVnd(amount) {
+      const safe = Number(amount) || 0;
+      return safe.toLocaleString('vi-VN') + ' đ';
+    }
+
+    function parseJson(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) return fallback;
+        return JSON.parse(raw);
+      } catch {
+        return fallback;
+      }
+    }
+
+    function writeJson(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function uuid() {
+      const c = typeof window !== 'undefined' ? window.crypto : undefined;
+      if (c && typeof c.randomUUID === 'function') return c.randomUUID();
+      return 'tx_' + Math.random().toString(16).slice(2) + '_' + Date.now();
+    }
+
+    function addAudit({ severity, actor, action, status, details }) {
+      const logs = parseJson(STORAGE.audit, []);
+      logs.unshift({ ts: nowIso(), severity, actor, action, status, details });
+      writeJson(STORAGE.audit, logs);
+    }
+
+    async function hmacSha256Base64(secret, message) {
+      const c = typeof window !== 'undefined' ? window.crypto : undefined;
+      if (!c || !c.subtle) throw new Error('WebCrypto not available');
+      const enc = new TextEncoder();
+      const key = await c.subtle.importKey(
+        'raw',
+        enc.encode(secret),
+        { name: 'HMAC', hash: 'SHA-256' },
+        false,
+        ['sign']
+      );
+      const sig = await c.subtle.sign('HMAC', key, enc.encode(message));
+      const bytes = new Uint8Array(sig);
+      let bin = '';
+      for (const b of bytes) bin += String.fromCharCode(b);
+      return btoa(bin);
+    }
+
+    function seedIfEmpty() {
+      const invoices = parseJson(STORAGE.invoices, []);
+      if (Array.isArray(invoices) && invoices.length > 0) return;
+
+      const demoInvoice = {
+        id: 'INV-' + new Date().getFullYear() + '-' + String(new Date().getMonth() + 1).padStart(2, '0') + '-0001',
+        cycleLabel: 'Chu kỳ tháng ' + String(new Date().getMonth() + 1).padStart(2, '0') + '/' + new Date().getFullYear(),
+        amount: 45000,
+        status: 'UNPAID',
+        createdAt: nowIso(),
+        updatedAt: nowIso(),
+        paidAt: null,
+        txId: null,
+      };
+
+      writeJson(STORAGE.invoices, [demoInvoice]);
+      writeJson(STORAGE.txs, []);
+      addAudit({
+        severity: 'INFO',
+        actor: ACTOR.system,
+        action: 'BillingRecordCreated',
+        status: 'Success',
+        details: `Tạo hóa đơn ${demoInvoice.id} (${demoInvoice.cycleLabel}) trạng thái Chưa thanh toán.`
+      });
+    }
+
+    function getCurrentInvoice() {
+      const invoices = parseJson(STORAGE.invoices, []);
+      if (!Array.isArray(invoices) || invoices.length === 0) return null;
+      return invoices[0];
+    }
+
+    function updateInvoice(nextInvoice) {
+      const invoices = parseJson(STORAGE.invoices, []);
+      if (!Array.isArray(invoices) || invoices.length === 0) {
+        writeJson(STORAGE.invoices, [nextInvoice]);
+        return;
+      }
+      invoices[0] = nextInvoice;
+      writeJson(STORAGE.invoices, invoices);
+    }
+
+    function updateTx(nextTx) {
+      const txs = parseJson(STORAGE.txs, []);
+      const idx = Array.isArray(txs) ? txs.findIndex(t => t.id === nextTx.id) : -1;
+      if (idx >= 0) {
+        txs[idx] = nextTx;
+      } else {
+        txs.push(nextTx);
+      }
+      writeJson(STORAGE.txs, txs);
+    }
+
+    function getTx(txId) {
+      const txs = parseJson(STORAGE.txs, []);
+      if (!Array.isArray(txs)) return null;
+      return txs.find(t => t.id === txId) || null;
+    }
+
+    function setBanner({ variant, title, message }) {
+      const el = document.getElementById('banner');
+      const style = {
+        success: 'bg-tertiary/10 border-tertiary/30 text-on-surface',
+        error: 'bg-error-container/30 border-error/30 text-on-surface',
+        info: 'bg-surface-container-low border-outline-variant/20 text-on-surface',
+      }[variant] || 'bg-surface-container-low border-outline-variant/20 text-on-surface';
+
+      el.className = `mb-6 rounded-lg p-4 border ${style}`;
+      el.innerHTML = `
+        <div class="flex items-start gap-3">
+          <span class="material-symbols-outlined ${variant === 'success' ? 'text-tertiary' : variant === 'error' ? 'text-error' : 'text-primary'}">info</span>
+          <div>
+            <p class="font-bold">${title}</p>
+            <p class="text-sm text-on-surface-variant mt-1">${message}</p>
+          </div>
+        </div>
+      `;
+      el.classList.remove('hidden');
+    }
+
+    function clearBanner() {
+      const el = document.getElementById('banner');
+      el.classList.add('hidden');
+      el.innerHTML = '';
+    }
+
+    function render(invoice) {
+      if (!invoice) return;
+
+      document.getElementById('invoiceTitle').textContent = invoice.cycleLabel;
+      document.getElementById('invoiceMeta').textContent = 'Phí gửi xe định kỳ';
+      document.getElementById('invoiceAmount').textContent = formatMoneyVnd(invoice.amount);
+      document.getElementById('invoiceId').textContent = invoice.id;
+      document.getElementById('invoiceUpdated').textContent = new Date(invoice.updatedAt).toLocaleString('vi-VN');
+
+      const statusEl = document.getElementById('invoiceStatus');
+      if (invoice.status === 'PAID') {
+        statusEl.className = 'mt-2 inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-tertiary/15 text-tertiary';
+        statusEl.textContent = 'Đã thanh toán';
+      } else {
+        statusEl.className = 'mt-2 inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-secondary-container/30 text-on-secondary-container';
+        statusEl.textContent = 'Chưa thanh toán';
+      }
+
+      const payBtn = document.getElementById('payBtn');
+      payBtn.disabled = invoice.status === 'PAID';
+    }
+
+    function renderTransactions() {
+      const txs = parseJson(STORAGE.txs, []);
+      const tbody = document.getElementById('txTbody');
+      const emptyEl = document.getElementById('txEmpty');
+      tbody.innerHTML = '';
+
+      if (!Array.isArray(txs) || txs.length === 0) {
+        emptyEl.classList.remove('hidden');
+        return;
+      }
+      emptyEl.classList.add('hidden');
+
+      const sorted = [...txs].sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
+      for (const tx of sorted.slice(0, 20)) {
+        const created = tx.createdAt ? new Date(tx.createdAt).toLocaleString('vi-VN') : '—';
+        const id = tx.id || '—';
+        const amount = formatMoneyVnd(tx.amount);
+        const status = String(tx.status || '—');
+
+        const badge = status === 'SUCCESS'
+          ? 'bg-tertiary/15 text-tertiary'
+          : status === 'PENDING'
+            ? 'bg-secondary-container/30 text-on-secondary-container'
+            : status === 'FAILED'
+              ? 'bg-error-container/30 text-error'
+              : 'bg-surface-container-high text-on-surface';
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="px-4 py-3 text-sm text-on-surface-variant">${created}</td>
+          <td class="px-4 py-3 text-sm font-mono text-on-surface">${id}</td>
+          <td class="px-4 py-3 text-sm text-on-surface">${amount}</td>
+          <td class="px-4 py-3 text-sm"><span class="inline-flex px-2 py-1 rounded-full text-xs font-bold ${badge}">${status}</span></td>
+        `;
+        tbody.appendChild(tr);
+      }
+    }
+
+    const VIEW_META = {
+      invoices: {
+        label: 'Hóa đơn',
+        title: 'Pricing • Hóa đơn',
+        subtitle: 'Thanh toán hóa đơn chu kỳ qua BKPay. Hệ thống không lưu thông tin thẻ/tài khoản của bạn.'
+      },
+      transactions: {
+        label: 'Giao dịch',
+        title: 'Pricing • Giao dịch',
+        subtitle: 'Theo dõi lịch sử giao dịch BKPay (demo) và trạng thái xử lý.'
+      },
+      policy: {
+        label: 'Chính sách',
+        title: 'Pricing • Chính sách',
+        subtitle: 'Tóm tắt chính sách giá/billing (demo) theo Task4.'
+      },
+    };
+
+    function getViewFromLocation() {
+      const raw = (window.location.hash || '').replace('#', '').trim();
+      if (raw === 'transactions') return 'transactions';
+      if (raw === 'policy') return 'policy';
+      return 'invoices';
+    }
+
+    function setActiveView(view) {
+      const meta = VIEW_META[view] || VIEW_META.invoices;
+      document.getElementById('pricingBrandSub').textContent = meta.title;
+      document.getElementById('pricingTitle').textContent = 'Pricing';
+      document.getElementById('pricingSubtitle').textContent = meta.subtitle;
+      document.title = `IoT-SPMS | ${meta.title}`;
+
+      document.getElementById('view-invoices').classList.toggle('hidden', view !== 'invoices');
+      document.getElementById('view-transactions').classList.toggle('hidden', view !== 'transactions');
+      document.getElementById('view-policy').classList.toggle('hidden', view !== 'policy');
+
+      document.querySelectorAll('.pricing-tab').forEach(el => {
+        const isActive = el.getAttribute('data-view') === view;
+        el.classList.toggle('bg-primary-container/30', isActive);
+        el.classList.toggle('border-primary/40', isActive);
+        el.classList.toggle('text-on-surface', true);
+      });
+
+      if (view === 'transactions') renderTransactions();
+    }
+
+    function handleReturnFromBkPay() {
+      const params = new URLSearchParams(window.location.search);
+      const txId = params.get('tx');
+      const result = params.get('result');
+      if (!txId || !result) return;
+
+      const tx = getTx(txId);
+      const invoice = getCurrentInvoice();
+      if (!tx || !invoice) return;
+
+      clearBanner();
+
+      if (result === 'success') {
+        const updatedTx = { ...tx, status: 'SUCCESS', updatedAt: nowIso() };
+        updateTx(updatedTx);
+
+        const updatedInvoice = {
+          ...invoice,
+          status: 'PAID',
+          updatedAt: nowIso(),
+          paidAt: nowIso(),
+          txId: txId,
+        };
+        updateInvoice(updatedInvoice);
+
+        addAudit({
+          severity: 'INFO',
+          actor: ACTOR.bkpay,
+          action: 'WebhookPaymentSuccess',
+          status: 'Success',
+          details: `BKPay webhook xác nhận giao dịch ${txId} cho hóa đơn ${invoice.id}.`
+        });
+
+        addAudit({
+          severity: 'INFO',
+          actor: ACTOR.system,
+          action: 'InvoiceStatusUpdated',
+          status: 'Success',
+          details: `Cập nhật hóa đơn ${invoice.id} sang Đã thanh toán (tx=${txId}).`
+        });
+
+        setBanner({
+          variant: 'success',
+          title: 'Thanh toán thành công',
+          message: 'Hóa đơn đã được cập nhật trạng thái “Đã thanh toán”.'
+        });
+
+        render(updatedInvoice);
+      } else if (result === 'failed' || result === 'cancelled') {
+        const updatedTx = { ...tx, status: result === 'failed' ? 'FAILED' : 'CANCELLED', updatedAt: nowIso() };
+        updateTx(updatedTx);
+
+        addAudit({
+          severity: result === 'failed' ? 'WARNING' : 'INFO',
+          actor: ACTOR.bkpay,
+          action: 'WebhookPaymentResult',
+          status: result === 'failed' ? 'Failed' : 'Cancelled',
+          details: `BKPay webhook trả trạng thái ${updatedTx.status} cho giao dịch ${txId} (hóa đơn ${invoice.id}).`
+        });
+
+        setBanner({
+          variant: 'error',
+          title: result === 'failed' ? 'Thanh toán thất bại' : 'Đã hủy giao dịch',
+          message: 'Hóa đơn vẫn ở trạng thái “Chưa thanh toán”.'
+        });
+      }
+
+      params.delete('tx');
+      params.delete('result');
+      const next = window.location.pathname + (params.toString() ? `?${params}` : '');
+      window.history.replaceState({}, '', next);
+    }
+
+    function applyMaintenanceUi() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('bkpay') !== 'maintenance') return;
+      if (params.get('tx') && params.get('result')) return;
+
+      const payBtn = document.getElementById('payBtn');
+      payBtn.disabled = true;
+
+      setBanner({
+        variant: 'error',
+        title: 'Cổng thanh toán đang bảo trì',
+        message: 'Vui lòng thử lại sau.'
+      });
+    }
+
+    async function startPayment() {
+      const invoice = getCurrentInvoice();
+      if (!invoice) return;
+
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('bkpay') === 'maintenance') {
+        addAudit({
+          severity: 'CRITICAL',
+          actor: ACTOR.system,
+          action: 'BKPayInitTransaction',
+          status: 'Error',
+          details: 'Không gọi được BKPay: cổng thanh toán đang bảo trì.'
+        });
+        setBanner({
+          variant: 'error',
+          title: 'Cổng thanh toán đang bảo trì',
+          message: 'Vui lòng thử lại sau.'
+        });
+        return;
+      }
+
+      clearBanner();
+
+      const txId = uuid();
+      const msg = `${invoice.id}|${invoice.amount}|${txId}`;
+
+      const demoSecret = 'demo_hmac_secret_do_not_use_in_production';
+      let signature = '';
+      try {
+        signature = await hmacSha256Base64(demoSecret, msg);
+      } catch {
+        signature = '';
+      }
+
+      const tx = {
+        id: txId,
+        invoiceId: invoice.id,
+        amount: invoice.amount,
+        status: 'PENDING',
+        createdAt: nowIso(),
+        updatedAt: nowIso(),
+        signature,
+      };
+
+      updateTx(tx);
+
+      addAudit({
+        severity: 'INFO',
+        actor: ACTOR.user,
+        action: 'SelectBKPayPayment',
+        status: 'Success',
+        details: `Người dùng chọn thanh toán BKPay cho hóa đơn ${invoice.id}.`
+      });
+
+      addAudit({
+        severity: 'INFO',
+        actor: ACTOR.system,
+        action: 'BKPayInitTransaction',
+        status: 'Success',
+        details: `Gửi yêu cầu khởi tạo giao dịch sang BKPay (tx=${txId}, sig=${signature ? 'present' : 'missing'}).`
+      });
+
+      const returnTo = encodeURIComponent('payment.html');
+      window.location.href = `bkpay.html?tx=${encodeURIComponent(txId)}&return_to=${returnTo}`;
+    }
+
+    function resetDemo() {
+      localStorage.removeItem(STORAGE.invoices);
+      localStorage.removeItem(STORAGE.txs);
+      localStorage.removeItem(STORAGE.audit);
+      seedIfEmpty();
+      clearBanner();
+      render(getCurrentInvoice());
+      setBanner({
+        variant: 'info',
+        title: 'Đã reset dữ liệu demo',
+        message: 'Hệ thống đã tạo lại 1 hóa đơn mẫu ở trạng thái “Chưa thanh toán”.'
+      });
+    }
+
+    document.getElementById('payBtn').addEventListener('click', () => {
+      startPayment();
+    });
+
+    document.getElementById('refreshBtn').addEventListener('click', () => {
+      clearBanner();
+      seedIfEmpty();
+      render(getCurrentInvoice());
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      resetDemo();
+    });
+
+    document.getElementById('txRefreshBtn').addEventListener('click', () => {
+      renderTransactions();
+    });
+
+    window.addEventListener('hashchange', () => {
+      setActiveView(getViewFromLocation());
+    });
+
+    seedIfEmpty();
+    render(getCurrentInvoice());
+    handleReturnFromBkPay();
+    applyMaintenanceUi();
+    setActiveView(getViewFromLocation());
+  </script>
+</body>
+
+</html>
