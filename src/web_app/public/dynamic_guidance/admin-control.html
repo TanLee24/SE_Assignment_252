@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trung tâm Điều khiển - IoT-SPMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { 'surface': '#0a0e15', 'primary': '#8eabff', 'primary-dim': '#2f6cf0', 'success': '#4ade80', 'error': '#ff716c' }, fontFamily: { 'headline': ['Space Grotesk', 'sans-serif'], 'body': ['Manrope', 'sans-serif'] } } }
+        }
+    </script>
+    <style>
+        .glass { background: rgba(15, 19, 27, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        /* Cố định chiều cao cột trái để hiện thanh cuộn */
+        .sidebar-scroll { height: calc(100vh - 64px); overflow-y: scroll; scrollbar-width: thin; scrollbar-color: #2f6cf0 rgba(255,255,255,0.05); }
+        .sidebar-scroll::-webkit-scrollbar { width: 6px; }
+        .sidebar-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+        .sidebar-scroll::-webkit-scrollbar-thumb { background: #2f6cf0; border-radius: 10px; }
+        
+        .modal-bg { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); }
+        .preview-container { width: 100%; height: 280px; overflow: hidden; position: relative; border-radius: 16px; background: #000; border: 4px solid #1b2029; }
+        .preview-iframe { width: 1920px; height: 1080px; border: none; transform: scale(0.25); transform-origin: 0 0; pointer-events: none; }
+    </style>
+</head>
+<body class="bg-surface text-white font-body min-h-screen overflow-hidden flex flex-col">
+
+    <header class="h-16 border-b border-white/10 px-8 flex items-center justify-between bg-surface/50 backdrop-blur-md z-50">
+        <div class="flex items-center gap-4">
+            <div class="w-8 h-8 bg-primary-dim rounded-lg flex items-center justify-center font-black text-xs text-white">QT</div>
+            <h1 class="text-sm font-black uppercase tracking-[0.2em]">Bảng Điều Khiển Hệ Thống LED</h1>
+        </div>
+        <div class="flex items-center gap-6">
+            <button onclick="resetSystem()" class="text-[10px] font-black uppercase tracking-widest text-white/20 hover:text-primary transition-all">Đặt lại tự động</button>
+            <a href="launcher.html" class="text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-error transition-all flex items-center gap-2">
+                <span class="material-symbols-outlined text-sm">logout</span> Đăng xuất
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-1 flex overflow-hidden">
+        <!-- LEFT: Control Center (Fixed Scrollbar) -->
+        <div class="w-[480px] border-r border-white/10 sidebar-scroll p-8 bg-surface-container/20">
+            <section class="space-y-8 pb-20">
+                <h2 class="text-xs font-black uppercase tracking-[0.3em] text-primary-dim italic">Cấu hình từng bảng LED</h2>
+                
+                <div class="p-6 glass rounded-3xl border-l-4 border-l-primary">
+                    <h3 class="font-headline font-bold text-lg mb-4 text-primary uppercase">Bảng Nút Giao 1 (Global)</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-[9px] font-black text-white/30 uppercase tracking-widest">Tiêu đề mặc định</label>
+                            <input type="text" id="in-glb-header" value="HỆ THỐNG ĐIỀU HƯỚNG" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm focus:border-primary outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[9px] font-black text-error uppercase tracking-widest">Ghi đè thông báo khẩn</label>
+                            <input type="text" id="in-glb-override" placeholder="Nhập để hiện thông báo to" class="w-full bg-error/5 border border-error/20 rounded-xl p-3 text-sm focus:border-error outline-none text-error">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Zone A -->
+                    <div class="p-6 glass rounded-3xl border-l-4 border-l-success">
+                        <span class="font-headline font-bold text-xl uppercase">Khu Vực A</span>
+                        <div class="grid grid-cols-2 gap-4 my-4">
+                            <div>
+                                <label class="text-[9px] font-black text-white/30 uppercase">Chỗ trống</label>
+                                <input type="number" id="in-slots-A" value="15" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-xl font-headline outline-none">
+                            </div>
+                            <div>
+                                <label class="text-[9px] font-black text-white/30 uppercase">Trạng thái</label>
+                                <select class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm outline-none"><option>BÌNH THƯỜNG</option><option>BẢO TRÌ</option></select>
+                            </div>
+                        </div>
+                        <label class="text-[9px] font-black text-white/30 uppercase">Thông báo riêng khu A</label>
+                        <input type="text" id="in-msg-A" placeholder="Để trống để hiện bản đồ" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm outline-none">
+                    </div>
+
+                    <!-- Zone B -->
+                    <div class="p-6 glass rounded-3xl border-l-4 border-l-primary">
+                        <span class="font-headline font-bold text-xl uppercase">Khu Vực B</span>
+                        <div class="grid grid-cols-2 gap-4 my-4">
+                            <input type="number" id="in-slots-B" value="42" class="bg-white/5 border border-white/10 rounded-xl p-3 text-xl font-headline outline-none">
+                            <select class="bg-white/5 border border-white/10 rounded-xl p-3 text-sm outline-none"><option>BÌNH THƯỜNG</option></select>
+                        </div>
+                        <input type="text" id="in-msg-B" placeholder="Để trống để hiện bản đồ" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm outline-none">
+                    </div>
+
+                    <!-- Zone C -->
+                    <div class="p-6 glass rounded-3xl border-l-4 border-l-error">
+                        <span class="font-headline font-bold text-xl uppercase text-error">Khu Vực C</span>
+                        <div class="grid grid-cols-2 gap-4 my-4">
+                            <input type="number" id="in-slots-C" value="0" class="bg-white/5 border border-white/10 rounded-xl p-3 text-xl font-headline outline-none">
+                            <select class="bg-white/5 border border-white/10 rounded-xl p-3 text-sm outline-none"><option>ĐÃ ĐẦY</option></select>
+                        </div>
+                        <input type="text" id="in-msg-C" placeholder="Để trống để hiện bản đồ" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 text-sm outline-none">
+                    </div>
+                </div>
+            </section>
+            
+            <div class="fixed bottom-0 left-0 w-[480px] p-8 bg-gradient-to-t from-surface to-transparent pointer-events-none">
+                <button onclick="showConfirm()" class="w-full bg-primary-dim hover:bg-primary py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs transition-all shadow-2xl pointer-events-auto">
+                    Đẩy cập nhật xuống hệ thống
+                </button>
+            </div>
+        </div>
+
+        <!-- RIGHT: True Live Previews -->
+        <div class="flex-1 bg-[#0f131b] p-10 overflow-y-auto sidebar-scroll">
+            <div class="max-w-5xl mx-auto space-y-12">
+                <div class="text-center"><h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-white/20 mb-2">Xem trước thực tế (Actual Previews)</h2></div>
+                <div class="grid grid-cols-2 gap-10">
+                    <div class="preview-container"><iframe id="iframe-global" src="global-display.html" class="preview-iframe"></iframe></div>
+                    <div class="preview-container"><iframe id="iframe-A" src="local-display.html?zone=A" class="preview-iframe"></iframe></div>
+                    <div class="preview-container"><iframe id="iframe-B" src="local-display.html?zone=B" class="preview-iframe"></iframe></div>
+                    <div class="preview-container"><iframe id="iframe-C" src="local-display.html?zone=C" class="preview-iframe"></iframe></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div id="confirmModal" class="hidden fixed inset-0 z-[100] modal-bg flex items-center justify-center p-6">
+        <div class="glass w-full max-w-md p-10 rounded-[40px] shadow-2xl border-primary/20">
+            <div class="text-center mb-8">
+                <span class="material-symbols-outlined text-3xl text-primary mb-4">publish</span>
+                <h3 class="text-2xl font-headline font-bold uppercase mb-2">Xác nhận cập nhật?</h3>
+                <p class="text-white/40 text-sm">Hệ thống sẽ đồng bộ dữ liệu mới lên toàn bộ các bảng LED.</p>
+            </div>
+            <div class="flex gap-4">
+                <button onclick="hideConfirm()" class="flex-1 bg-white/5 py-4 rounded-2xl text-xs font-black uppercase">Hủy</button>
+                <button onclick="applyChanges()" class="flex-1 bg-primary-dim py-4 rounded-2xl text-xs font-black uppercase">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showConfirm() { document.getElementById('confirmModal').classList.remove('hidden'); }
+        function hideConfirm() { document.getElementById('confirmModal').classList.add('hidden'); }
+        function applyChanges() {
+            // Save settings
+            localStorage.setItem('dg_header', document.getElementById('in-glb-header').value);
+            localStorage.setItem('dg_global_override', document.getElementById('in-glb-override').value);
+            
+            ['A', 'B', 'C'].forEach(z => {
+                localStorage.setItem(`dg_slots_${z}`, document.getElementById(`in-slots-${z}`).value);
+                localStorage.setItem(`dg_msg_${z}`, document.getElementById(`in-msg-${z}`).value);
+            });
+            
+            localStorage.setItem('dg_override_active', 'true');
+            localStorage.setItem('dg_last_update', new Date().getTime());
+            
+            // Reload all previews
+            document.querySelectorAll('iframe').forEach(f => f.contentWindow.location.reload());
+            hideConfirm();
+        }
+        function resetSystem() {
+            localStorage.clear();
+            location.reload();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Launcher - IoT-SPMS Guidance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'surface': '#0a0e15',
+                        'primary': '#8eabff',
+                        'primary-dim': '#2f6cf0',
+                        'success': '#4ade80'
+                    },
+                    fontFamily: {
+                        'headline': ['Space Grotesk', 'sans-serif'],
+                        'body': ['Manrope', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass { background: rgba(15, 19, 27, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .glow-blue { text-shadow: 0 0 30px rgba(47, 108, 240, 0.6); }
+        .card-hover:hover { transform: translateY(-10px); border-color: rgba(47, 108, 240, 0.5); background: rgba(47, 108, 240, 0.05); }
+    </style>
+</head>
+<body class="bg-surface text-white font-body min-h-screen flex flex-col items-center justify-center p-10">
+
+    <div class="text-center mb-16">
+        <h1 class="text-6xl font-headline glow-blue uppercase tracking-tighter mb-4">HỆ THỐNG ĐIỀU HƯỚNG</h1>
+        <p class="text-white/40 text-xl font-black uppercase tracking-[0.4em]">Campus Smart Parking UI Selection</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl w-full">
+        
+        <!-- Nút giao 1 Launcher -->
+        <a href="global-display.html" class="glass p-10 rounded-[40px] text-center card-hover transition-all duration-500 border border-white/5 flex flex-col items-center group">
+            <div class="w-20 h-20 bg-primary-dim/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-4xl text-primary">Alt_Route</span>
+            </div>
+            <h2 class="text-2xl font-headline mb-2 uppercase">NÚT GIAO 1</h2>
+            <p class="text-white/40 text-xs font-bold leading-relaxed uppercase tracking-widest">Bản đồ & Trạng thái tổng quan</p>
+        </a>
+
+        <!-- Zone A Launcher -->
+        <a href="local-display.html?zone=A" class="glass p-10 rounded-[40px] text-center card-hover transition-all duration-500 border border-white/5 flex flex-col items-center group">
+            <div class="w-20 h-20 bg-success/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-4xl text-success">location_on</span>
+            </div>
+            <h2 class="text-2xl font-headline mb-2 uppercase">Khu vực A</h2>
+            <p class="text-white/40 text-xs font-bold leading-relaxed uppercase tracking-widest">Biển báo tại bãi A</p>
+        </a>
+
+        <!-- Zone B Launcher -->
+        <a href="local-display.html?zone=B" class="glass p-10 rounded-[40px] text-center card-hover transition-all duration-500 border border-white/5 flex flex-col items-center group">
+            <div class="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-4xl text-primary">location_on</span>
+            </div>
+            <h2 class="text-2xl font-headline mb-2 uppercase">Khu vực B</h2>
+            <p class="text-white/40 text-xs font-bold leading-relaxed uppercase tracking-widest">Biển báo tại bãi B</p>
+        </a>
+
+        <!-- Zone C Launcher -->
+        <a href="local-display.html?zone=C" class="glass p-10 rounded-[40px] text-center card-hover transition-all duration-500 border border-white/5 flex flex-col items-center group">
+            <div class="w-20 h-20 bg-error/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-4xl text-error">location_on</span>
+            </div>
+            <h2 class="text-2xl font-headline mb-2 uppercase">Khu vực C</h2>
+            <p class="text-white/40 text-xs font-bold leading-relaxed uppercase tracking-widest">Biển báo tại bãi C</p>
+        </a>
+
+    </div>
+
+    <!-- Admin Access Link -->
+    <div class="mt-20">
+        <a href="auth-login.html" class="flex items-center gap-3 text-white/20 hover:text-white transition-all text-sm font-black uppercase tracking-[0.3em]">
+            <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
+            TRUY CẬP QUẢN TRỊ VIÊN
+        </a>
+    </div>
+
+</body>
+</html>

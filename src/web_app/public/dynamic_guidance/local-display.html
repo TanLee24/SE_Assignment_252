@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local LED Signage - IoT-SPMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: { colors: { 'surface': '#0a0e15', 'surface-container-high': '#1b2029', 'primary': '#8eabff', 'primary-dim': '#2f6cf0', 'error': '#ff716c', 'success': '#4ade80' }, fontFamily: { 'headline': ['Space Grotesk', 'sans-serif'], 'body': ['Manrope', 'sans-serif'] } } }
+        }
+    </script>
+    <style>
+        .glow-green { text-shadow: 0 0 30px rgba(74, 222, 128, 0.6); }
+        .glow-blue { text-shadow: 0 0 30px rgba(47, 108, 240, 0.6); }
+        .glow-blue-intense { text-shadow: 0 0 50px rgba(47, 108, 240, 0.8); }
+        .glass { background: rgba(15, 19, 27, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(68, 72, 80, 0.2); }
+        .guidance-path { stroke-dasharray: 12; animation: dash 0.8s linear infinite; } @keyframes dash { to { stroke-dashoffset: -24; } }
+        .slot { transition: all 0.5s ease; } .slot-target { filter: drop-shadow(0 0 15px #2f6cf0); stroke-width: 4px; }
+    </style>
+</head>
+<body class="bg-surface text-white font-body h-screen flex overflow-hidden">
+    
+    <!-- OVERRIDE OVERLAY (To rõ) -->
+    <div id="override-overlay" class="hidden fixed inset-0 bg-surface z-[100] flex flex-col items-center justify-center p-20 text-center">
+        <h2 id="override-zone-title" class="text-5xl font-headline text-primary/40 uppercase tracking-[0.5em] mb-12">KHU VỰC A</h2>
+        <h1 id="override-msg" class="text-8xl font-headline uppercase glow-blue leading-tight tracking-tighter max-w-6xl animate-pulse">ĐANG CẬP NHẬT TRẠNG THÁI</h1>
+    </div>
+
+    <aside id="left-col" class="w-1/4 h-full border-r border-white/5 flex flex-col p-12 justify-center items-center text-center bg-gradient-to-b from-primary-dim/10 to-transparent relative">
+        <button onclick="window.location.href='launcher.html'" class="absolute top-8 left-8 flex items-center gap-2 text-white/20 hover:text-primary transition-all uppercase text-[10px] font-black tracking-widest">
+            <span class="material-symbols-outlined text-sm">grid_view</span> LAUNCHER
+        </button>
+        <div class="space-y-2 mb-6"><span class="text-primary/40 font-black uppercase tracking-[0.4em] text-3xl">KHU VỰC</span><h1 id="zone-id-large" class="text-[16rem] font-headline leading-none glow-blue-intense">A</h1></div>
+        <div class="w-2/3 h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent my-12"></div>
+        <div class="space-y-4"><div id="vacancy-count-large" class="text-[10rem] font-headline text-success glow-green leading-none">15</div><p class="text-success/60 font-black uppercase tracking-[0.4em] text-3xl">CHỖ TRỐNG</p></div>
+    </aside>
+
+    <main id="right-col" class="flex-1 h-full relative p-12 flex flex-col">
+        <header class="flex justify-between items-center mb-10">
+            <h1 class="text-5xl font-headline tracking-tight uppercase glow-blue">SƠ ĐỒ ĐIỀU HƯỚNG CHI TIẾT</h1>
+            <div class="flex gap-8 glass px-8 py-5 rounded-2xl border-white/10">
+                <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-md bg-success"></div><span class="text-xs font-black uppercase">TRỐNG</span></div>
+                <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-md bg-error"></div><span class="text-xs font-black uppercase">ĐÃ CÓ XE</span></div>
+            </div>
+        </header>
+        <div class="flex-1 glass rounded-[48px] relative overflow-hidden flex items-center justify-center p-2 bg-surface-container-high/30 border-white/5 shadow-2xl">
+            <svg id="local-map-svg" viewBox="0 0 1600 1000" class="w-full h-full">
+                <g id="roads-container"></g><g id="slots-container"></g>
+                <path id="guidance-arrow" d="" stroke="white" stroke-width="8" fill="none" marker-end="url(#arrowhead)" class="guidance-path hidden shadow-lg" style="filter: drop-shadow(0 0 10px rgba(255,255,255,0.5))"/>
+                <g id="current-pos"><circle cx="60" cy="920" r="15" fill="#2f6cf0" class="animate-pulse"/><text x="60" y="985" text-anchor="middle" fill="white" font-size="24" font-weight="900" class="uppercase tracking-[0.2em] glow-blue">BẠN Ở ĐÂY</text></g>
+                <defs><marker id="arrowhead" markerWidth="4" markerHeight="3" refX="3" refY="1.5" orient="auto"><polygon points="0 0, 4 1.5, 0 3" fill="white" /></marker></defs>
+            </svg>
+        </div>
+    </main>
+
+    <script src="assets/scripts/core.js"></script>
+    <script src="assets/scripts/signage.js"></script>
+    <script>
+        function checkOverride() {
+            const isOverride = localStorage.getItem('dg_override_active') === 'true';
+            const overlay = document.getElementById('override-overlay');
+            const leftCol = document.getElementById('left-col');
+            const rightCol = document.getElementById('right-col');
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const zoneId = urlParams.get('zone') || "A";
+            const customMsg = localStorage.getItem(`dg_msg_${zoneId}`);
+
+            // Chỉ kích hoạt overlay nếu override=true VÀ có tin nhắn cụ thể cho khu này
+            if (isOverride && customMsg && customMsg.trim() !== "") {
+                document.getElementById('override-zone-title').innerText = `KHU VỰC ${zoneId}`;
+                document.getElementById('override-msg').innerText = customMsg;
+                overlay.classList.remove('hidden');
+                leftCol.classList.add('hidden');
+                rightCol.classList.add('hidden');
+            } else {
+                overlay.classList.add('hidden');
+                leftCol.classList.remove('hidden');
+                rightCol.classList.remove('hidden');
+                
+                // Cập nhật số liệu nếu có trong storage
+                const slots = localStorage.getItem(`dg_slots_${zoneId}`);
+                if (slots !== null) {
+                    const vacancyEl = document.getElementById('vacancy-count-large');
+                    if (vacancyEl) vacancyEl.innerText = slots;
+                }
+            }
+        }
+        checkOverride(); setInterval(checkOverride, 2000);
+    </script>
+</body>
+</html>
