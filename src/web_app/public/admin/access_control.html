@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Access Control | HCMUT Smart Parking</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-bright": "#353941",
+            "surface-container-lowest": "#0a0e15",
+            "on-secondary-container": "#9eb6ff",
+            "on-secondary-fixed": "#001849",
+            "on-primary-fixed-variant": "#003fa4",
+            "on-secondary-fixed-variant": "#21428f",
+            "on-primary": "#002b75",
+            "on-tertiary-fixed-variant": "#004f54",
+            "secondary-fixed": "#dbe1ff",
+            "surface-container": "#1c2027",
+            "primary-container": "#2f6cf0",
+            "error": "#ffb4ab",
+            "surface-container-low": "#181c23",
+            "primary-fixed-dim": "#b3c5ff",
+            "on-secondary": "#002b75",
+            "surface-tint": "#b3c5ff",
+            "error-container": "#93000a",
+            "tertiary-fixed": "#74f5ff",
+            "inverse-surface": "#dfe2ed",
+            "tertiary": "#00dbe7",
+            "secondary-container": "#244592",
+            "on-tertiary-container": "#f3feff",
+            "on-error-container": "#ffdad6",
+            "tertiary-fixed-dim": "#00dbe7",
+            "on-primary-fixed": "#001849",
+            "surface-variant": "#31353d",
+            "surface": "#10131b",
+            "tertiary-container": "#008188",
+            "surface-container-high": "#262a32",
+            "on-surface": "#dfe2ed",
+            "on-surface-variant": "#c3c6d7",
+            "surface-container-highest": "#31353d",
+            "primary": "#b3c5ff",
+            "outline-variant": "#424654",
+            "surface-dim": "#10131b",
+            "on-tertiary": "#00363a",
+            "secondary-fixed-dim": "#b3c5ff",
+            "on-background": "#dfe2ed",
+            "secondary": "#b3c5ff",
+            "on-tertiary-fixed": "#002022",
+            "on-primary-container": "#fffcff",
+            "inverse-primary": "#0054d6",
+            "primary-fixed": "#dbe1ff",
+            "on-error": "#690005",
+            "inverse-on-surface": "#2d3038",
+            "background": "#10131b",
+            "outline": "#8d90a0"
+          },
+          borderRadius: {
+            DEFAULT: "1rem",
+            lg: "2rem",
+            xl: "3rem",
+            full: "9999px"
+          },
+          fontFamily: {
+            headline: ["Space Grotesk"],
+            body: ["Manrope"],
+            label: ["Manrope"]
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #10131b;
+      color: #dfe2ed;
+      font-family: 'Manrope', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+
+    .glass-card {
+      background: rgba(49, 53, 61, 0.4);
+      backdrop-filter: blur(20px);
+    }
+
+    .text-gradient-primary {
+      background: linear-gradient(135deg, #b3c5ff 0%, #2f6cf0 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .glow-hover:hover {
+      box-shadow: 0 0 20px rgba(47, 108, 240, 0.2);
+    }
+
+    .pulse-dot {
+      position: relative;
+      width: 10px;
+      height: 10px;
+      border-radius: 9999px;
+    }
+
+    .pulse-dot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      animation: pulsePing 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes pulsePing {
+      75%,
+      100% {
+        transform: scale(2.6);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-surface selection:bg-primary-container selection:text-on-primary-container">
+  <!-- Top Navigation Bar -->
+  <header class="fixed top-0 w-full z-50 bg-[#10131b]/80 backdrop-blur-2xl border-b border-[#424654]/15 shadow-[0px_20px_40px_rgba(47,108,240,0.08)]">
+    <div class="flex justify-between items-center h-20 px-8 w-full max-w-[1920px] mx-auto">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#b3c5ff] to-[#2f6cf0] font-['Space_Grotesk']">HCMUT Smart Parking</span>
+      </div>
+
+      <nav class="hidden md:flex gap-6 items-center h-full">
+        <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-4 py-2 rounded-lg" href="admin_dashboard.html">Dashboard</a>
+        <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#b3c5ff] border-b-2 border-[#2f6cf0] h-full flex items-center px-2" href="access_control.html">Access Control</a>
+        <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-4 py-2 rounded-lg" href="users.html">Users</a>
+        <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-4 py-2 rounded-lg" href="sync.html">Data Sync</a>
+        <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-4 py-2 rounded-lg" href="analytics.html">Analytics</a>
+        <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-4 py-2 rounded-lg" href="logs.html">Audit Logs</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <button id="onlineToggle" class="flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant/15 hover:bg-surface-variant/30 transition-colors active:scale-95">
+          <span id="onlineDot" class="pulse-dot bg-tertiary"></span>
+          <span id="onlineLabel" class="text-xs font-bold tracking-widest uppercase text-tertiary">ONLINE</span>
+          <span class="material-symbols-outlined text-[#dfe2ed]/60">wifi</span>
+        </button>
+
+        <button class="p-2 text-[#dfe2ed]/60 hover:text-[#b3c5ff] active:scale-95 transition-transform" title="Notifications">
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
+
+        <button class="p-2 text-[#dfe2ed]/60 hover:text-[#b3c5ff] active:scale-95 transition-transform" title="Settings">
+          <span class="material-symbols-outlined">settings</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-32 pb-20 px-8 max-w-[1920px] mx-auto min-h-screen">
+    <!-- Page Header -->
+    <section class="mb-10">
+      <div class="flex flex-col lg:flex-row justify-between items-start gap-6">
+        <div>
+          <h1 class="font-headline text-5xl md:text-6xl font-bold tracking-tighter mb-2">Access <span class="text-gradient-primary">Control</span></h1>
+          <p class="font-body text-on-surface-variant text-lg max-w-3xl">Gate operations console for entry/exit validation, temporary tickets, exception handling, and offline-first queueing.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full lg:w-auto">
+          <div class="bg-surface-container-low p-5 rounded-lg min-w-[220px]">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-xs text-primary">local_parking</span>
+              <span class="font-label text-[10px] uppercase tracking-[0.1em] text-on-surface-variant">Occupancy</span>
+            </div>
+            <div class="font-headline text-3xl font-bold text-primary"><span id="kpiUsed">0</span>/<span id="kpiCap">0</span></div>
+            <p class="text-xs text-on-surface-variant mt-1">Live capacity guard for Entry Gate.</p>
+          </div>
+
+          <div class="bg-surface-container-low p-5 rounded-lg min-w-[220px]">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_10px_#00dbe7]"></span>
+              <span class="font-label text-[10px] uppercase tracking-[0.1em] text-on-surface-variant">Barrier</span>
+            </div>
+            <div class="font-headline text-3xl font-bold text-tertiary" id="kpiBarrier">READY</div>
+            <p class="text-xs text-on-surface-variant mt-1">Motor controller state (simulated).</p>
+          </div>
+
+          <div class="bg-surface-container-low p-5 rounded-lg min-w-[220px]">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-xs text-primary">cloud_queue</span>
+              <span class="font-label text-[10px] uppercase tracking-[0.1em] text-on-surface-variant">Offline Queue</span>
+            </div>
+            <div class="font-headline text-3xl font-bold text-primary" id="kpiQueue">0</div>
+            <p class="text-xs text-on-surface-variant mt-1">Pending events waiting for sync.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="offlineBanner" class="hidden mt-6 bg-error-container/20 border border-error/20 rounded-lg px-6 py-4 flex items-start gap-3">
+        <span class="material-symbols-outlined text-error">cloud_off</span>
+        <div>
+          <p class="font-headline font-bold text-error">Offline Mode</p>
+          <p class="text-sm text-on-surface-variant">Transactions are queued locally. You can continue issuing temporary tickets and logging gate actions in degraded mode.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen Tabs -->
+    <section class="mb-8">
+      <div class="flex flex-wrap gap-2 bg-surface-container-lowest p-2 rounded-full ring-1 ring-outline-variant/15 w-fit">
+        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all bg-primary-container text-on-primary-container shadow-[0_4px_12px_rgba(47,108,240,0.35)]" data-screen="entry">Entry Gate</button>
+        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all text-[#dfe2ed]/60 hover:text-[#dfe2ed]" data-screen="exit">Exit Gate</button>
+        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all text-[#dfe2ed]/60 hover:text-[#dfe2ed]" data-screen="temp">Temporary Ticket</button>
+        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all text-[#dfe2ed]/60 hover:text-[#dfe2ed]" data-screen="exceptions">Exception Handling</button>
+        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all text-[#dfe2ed]/60 hover:text-[#dfe2ed]" data-screen="offline">Offline Mode</button>
+      </div>
+    </section>
+
+    <!-- Main Canvas -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Control Console -->
+      <div class="lg:col-span-5 space-y-6">
+        <section class="glass-card rounded-lg p-8 glow-hover">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <p class="text-[10px] font-bold tracking-[0.3em] text-on-surface-variant uppercase font-label" id="statePrefix">STATE</p>
+              <h2 class="font-headline text-3xl font-bold tracking-tight mt-1" id="stateTitle">IDLE</h2>
+              <p class="text-sm text-on-surface-variant mt-2" id="stateMessage">Ready to scan credentials at selected gate.</p>
+            </div>
+            <div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center border border-outline-variant/15">
+              <span class="material-symbols-outlined text-primary" id="stateIcon">qr_code_scanner</span>
+            </div>
+          </div>
+
+          <div class="mt-6 bg-surface-container-low rounded-lg p-4 flex items-center gap-3">
+            <div id="statusDot" class="pulse-dot bg-primary"></div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold tracking-widest uppercase" id="statusLabel">IDLE</span>
+                <span class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant" id="statusHint">Select a screen to begin</span>
+              </div>
+              <div class="text-xs text-on-surface-variant mt-1" id="statusSub">No pending operations.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Entry Gate Screen -->
+        <section class="ac-screen space-y-6" data-screen="entry">
+          <section class="bg-surface-container-low rounded-lg p-8">
+            <h3 class="font-headline text-xl font-bold mb-2">Entry Gate</h3>
+            <p class="text-sm text-on-surface-variant mb-6">Validate card → check capacity → open barrier → create active parking session.</p>
+
+            <div class="space-y-4">
+              <div>
+                <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">RFID / Card UID</label>
+                <input id="entryCard" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary/40" placeholder="e.g., CARD-7F2A91" />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Plate (optional)</label>
+                  <input id="entryPlate" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary/40" placeholder="59A-123.45" />
+                </div>
+                <div>
+                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Simulate Outcome</label>
+                  <select id="entrySim" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary/40">
+                    <option value="auto">AUTO (normal)</option>
+                    <option value="success">SUCCESS</option>
+                    <option value="card_invalid">ERROR: Card Invalid</option>
+                    <option value="full">ERROR: Parking Full</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="flex gap-3 pt-2">
+                <button id="entryScan" class="flex-1 px-6 py-3 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-bold shadow-[0px_10px_30px_rgba(47,108,240,0.25)] hover:shadow-[0px_0px_20px_rgba(47,108,240,0.55)] transition-all active:scale-95">
+                  <span class="material-symbols-outlined mr-2">login</span>
+                  Start Scan
+                </button>
+                <button id="entryReset" class="px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold border border-outline-variant/15 hover:bg-surface-bright transition-colors active:scale-95">
+                  Reset
+                </button>
+              </div>
+
+              <div class="text-xs text-on-surface-variant">
+                Interaction flow: Operator clicks <span class="text-primary">Start Scan</span> → system enters <span class="text-primary">scanning</span> → success opens barrier & logs session, or error reports exception.
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- Exit Gate Screen -->
+        <section class="ac-screen hidden space-y-6" data-screen="exit">
+          <section class="bg-surface-container-low rounded-lg p-8">
+            <h3 class="font-headline text-xl font-bold mb-2">Exit Gate</h3>
+            <p class="text-sm text-on-surface-variant mb-6">Validate ticket/card → compute fee → confirm payment → close session → open barrier.</p>
+
+            <div class="space-y-4">
+              <div>
+                <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Ticket ID / Card UID</label>
+                <input id="exitId" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary/40" placeholder="e.g., CARD-7F2A91 or TMP-104822" />
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Payment Method</label>
+                  <select id="exitPay" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary/40">
+                    <option value="cash">Cash</option>
+                    <option value="card">Card</option>
+                    <option value="wallet">E-Wallet</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Simulate Outcome</label>
+                  <select id="exitSim" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary/40">
+                    <option value="auto">AUTO (normal)</option>
+                    <option value="success">SUCCESS</option>
+                    <option value="mismatch">ERROR: Ticket Mismatch</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="flex gap-3 pt-2">
+                <button id="exitScan" class="flex-1 px-6 py-3 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-bold shadow-[0px_10px_30px_rgba(47,108,240,0.25)] hover:shadow-[0px_0px_20px_rgba(47,108,240,0.55)] transition-all active:scale-95">
+                  <span class="material-symbols-outlined mr-2">logout</span>
+                  Start Scan
+                </button>
+                <button id="exitReset" class="px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold border border-outline-variant/15 hover:bg-surface-bright transition-colors active:scale-95">
+                  Reset
+                </button>
+              </div>
+
+              <div id="exitFeePanel" class="hidden mt-4 bg-surface-container-high rounded-lg p-4 border border-outline-variant/10">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Calculated Fee</p>
+                    <p class="font-headline text-3xl font-bold text-primary" id="exitFee">0</p>
+                  </div>
+                  <button id="exitConfirm" class="px-6 py-3 rounded-xl bg-tertiary/15 text-tertiary font-bold border border-tertiary/25 hover:bg-tertiary/20 transition-colors active:scale-95">
+                    <span class="material-symbols-outlined mr-2">payments</span>
+                    Confirm Payment & Open
+                  </button>
+                </div>
+                <p class="text-xs text-on-surface-variant mt-2">On confirm: session closes and occupancy decreases.</p>
+              </div>
+
+              <div class="text-xs text-on-surface-variant">
+                Interaction flow: Start Scan → system validates & computes fee → operator confirms payment → barrier opens.
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- Temporary Ticket Screen -->
+        <section class="ac-screen hidden space-y-6" data-screen="temp">
+          <section class="bg-surface-container-low rounded-lg p-8">
+            <h3 class="font-headline text-xl font-bold mb-2">Temporary Ticket</h3>
+            <p class="text-sm text-on-surface-variant mb-6">Issue visitor ticket → open entry barrier → track session by ticket ID (no card required).</p>
+
+            <div class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Vehicle Type</label>
+                  <select id="tempVehicle" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary/40">
+                    <option value="motorbike">Motorbike</option>
+                    <option value="car">Car</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Plate (optional)</label>
+                  <input id="tempPlate" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary/40" placeholder="59A-123.45" />
+                </div>
+              </div>
+
+              <div class="flex gap-3 pt-2">
+                <button id="tempIssue" class="flex-1 px-6 py-3 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-bold shadow-[0px_10px_30px_rgba(47,108,240,0.25)] hover:shadow-[0px_0px_20px_rgba(47,108,240,0.55)] transition-all active:scale-95">
+                  <span class="material-symbols-outlined mr-2">confirmation_number</span>
+                  Issue Ticket
+                </button>
+                <button id="tempReset" class="px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold border border-outline-variant/15 hover:bg-surface-bright transition-colors active:scale-95">Reset</button>
+              </div>
+
+              <div id="tempResult" class="hidden mt-4 bg-surface-container-high rounded-lg p-4 border border-outline-variant/10">
+                <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Issued Ticket</p>
+                <div class="flex items-center justify-between gap-4">
+                  <div>
+                    <p class="font-headline text-3xl font-bold text-primary" id="tempTicketId">TMP-000000</p>
+                    <p class="text-xs text-on-surface-variant mt-1" id="tempIssuedAt">Issued at: --</p>
+                  </div>
+                  <div class="w-16 h-16 rounded-xl bg-surface-container-low flex items-center justify-center border border-outline-variant/10">
+                    <span class="material-symbols-outlined text-primary">qr_code_2</span>
+                  </div>
+                </div>
+                <p class="text-xs text-on-surface-variant mt-3">Use this Ticket ID at Exit Gate for validation and fee calculation.</p>
+              </div>
+
+              <div class="text-xs text-on-surface-variant">
+                Interaction flow: Issue Ticket → success returns Ticket ID → barrier opens → session tracked until exit.
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- Exception Handling Screen -->
+        <section class="ac-screen hidden space-y-6" data-screen="exceptions">
+          <section class="bg-surface-container-low rounded-lg p-8">
+            <h3 class="font-headline text-xl font-bold mb-2">Exception Handling</h3>
+            <p class="text-sm text-on-surface-variant mb-6">Operator tools to resolve common gate exceptions without breaking the audit trail.</p>
+
+            <div class="space-y-4">
+              <div>
+                <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Exception Type</label>
+                <select id="exType" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary/40">
+                  <option value="card_invalid">Card Invalid / Not Registered</option>
+                  <option value="full">Parking Full</option>
+                  <option value="mismatch">Entry/Exit Mismatch</option>
+                  <option value="sensor_timeout">Sensor Timeout</option>
+                </select>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button id="exSimulate" class="px-6 py-3 rounded-xl bg-error/10 text-error font-bold border border-error/20 hover:bg-error/15 transition-colors active:scale-95">
+                  <span class="material-symbols-outlined mr-2">report</span>
+                  Simulate Error
+                </button>
+                <button id="exOverride" class="px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold border border-outline-variant/15 hover:bg-surface-bright transition-colors active:scale-95">
+                  <span class="material-symbols-outlined mr-2">admin_panel_settings</span>
+                  Manual Override
+                </button>
+              </div>
+
+              <div class="text-xs text-on-surface-variant">
+                Interaction flow: Select exception → system displays <span class="text-error">error</span> state → operator may apply Manual Override (logged) if policy allows.
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- Offline Mode Screen -->
+        <section class="ac-screen hidden space-y-6" data-screen="offline">
+          <section class="bg-surface-container-low rounded-lg p-8">
+            <h3 class="font-headline text-xl font-bold mb-2">Offline Mode</h3>
+            <p class="text-sm text-on-surface-variant mb-6">When connectivity is lost, actions are stored locally and synced later.</p>
+
+            <div class="space-y-4">
+              <div class="flex flex-col sm:flex-row gap-3">
+                <button id="offlineQueueEntry" class="flex-1 px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold border border-outline-variant/15 hover:bg-surface-bright transition-colors active:scale-95">
+                  <span class="material-symbols-outlined mr-2">playlist_add</span>
+                  Queue Entry Event
+                </button>
+                <button id="offlineQueueExit" class="flex-1 px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold border border-outline-variant/15 hover:bg-surface-bright transition-colors active:scale-95">
+                  <span class="material-symbols-outlined mr-2">playlist_add</span>
+                  Queue Exit Event
+                </button>
+              </div>
+
+              <div class="flex flex-col sm:flex-row gap-3">
+                <button id="offlineSync" class="flex-1 px-6 py-3 rounded-xl bg-tertiary/15 text-tertiary font-bold border border-tertiary/25 hover:bg-tertiary/20 transition-colors active:scale-95">
+                  <span class="material-symbols-outlined mr-2">sync</span>
+                  Sync Queue (online only)
+                </button>
+                <button id="offlineClear" class="flex-1 px-6 py-3 rounded-xl bg-error/10 text-error font-bold border border-error/20 hover:bg-error/15 transition-colors active:scale-95">
+                  <span class="material-symbols-outlined mr-2">delete</span>
+                  Clear Queue
+                </button>
+              </div>
+
+              <div class="text-xs text-on-surface-variant">
+                Interaction flow: Offline → queue actions → back Online → Sync Queue → events applied to local sessions/occupancy and logged.
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+
+      <!-- Telemetry + Event Log -->
+      <div class="lg:col-span-7 space-y-6">
+        <section class="bg-surface-container-low rounded-lg p-8">
+          <div class="flex items-center justify-between gap-6">
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.3em] text-on-surface-variant font-bold">Gate Telemetry</p>
+              <h3 class="font-headline text-2xl font-bold mt-1" id="telemetryTitle">ENTRY GATE</h3>
+              <p class="text-sm text-on-surface-variant mt-2">Real-time indicators aligned to the system state machine.</p>
+            </div>
+            <div class="flex items-center gap-3 bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant/15">
+              <span id="telemetryDot" class="pulse-dot bg-primary"></span>
+              <span class="text-xs font-bold tracking-widest uppercase" id="telemetryStatus">IDLE</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+            <div class="bg-surface-container-high rounded-lg p-5">
+              <div class="flex items-center justify-between">
+                <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Scanner</p>
+                <span class="material-symbols-outlined text-primary">nfc</span>
+              </div>
+              <p class="font-headline text-2xl font-bold mt-3" id="telemetryScanner">READY</p>
+              <p class="text-xs text-on-surface-variant mt-1">RFID/QR validation.</p>
+            </div>
+
+            <div class="bg-surface-container-high rounded-lg p-5">
+              <div class="flex items-center justify-between">
+                <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Barrier</p>
+                <span class="material-symbols-outlined text-tertiary">door_front</span>
+              </div>
+              <p class="font-headline text-2xl font-bold mt-3" id="telemetryBarrier">CLOSED</p>
+              <p class="text-xs text-on-surface-variant mt-1">Actuator state.</p>
+            </div>
+
+            <div class="bg-surface-container-high rounded-lg p-5">
+              <div class="flex items-center justify-between">
+                <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Policy</p>
+                <span class="material-symbols-outlined text-on-surface">gpp_good</span>
+              </div>
+              <p class="font-headline text-2xl font-bold mt-3" id="telemetryPolicy">ENFORCED</p>
+              <p class="text-xs text-on-surface-variant mt-1">Capacity & mismatch guards.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-surface-container-low rounded-lg p-8">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="font-headline text-xl font-bold flex items-center gap-3">
+              <span class="material-symbols-outlined text-tertiary">history</span>
+              Access Event Log
+            </h3>
+            <button id="clearEvents" class="text-xs font-bold tracking-widest uppercase text-[#dfe2ed]/60 hover:text-[#b3c5ff] transition-colors">Clear</button>
+          </div>
+
+          <div id="eventList" class="space-y-4"></div>
+
+          <template id="eventItemTpl">
+            <div class="bg-surface-container-high rounded-lg p-4 flex items-start gap-3">
+              <div class="mt-1 w-2 h-2 rounded-full" data-dot></div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-3">
+                  <p class="text-sm font-bold" data-title></p>
+                  <span class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant" data-tag></span>
+                </div>
+                <p class="text-xs text-on-surface-variant mt-1" data-detail></p>
+              </div>
+              <div class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant" data-time></div>
+            </div>
+          </template>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="w-full py-6 bg-[#0a0e15] border-t border-[#424654]/10">
+    <div class="flex flex-col md:flex-row justify-between items-center px-12 gap-4">
+      <div class="font-['Manrope'] text-[10px] uppercase tracking-[0.05em] text-[#dfe2ed]/40">© 2026 HCMUT IoT Labs. Kinetic Grid Systems.</div>
+      <div class="flex gap-8">
+        <a class="font-['Manrope'] text-[10px] uppercase tracking-[0.05em] text-[#dfe2ed]/40 hover:text-[#00dbe7] transition-colors" href="#">System Status</a>
+        <a class="font-['Manrope'] text-[10px] uppercase tracking-[0.05em] text-[#dfe2ed]/40 hover:text-[#00dbe7] transition-colors" href="#">Documentation</a>
+        <a class="font-['Manrope'] text-[10px] uppercase tracking-[0.05em] text-[#dfe2ed]/40 hover:text-[#00dbe7] transition-colors" href="#">Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const STORAGE = {
+      online: 'ac_online',
+      capacity: 'ac_capacity',
+      used: 'ac_used',
+      sessions: 'ac_sessions',
+      queue: 'ac_queue',
+      events: 'ac_events'
+    };
+
+    const STATUS = {
+      idle: 'idle',
+      scanning: 'scanning',
+      success: 'success',
+      error: 'error',
+      offline: 'offline'
+    };
+
+    const SCREENS = {
+      entry: 'entry',
+      exit: 'exit',
+      temp: 'temp',
+      exceptions: 'exceptions',
+      offline: 'offline'
+    };
+
+    const state = {
+      screen: SCREENS.entry,
+      status: STATUS.idle,
+      online: true,
+      barrier: 'READY',
+      pendingExit: null
+    };
+
+    function safeJsonParse(value, fallback) {
+      try {
+        return JSON.parse(value);
+      } catch {
+        return fallback;
+      }
+    }
+
+    function nowIsoShort() {
+      const d = new Date();
+      const pad = (n) => String(n).padStart(2, '0');
+      return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    }
+
+    function formatMoneyVnd(amount) {
+      return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+    }
+
+    function loadNumber(key, defaultValue) {
+      const raw = localStorage.getItem(key);
+      const n = Number(raw);
+      return Number.isFinite(n) ? n : defaultValue;
+    }
+
+    function saveNumber(key, value) {
+      localStorage.setItem(key, String(value));
+    }
+
+    function loadSessions() {
+      return safeJsonParse(localStorage.getItem(STORAGE.sessions) || '{}', {});
+    }
+
+    function saveSessions(sessions) {
+      localStorage.setItem(STORAGE.sessions, JSON.stringify(sessions));
+    }
+
+    function loadQueue() {
+      return safeJsonParse(localStorage.getItem(STORAGE.queue) || '[]', []);
+    }
+
+    function saveQueue(queue) {
+      localStorage.setItem(STORAGE.queue, JSON.stringify(queue));
+    }
+
+    function loadEvents() {
+      return safeJsonParse(localStorage.getItem(STORAGE.events) || '[]', []);
+    }
+
+    function saveEvents(events) {
+      localStorage.setItem(STORAGE.events, JSON.stringify(events));
+    }
+
+    function initStorage() {
+      if (!localStorage.getItem(STORAGE.capacity)) saveNumber(STORAGE.capacity, 500);
+      if (!localStorage.getItem(STORAGE.used)) saveNumber(STORAGE.used, 128);
+      if (!localStorage.getItem(STORAGE.sessions)) saveSessions({});
+      if (!localStorage.getItem(STORAGE.queue)) saveQueue([]);
+      if (!localStorage.getItem(STORAGE.events)) saveEvents([]);
+
+      const onlineRaw = localStorage.getItem(STORAGE.online);
+      if (onlineRaw === null) {
+        localStorage.setItem(STORAGE.online, '1');
+      }
+      state.online = localStorage.getItem(STORAGE.online) === '1';
+    }
+
+    function setOnline(isOnline) {
+      state.online = isOnline;
+      localStorage.setItem(STORAGE.online, isOnline ? '1' : '0');
+      if (!isOnline && state.status !== STATUS.scanning) {
+        setStatus(STATUS.offline, { message: 'Connectivity lost. Switching to offline-first queueing.' });
+      }
+      updateOnlineUI();
+      updateKpis();
+    }
+
+    function setScreen(screen) {
+      state.screen = screen;
+
+      document.querySelectorAll('.ac-screen').forEach((el) => {
+        el.classList.toggle('hidden', el.getAttribute('data-screen') !== screen);
+      });
+
+      document.querySelectorAll('.ac-tab').forEach((btn) => {
+        const active = btn.getAttribute('data-screen') === screen;
+        btn.classList.toggle('bg-primary-container', active);
+        btn.classList.toggle('text-on-primary-container', active);
+        btn.classList.toggle('shadow-[0_4px_12px_rgba(47,108,240,0.35)]', active);
+        btn.classList.toggle('text-[#dfe2ed]/60', !active);
+      });
+
+      const titleMap = {
+        [SCREENS.entry]: 'ENTRY GATE',
+        [SCREENS.exit]: 'EXIT GATE',
+        [SCREENS.temp]: 'TEMP TICKET',
+        [SCREENS.exceptions]: 'EXCEPTION HANDLING',
+        [SCREENS.offline]: 'OFFLINE MODE'
+      };
+      document.getElementById('telemetryTitle').textContent = titleMap[screen] || 'ACCESS CONTROL';
+
+      if (state.online) {
+        setStatus(STATUS.idle, { message: 'Ready. Select an action and start scan.' });
+      } else {
+        setStatus(STATUS.offline, { message: 'Offline mode active. Actions are queued locally.' });
+      }
+    }
+
+    function setStatus(status, opts = {}) {
+      state.status = status;
+
+      const dot = document.getElementById('statusDot');
+      const telemetryDot = document.getElementById('telemetryDot');
+      const label = document.getElementById('statusLabel');
+      const hint = document.getElementById('statusHint');
+      const sub = document.getElementById('statusSub');
+      const title = document.getElementById('stateTitle');
+      const message = document.getElementById('stateMessage');
+      const icon = document.getElementById('stateIcon');
+      const telemetryStatus = document.getElementById('telemetryStatus');
+
+      const cfg = {
+        [STATUS.idle]: { color: 'bg-primary', text: 'IDLE', hint: 'Awaiting operator', sub: 'No pending operations.', icon: 'qr_code_scanner' },
+        [STATUS.scanning]: { color: 'bg-primary', text: 'SCANNING', hint: 'Sensor active', sub: 'Validating credential…', icon: 'radar' },
+        [STATUS.success]: { color: 'bg-tertiary', text: 'SUCCESS', hint: 'Policy passed', sub: 'Barrier operation completed.', icon: 'check_circle' },
+        [STATUS.error]: { color: 'bg-error', text: 'ERROR', hint: 'Attention required', sub: 'Exception raised. Resolve or override.', icon: 'error' },
+        [STATUS.offline]: { color: 'bg-error', text: 'OFFLINE', hint: 'Degraded mode', sub: 'Actions are queued locally.', icon: 'cloud_off' }
+      };
+
+      const c = cfg[status] || cfg[STATUS.idle];
+
+      dot.className = `pulse-dot ${c.color}`;
+      telemetryDot.className = `pulse-dot ${c.color}`;
+      label.textContent = c.text;
+      hint.textContent = c.hint;
+      sub.textContent = opts.sub || c.sub;
+      title.textContent = c.text;
+      message.textContent = opts.message || document.getElementById('stateMessage').textContent;
+      icon.textContent = opts.icon || c.icon;
+      telemetryStatus.textContent = c.text;
+
+      const banner = document.getElementById('offlineBanner');
+      banner.classList.toggle('hidden', state.online);
+
+      updateTelemetry();
+    }
+
+    function updateTelemetry() {
+      const scanner = document.getElementById('telemetryScanner');
+      const barrier = document.getElementById('telemetryBarrier');
+      const policy = document.getElementById('telemetryPolicy');
+
+      if (!state.online) {
+        scanner.textContent = 'OFFLINE';
+        barrier.textContent = 'MANUAL';
+        policy.textContent = 'DEGRADED';
+        return;
+      }
+
+      if (state.status === STATUS.scanning) {
+        scanner.textContent = 'ACTIVE';
+        barrier.textContent = 'LOCKED';
+        policy.textContent = 'ENFORCED';
+        return;
+      }
+
+      if (state.status === STATUS.success) {
+        scanner.textContent = 'READY';
+        barrier.textContent = 'OPENED';
+        policy.textContent = 'ENFORCED';
+        return;
+      }
+
+      if (state.status === STATUS.error) {
+        scanner.textContent = 'READY';
+        barrier.textContent = 'CLOSED';
+        policy.textContent = 'ENFORCED';
+        return;
+      }
+
+      scanner.textContent = 'READY';
+      barrier.textContent = 'CLOSED';
+      policy.textContent = 'ENFORCED';
+    }
+
+    function updateOnlineUI() {
+      const dot = document.getElementById('onlineDot');
+      const label = document.getElementById('onlineLabel');
+      const icon = document.querySelector('#onlineToggle .material-symbols-outlined');
+
+      if (state.online) {
+        dot.className = 'pulse-dot bg-tertiary';
+        dot.style.setProperty('--ping-color', '#00dbe7');
+        label.textContent = 'ONLINE';
+        label.className = 'text-xs font-bold tracking-widest uppercase text-tertiary';
+        icon.textContent = 'wifi';
+      } else {
+        dot.className = 'pulse-dot bg-error';
+        label.textContent = 'OFFLINE';
+        label.className = 'text-xs font-bold tracking-widest uppercase text-error';
+        icon.textContent = 'wifi_off';
+      }
+
+      updateTelemetry();
+    }
+
+    function updateKpis() {
+      const cap = loadNumber(STORAGE.capacity, 500);
+      const used = loadNumber(STORAGE.used, 0);
+      const queue = loadQueue();
+
+      document.getElementById('kpiCap').textContent = String(cap);
+      document.getElementById('kpiUsed').textContent = String(used);
+      document.getElementById('kpiQueue').textContent = String(queue.length);
+      document.getElementById('kpiBarrier').textContent = state.status === STATUS.success ? 'OPEN' : 'READY';
+
+      document.getElementById('offlineSync').disabled = !state.online;
+      document.getElementById('offlineSync').classList.toggle('opacity-40', !state.online);
+      document.getElementById('offlineSync').classList.toggle('cursor-not-allowed', !state.online);
+    }
+
+    function addEvent({ level, tag, title, detail }) {
+      const events = loadEvents();
+      events.unshift({
+        level,
+        tag,
+        title,
+        detail,
+        time: nowIsoShort()
+      });
+      saveEvents(events.slice(0, 30));
+      renderEvents();
+    }
+
+    function renderEvents() {
+      const list = document.getElementById('eventList');
+      const tpl = document.getElementById('eventItemTpl');
+      list.innerHTML = '';
+
+      const events = loadEvents();
+      if (events.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'bg-surface-container-high rounded-lg p-6 text-sm text-on-surface-variant';
+        empty.textContent = 'No events yet. Start a scan to generate audit entries.';
+        list.appendChild(empty);
+        return;
+      }
+
+      for (const ev of events) {
+        const node = tpl.content.cloneNode(true);
+        const dot = node.querySelector('[data-dot]');
+        const title = node.querySelector('[data-title]');
+        const tag = node.querySelector('[data-tag]');
+        const detail = node.querySelector('[data-detail]');
+        const time = node.querySelector('[data-time]');
+
+        const dotClass = ev.level === 'success' ? 'bg-tertiary' : ev.level === 'error' ? 'bg-error' : 'bg-primary';
+        dot.className = `mt-1 w-2 h-2 rounded-full ${dotClass}`;
+
+        title.textContent = ev.title;
+        tag.textContent = ev.tag;
+        detail.textContent = ev.detail;
+        time.textContent = ev.time;
+
+        list.appendChild(node);
+      }
+    }
+
+    function setBusy(disabled) {
+      ['entryScan', 'entryReset', 'exitScan', 'exitReset', 'tempIssue', 'tempReset', 'exSimulate', 'exOverride', 'offlineQueueEntry', 'offlineQueueExit', 'offlineSync', 'offlineClear', 'exitConfirm'].forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.disabled = disabled;
+        el.classList.toggle('opacity-60', disabled);
+        el.classList.toggle('cursor-not-allowed', disabled);
+      });
+
+      if (!state.online) {
+        ['entryScan', 'exitScan'].forEach((id) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          el.disabled = true;
+          el.classList.add('opacity-60', 'cursor-not-allowed');
+        });
+      }
+    }
+
+    function simulateDelay(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    function ensureId(input) {
+      return (input || '').trim();
+    }
+
+    function computeFeeVnd(startedAtMs) {
+      const minutes = Math.max(1, Math.floor((Date.now() - startedAtMs) / 60000));
+      const base = 5000;
+      const perMinute = 80;
+      return base + minutes * perMinute;
+    }
+
+    async function runEntryScan() {
+      const card = ensureId(document.getElementById('entryCard').value);
+      const plate = ensureId(document.getElementById('entryPlate').value);
+      const sim = document.getElementById('entrySim').value;
+
+      if (!state.online) {
+        queueEvent({ type: 'ENTRY', id: card || 'UNKNOWN', plate, createdAt: Date.now() });
+        addEvent({ level: 'info', tag: 'OFFLINE', title: 'Entry queued', detail: `Queued entry event for ${card || 'UNKNOWN'}.` });
+        setStatus(STATUS.offline, { message: 'Offline: entry event queued locally.', sub: 'Queue will sync when online.' });
+        updateKpis();
+        return;
+      }
+
+      if (!card) {
+        setStatus(STATUS.error, { message: 'Missing Card UID.', sub: 'Provide RFID/Card UID and retry.' });
+        addEvent({ level: 'error', tag: 'ENTRY', title: 'Scan rejected', detail: 'Card UID is required.' });
+        return;
+      }
+
+      setBusy(true);
+      setStatus(STATUS.scanning, { message: 'Scanning entry credential…', sub: 'RFID read in progress.' });
+      addEvent({ level: 'info', tag: 'ENTRY', title: 'Scanning started', detail: `Card=${card}${plate ? `, Plate=${plate}` : ''}` });
+
+      await simulateDelay(1200);
+
+      const cap = loadNumber(STORAGE.capacity, 500);
+      const used = loadNumber(STORAGE.used, 0);
+
+      const outcome = sim === 'auto'
+        ? (used >= cap ? 'full' : 'success')
+        : sim;
+
+      if (outcome === 'card_invalid') {
+        setStatus(STATUS.error, { message: 'Card invalid / not registered.', sub: 'Deny entry or issue temporary ticket.' });
+        addEvent({ level: 'error', tag: 'ENTRY', title: 'Card invalid', detail: `Card=${card}` });
+        setBusy(false);
+        return;
+      }
+
+      if (outcome === 'full') {
+        setStatus(STATUS.error, { message: 'Parking is full.', sub: 'Capacity guard blocked entry.' });
+        addEvent({ level: 'error', tag: 'ENTRY', title: 'Capacity full', detail: `Used=${used}/${cap}` });
+        setBusy(false);
+        return;
+      }
+
+      const sessions = loadSessions();
+      sessions[card] = { kind: 'card', id: card, plate: plate || null, startedAt: Date.now() };
+      saveSessions(sessions);
+      saveNumber(STORAGE.used, used + 1);
+
+      setStatus(STATUS.success, { message: 'Entry granted. Barrier opened.', sub: 'Session created and occupancy incremented.', icon: 'check_circle' });
+      addEvent({ level: 'success', tag: 'ENTRY', title: 'Entry granted', detail: `Session opened for ${card}.` });
+
+      setBusy(false);
+      updateKpis();
+    }
+
+    async function runExitScan() {
+      const id = ensureId(document.getElementById('exitId').value);
+      const sim = document.getElementById('exitSim').value;
+      const pay = document.getElementById('exitPay').value;
+
+      document.getElementById('exitFeePanel').classList.add('hidden');
+      state.pendingExit = null;
+
+      if (!state.online) {
+        queueEvent({ type: 'EXIT', id: id || 'UNKNOWN', pay, createdAt: Date.now() });
+        addEvent({ level: 'info', tag: 'OFFLINE', title: 'Exit queued', detail: `Queued exit event for ${id || 'UNKNOWN'}.` });
+        setStatus(STATUS.offline, { message: 'Offline: exit event queued locally.', sub: 'Barrier requires manual policy in offline mode.' });
+        updateKpis();
+        return;
+      }
+
+      if (!id) {
+        setStatus(STATUS.error, { message: 'Missing Ticket/Card ID.', sub: 'Provide an ID and retry.' });
+        addEvent({ level: 'error', tag: 'EXIT', title: 'Scan rejected', detail: 'Ticket/Card ID is required.' });
+        return;
+      }
+
+      setBusy(true);
+      setStatus(STATUS.scanning, { message: 'Scanning exit credential…', sub: 'Looking up active session.' });
+      addEvent({ level: 'info', tag: 'EXIT', title: 'Scanning started', detail: `ID=${id}, Payment=${pay}` });
+
+      await simulateDelay(1200);
+
+      const sessions = loadSessions();
+      const session = sessions[id];
+
+      const outcome = sim === 'auto'
+        ? (session ? 'success' : 'mismatch')
+        : sim;
+
+      if (outcome === 'mismatch' || !session) {
+        setStatus(STATUS.error, { message: 'Entry/Exit mismatch.', sub: 'No active session found for provided ID.' });
+        addEvent({ level: 'error', tag: 'EXIT', title: 'Mismatch', detail: `No session found for ${id}.` });
+        setBusy(false);
+        return;
+      }
+
+      const fee = computeFeeVnd(session.startedAt);
+      state.pendingExit = { id, fee, pay };
+
+      document.getElementById('exitFee').textContent = formatMoneyVnd(fee);
+      document.getElementById('exitFeePanel').classList.remove('hidden');
+
+      setStatus(STATUS.success, { message: 'Session verified. Awaiting payment confirmation.', sub: 'Confirm to open barrier and close session.', icon: 'payments' });
+      addEvent({ level: 'success', tag: 'EXIT', title: 'Session verified', detail: `Fee computed for ${id}: ${formatMoneyVnd(fee)}.` });
+
+      setBusy(false);
+      updateKpis();
+    }
+
+    function confirmExitPayment() {
+      if (!state.online) {
+        setStatus(STATUS.offline, { message: 'Offline: cannot finalize payment.', sub: 'Queue the action and sync when online.' });
+        return;
+      }
+
+      if (!state.pendingExit) {
+        setStatus(STATUS.error, { message: 'No pending exit payment.', sub: 'Run scan first.' });
+        return;
+      }
+
+      const { id, fee, pay } = state.pendingExit;
+      const sessions = loadSessions();
+      if (!sessions[id]) {
+        setStatus(STATUS.error, { message: 'Session missing.', sub: 'It may have been cleared already.' });
+        return;
+      }
+
+      delete sessions[id];
+      saveSessions(sessions);
+
+      const used = loadNumber(STORAGE.used, 0);
+      saveNumber(STORAGE.used, Math.max(0, used - 1));
+
+      document.getElementById('exitFeePanel').classList.add('hidden');
+      state.pendingExit = null;
+
+      setStatus(STATUS.success, { message: 'Payment confirmed. Barrier opened.', sub: `Exit completed via ${pay}.` });
+      addEvent({ level: 'success', tag: 'EXIT', title: 'Exit completed', detail: `Closed session ${id}. Paid ${formatMoneyVnd(fee)} via ${pay}.` });
+      updateKpis();
+    }
+
+    async function issueTempTicket() {
+      const vehicle = document.getElementById('tempVehicle').value;
+      const plate = ensureId(document.getElementById('tempPlate').value);
+
+      const cap = loadNumber(STORAGE.capacity, 500);
+      const used = loadNumber(STORAGE.used, 0);
+      if (state.online && used >= cap) {
+        setStatus(STATUS.error, { message: 'Parking is full.', sub: 'Cannot issue ticket for entry.' });
+        addEvent({ level: 'error', tag: 'TEMP', title: 'Ticket blocked', detail: `Capacity full: ${used}/${cap}` });
+        return;
+      }
+
+      const ticketId = `TMP-${Math.floor(100000 + Math.random() * 899999)}`;
+
+      if (!state.online) {
+        queueEvent({ type: 'TEMP_ISSUE', id: ticketId, vehicle, plate, createdAt: Date.now() });
+        addEvent({ level: 'info', tag: 'OFFLINE', title: 'Ticket queued', detail: `Queued ticket issuance ${ticketId}.` });
+        setStatus(STATUS.offline, { message: 'Offline: temporary ticket queued locally.', sub: 'Provide printed ticket ID to customer.' });
+        document.getElementById('tempTicketId').textContent = ticketId;
+        document.getElementById('tempIssuedAt').textContent = `Issued at (offline): ${new Date().toLocaleString('vi-VN')}`;
+        document.getElementById('tempResult').classList.remove('hidden');
+        updateKpis();
+        return;
+      }
+
+      setBusy(true);
+      setStatus(STATUS.scanning, { message: 'Issuing temporary ticket…', sub: 'Generating ticket & opening entry barrier.' });
+      addEvent({ level: 'info', tag: 'TEMP', title: 'Issuing ticket', detail: `Vehicle=${vehicle}${plate ? `, Plate=${plate}` : ''}` });
+
+      await simulateDelay(900);
+
+      const sessions = loadSessions();
+      sessions[ticketId] = { kind: 'temp', id: ticketId, vehicle, plate: plate || null, startedAt: Date.now() };
+      saveSessions(sessions);
+      saveNumber(STORAGE.used, used + 1);
+
+      document.getElementById('tempTicketId').textContent = ticketId;
+      document.getElementById('tempIssuedAt').textContent = `Issued at: ${new Date().toLocaleString('vi-VN')}`;
+      document.getElementById('tempResult').classList.remove('hidden');
+
+      setStatus(STATUS.success, { message: 'Ticket issued. Entry granted.', sub: 'Temporary session created.', icon: 'confirmation_number' });
+      addEvent({ level: 'success', tag: 'TEMP', title: 'Ticket issued', detail: `Ticket ${ticketId} created.` });
+
+      setBusy(false);
+      updateKpis();
+    }
+
+    function simulateException() {
+      const type = document.getElementById('exType').value;
+      const map = {
+        card_invalid: { msg: 'Card invalid / not registered.', sub: 'Deny entry or issue temporary ticket.' },
+        full: { msg: 'Parking full.', sub: 'Capacity guard blocked entry.' },
+        mismatch: { msg: 'Entry/Exit mismatch.', sub: 'No active session found.' },
+        sensor_timeout: { msg: 'Sensor timeout.', sub: 'Retry scan or switch to manual override.' }
+      };
+      const d = map[type] || map.sensor_timeout;
+      setStatus(STATUS.error, { message: d.msg, sub: d.sub });
+      addEvent({ level: 'error', tag: 'EXCEPTION', title: 'Exception raised', detail: `${d.msg} (${type})` });
+      updateKpis();
+    }
+
+    function manualOverride() {
+      addEvent({ level: 'info', tag: 'OVERRIDE', title: 'Manual override', detail: 'Operator override requested (policy-controlled).' });
+      setStatus(state.online ? STATUS.success : STATUS.offline, {
+        message: state.online ? 'Manual override applied. Barrier opened (logged).' : 'Offline: override queued locally.',
+        sub: state.online ? 'Ensure policy compliance and audit follow-up.' : 'Sync when online to persist audit entry.',
+        icon: 'admin_panel_settings'
+      });
+      if (!state.online) queueEvent({ type: 'OVERRIDE', createdAt: Date.now() });
+      updateKpis();
+    }
+
+    function queueEvent(payload) {
+      const queue = loadQueue();
+      queue.push({ ...payload, queuedAt: Date.now() });
+      saveQueue(queue);
+      updateKpis();
+    }
+
+    async function syncQueue() {
+      if (!state.online) {
+        setStatus(STATUS.offline, { message: 'Still offline.', sub: 'Cannot sync queue without connectivity.' });
+        return;
+      }
+
+      const queue = loadQueue();
+      if (queue.length === 0) {
+        addEvent({ level: 'info', tag: 'SYNC', title: 'Queue empty', detail: 'No offline events to sync.' });
+        return;
+      }
+
+      setBusy(true);
+      setStatus(STATUS.scanning, { message: 'Syncing offline queue…', sub: `Applying ${queue.length} queued events.` });
+      addEvent({ level: 'info', tag: 'SYNC', title: 'Sync started', detail: `${queue.length} events` });
+
+      await simulateDelay(900);
+
+      let used = loadNumber(STORAGE.used, 0);
+      const sessions = loadSessions();
+
+      for (const ev of queue) {
+        if (ev.type === 'ENTRY') {
+          if (ev.id && !sessions[ev.id]) {
+            sessions[ev.id] = { kind: 'card', id: ev.id, plate: ev.plate || null, startedAt: ev.createdAt || Date.now() };
+            used += 1;
+          }
+        }
+
+        if (ev.type === 'TEMP_ISSUE') {
+          if (ev.id && !sessions[ev.id]) {
+            sessions[ev.id] = { kind: 'temp', id: ev.id, vehicle: ev.vehicle || 'unknown', plate: ev.plate || null, startedAt: ev.createdAt || Date.now() };
+            used += 1;
+          }
+        }
+
+        if (ev.type === 'EXIT') {
+          if (ev.id && sessions[ev.id]) {
+            delete sessions[ev.id];
+            used = Math.max(0, used - 1);
+          }
+        }
+      }
+
+      saveSessions(sessions);
+      saveNumber(STORAGE.used, used);
+      saveQueue([]);
+
+      setStatus(STATUS.success, { message: 'Sync completed.', sub: 'Offline events applied locally and logged.' });
+      addEvent({ level: 'success', tag: 'SYNC', title: 'Sync completed', detail: 'Queue flushed and state updated.' });
+
+      setBusy(false);
+      updateKpis();
+    }
+
+    function clearQueue() {
+      saveQueue([]);
+      addEvent({ level: 'info', tag: 'QUEUE', title: 'Queue cleared', detail: 'Offline queue has been cleared by operator.' });
+      updateKpis();
+    }
+
+    function resetEntry() {
+      document.getElementById('entryCard').value = '';
+      document.getElementById('entryPlate').value = '';
+      document.getElementById('entrySim').value = 'auto';
+      setStatus(state.online ? STATUS.idle : STATUS.offline, { message: state.online ? 'Ready to scan credentials at selected gate.' : 'Offline mode active. Actions are queued locally.' });
+    }
+
+    function resetExit() {
+      document.getElementById('exitId').value = '';
+      document.getElementById('exitPay').value = 'cash';
+      document.getElementById('exitSim').value = 'auto';
+      document.getElementById('exitFeePanel').classList.add('hidden');
+      state.pendingExit = null;
+      setStatus(state.online ? STATUS.idle : STATUS.offline, { message: state.online ? 'Ready to scan credentials at selected gate.' : 'Offline mode active. Actions are queued locally.' });
+    }
+
+    function resetTemp() {
+      document.getElementById('tempVehicle').value = 'motorbike';
+      document.getElementById('tempPlate').value = '';
+      document.getElementById('tempResult').classList.add('hidden');
+      setStatus(state.online ? STATUS.idle : STATUS.offline, { message: state.online ? 'Ready to scan credentials at selected gate.' : 'Offline mode active. Actions are queued locally.' });
+    }
+
+    function queueQuick(type) {
+      const id = type === 'ENTRY' ? `CARD-OFF-${Math.floor(Math.random() * 9999)}` : `TMP-OFF-${Math.floor(Math.random() * 9999)}`;
+      queueEvent({ type, id, createdAt: Date.now() });
+      addEvent({ level: 'info', tag: 'OFFLINE', title: `${type} queued`, detail: `Queued ${type} event (${id}).` });
+      setStatus(STATUS.offline, { message: `Queued ${type} event.`, sub: 'Sync when online to apply.' });
+    }
+
+    function wireEvents() {
+      document.querySelectorAll('.ac-tab').forEach((btn) => {
+        btn.addEventListener('click', () => setScreen(btn.getAttribute('data-screen')));
+      });
+
+      document.getElementById('onlineToggle').addEventListener('click', () => setOnline(!state.online));
+
+      document.getElementById('entryScan').addEventListener('click', runEntryScan);
+      document.getElementById('entryReset').addEventListener('click', resetEntry);
+
+      document.getElementById('exitScan').addEventListener('click', runExitScan);
+      document.getElementById('exitReset').addEventListener('click', resetExit);
+      document.getElementById('exitConfirm').addEventListener('click', confirmExitPayment);
+
+      document.getElementById('tempIssue').addEventListener('click', issueTempTicket);
+      document.getElementById('tempReset').addEventListener('click', resetTemp);
+
+      document.getElementById('exSimulate').addEventListener('click', simulateException);
+      document.getElementById('exOverride').addEventListener('click', manualOverride);
+
+      document.getElementById('offlineQueueEntry').addEventListener('click', () => queueQuick('ENTRY'));
+      document.getElementById('offlineQueueExit').addEventListener('click', () => queueQuick('EXIT'));
+      document.getElementById('offlineSync').addEventListener('click', syncQueue);
+      document.getElementById('offlineClear').addEventListener('click', clearQueue);
+
+      document.getElementById('clearEvents').addEventListener('click', () => {
+        saveEvents([]);
+        renderEvents();
+      });
+    }
+
+    (function boot() {
+      initStorage();
+      wireEvents();
+      updateOnlineUI();
+      updateKpis();
+      renderEvents();
+      setScreen(SCREENS.entry);
+      setBusy(false);
+
+      if (!state.online) {
+        setStatus(STATUS.offline, { message: 'Offline mode active. Actions are queued locally.' });
+      }
+    })();
+  </script>
+</body>
+</html>
