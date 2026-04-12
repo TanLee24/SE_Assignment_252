@@ -1,52 +1,115 @@
 \newpage
 \section{UI}
 
-\subsection{Quản lý Tính phí và Thanh toán}
+\subsection{Quản trị hệ thống và Tích hợp}
 
-\subsubsection{Màn hình Pricing/Hóa đơn (User Portal)}
-\textbf{Mục tiêu:} Cho phép người dùng xem hóa đơn chu kỳ, khởi tạo thanh toán qua BKPay, theo dõi lịch sử giao dịch và xem chính sách (demo).
+\noindent \textbf{Form Đăng nhập}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pictures/ui/login_form.jpg} 
+    \caption{UI cho Form Đăng nhập}
+    \label{loginform_ui}
+\end{figure}
 
-\textbf{Mockup tham chiếu:} \texttt{src/web\_app/public/pricing/payment.html}
+\noindent \textbf{Admin Dashboard}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pictures/ui/admin_dashboard.jpg} 
+    \caption{UI cho trang Admin Dashboard}
+    \label{admindb_ui}
+\end{figure}
 
-\renewcommand{\arraystretch}{1.4}
-\begin{xltabular}{\textwidth}{|l|X|}
-\hline
-\textbf{Khu vực} & \textbf{Mô tả UI/Thành phần} \\
-\hline
-Header & Branding \textbf{IoT-SPMS}, breadcrumb nhỏ \textit{Pricing • Hóa đơn}; liên kết \textit{Đăng xuất} và \textit{Admin}.\\
-\hline
-Thanh điều hướng & 3 tab: \textbf{Hóa đơn} / \textbf{Giao dịch} / \textbf{Chính sách}.\\
-\hline
-Tab Hóa đơn & Hiển thị: Chu kỳ, mã hóa đơn, tổng tiền, trạng thái (UNPAID/PAID), thời điểm cập nhật. Nút: \textbf{Thanh toán qua BKPay} (disable nếu đã PAID) và \textbf{Làm mới}.\\
-\hline
-Tab Giao dịch & Bảng danh sách giao dịch: thời gian, mã giao dịch, số tiền, trạng thái; nút \textbf{Làm mới}. Nếu trống: thông báo \textit{Chưa có giao dịch nào}.\\
-\hline
-Tab Chính sách & Nội dung mô tả chính sách giá (demo): chu kỳ hàng tháng + cơ chế redirect BKPay + webhook.\\
-\hline
-Khối Thông tin & Nhắc các ràng buộc phi chức năng: HMAC chữ ký, không lưu thông tin thẻ, có log đối soát.\\
-\hline
-Hành động demo & Nút \textbf{Reset dữ liệu demo}.\\
-\hline
-\end{xltabular}
+\newpage
+\noindent \textbf{Đồng bộ thông tin người dùng}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pictures/ui/admin_sync.jpg} 
+    \caption{UI cho trang Đồng bộ thông tin người dùng}
+    \label{adminsync_ui}
+\end{figure}
 
-\subsubsection{Màn hình BKPay (mô phỏng)}
-\textbf{Mục tiêu:} Mô phỏng cổng thanh toán BKPay để minh họa luồng redirect và trả kết quả về IoT-SPMS.
+\noindent \textbf{Phân quyền người dùng}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pictures/ui/admin_useraccess.jpg} 
+    \caption{UI cho trang Phân quyền người dùng}
+    \label{adminuser_ui}
+\end{figure}
 
-\textbf{Mockup tham chiếu:} \texttt{src/web\_app/public/pricing/bkpay.html}
+\newpage
+\noindent \textbf{Báo cáo và thống kê}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pictures/ui/admin_analytics.jpg} 
+    \caption{UI cho trang Báo cáo và thống kê}
+    \label{adminanalytics_ui}
+\end{figure}
 
-\renewcommand{\arraystretch}{1.4}
-\begin{xltabular}{\textwidth}{|l|X|}
-\hline
-\textbf{Khu vực} & \textbf{Mô tả UI/Thành phần} \\
-\hline
-Header & Branding \textbf{BKPay} (mô phỏng); link \textit{Quay lại}.\\
-\hline
-Thông tin giao dịch & Hiển thị \textit{txId}, \textit{invoiceId}, trạng thái hiện tại, số tiền.\\
-\hline
-Khu vực QR/link & Hiển thị QR + nút \textbf{Mở link thanh toán} (demo).\\
-\hline
-Các nút kết quả & \textbf{Xác nhận thanh toán} / \textbf{Thất bại} / \textbf{Hủy}.\\
-\hline
-Hành vi & Sau khi chọn kết quả, BKPay redirect về trang Pricing kèm tham số kết quả; phía IoT-SPMS cập nhật trạng thái hóa đơn/giao dịch (mô phỏng webhook).\\
-\hline
-\end{xltabular}
+\noindent \textbf{Quản lý log và truy vết}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pictures/ui/admin_auditlogs.jpg} 
+    \caption{UI cho trang Quản lý log và truy vết}
+    \label{adminlog_ui}
+\end{figure}
+
+\newpage
+\subsection{Quản lý kiểm soát ra vào}
+
+\noindent \textbf{Dashboard Quản lý kiểm soát ra vào}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pictures/ui/UI_AC_1.png} 
+    \caption{UI tổng quan trang Quản lý kiểm soát ra vào}
+    \label{ac_dashboard_ui}
+\end{figure}
+
+\noindent \textbf{Use case: Vào bãi xe bằng thẻ ID}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pictures/ui/UI_AC_2.png} 
+    \caption{UI cho Use case: Vào bãi xe bằng thẻ ID (bao gồm xử lý ngoại lệ)}
+    \label{ac_entry_ui}
+\end{figure}
+
+\newpage
+\noindent \textbf{Use case: Rời bãi xe bằng thẻ ID}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pictures/ui/UI_AC_3.png} 
+    \caption{UI cho Use case: Rời bãi xe bằng thẻ ID và tính phí}
+    \label{ac_exit_ui}
+\end{figure}
+
+\noindent \textbf{Use case: Phát hành vé tạm thời}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pictures/ui/UI_AC_4.png} 
+    \caption{UI cho Use case: Phát hành vé tạm thời và nhận diện biển số}
+    \label{ac_temp_ui}
+\end{figure}
+
+\newpage
+\noindent \textbf{Use case: Quản lý phiên ngoại tuyến}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pictures/ui/UI_AC_5.png} 
+    \caption{UI cảnh báo trạng thái hệ thống khi mất kết nối (Offline Mode)}
+    \label{ac_offline_state}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pictures/ui/UI_AC_6.png} 
+    \caption{UI thao tác hàng đợi giao dịch cục bộ trong chế độ ngoại tuyến}
+    \label{ac_offline_queue}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pictures/ui/UI_AC_7.png} 
+    \caption{UI ghi nhận lịch sử đồng bộ dữ liệu sau khi khôi phục kết nối}
+    \label{ac_sync_logs}
+\end{figure}
