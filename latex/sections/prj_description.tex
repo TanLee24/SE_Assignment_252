@@ -1,0 +1,55 @@
+\newpage
+\section{Đặc tả dự án}
+\subsection{Bối cảnh dự án}
+
+Dự án Hệ thống Quản lý Bãi đỗ xe Thông minh (IoT-SPMS) được xây dựng nhằm tự động hóa và tối ưu hóa quy trình quản lý bãi giữ xe trong khuôn viên trường đại học. Hệ thống giải quyết bài toán lưu lượng phương tiện cá nhân rất lớn ra vào mỗi ngày, đòi hỏi sự phối hợp nhịp nhàng giữa kiểm soát an ninh, điều hướng giao thông và quản lý tài chính.
+
+Với mật độ phương tiện ngày càng tăng trong khi diện tích bãi đỗ có hạn, công tác vận hành hiện tại đang đối mặt với nhiều bất cập:
+\begin{itemize}
+    \item \textbf{Ùn tắc cục bộ}: Thường xuyên xảy ra kẹt xe tại các cổng kiểm soát (entry/exit points) vào các khung giờ cao điểm.
+    \item \textbf{Lãng phí không gian}: Khó khăn trong việc tối ưu hóa chỗ trống do người lái xe không biết khu vực nào còn chỗ, dẫn đến việc chạy lòng vòng tìm kiếm.
+    \item \textbf{Thiếu thông tin thời gian thực}: Không có hệ thống giám sát và báo cáo trực quan về tình trạng sức chứa của bãi xe tại một thời điểm cụ thể.
+    \item \textbf{Quản lý phí phân tán}: Việc thu phí thủ công hoặc thiếu đồng bộ gây mất thời gian và khó khăn trong công tác đối soát, kiểm toán tài chính.
+\end{itemize}
+
+Việc áp dụng mô hình Smart Parking tích hợp công nghệ Internet of Things (IoT) là giải pháp tất yếu để chuyển đổi số hạ tầng trường học. Hệ thống giúp loại bỏ các thao tác thủ công, tận dụng cơ sở dữ liệu có sẵn (HCMUT\_SSO, HCMUT\_DATACORE) để nhận diện nhanh chóng, dùng cảm biến để chỉ đường và tự động hóa thanh toán, từ đó mang lại trải nghiệm tiện lợi, hiện đại và minh bạch.
+
+\subsection{Các bên liên quan của dự án (Stakeholders)}
+
+\begin{itemize}
+    \item \textbf{Người học (Sinh viên, Học viên cao học, Nghiên cứu sinh)}. Họ mong đợi: Ra vào bãi đỗ xe nhanh chóng bằng thẻ sinh viên, dễ dàng tra cứu vị trí còn trống để tiết kiệm thời gian, quy trình thanh toán phí gửi xe minh bạch và tự động (theo kỳ học).
+    \item \textbf{Cán bộ - Giảng viên}. Họ mong đợi: Trải nghiệm tương tự người học nhưng có thêm các đặc quyền ưu tiên (khu vực đỗ xe riêng) và chính sách phí được cấu hình phù hợp với quy định của trường.
+    \item \textbf{Nhân viên vận hành bãi xe (Bảo vệ)}. Họ mong đợi: Hệ thống hoạt động ổn định, cung cấp công cụ để xử lý nhanh các trường hợp ngoại lệ (khách quên thẻ, máy lỗi), và có màn hình giám sát luồng xe vào/ra thực tế.
+    \item \textbf{Khách vãng lai}. Họ mong đợi: Dễ dàng được cấp quyền truy cập tạm thời (vé/thẻ khách) tại cổng mà không gặp rắc rối về thủ tục nhận diện.
+    \item \textbf{Quản trị viên hệ thống}. Họ mong đợi: Giao diện quản trị tập trung để dễ dàng cấu hình chính sách giá, phân quyền người dùng (RBAC), theo dõi trạng thái thiết bị IoT và truy xuất log hệ thống khi cần kiểm toán.
+    \item \textbf{Ban Quản lý trường Đại học}. Họ mong đợi: Có được các báo cáo thống kê chính xác về hiệu suất sử dụng bãi xe, lưu lượng giao thông và doanh thu để đưa ra các quyết định quy hoạch hạ tầng trong tương lai.
+\end{itemize}
+
+\subsection{Mục tiêu hệ thống}
+Hệ thống IoT-SPMS cần đạt được các mục tiêu cốt lõi sau:
+\begin{itemize}
+    \item \textbf{Tự động hóa kiểm soát ra vào (Access Control)}: Đảm bảo tốc độ quét thẻ và mở barie nhanh chóng, chính xác cho người dùng nội bộ, đồng thời hỗ trợ luồng cấp vé độc lập cho khách vãng lai.
+    \item \textbf{Giám sát thời gian thực (Real-time Monitoring)}: Cập nhật liên tục trạng thái "trống/có xe" của từng vị trí đỗ thông qua việc thu thập và xử lý dữ liệu từ mạng lưới cảm biến IoT.
+    \item \textbf{Điều hướng thông minh (Dynamic Guidance)}: Hiển thị trạng thái bãi xe (còn chỗ/gần đầy/hết chỗ) lên các bảng LED điện tử tại cổng và ngã tư để điều hướng phương tiện từ xa.
+    \item \textbf{Tích hợp thanh toán liền mạch (Integrated Billing)}: Tự động tổng hợp dữ liệu gửi xe, áp dụng đúng chính sách giá và kết nối với hệ thống BKPay để trừ phí định kỳ.
+    \item \textbf{Vận hành bền bỉ (Reliability)}: Đảm bảo khả năng chịu lỗi (fault tolerance), cho phép hoạt động cấp vé thủ công hoặc nội bộ ngay cả khi mất kết nối mạng gián đoạn.
+\end{itemize}
+
+\subsection{Phạm vi dự án}
+Hệ thống làm:
+\begin{itemize}
+    \item Tích hợp cổng đăng nhập HCMUT\_SSO và đồng bộ dữ liệu (chỉ đọc) từ HCMUT\_DATACORE.
+    \item Quản lý cơ chế phân quyền (Role-Based Access Control) cho các nhóm người dùng khác nhau.
+    \item Tiếp nhận, xử lý tín hiệu từ các Gateway/Cảm biến IoT và gửi lệnh điều khiển hiển thị ra bảng LED.
+    \item Cung cấp giao diện Web Dashboard cho Quản trị viên và Nhân viên vận hành để giám sát sơ đồ bãi xe.
+    \item Tính toán phí gửi xe dựa trên cấu hình giá và khởi tạo yêu cầu thanh toán chuyển sang API của BKPay.
+    \item Ghi nhận toàn bộ nhật ký hệ thống (Audit logs) cho các giao dịch và thay đổi quyền.
+\end{itemize}
+
+Hệ thống không làm:
+\begin{itemize}
+    \item Không xây dựng hay can thiệp vào module thanh toán lõi (Core banking) của BKPay; hệ thống chỉ đóng vai trò gửi yêu cầu và nhận trạng thái thanh toán.
+    \item Không cho phép chỉnh sửa, cập nhật (Write/Update) thông tin cá nhân cơ bản của sinh viên/giảng viên ngược trở lại hệ thống HCMUT\_DATACORE.
+    \item Không phát triển phần mềm nhúng (Firmware) chi tiết cho từng loại cảm biến vật lý ở mức độ mạch điện (trong phạm vi môn học Công nghệ phần mềm, hệ thống giả định phần cứng IoT đã có sẵn bộ API/Giao thức chuẩn để truyền dữ liệu về).
+\end{itemize}
+
