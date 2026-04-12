@@ -1,3 +1,52 @@
 \newpage
 \section{UI}
-Phần ai làm thì tạo subsection rồi tự đưa vào
+
+\subsection{Quản lý Tính phí và Thanh toán}
+
+\subsubsection{Màn hình Pricing/Hóa đơn (User Portal)}
+\textbf{Mục tiêu:} Cho phép người dùng xem hóa đơn chu kỳ, khởi tạo thanh toán qua BKPay, theo dõi lịch sử giao dịch và xem chính sách (demo).
+
+\textbf{Mockup tham chiếu:} \texttt{src/web\_app/public/pricing/payment.html}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{xltabular}{\textwidth}{|l|X|}
+\hline
+\textbf{Khu vực} & \textbf{Mô tả UI/Thành phần} \\
+\hline
+Header & Branding \textbf{IoT-SPMS}, breadcrumb nhỏ \textit{Pricing • Hóa đơn}; liên kết \textit{Đăng xuất} và \textit{Admin}.\\
+\hline
+Thanh điều hướng & 3 tab: \textbf{Hóa đơn} / \textbf{Giao dịch} / \textbf{Chính sách}.\\
+\hline
+Tab Hóa đơn & Hiển thị: Chu kỳ, mã hóa đơn, tổng tiền, trạng thái (UNPAID/PAID), thời điểm cập nhật. Nút: \textbf{Thanh toán qua BKPay} (disable nếu đã PAID) và \textbf{Làm mới}.\\
+\hline
+Tab Giao dịch & Bảng danh sách giao dịch: thời gian, mã giao dịch, số tiền, trạng thái; nút \textbf{Làm mới}. Nếu trống: thông báo \textit{Chưa có giao dịch nào}.\\
+\hline
+Tab Chính sách & Nội dung mô tả chính sách giá (demo): chu kỳ hàng tháng + cơ chế redirect BKPay + webhook.\\
+\hline
+Khối Thông tin & Nhắc các ràng buộc phi chức năng: HMAC chữ ký, không lưu thông tin thẻ, có log đối soát.\\
+\hline
+Hành động demo & Nút \textbf{Reset dữ liệu demo}.\\
+\hline
+\end{xltabular}
+
+\subsubsection{Màn hình BKPay (mô phỏng)}
+\textbf{Mục tiêu:} Mô phỏng cổng thanh toán BKPay để minh họa luồng redirect và trả kết quả về IoT-SPMS.
+
+\textbf{Mockup tham chiếu:} \texttt{src/web\_app/public/pricing/bkpay.html}
+
+\renewcommand{\arraystretch}{1.4}
+\begin{xltabular}{\textwidth}{|l|X|}
+\hline
+\textbf{Khu vực} & \textbf{Mô tả UI/Thành phần} \\
+\hline
+Header & Branding \textbf{BKPay} (mô phỏng); link \textit{Quay lại}.\\
+\hline
+Thông tin giao dịch & Hiển thị \textit{txId}, \textit{invoiceId}, trạng thái hiện tại, số tiền.\\
+\hline
+Khu vực QR/link & Hiển thị QR + nút \textbf{Mở link thanh toán} (demo).\\
+\hline
+Các nút kết quả & \textbf{Xác nhận thanh toán} / \textbf{Thất bại} / \textbf{Hủy}.\\
+\hline
+Hành vi & Sau khi chọn kết quả, BKPay redirect về trang Pricing kèm tham số kết quả; phía IoT-SPMS cập nhật trạng thái hóa đơn/giao dịch (mô phỏng webhook).\\
+\hline
+\end{xltabular}

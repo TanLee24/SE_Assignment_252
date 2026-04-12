@@ -1,6 +1,7 @@
 \newpage
 \section{Các yêu cầu phi chức năng}
 
+\subsection{Nhóm Điều hướng \& Giám sát IoT}
 Các ràng buộc nhằm đảm bảo hệ thống điều hướng hoạt động ổn định, chính xác và phản hồi theo thời gian gần thực:
 \begin{itemize}
     \item Hiệu suất thời gian thực (Real-time Performance):
@@ -34,7 +35,7 @@ Các ràng buộc nhằm đảm bảo hệ thống điều hướng hoạt độ
     \end{itemize}
 \end{itemize}
 
-
+\subsection{Nhóm Tính phí \& Thanh toán (BKPay)}
 Các ràng buộc chặt chẽ đảm bảo tính chính xác và an toàn cho luồng tài chính:
 
 \begin{itemize}
@@ -46,8 +47,9 @@ Các ràng buộc chặt chẽ đảm bảo tính chính xác và an toàn cho l
 
     \item Bảo mật và Tích hợp (Security \& Integration Constraint):
     \begin{itemize}
-        \item Kết nối giữa IoT-SPMS1 và BKPay phải sử dụng chữ ký điện tử (Digital Signature/HMAC) để chống giả mạo gói tin thanh toán.
-        \item Không lưu trữ bất kỳ thông tin nhạy cảm nào về thẻ ngân hàng/tài khoản ví điện tử của người dùng trên IoT-SPMS1 (hoàn toàn ủy thác cho BKPay).
+        \item Kết nối giữa IoT-SPMS và BKPay phải sử dụng chữ ký điện tử (Digital Signature/HMAC) để chống giả mạo gói tin thanh toán.
+        \item Không lưu trữ bất kỳ thông tin nhạy cảm nào về thẻ ngân hàng/tài khoản ví điện tử của người dùng trên IoT-SPMS (hoàn toàn ủy thác cho BKPay).
+        \item Endpoint webhook/callback phải có cơ chế idempotency (chống xử lý trùng) theo cặp (invoiceId, txId) để tránh cập nhật trạng thái sai khi BKPay retry.
     \end{itemize}
 
     \item Hiệu suất xử lý lô (Batch Processing Performance):
@@ -59,5 +61,11 @@ Các ràng buộc chặt chẽ đảm bảo tính chính xác và an toàn cho l
     \begin{itemize}
         \item Lưu trữ lịch sử (log) của mọi thay đổi liên quan đến "Cấu hình chính sách giá" (ai sửa, sửa khi nào, giá trị cũ/mới).
         \item Lưu trữ log của mọi giao tiếp API với BKPay trong ít nhất 12 tháng phục vụ việc đối soát tài chính định kỳ.
+    \end{itemize}
+
+    \item Tính sẵn sàng và khôi phục (Availability \& Recovery):
+    \begin{itemize}
+        \item Dịch vụ tính phí/thanh toán phải có cơ chế retry khi gọi API BKPay (giới hạn số lần, có backoff) và phải timeout rõ ràng để tránh treo giao dịch.
+        \item CSDL hóa đơn/giao dịch phải được sao lưu định kỳ; mục tiêu khôi phục dữ liệu sau sự cố (RPO) không quá 24 giờ đối với dữ liệu hóa đơn và log đối soát.
     \end{itemize}
 \end{itemize}
