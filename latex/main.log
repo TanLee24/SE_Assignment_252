@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.12.8)  12 APR 2026 15:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.12.8)  12 APR 2026 18:57
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1456,7 +1456,7 @@ Package hyperref Info: Link coloring ON on input line 87.
 \@outlinefile=\write6
 \openout6 = `main.out'.
 
-<pictures/hcmut.png, id=186, 272.01625pt x 277.035pt>
+<pictures/hcmut.png, id=190, 272.01625pt x 277.035pt>
 File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 100.
@@ -1537,7 +1537,7 @@ File: pictures/hcmut.png Graphic file (type png)
 Package pdftex.def Info: pictures/hcmut.png  used on input line 1.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
 [4]
-<pictures/whole_system_UCD.drawio.png, id=276, 1023.825pt x 1025.8325pt>
+<pictures/whole_system_UCD.drawio.png, id=281, 1023.825pt x 1025.8325pt>
 File: pictures/whole_system_UCD.drawio.png Graphic file (type png)
 <use pictures/whole_system_UCD.drawio.png>
 Package pdftex.def Info: pictures/whole_system_UCD.drawio.png  used on input li
@@ -1555,7 +1555,7 @@ File: pictures/hcmut.png Graphic file (type png)
 Package pdftex.def Info: pictures/hcmut.png  used on input line 17.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
 [5 <./pictures/whole_system_UCD.drawio.png>]
-<pictures/UCD_Task5.png, id=285, 984.67876pt x 793.96625pt>
+<pictures/UCD_Task5.png, id=290, 984.67876pt x 793.96625pt>
 File: pictures/UCD_Task5.png Graphic file (type png)
 <use pictures/UCD_Task5.png>
 Package pdftex.def Info: pictures/UCD_Task5.png  used on input line 21.
@@ -1605,7 +1605,7 @@ File: pictures/hcmut.png Graphic file (type png)
 Package pdftex.def Info: pictures/hcmut.png  used on input line 122.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
 [9]
-<pictures/task1_usecase_diagram.png, id=311, 1131.22626pt x 440.64626pt>
+<pictures/task1_usecase_diagram.png, id=316, 1131.22626pt x 440.64626pt>
 File: pictures/task1_usecase_diagram.png Graphic file (type png)
 <use pictures/task1_usecase_diagram.png>
 Package pdftex.def Info: pictures/task1_usecase_diagram.png  used on input line
@@ -1696,7 +1696,7 @@ File: pictures/hcmut.png Graphic file (type png)
 Package pdftex.def Info: pictures/hcmut.png  used on input line 281.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
 [12]
-<pictures/UCD_Task2.png, id=333, 722.7pt x 332.442pt>
+<pictures/UCD_Task2.png, id=338, 722.7pt x 332.442pt>
 File: pictures/UCD_Task2.png Graphic file (type png)
 <use pictures/UCD_Task2.png>
 Package pdftex.def Info: pictures/UCD_Task2.png  used on input line 290.
@@ -1760,7 +1760,7 @@ File: pictures/hcmut.png Graphic file (type png)
 Package pdftex.def Info: pictures/hcmut.png  used on input line 390.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
 [15]
-<pictures/task3_uc_diagram.png, id=354, 1843.88875pt x 478.78876pt>
+<pictures/task3_uc_diagram.png, id=359, 1843.88875pt x 478.78876pt>
 File: pictures/task3_uc_diagram.png Graphic file (type png)
 <use pictures/task3_uc_diagram.png>
 Package pdftex.def Info: pictures/task3_uc_diagram.png  used on input line 399.
@@ -1821,7 +1821,7 @@ File: pictures/hcmut.png Graphic file (type png)
 Package pdftex.def Info: pictures/hcmut.png  used on input line 527.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
 [19]
-<pictures/UCD_Task4.jpg, id=380, 948.54375pt x 630.355pt>
+<pictures/UCD_Task4.jpg, id=385, 948.54375pt x 630.355pt>
 File: pictures/UCD_Task4.jpg Graphic file (type jpg)
 <use pictures/UCD_Task4.jpg>
 Package pdftex.def Info: pictures/UCD_Task4.jpg  used on input line 531.
@@ -1885,7 +1885,7 @@ File: pictures/hcmut.png Graphic file (type png)
 Package pdftex.def Info: pictures/hcmut.png  used on input line 656.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
 [22]
-<pictures/se_nonin.drawio.png, id=400, 1511.6475pt x 773.89125pt>
+<pictures/se_nonin.drawio.png, id=405, 1511.6475pt x 773.89125pt>
 File: pictures/se_nonin.drawio.png Graphic file (type png)
 <use pictures/se_nonin.drawio.png>
 Package pdftex.def Info: pictures/se_nonin.drawio.png  used on input line 665.
@@ -1959,7 +1959,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 785--787
 
  []
 
-<pictures/non_in2.png, id=422, 735.34724pt x 413.1435pt>
+<pictures/non_in2.png, id=427, 735.34724pt x 413.1435pt>
 File: pictures/non_in2.png Graphic file (type png)
 <use pictures/non_in2.png>
 Package pdftex.def Info: pictures/non_in2.png  used on input line 825.
@@ -2047,20 +2047,126 @@ File: pictures/hcmut.png Graphic file (type png)
 Package pdftex.def Info: pictures/hcmut.png  used on input line 1.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
 [32]
-<pictures/ui/admin_dashboard.jpg, id=465, 2568.59625pt x 1409.265pt>
+<pictures/ui/login_form.jpg, id=470, 2568.59625pt x 1404.24625pt>
+File: pictures/ui/login_form.jpg Graphic file (type jpg)
+<use pictures/ui/login_form.jpg>
+Package pdftex.def Info: pictures/ui/login_form.jpg  used on input line 9.
+(pdftex.def)             Requested size: 339.67029pt x 185.68677pt.
+<pictures/ui/admin_dashboard.jpg, id=471, 2568.59625pt x 1409.265pt>
 File: pictures/ui/admin_dashboard.jpg Graphic file (type jpg)
 <use pictures/ui/admin_dashboard.jpg>
-Package pdftex.def Info: pictures/ui/admin_dashboard.jpg  used on input line 9.
-
+Package pdftex.def Info: pictures/ui/admin_dashboard.jpg  used on input line 17
+.
 (pdftex.def)             Requested size: 339.67029pt x 186.3504pt.
-) (sections/act_diagram.tex
+
+
+File: pictures/hcmut.png Graphic file (type png)
+<use pictures/hcmut.png>
+Package pdftex.def Info: pictures/hcmut.png  used on input line 22.
+(pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
+[33 <./pictures/ui/login_form.jpg> <./pictures/ui/admin_dashboard.jpg>]
+<pictures/ui/admin_sync.jpg, id=479, 2567.5925pt x 1411.2725pt>
+File: pictures/ui/admin_sync.jpg Graphic file (type jpg)
+<use pictures/ui/admin_sync.jpg>
+Package pdftex.def Info: pictures/ui/admin_sync.jpg  used on input line 26.
+(pdftex.def)             Requested size: 339.67029pt x 186.68047pt.
+<pictures/ui/admin_useraccess.jpg, id=480, 2568.59625pt x 1401.235pt>
+File: pictures/ui/admin_useraccess.jpg Graphic file (type jpg)
+<use pictures/ui/admin_useraccess.jpg>
+Package pdftex.def Info: pictures/ui/admin_useraccess.jpg  used on input line 3
+4.
+(pdftex.def)             Requested size: 339.67029pt x 185.28859pt.
+
+
+File: pictures/hcmut.png Graphic file (type png)
+<use pictures/hcmut.png>
+Package pdftex.def Info: pictures/hcmut.png  used on input line 39.
+(pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
+[34 <./pictures/ui/admin_sync.jpg> <./pictures/ui/admin_useraccess.jpg>]
+<pictures/ui/admin_analytics.jpg, id=488, 2549.525pt x 1410.26875pt>
+File: pictures/ui/admin_analytics.jpg Graphic file (type jpg)
+<use pictures/ui/admin_analytics.jpg>
+Package pdftex.def Info: pictures/ui/admin_analytics.jpg  used on input line 43
+.
+(pdftex.def)             Requested size: 339.67029pt x 187.88187pt.
+<pictures/ui/admin_auditlogs.jpg, id=489, 2564.58125pt x 1408.26125pt>
+File: pictures/ui/admin_auditlogs.jpg Graphic file (type jpg)
+<use pictures/ui/admin_auditlogs.jpg>
+Package pdftex.def Info: pictures/ui/admin_auditlogs.jpg  used on input line 51
+.
+(pdftex.def)             Requested size: 339.67029pt x 186.51851pt.
+
+
+File: pictures/hcmut.png Graphic file (type png)
+<use pictures/hcmut.png>
+Package pdftex.def Info: pictures/hcmut.png  used on input line 56.
+(pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
+[35 <./pictures/ui/admin_analytics.jpg> <./pictures/ui/admin_auditlogs.jpg>]
+<pictures/ui/UI_AC_1.png, id=498, 1444.64719pt x 812.28468pt>
+File: pictures/ui/UI_AC_1.png Graphic file (type png)
+<use pictures/ui/UI_AC_1.png>
+Package pdftex.def Info: pictures/ui/UI_AC_1.png  used on input line 62.
+(pdftex.def)             Requested size: 339.67029pt x 190.98608pt.
+<pictures/ui/UI_AC_2.png, id=499, 1444.64719pt x 812.28468pt>
+File: pictures/ui/UI_AC_2.png Graphic file (type png)
+<use pictures/ui/UI_AC_2.png>
+Package pdftex.def Info: pictures/ui/UI_AC_2.png  used on input line 70.
+(pdftex.def)             Requested size: 339.67029pt x 190.98608pt.
+
+
+File: pictures/hcmut.png Graphic file (type png)
+<use pictures/hcmut.png>
+Package pdftex.def Info: pictures/hcmut.png  used on input line 75.
+(pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
+[36 <./pictures/ui/UI_AC_1.png> <./pictures/ui/UI_AC_2.png>]
+<pictures/ui/UI_AC_3.png, id=509, 1444.64719pt x 812.28468pt>
+File: pictures/ui/UI_AC_3.png Graphic file (type png)
+<use pictures/ui/UI_AC_3.png>
+Package pdftex.def Info: pictures/ui/UI_AC_3.png  used on input line 79.
+(pdftex.def)             Requested size: 339.67029pt x 190.98608pt.
+<pictures/ui/UI_AC_4.png, id=510, 1444.64719pt x 812.28468pt>
+File: pictures/ui/UI_AC_4.png Graphic file (type png)
+<use pictures/ui/UI_AC_4.png>
+Package pdftex.def Info: pictures/ui/UI_AC_4.png  used on input line 87.
+(pdftex.def)             Requested size: 339.67029pt x 190.98608pt.
+
+
+File: pictures/hcmut.png Graphic file (type png)
+<use pictures/hcmut.png>
+Package pdftex.def Info: pictures/hcmut.png  used on input line 92.
+(pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
+[37 <./pictures/ui/UI_AC_3.png> <./pictures/ui/UI_AC_4.png>]
+<pictures/ui/UI_AC_5.png, id=520, 1444.64719pt x 812.28468pt>
+File: pictures/ui/UI_AC_5.png Graphic file (type png)
+<use pictures/ui/UI_AC_5.png>
+Package pdftex.def Info: pictures/ui/UI_AC_5.png  used on input line 97.
+(pdftex.def)             Requested size: 339.67029pt x 190.98608pt.
+<pictures/ui/UI_AC_6.png, id=521, 1444.64719pt x 812.28468pt>
+File: pictures/ui/UI_AC_6.png Graphic file (type png)
+<use pictures/ui/UI_AC_6.png>
+Package pdftex.def Info: pictures/ui/UI_AC_6.png  used on input line 104.
+(pdftex.def)             Requested size: 339.67029pt x 190.98608pt.
+
+
+File: pictures/hcmut.png Graphic file (type png)
+<use pictures/hcmut.png>
+Package pdftex.def Info: pictures/hcmut.png  used on input line 109.
+(pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
+[38 <./pictures/ui/UI_AC_5.png> <./pictures/ui/UI_AC_6.png>]
+<pictures/ui/UI_AC_7.png, id=531, 1444.64719pt x 800.9925pt>
+File: pictures/ui/UI_AC_7.png Graphic file (type png)
+<use pictures/ui/UI_AC_7.png>
+Package pdftex.def Info: pictures/ui/UI_AC_7.png  used on input line 112.
+(pdftex.def)             Requested size: 339.67029pt x 188.33104pt.
+)
+(sections/act_diagram.tex
 
 File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 1.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[33 <./pictures/ui/admin_dashboard.jpg>]
-<pictures/act_diagram/login_act.drawio.png, id=472, 939.51pt x 1398.22375pt>
+[39 <./pictures/ui/UI_AC_7.png>]
+<pictures/act_diagram/login_act.drawio.png, id=539, 939.51pt x 1398.22375pt>
 File: pictures/act_diagram/login_act.drawio.png Graphic file (type png)
 <use pictures/act_diagram/login_act.drawio.png>
 Package pdftex.def Info: pictures/act_diagram/login_act.drawio.png  used on inp
@@ -2072,8 +2178,8 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 14.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[34 <./pictures/act_diagram/login_act.drawio.png>]
-<pictures/act_diagram/sync_act.drawio.png, id=480, 844.15375pt x 1157.32375pt>
+[40 <./pictures/act_diagram/login_act.drawio.png>]
+<pictures/act_diagram/sync_act.drawio.png, id=547, 844.15375pt x 1157.32375pt>
 File: pictures/act_diagram/sync_act.drawio.png Graphic file (type png)
 <use pictures/act_diagram/sync_act.drawio.png>
 Package pdftex.def Info: pictures/act_diagram/sync_act.drawio.png  used on inpu
@@ -2085,15 +2191,15 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 23.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[35 <./pictures/act_diagram/sync_act.drawio.png>]
-<pictures/act_diagram/useraccess_act.drawio.png, id=489, 874.26625pt x 1157.323
+[41 <./pictures/act_diagram/sync_act.drawio.png>]
+<pictures/act_diagram/useraccess_act.drawio.png, id=556, 874.26625pt x 1157.323
 75pt>
 File: pictures/act_diagram/useraccess_act.drawio.png Graphic file (type png)
 <use pictures/act_diagram/useraccess_act.drawio.png>
 Package pdftex.def Info: pictures/act_diagram/useraccess_act.drawio.png  used o
 n input line 27.
 (pdftex.def)             Requested size: 339.67029pt x 449.6415pt.
-<pictures/act_diagram/enter_parking_act.png, id=490, 3123.67pt x 1449.415pt>
+<pictures/act_diagram/enter_parking_act.png, id=557, 3123.67pt x 1449.415pt>
 File: pictures/act_diagram/enter_parking_act.png Graphic file (type png)
 <use pictures/act_diagram/enter_parking_act.png>
 Package pdftex.def Info: pictures/act_diagram/enter_parking_act.png  used on in
@@ -2105,14 +2211,14 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 42.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[36 <./pictures/act_diagram/useraccess_act.drawio.png>]
+[42 <./pictures/act_diagram/useraccess_act.drawio.png>]
 
 File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 43.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[37 <./pictures/act_diagram/enter_parking_act.png>]
-<pictures/act_diagram/exit_parking_act.png, id=505, 3648.63126pt x 1557.82pt>
+[43 <./pictures/act_diagram/enter_parking_act.png>]
+<pictures/act_diagram/exit_parking_act.png, id=572, 3648.63126pt x 1557.82pt>
 File: pictures/act_diagram/exit_parking_act.png Graphic file (type png)
 <use pictures/act_diagram/exit_parking_act.png>
 Package pdftex.def Info: pictures/act_diagram/exit_parking_act.png  used on inp
@@ -2124,8 +2230,8 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 52.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[38 <./pictures/act_diagram/exit_parking_act.png>]
-<pictures/act_diagram/temp_ticket_act.png, id=513, 3065.4525pt x 1165.35374pt>
+[44 <./pictures/act_diagram/exit_parking_act.png>]
+<pictures/act_diagram/temp_ticket_act.png, id=580, 3065.4525pt x 1165.35374pt>
 File: pictures/act_diagram/temp_ticket_act.png Graphic file (type png)
 <use pictures/act_diagram/temp_ticket_act.png>
 Package pdftex.def Info: pictures/act_diagram/temp_ticket_act.png  used on inpu
@@ -2137,8 +2243,8 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 61.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[39 <./pictures/act_diagram/temp_ticket_act.png>]
-<pictures/act_diagram/off_ctrl_act.png, id=521, 2334.7225pt x 1129.21875pt>
+[45 <./pictures/act_diagram/temp_ticket_act.png>]
+<pictures/act_diagram/off_ctrl_act.png, id=588, 2334.7225pt x 1129.21875pt>
 File: pictures/act_diagram/off_ctrl_act.png Graphic file (type png)
 <use pictures/act_diagram/off_ctrl_act.png>
 Package pdftex.def Info: pictures/act_diagram/off_ctrl_act.png  used on input l
@@ -2150,8 +2256,8 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 1.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[40 <./pictures/act_diagram/off_ctrl_act.png>]
-<pictures/seq_diagram/login_seq.drawio.png, id=529, 665.48625pt x 664.4825pt>
+[46 <./pictures/act_diagram/off_ctrl_act.png>]
+<pictures/seq_diagram/login_seq.drawio.png, id=596, 665.48625pt x 664.4825pt>
 File: pictures/seq_diagram/login_seq.drawio.png Graphic file (type png)
 <use pictures/seq_diagram/login_seq.drawio.png>
 Package pdftex.def Info: pictures/seq_diagram/login_seq.drawio.png  used on inp
@@ -2163,8 +2269,8 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 14.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[41 <./pictures/seq_diagram/login_seq.drawio.png>]
-<pictures/seq_diagram/sync_seq.drawio.png, id=538, 636.3775pt x 805.0075pt>
+[47 <./pictures/seq_diagram/login_seq.drawio.png>]
+<pictures/seq_diagram/sync_seq.drawio.png, id=605, 636.3775pt x 805.0075pt>
 File: pictures/seq_diagram/sync_seq.drawio.png Graphic file (type png)
 <use pictures/seq_diagram/sync_seq.drawio.png>
 Package pdftex.def Info: pictures/seq_diagram/sync_seq.drawio.png  used on inpu
@@ -2176,15 +2282,15 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 23.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[42 <./pictures/seq_diagram/sync_seq.drawio.png>]
-<pictures/seq_diagram/useraccess_seq.drawio.png, id=546, 674.52pt x 644.4075pt>
+[48 <./pictures/seq_diagram/sync_seq.drawio.png>]
+<pictures/seq_diagram/useraccess_seq.drawio.png, id=613, 674.52pt x 644.4075pt>
 
 File: pictures/seq_diagram/useraccess_seq.drawio.png Graphic file (type png)
 <use pictures/seq_diagram/useraccess_seq.drawio.png>
 Package pdftex.def Info: pictures/seq_diagram/useraccess_seq.drawio.png  used o
 n input line 27.
 (pdftex.def)             Requested size: 339.67029pt x 324.51367pt.
-<pictures/seq_diagram/Enter_parking_ID.png, id=547, 8222.72pt x 5698.28876pt>
+<pictures/seq_diagram/Enter_parking_ID.png, id=614, 8222.72pt x 5698.28876pt>
 File: pictures/seq_diagram/Enter_parking_ID.png Graphic file (type png)
 <use pictures/seq_diagram/Enter_parking_ID.png>
 Package pdftex.def Info: pictures/seq_diagram/Enter_parking_ID.png  used on inp
@@ -2196,14 +2302,14 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 43.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[43 <./pictures/seq_diagram/useraccess_seq.drawio.png>]
+[49 <./pictures/seq_diagram/useraccess_seq.drawio.png>]
 
 File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 44.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[44 <./pictures/seq_diagram/Enter_parking_ID.png>]
-<pictures/seq_diagram/Exit_parking_ID.png, id=562, 8221.71625pt x 6678.9525pt>
+[50 <./pictures/seq_diagram/Enter_parking_ID.png>]
+<pictures/seq_diagram/Exit_parking_ID.png, id=629, 8221.71625pt x 6678.9525pt>
 File: pictures/seq_diagram/Exit_parking_ID.png Graphic file (type png)
 <use pictures/seq_diagram/Exit_parking_ID.png>
 Package pdftex.def Info: pictures/seq_diagram/Exit_parking_ID.png  used on inpu
@@ -2215,8 +2321,8 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 53.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[45 <./pictures/seq_diagram/Exit_parking_ID.png>]
-<pictures/seq_diagram/Issue_Temporary_Ticket.png, id=570, 8222.72pt x 5645.09pt
+[51 <./pictures/seq_diagram/Exit_parking_ID.png>]
+<pictures/seq_diagram/Issue_Temporary_Ticket.png, id=637, 8222.72pt x 5645.09pt
 >
 File: pictures/seq_diagram/Issue_Temporary_Ticket.png Graphic file (type png)
 <use pictures/seq_diagram/Issue_Temporary_Ticket.png>
@@ -2229,8 +2335,8 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 62.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[46 <./pictures/seq_diagram/Issue_Temporary_Ticket.png>]
-<pictures/seq_diagram/Offline_Access_Control_Mode.png, id=578, 8222.72pt x 4982
+[52 <./pictures/seq_diagram/Issue_Temporary_Ticket.png>]
+<pictures/seq_diagram/Offline_Access_Control_Mode.png, id=645, 8222.72pt x 4982
 .615pt>
 File: pictures/seq_diagram/Offline_Access_Control_Mode.png Graphic file (type p
 ng)
@@ -2245,8 +2351,8 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 1.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[47 <./pictures/seq_diagram/Offline_Access_Control_Mode.png>]
-<pictures/state_diagram/login_state.png, id=587, 833.1125pt x 703.62875pt>
+[53 <./pictures/seq_diagram/Offline_Access_Control_Mode.png>]
+<pictures/state_diagram/login_state.png, id=654, 833.1125pt x 703.62875pt>
 File: pictures/state_diagram/login_state.png Graphic file (type png)
 <use pictures/state_diagram/login_state.png>
 Package pdftex.def Info: pictures/state_diagram/login_state.png  used on input 
@@ -2258,8 +2364,8 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 14.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[48 <./pictures/state_diagram/login_state.png>]
-<pictures/state_diagram/enter_parking_states.png, id=595, 1596.96625pt x 1482.5
+[54 <./pictures/state_diagram/login_state.png>]
+<pictures/state_diagram/enter_parking_states.png, id=662, 1596.96625pt x 1482.5
 3876pt>
 File: pictures/state_diagram/enter_parking_states.png Graphic file (type png)
 <use pictures/state_diagram/enter_parking_states.png>
@@ -2272,8 +2378,8 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 25.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[49 <./pictures/state_diagram/enter_parking_states.png>]
-<pictures/state_diagram/exit_parking_states.png, id=603, 1612.0225pt x 1580.906
+[55 <./pictures/state_diagram/enter_parking_states.png>]
+<pictures/state_diagram/exit_parking_states.png, id=670, 1612.0225pt x 1580.906
 25pt>
 File: pictures/state_diagram/exit_parking_states.png Graphic file (type png)
 <use pictures/state_diagram/exit_parking_states.png>
@@ -2286,8 +2392,8 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 34.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[50 <./pictures/state_diagram/exit_parking_states.png>]
-<pictures/state_diagram/temp_ticket_states.png, id=611, 1825.82124pt x 1229.593
+[56 <./pictures/state_diagram/exit_parking_states.png>]
+<pictures/state_diagram/temp_ticket_states.png, id=678, 1825.82124pt x 1229.593
 75pt>
 File: pictures/state_diagram/temp_ticket_states.png Graphic file (type png)
 <use pictures/state_diagram/temp_ticket_states.png>
@@ -2300,8 +2406,8 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 43.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[51 <./pictures/state_diagram/temp_ticket_states.png>]
-<pictures/state_diagram/off_control_states.png, id=619, 1164.35pt x 1355.0625pt
+[57 <./pictures/state_diagram/temp_ticket_states.png>]
+<pictures/state_diagram/off_control_states.png, id=686, 1164.35pt x 1355.0625pt
 >
 File: pictures/state_diagram/off_control_states.png Graphic file (type png)
 <use pictures/state_diagram/off_control_states.png>
@@ -2314,8 +2420,8 @@ File: pictures/hcmut.png Graphic file (type png)
 <use pictures/hcmut.png>
 Package pdftex.def Info: pictures/hcmut.png  used on input line 189.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
-[52 <./pictures/state_diagram/off_control_states.png>]
-runsystem(latexminted cleantemp  --timestamp 20260412150613 FAD58DE7366495DB465
+[58 <./pictures/state_diagram/off_control_states.png>]
+runsystem(latexminted cleantemp  --timestamp 20260412185724 FAD58DE7366495DB465
 0CFEFAC2FCD61)...executed.
 
 
@@ -2327,13 +2433,13 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-06>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B0236C6E3FDB4F5A939FAC4DB0CBED3B;7901.
+(rerunfilecheck)             Checksum: D826A1BD1B5C6B200896183B48DE6679;8109.
  ) 
 Here is how much of TeX's memory you used:
- 33456 strings out of 467875
- 667603 string characters out of 5430966
- 1188318 words of memory out of 5000000
- 61557 multiletter control sequences out of 15000+600000
+ 33572 strings out of 467875
+ 670782 string characters out of 5430966
+ 1189421 words of memory out of 5000000
+ 61654 multiletter control sequences out of 15000+600000
  641438 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  102i,24n,126p,1452b,762s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -2343,9 +2449,9 @@ ad/fonts/type1/vntex/vnr/vnbx12.pfb><D:/miktex_download/fonts/type1/vntex/vnr/v
 nr10.pfb><D:/miktex_download/fonts/type1/vntex/vnr/vnr12.pfb><D:/miktex_downloa
 d/fonts/type1/vntex/vnr/vnr8.pfb><D:/miktex_download/fonts/type1/vntex/vnr/vntt
 10.pfb><D:/miktex_download/fonts/type1/vntex/vnr/vntt8.pfb>
-Output written on main.pdf (54 pages, 5568419 bytes).
+Output written on main.pdf (60 pages, 8094319 bytes).
 PDF statistics:
- 696 PDF objects out of 1000 (max. 8388607)
- 154 named destinations out of 1000 (max. 500000)
- 518 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 766 PDF objects out of 1000 (max. 8388607)
+ 173 named destinations out of 1000 (max. 500000)
+ 586 words of extra memory for PDF output out of 10000 (max. 10000000)
 
