@@ -6,19 +6,32 @@ Dự án được chia làm 5 phân hệ (5 Use-case lớn), mỗi phân hệ đ
 \subsection{Use-case diagram cho toàn bộ hệ thống}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\textwidth]{pictures/whole_system_UCD.drawio.png} 
+    \includegraphics[width=1.1\textwidth]{pictures/whole_ucd.drawio.png} 
     \caption{Use-case diagram cho toàn hệ thống}
     \label{UCD_All}
 \end{figure}
 
 \subsection{Quản trị Hệ thống và Tích hợp}
 \subsubsection{Tổng quan}
-Phân hệ này cho phép người dùng (sinh viên, cán bộ, giảng viên và quản trị viên) đăng nhập an toàn vào hệ thống IoT-SPMS thông qua cổng HCMUT\_SSO. Sau khi xác thực, hệ thống sẽ đồng bộ dữ liệu cá nhân từ HCMUT\_DATACORE để thiết lập phân quyền truy cập (RBAC), đồng thời hỗ trợ quản trị viên truy vết lịch sử hoạt động và xuất báo cáo. Điều này đảm bảo việc quản lý hệ thống được tập trung, bảo mật và luôn đồng nhất với cơ sở dữ liệu chính thức của nhà trường.
+Phân hệ này cho phép người dùng (sinh viên, cán bộ, giảng viên và quản trị viên) 
+đăng nhập an toàn vào hệ thống IoT-SPMS thông qua cổng HCMUT\_SSO. 
+Sau khi xác thực, hệ thống sẽ đồng bộ dữ liệu cá nhân từ HCMUT\_DATACORE 
+để thiết lập phân quyền truy cập (RBAC), đồng thời hỗ trợ quản trị viên truy vết lịch sử hoạt động 
+và xuất báo cáo. Điều này đảm bảo việc quản lý hệ thống được tập trung, bảo mật và 
+luôn đồng nhất với cơ sở dữ liệu chính thức của nhà trường.
 
 \subsubsection{Use-case diagram}
+
+Vì đây là một phân hệ khá rộng nên chúng ta sẽ chia nó thành 3 nhóm use-case chính:
+\begin{itemize}
+    \item Nhóm Xác thực và bảo mật
+    \item Nhóm Quản trị người dùng
+    \item Nhóm Giám sát và Truy vết
+\end{itemize}
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\textwidth]{pictures/UCD_Task5.png} 
+    \includegraphics[width=1.1\textwidth]{pictures/system_mngt_ucd.drawio.png}
     \caption{Use-case diagram cho Phân hệ Quản trị Hệ thống và Tích hợp}
     \label{UCD_Admin}
 \end{figure}
