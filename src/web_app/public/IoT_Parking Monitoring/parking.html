@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>IoT SPMS - Advanced Monitoring System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-void: #0a0e15;
+            --surface-low: #0f131b;
+            --surface-high: #1b2029;
+            --primary: #8eabff;
+            --primary-dim: #2f6cf0;
+            --on-surface: #f1f3fe;
+            --on-surface-variant: #a8abb5;
+            --error: #d7383b;
+            --success: #00e676;
+            --warning: #ffab40;
+            --anomaly: #ff00ff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg-void); color: var(--on-surface); font-family: 'Manrope', sans-serif; height: 100vh; display: flex; overflow: hidden; }
+        h1, h2, h3, .tab-btn { font-family: 'Space Grotesk', sans-serif; font-weight: 500; }
+
+        /* Sidebar */
+        .sidebar { width: 280px; background: var(--surface-low); border-right: 1px solid rgba(255,255,255,0.05); padding: 2rem 1rem; display: flex; flex-direction: column; flex-shrink: 0; }
+        .nav-group { flex: 1; margin-top: 2rem; }
+        .tab-btn { 
+            width: 100%; padding: 1rem; background: transparent; border: none; color: var(--on-surface-variant); 
+            text-align: left; cursor: pointer; border-radius: 0.5rem; transition: 0.3s; margin-bottom: 0.5rem; font-size: 0.95rem;
+        }
+        .tab-btn.active { background: var(--primary-dim); color: white; box-shadow: 0 4px 15px rgba(47,108,240,0.3); }
+
+        /* Main Content */
+        .main { flex: 1; overflow-y: auto; padding: 2rem; }
+        .view { display: none; animation: fadeIn 0.4s ease; }
+        .view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Layout Components */
+        .card { background: var(--surface-high); padding: 1.5rem; border-radius: 1rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.03); }
+        .label { font-size: 0.7rem; color: var(--on-surface-variant); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .flex-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
+
+        /* 2D Map Grid (Scenario 1, 2, 4) */
+        .map-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 1rem; }
+        .spot { height: 90px; background: var(--surface-low); border-radius: 0.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border-bottom: 4px solid var(--on-surface-variant); transition: 0.4s; }
+        .spot.empty { border-bottom-color: var(--success); }
+        .spot.occupied { border-bottom-color: var(--error); }
+        .spot.faulty { border-bottom-color: #444; opacity: 0.3; }
+        .spot.anomaly { border-bottom-color: var(--anomaly); animation: shake 0.5s infinite; }
+
+        /* Heartbeat Animation (Scenario 3) */
+        .pulse { width: 6px; height: 6px; background: var(--primary); border-radius: 50%; position: absolute; top: 10px; right: 10px; }
+        .pulse::after { content: ''; position: absolute; width: 100%; height: 100%; background: inherit; border-radius: inherit; animation: ping 2s infinite; }
+        @keyframes ping { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(4); opacity: 0; } }
+        @keyframes shake { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(2deg); } 75% { transform: rotate(-2deg); } }
+
+        /* Tables & Lists (Scenario 3, 5, 6) */
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
+        th { text-align: left; padding: 1rem; color: var(--on-surface-variant); border-bottom: 1px solid var(--surface-low); }
+        td { padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.02); }
+        .tag { padding: 0.2rem 0.6rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 600; }
+        .tag-ok { background: rgba(0, 230, 118, 0.1); color: var(--success); }
+        .tag-off { background: rgba(215, 56, 59, 0.1); color: var(--error); }
+
+        /* System Logs (Scenario 4, 7) */
+        .log-box { max-height: 250px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.5rem; }
+        .log-entry { padding: 0.8rem; background: rgba(255,255,255,0.02); border-left: 3px solid var(--primary-dim); font-size: 0.85rem; border-radius: 0 4px 4px 0; }
+        .log-entry.alert { border-left-color: var(--error); background: rgba(215, 56, 59, 0.05); }
+        .log-entry.warn { border-left-color: var(--warning); }
+    </style>
+</head>
+<body>
+
+<aside class="sidebar">
+    <div style="margin-bottom: 1rem;">
+        <p class="label" style="color: var(--primary)">IoT Control Unit</p>
+        <h2>SPMS 2.0</h2>
+    </div>
+
+    <nav class="nav-group">
+        <button class="tab-btn active" onclick="switchTab(event, 'realtime-map')">Sơ đồ thời gian thực</button>
+        <button class="tab-btn" onclick="switchTab(event, 'hardware-monitor')">Hệ thống & Phần cứng</button>
+        <button class="tab-btn" onclick="switchTab(event, 'reports-view')">Báo cáo & Hiệu suất</button>
+    </nav>
+
+    <div class="card" style="margin-bottom: 0; background: var(--surface-low);">
+        <p class="label">Auto-Maintenance (S5)</p>
+        <p style="font-size: 0.85rem; color: var(--success)">Cache: Đã dọn dẹp (02:00 AM)</p>
+        <p style="font-size: 0.75rem; color: var(--on-surface-variant); margin-top: 5px;">Sức khỏe RAM Gateway: 98%</p>
+    </div>
+</aside>
+
+<main class="main">
+    <section id="realtime-map" class="view active">
+        <div class="flex-row">
+            <div>
+                <h1 style="font-size: 2.2rem;">Live Monitoring</h1>
+                <p class="label">Cập nhật qua SignalR / MQTT Protocol</p>
+            </div>
+            <div style="text-align: right;">
+                <p class="label">Tổng chỗ trống</p>
+                <h2 style="color: var(--primary); font-size: 2rem;">128 / 200</h2>
+            </div>
+        </div>
+
+        <div class="card">
+            <p class="label">Mặt bằng bãi đỗ - Khu vực chính (Scenario 1 & 2)</p>
+            <div class="map-grid">
+                <div class="spot empty"><span class="label">A-01</span><p>TRỐNG</p><div class="pulse"></div></div>
+                <div class="spot occupied"><span class="label">A-02</span><p>CÓ XE</p><div class="pulse"></div></div>
+                <div class="spot anomaly"><span class="label">A-03</span><p>NHIỄU!</p></div>
+                <div class="spot empty"><span class="label">A-04</span><p>TRỐNG</p><div class="pulse"></div></div>
+                <div class="spot faulty"><span class="label">A-05</span><p>LỖI</p></div>
+                <div class="spot occupied"><span class="label">A-06</span><p>CÓ XE</p><div class="pulse"></div></div>
+                <div class="spot empty"><span class="label">A-07</span><p>TRỐNG</p><div class="pulse"></div></div>
+                <div class="spot empty"><span class="label">A-08</span><p>TRỐNG</p><div class="pulse"></div></div>
+            </div>
+        </div>
+
+        <div class="card" style="background: rgba(215, 56, 59, 0.05); border: 1px solid var(--error);">
+            <p class="label" style="color: var(--error)">Phát hiện bất thường (Scenario 7)</p>
+            <p style="font-size: 0.9rem;">Cảnh báo: Ô đỗ <b>A-03</b> nhảy trạng thái liên tục. Hệ thống đã tự động khóa dữ liệu ô này để kiểm tra cảm biến.</p>
+        </div>
+    </section>
+
+    <section id="hardware-monitor" class="view">
+        <h1 style="margin-bottom: 2rem;">Giám sát thiết bị IoT</h1>
+        
+        <div class="card">
+            <p class="label">Danh sách Gateway & Heartbeat (Scenario 3)</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Device ID</th>
+                        <th>IP</th>
+                        <th>Trạng thái</th>
+                        <th>Ping</th>
+                        <th>Lần cuối phản hồi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>GTW-001</td><td>10.0.0.1</td><td><span class="tag tag-ok">ONLINE</span></td><td>15ms</td><td>Vừa xong</td></tr>
+                    <tr><td>GTW-002</td><td>10.0.0.2</td><td><span class="tag tag-ok">ONLINE</span></td><td>22ms</td><td>4s trước</td></tr>
+                    <tr style="background: rgba(215,56,59,0.05)"><td>GTW-003</td><td>10.0.0.3</td><td><span class="tag tag-off">OFFLINE</span></td><td>--</td><td>12 phút trước</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <p class="label">Nhật ký cô lập & Tự phục hồi (Scenario 4)</p>
+            <div class="log-box">
+                <div class="log-entry warn"><b>11:50</b> - Bộ định thời phát hiện GTW-003 không phản hồi. Thử lại lần 2...</div>
+                <div class="log-entry alert"><b>11:51</b> - GTW-003 Offline. Đã tự động cô lập 15 ô đỗ thuộc Zone C (Scenario 4).</div>
+                <div class="log-entry"><b>11:55</b> - Hệ thống khấu trừ 15 ô lỗi khỏi thuật toán bảng LED.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reports-view" class="view">
+        <h1 style="margin-bottom: 2rem;">Thống kê hiệu suất</h1>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="card">
+                <p class="label">Tỷ lệ lấp đầy ngày hôm qua (Scenario 6)</p>
+                <div style="font-size: 3rem; color: var(--primary); font-weight: 700;">92%</div>
+                <p style="font-size: 0.8rem; color: var(--on-surface-variant); margin-top: 10px;">Báo cáo đã tự động gửi đến Email Ban quản lý lúc 23:59.</p>
+            </div>
+            <div class="card">
+                <p class="label">Lượt xe trong ngày</p>
+                <div style="font-size: 3rem; color: var(--success); font-weight: 700;">450</div>
+                <p style="font-size: 0.8rem; color: var(--on-surface-variant); margin-top: 10px;">Thời gian đỗ trung bình: 2.5 giờ.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <p class="label">Tự động hóa (Decision Support)</p>
+            <p style="font-size: 0.95rem; line-height: 1.6;">Dựa trên dữ liệu tuần qua, hệ thống đề xuất tăng cường nhân sự vào khung giờ 17:00 - 19:00 do tỷ lệ lấp đầy thường xuyên đạt mức 98%.</p>
+        </div>
+    </section>
+</main>
+
+<script>
+    function switchTab(event, tabId) {
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
