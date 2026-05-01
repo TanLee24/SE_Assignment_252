@@ -1,0 +1,63 @@
+\newpage
+\section{Các yêu cầu phi chức năng}
+
+Các ràng buộc nhằm đảm bảo hệ thống điều hướng hoạt động ổn định, chính xác và phản hồi theo thời gian gần thực:
+\begin{itemize}
+    \item Hiệu suất thời gian thực (Real-time Performance):
+    \begin{itemize}
+        \item Hệ thống phải cập nhật trạng thái bãi đỗ xe từ dữ liệu cảm biến trong thời gian gần thực (near real-time), với độ trễ tối đa không quá 5 giây kể từ khi gateway gửi dữ liệu.
+        \item Việc cập nhật thông tin hiển thị trên các bảng LED phải hoàn thành trong vòng 3 giây sau khi trạng thái bãi xe thay đổi.
+    \end{itemize}
+
+    \item Độ tin cậy và khả năng chịu lỗi (Reliability \& Fault Tolerance):
+    \begin{itemize}
+        \item Trong trường hợp mất kết nối tạm thời với IoT Gateway, hệ thống phải sử dụng dữ liệu trạng thái gần nhất đã lưu để tiếp tục hiển thị thông tin cho người dùng.
+        \item Nếu một bảng hiển thị LED bị lỗi hoặc mất kết nối, hệ thống phải ghi log cảnh báo và tiếp tục cập nhật các bảng hiển thị khác mà không làm gián đoạn toàn bộ hệ thống.
+    \end{itemize}
+
+    \item Khả năng mở rộng (Scalability):
+    \begin{itemize}
+        \item Hệ thống phải hỗ trợ mở rộng để quản lý hàng trăm cảm biến chỗ đỗ xe và nhiều bảng hiển thị LED trong khuôn viên trường mà không làm suy giảm hiệu năng.
+        \item Kiến trúc hệ thống phải cho phép bổ sung thêm khu vực bãi xe hoặc bảng hiển thị mới mà không cần thay đổi lớn trong hệ thống hiện tại.
+    \end{itemize}
+
+    \item Bảo mật và truyền thông IoT (Security \& Communication):
+    \begin{itemize}
+        \item Kết nối giữa IoT Gateway và hệ thống IoT-SPMS phải sử dụng giao thức truyền thông bảo mật (ví dụ: MQTT over TLS hoặc HTTPS) để đảm bảo tính bảo mật và toàn vẹn dữ liệu.
+        \item Hệ thống phải xác thực thiết bị gateway trước khi chấp nhận dữ liệu nhằm tránh việc gửi dữ liệu giả mạo từ thiết bị không được phép.
+    \end{itemize}
+
+    \item Khả năng giám sát và ghi log (Monitoring \& Logging):
+    \begin{itemize}
+        \item Hệ thống phải ghi log tất cả các sự kiện quan trọng như cập nhật dữ liệu cảm biến, thay đổi trạng thái bãi xe, và cập nhật thông tin hiển thị.
+        \item Các log hệ thống phải được lưu trữ tối thiểu 6 tháng để phục vụ việc kiểm tra, phân tích sự cố và tối ưu hệ thống.
+    \end{itemize}
+\end{itemize}
+
+
+Các ràng buộc chặt chẽ đảm bảo tính chính xác và an toàn cho luồng tài chính:
+
+\begin{itemize}
+    \item Tính chính xác toàn vẹn (Data Integrity \& Accuracy):
+    \begin{itemize}
+        \item Các phép tính phí phải chính xác tuyệt đối, hỗ trợ làm tròn số theo quy định tài chính của trường.
+        \item Hệ thống phải triển khai cơ chế Transaction Management (Quản lý giao dịch) trong cơ sở dữ liệu: nếu quá trình lưu hóa đơn thất bại ở bất kỳ bước nào, toàn bộ thao tác phải được rollback (hoàn tác) để tránh tình trạng trừ tiền sai hoặc ghi nhận thiếu.
+    \end{itemize}
+
+    \item Bảo mật và Tích hợp (Security \& Integration Constraint):
+    \begin{itemize}
+        \item Kết nối giữa IoT-SPMS1 và BKPay phải sử dụng chữ ký điện tử (Digital Signature/HMAC) để chống giả mạo gói tin thanh toán.
+        \item Không lưu trữ bất kỳ thông tin nhạy cảm nào về thẻ ngân hàng/tài khoản ví điện tử của người dùng trên IoT-SPMS1 (hoàn toàn ủy thác cho BKPay).
+    \end{itemize}
+
+    \item Hiệu suất xử lý lô (Batch Processing Performance):
+    \begin{itemize}
+        \item Tiến trình "Tổng hợp và Tính toán phí tự động" vào cuối chu kỳ phải xử lý xong toàn bộ dữ liệu của khoảng 30,000+ sinh viên/cán bộ trong thời gian tối đa 2 giờ và phải chạy vào khung giờ thấp điểm (vd: 01:00 AM - 03:00 AM) để không ảnh hưởng đến băng thông chung của server.
+    \end{itemize}
+
+    \item Khả năng truy vết (Auditability):
+    \begin{itemize}
+        \item Lưu trữ lịch sử (log) của mọi thay đổi liên quan đến "Cấu hình chính sách giá" (ai sửa, sửa khi nào, giá trị cũ/mới).
+        \item Lưu trữ log của mọi giao tiếp API với BKPay trong ít nhất 12 tháng phục vụ việc đối soát tài chính định kỳ.
+    \end{itemize}
+\end{itemize}

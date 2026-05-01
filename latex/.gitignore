@@ -1,0 +1,66 @@
+# ========== LaTeX Build Files ==========
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.synctex(busy)
+*.fls
+*.fdb_latexmk
+*.pdf
+*.nav
+*.snm
+*.vrb
+*.maf
+*.mtc
+*.mtc*
+*.maf
+
+# ========== Intermediate LaTeX Files ==========
+*.bbl
+*.blg
+*.dvi
+*.ps
+*.eps
+
+# ========== IDE & Editor Files ==========
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ========== Python ==========
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# ========== Node.js ==========
+node_modules/
+package-lock.json
+yarn.lock
+
+# ========== OS Files ==========
+Thumbs.db
+.DS_Store
+*.suo
+*.user
+
+# ========== Build Artifacts ==========
+dist/
+build/
+target/
+
+# ========== Environment ==========
+.env
+.env.local
+.venv
+env/
+
+# ========== Temporary Files ==========
+*.tmp
+*.temp
+*.bak
