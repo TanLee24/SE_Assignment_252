@@ -93,6 +93,7 @@
         .text-gradient-primary {
             background: linear-gradient(135deg, #b3c5ff 0%, #2f6cf0 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .glow-hover:hover {
@@ -109,6 +110,7 @@
 </div>
 <nav class="hidden md:flex gap-8 items-center h-full">
 <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#b3c5ff] border-b-2 border-[#2f6cf0] h-full flex items-center px-2" href="#">Dashboard</a>
+<a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-4 py-2 rounded-lg" href="access_control.html">Access Control</a>
 <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-4 py-2 rounded-lg" href="users.html">Users</a>
 <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-4 py-2 rounded-lg" href="sync.html">Data Sync</a>
 <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-4 py-2 rounded-lg" href="analytics.html">Analytics</a>
@@ -227,6 +229,23 @@
 </div>
 </div>
 </a>
+<!-- Module 5: Access Control -->
+<a class="group relative overflow-hidden glass-card p-8 rounded-lg transition-all duration-500 hover:-translate-y-2 hover:bg-surface-variant/40 glow-hover" href="access_control.html">
+<div class="absolute top-0 right-0 p-4 opacity-10 transition-opacity group-hover:opacity-20">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">shield_locked</span>
+</div>
+<div class="relative z-10 h-full flex flex-col">
+<div class="bg-primary-container/20 w-14 h-14 rounded-md flex items-center justify-center mb-6 text-primary border border-primary/20">
+<span class="material-symbols-outlined text-3xl">shield_locked</span>
+</div>
+<h3 class="font-headline text-2xl font-bold mb-2">Access Control</h3>
+<p class="font-body text-on-surface-variant text-sm mb-auto">Operate entry/exit gates, temporary tickets, exceptions, and offline queue.</p>
+<div class="flex items-center gap-2 mt-8 text-primary font-bold text-xs uppercase tracking-widest">
+<span>OPEN CONSOLE</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+</a>
 </section>
 <!-- System Activity Feed -->
 <section class="bg-surface-container-low rounded-lg p-8">
@@ -265,7 +284,7 @@
 <footer class="w-full py-6 mt-auto bg-[#0a0e15] border-t border-[#424654]/10">
 <div class="flex flex-col md:flex-row justify-between items-center px-12 gap-4">
 <div class="font-['Manrope'] text-[10px] uppercase tracking-[0.05em] text-[#dfe2ed]/40">
-                © 2024 HCMUT IoT Labs. Kinetic Grid Systems.
+                © 2026 HCMUT IoT Labs. Kinetic Grid Systems.
             </div>
 <div class="flex gap-8">
 <a class="font-['Manrope'] text-[10px] uppercase tracking-[0.05em] text-[#dfe2ed]/40 hover:text-[#00dbe7] transition-colors" href="#">System Status</a>
