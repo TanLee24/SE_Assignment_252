@@ -1,8 +1,102 @@
 [
-    {
-        "username": "admin",
-        "password": "admin123",
-        "role": "super_admin",
-        "fullName": "System Administrator"
-    }
+  {
+    "id": "USR-001",
+    "username": "admin",
+    "password": "admin123",
+    "role": "super_admin",
+    "fullName": "Nguyễn Văn An",
+    "email": "an.nguyen@hcmut.edu.vn",
+    "department": "Phòng Quản trị",
+    "cardId": "CARD-A006"
+  },
+  {
+    "id": "USR-002",
+    "username": "nthao",
+    "password": "admin456",
+    "role": "admin",
+    "fullName": "Nguyễn Thị Thảo",
+    "email": "thao.nguyen@hcmut.edu.vn",
+    "department": "Phòng Quản trị",
+    "cardId": "CARD-B003"
+  },
+  {
+    "id": "USR-003",
+    "username": "ltuan",
+    "password": "admin789",
+    "role": "admin",
+    "fullName": "Lê Văn Tuấn",
+    "email": "tuan.le@hcmut.edu.vn",
+    "department": "Phòng Kỹ thuật IoT",
+    "cardId": "CARD-A005"
+  },
+  {
+    "id": "USR-004",
+    "username": "bvhung",
+    "password": "guard123",
+    "role": "guard",
+    "fullName": "Bùi Văn Hùng",
+    "email": "hung.bui@hcmut.edu.vn",
+    "department": "Bảo vệ",
+    "cardId": "CARD-B001"
+  },
+  {
+    "id": "USR-005",
+    "username": "nvlinh",
+    "password": "guard456",
+    "role": "guard",
+    "fullName": "Nguyễn Văn Linh",
+    "email": "linh.nguyen@hcmut.edu.vn",
+    "department": "Bảo vệ",
+    "cardId": "CARD-B002"
+  },
+  {
+    "id": "USR-006",
+    "username": "ptmai",
+    "password": "staff123",
+    "role": "staff",
+    "fullName": "Phạm Thị Mai",
+    "email": "mai.pham@hcmut.edu.vn",
+    "department": "Phòng Đào tạo",
+    "cardId": "CARD-A004"
+  },
+  {
+    "id": "USR-007",
+    "username": "dqkhoa",
+    "password": "staff456",
+    "role": "staff",
+    "fullName": "Đỗ Quang Khoa",
+    "email": "khoa.do@hcmut.edu.vn",
+    "department": "Phòng Công nghệ Thông tin",
+    "cardId": "CARD-C001"
+  },
+  {
+    "id": "USR-008",
+    "username": "2153029",
+    "password": "stu123",
+    "role": "student",
+    "fullName": "Trần Minh Khoa",
+    "email": "khoa.tran@hcmut.edu.vn",
+    "department": "Khoa Khoa học Máy tính",
+    "cardId": "CARD-A001"
+  },
+  {
+    "id": "USR-009",
+    "username": "2152048",
+    "password": "stu456",
+    "role": "student",
+    "fullName": "Lê Thị Hương",
+    "email": "huong.le@hcmut.edu.vn",
+    "department": "Khoa Điện - Điện tử",
+    "cardId": "CARD-A002"
+  },
+  {
+    "id": "USR-010",
+    "username": "2154017",
+    "password": "stu789",
+    "role": "student",
+    "fullName": "Nguyễn Văn Bình",
+    "email": "binh.nguyen@hcmut.edu.vn",
+    "department": "Khoa Cơ khí",
+    "cardId": "CARD-A003"
+  }
 ]

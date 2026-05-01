@@ -1,0 +1,274 @@
+{
+  "logs": [
+    {
+      "id": "LOG-001",
+      "timestamp": "2026-05-01T07:30:00+07:00",
+      "module": "system",
+      "action": "SYSTEM_START",
+      "actor": "system",
+      "level": "info",
+      "detail": "Hệ thống IoT-SPMS khởi động thành công. Gateway GTW-001, GTW-002 online."
+    },
+    {
+      "id": "LOG-002",
+      "timestamp": "2026-05-01T07:32:10+07:00",
+      "module": "auth",
+      "action": "LOGIN_SUCCESS",
+      "actor": "bvhung",
+      "level": "info",
+      "detail": "Bùi Văn Hùng (guard) đăng nhập thành công từ cổng vào."
+    },
+    {
+      "id": "LOG-003",
+      "timestamp": "2026-05-01T07:33:05+07:00",
+      "module": "auth",
+      "action": "LOGIN_SUCCESS",
+      "actor": "nvlinh",
+      "level": "info",
+      "detail": "Nguyễn Văn Linh (guard) đăng nhập thành công từ cổng ra."
+    },
+    {
+      "id": "LOG-004",
+      "timestamp": "2026-05-01T07:45:18+07:00",
+      "module": "access_control",
+      "action": "ENTRY_SUCCESS",
+      "actor": "bvhung",
+      "level": "success",
+      "detail": "CARD-A001 vào bãi. Biển số: 59A-123.45 | Khu A - Ô A-07. Session: SES-2026050100001"
+    },
+    {
+      "id": "LOG-005",
+      "timestamp": "2026-05-01T08:01:12+07:00",
+      "module": "access_control",
+      "action": "ENTRY_SUCCESS",
+      "actor": "nvlinh",
+      "level": "success",
+      "detail": "CARD-B003 vào bãi. Biển số: 51H-774.22 | Khu B - Ô B-15. Session: SES-2026050100002"
+    },
+    {
+      "id": "LOG-006",
+      "timestamp": "2026-05-01T08:00:00+07:00",
+      "module": "auth",
+      "action": "LOGIN_SUCCESS",
+      "actor": "admin",
+      "level": "info",
+      "detail": "Nguyễn Văn An (super_admin) đăng nhập vào Admin Dashboard."
+    },
+    {
+      "id": "LOG-007",
+      "timestamp": "2026-05-01T08:05:00+07:00",
+      "module": "admin",
+      "action": "USER_ROLE_UPDATED",
+      "actor": "admin",
+      "level": "info",
+      "detail": "Cập nhật vai trò tài khoản 'dqkhoa' từ staff → admin. Được phê duyệt bởi super_admin."
+    },
+    {
+      "id": "LOG-008",
+      "timestamp": "2026-05-01T08:15:30+07:00",
+      "module": "access_control",
+      "action": "TEMP_TICKET_ISSUED",
+      "actor": "bvhung",
+      "level": "info",
+      "detail": "Cấp vé tạm TMP-100301 cho khách vãng lai. Biển số: 43C-889.01 | Khu A - Ô A-12."
+    },
+    {
+      "id": "LOG-009",
+      "timestamp": "2026-05-01T09:30:45+07:00",
+      "module": "pricing",
+      "action": "PAYMENT_SUCCESS",
+      "actor": "bvhung",
+      "level": "success",
+      "detail": "Thanh toán thành công 8,000 VND qua BKPay. Session: SES-2026050100001. Ref: BKP-f3a2c1d0-0001"
+    },
+    {
+      "id": "LOG-010",
+      "timestamp": "2026-05-01T10:01:20+07:00",
+      "module": "pricing",
+      "action": "PAYMENT_SUCCESS",
+      "actor": "bvhung",
+      "level": "success",
+      "detail": "Thanh toán thành công 8,000 VND tiền mặt. Session: SES-2026050100003."
+    },
+    {
+      "id": "LOG-011",
+      "timestamp": "2026-05-01T10:30:00+07:00",
+      "module": "admin",
+      "action": "DATA_SYNC",
+      "actor": "nthao",
+      "level": "info",
+      "detail": "Đồng bộ dữ liệu thủ công với HCMUT_DATACORE. Cập nhật 15,342 bản ghi thành công."
+    },
+    {
+      "id": "LOG-012",
+      "timestamp": "2026-05-01T11:50:00+07:00",
+      "module": "iot_monitoring",
+      "action": "GATEWAY_OFFLINE",
+      "actor": "system",
+      "level": "warning",
+      "detail": "Gateway GTW-003 (10.0.0.3) không phản hồi. Bắt đầu thử lại lần 1..."
+    },
+    {
+      "id": "LOG-013",
+      "timestamp": "2026-05-01T11:51:00+07:00",
+      "module": "iot_monitoring",
+      "action": "GATEWAY_ISOLATED",
+      "actor": "system",
+      "level": "error",
+      "detail": "GTW-003 offline xác nhận. Hệ thống tự động cô lập 15 ô đỗ thuộc Khu C. Khu C chuyển trạng thái FULL."
+    },
+    {
+      "id": "LOG-014",
+      "timestamp": "2026-05-01T12:02:50+07:00",
+      "module": "pricing",
+      "action": "PAYMENT_SUCCESS",
+      "actor": "nvlinh",
+      "level": "success",
+      "detail": "Thanh toán thành công 14,000 VND qua BKPay. Session: SES-2026050100004. Ref: BKP-a9b8c7d6-0004"
+    },
+    {
+      "id": "LOG-015",
+      "timestamp": "2026-05-01T12:30:00+07:00",
+      "module": "dynamic_guidance",
+      "action": "DISPLAY_UPDATED",
+      "actor": "nthao",
+      "level": "info",
+      "detail": "Admin cập nhật bảng LED: Khu C → 0 chỗ trống, trạng thái ĐÃ ĐẦY. Đã đẩy xuống hệ thống."
+    },
+    {
+      "id": "LOG-016",
+      "timestamp": "2026-05-01T13:00:20+07:00",
+      "module": "access_control",
+      "action": "TEMP_TICKET_ISSUED",
+      "actor": "bvhung",
+      "level": "info",
+      "detail": "Cấp vé tạm TMP-100303 cho khách vãng lai. Xe ô tô. Biển số: 79A-112.34 | Khu C - Ô C-11."
+    },
+    {
+      "id": "LOG-017",
+      "timestamp": "2026-05-01T14:00:00+07:00",
+      "module": "auth",
+      "action": "LOGIN_FAILED",
+      "actor": "unknown",
+      "level": "warning",
+      "detail": "Đăng nhập thất bại 3 lần liên tiếp với username 'admin'. IP: 192.168.1.45. Tài khoản chưa bị khóa."
+    },
+    {
+      "id": "LOG-018",
+      "timestamp": "2026-05-01T15:01:05+07:00",
+      "module": "access_control",
+      "action": "EXCEPTION_CARD_MISMATCH",
+      "actor": "bvhung",
+      "level": "error",
+      "detail": "Phát hiện không khớp tại cổng ra. CARD-A005 vào nhưng đọc được CARD-B004. Session SES-2026050100014 chuyển trạng thái exception. Bảo vệ xử lý thủ công."
+    },
+    {
+      "id": "LOG-019",
+      "timestamp": "2026-05-01T15:02:00+07:00",
+      "module": "access_control",
+      "action": "MANUAL_OVERRIDE",
+      "actor": "bvhung",
+      "level": "warning",
+      "detail": "Bảo vệ áp dụng Manual Override cho SES-2026050100014. Lý do: Card mismatch đã xác minh danh tính bằng CMND."
+    },
+    {
+      "id": "LOG-020",
+      "timestamp": "2026-05-01T15:30:00+07:00",
+      "module": "admin",
+      "action": "PRICE_UPDATED",
+      "actor": "admin",
+      "level": "info",
+      "detail": "Cập nhật bảng giá: Xe máy tăng từ 3,000 → 4,000 VND/giờ đầu. Áp dụng từ 01/06/2026."
+    },
+    {
+      "id": "LOG-021",
+      "timestamp": "2026-05-01T16:00:00+07:00",
+      "module": "system",
+      "action": "AUTO_REPORT_GENERATED",
+      "actor": "system",
+      "level": "info",
+      "detail": "Báo cáo tự động 16:00 - Tổng lượt xe: 20 | Doanh thu: 188,000 VND | Tỷ lệ lấp đầy: 78%"
+    },
+    {
+      "id": "LOG-022",
+      "timestamp": "2026-05-01T17:01:10+07:00",
+      "module": "pricing",
+      "action": "PAYMENT_SUCCESS",
+      "actor": "bvhung",
+      "level": "success",
+      "detail": "Thanh toán thành công 10,000 VND qua thẻ. Session: SES-2026050100013."
+    },
+    {
+      "id": "LOG-023",
+      "timestamp": "2026-05-01T17:31:58+07:00",
+      "module": "pricing",
+      "action": "PAYMENT_SUCCESS",
+      "actor": "nvlinh",
+      "level": "success",
+      "detail": "Thanh toán thành công 30,000 VND tiền mặt. Session: SES-2026050100002."
+    },
+    {
+      "id": "LOG-024",
+      "timestamp": "2026-05-01T18:01:35+07:00",
+      "module": "pricing",
+      "action": "PAYMENT_SUCCESS",
+      "actor": "nvlinh",
+      "level": "success",
+      "detail": "Thanh toán thành công 16,000 VND qua BKPay. Session: SES-2026050100012. Ref: BKP-q3r4s5t6-0012"
+    },
+    {
+      "id": "LOG-025",
+      "timestamp": "2026-05-01T18:30:00+07:00",
+      "module": "admin",
+      "action": "DATA_SYNC",
+      "actor": "system",
+      "level": "info",
+      "detail": "Đồng bộ tự động 18:30 - Cập nhật 15,355 bản ghi lên HCMUT_DATACORE thành công."
+    },
+    {
+      "id": "LOG-026",
+      "timestamp": "2026-05-01T19:00:00+07:00",
+      "module": "iot_monitoring",
+      "action": "ANOMALY_DETECTED",
+      "actor": "system",
+      "level": "warning",
+      "detail": "Ô A-03 nhảy trạng thái liên tục (3 lần/phút). Cảm biến có thể bị lỗi. Đã khóa dữ liệu ô này để kiểm tra."
+    },
+    {
+      "id": "LOG-027",
+      "timestamp": "2026-05-01T20:15:00+07:00",
+      "module": "dynamic_guidance",
+      "action": "OVERRIDE_BROADCAST",
+      "actor": "ltuan",
+      "level": "warning",
+      "detail": "Phát thông báo khẩn lên toàn bộ bảng LED: 'BÃI A SẮP ĐẦY - VUI LÒNG VÀO KHU B'. Thời gian: 5 phút."
+    },
+    {
+      "id": "LOG-028",
+      "timestamp": "2026-05-01T21:00:00+07:00",
+      "module": "auth",
+      "action": "LOGOUT",
+      "actor": "nthao",
+      "level": "info",
+      "detail": "Nguyễn Thị Thảo (admin) đăng xuất khỏi hệ thống."
+    },
+    {
+      "id": "LOG-029",
+      "timestamp": "2026-05-01T22:00:00+07:00",
+      "module": "system",
+      "action": "CACHE_CLEANUP",
+      "actor": "system",
+      "level": "info",
+      "detail": "Tác vụ tự động: Dọn dẹp cache Gateway RAM. Sức khỏe RAM: 98%. Không có lỗi."
+    },
+    {
+      "id": "LOG-030",
+      "timestamp": "2026-05-01T23:00:00+07:00",
+      "module": "system",
+      "action": "AUTO_REPORT_GENERATED",
+      "actor": "system",
+      "level": "info",
+      "detail": "Báo cáo tổng kết 23:00 - Tổng lượt xe: 20 | Doanh thu ngày: 188,000 VND | Đang đỗ: 6 xe | Sự cố: 1"
+    }
+  ]
+}
