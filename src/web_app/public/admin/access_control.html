@@ -272,7 +272,17 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Plate (optional)</label>
-                  <input id="entryPlate" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary/40" placeholder="59A-123.45" />
+                  <div id="entryAnprCam" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg overflow-hidden relative h-28">
+                    <img id="entryAnprCamImg" class="w-full h-full object-cover opacity-60" alt="Entry ANPR camera preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyzzioJr-43sEgueO2lknd74RBy07GA8NzNyfr88GkXmsSzJGqyKIl4_FKXp0M_NIK64BNungdVgCt1VdATKSgIdWgXkYcHqvYqyhVWFI8xYRQBFR9kxTXdrDblWC3OLECPeAOWII2yXeIeDUNtNvFQHkZjjks-legJucHK210oGwsevGjbiTlKeVnWmdCL5IDUKNhLAch9xigwb2Poj_o4urSzrb34Z21fsI6Ch5CPWozCmZlT3z29mt51GOTV73QsErf8Oa9K34" />
+                    <div class="absolute top-2 left-2 flex gap-2">
+                      <div class="bg-black/60 text-[8px] px-2 py-1 rounded text-white font-mono uppercase tracking-[0.2em]">CAM G-01</div>
+                      <div id="entryAnprBadge" class="bg-primary/20 text-primary text-[8px] px-2 py-1 rounded font-black uppercase tracking-[0.2em]">IDLE</div>
+                    </div>
+                    <div id="entryAnprOverlay" class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div class="bg-black/50 text-white text-[10px] font-black uppercase tracking-[0.35em] px-3 py-2 rounded">CAMERA READY</div>
+                    </div>
+                  </div>
+                  <input id="entryPlate" readonly class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary/40 font-mono tracking-wider" placeholder="ANPR detected plate" />
                 </div>
                 <div>
                   <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Simulate Outcome</label>
@@ -381,7 +391,17 @@
                 </div>
                 <div>
                   <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Plate (optional)</label>
-                  <input id="tempPlate" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary/40" placeholder="59A-123.45" />
+                  <div id="tempAnprCam" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg overflow-hidden relative h-28">
+                    <img id="tempAnprCamImg" class="w-full h-full object-cover opacity-60" alt="Temporary ticket ANPR camera preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyzzioJr-43sEgueO2lknd74RBy07GA8NzNyfr88GkXmsSzJGqyKIl4_FKXp0M_NIK64BNungdVgCt1VdATKSgIdWgXkYcHqvYqyhVWFI8xYRQBFR9kxTXdrDblWC3OLECPeAOWII2yXeIeDUNtNvFQHkZjjks-legJucHK210oGwsevGjbiTlKeVnWmdCL5IDUKNhLAch9xigwb2Poj_o4urSzrb34Z21fsI6Ch5CPWozCmZlT3z29mt51GOTV73QsErf8Oa9K34" />
+                    <div class="absolute top-2 left-2 flex gap-2">
+                      <div class="bg-black/60 text-[8px] px-2 py-1 rounded text-white font-mono uppercase tracking-[0.2em]">CAM G-01</div>
+                      <div id="tempAnprBadge" class="bg-primary/20 text-primary text-[8px] px-2 py-1 rounded font-black uppercase tracking-[0.2em]">IDLE</div>
+                    </div>
+                    <div id="tempAnprOverlay" class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div class="bg-black/50 text-white text-[10px] font-black uppercase tracking-[0.35em] px-3 py-2 rounded">CAMERA READY</div>
+                    </div>
+                  </div>
+                  <input id="tempPlate" readonly class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary/40 font-mono tracking-wider" placeholder="ANPR detected plate" />
                 </div>
               </div>
 
@@ -679,6 +699,9 @@
       }
       updateOnlineUI();
       updateKpis();
+
+      setAnprUi('entry', state.online ? 'idle' : 'offline');
+      setAnprUi('temp', state.online ? 'idle' : 'offline');
     }
 
     function setScreen(screen) {
@@ -899,6 +922,67 @@
       return (input || '').trim();
     }
 
+    function setAnprUi(prefix, mode, plateValue = '') {
+      const badge = document.getElementById(`${prefix}AnprBadge`);
+      const overlay = document.getElementById(`${prefix}AnprOverlay`);
+      const plateEl = document.getElementById(prefix === 'entry' ? 'entryPlate' : 'tempPlate');
+
+      if (!badge || !overlay || !plateEl) return;
+
+      const map = {
+        idle: { badge: 'IDLE', badgeClass: 'bg-primary/20 text-primary', overlay: 'CAMERA READY', plate: '' },
+        scanning: { badge: 'SCANNING', badgeClass: 'bg-primary/20 text-primary', overlay: 'ANPR DETECTING…', plate: 'DETECTING…' },
+        success: { badge: 'SUCCESS', badgeClass: 'bg-tertiary/15 text-tertiary', overlay: 'PLATE LOCKED', plate: plateValue },
+        error: { badge: 'ERROR', badgeClass: 'bg-error/15 text-error', overlay: 'ANPR FAILED', plate: '' },
+        offline: { badge: 'OFFLINE', badgeClass: 'bg-error/15 text-error', overlay: 'OFFLINE MODE', plate: '' }
+      };
+      const cfg = map[mode] || map.idle;
+
+      badge.textContent = cfg.badge;
+      badge.className = `text-[8px] px-2 py-1 rounded font-black uppercase tracking-[0.2em] ${cfg.badgeClass}`;
+
+      const overlayNode = overlay.querySelector('div');
+      if (overlayNode) overlayNode.textContent = cfg.overlay;
+
+      plateEl.value = cfg.plate || '';
+      const isScanning = mode === 'scanning';
+      const isSuccess = mode === 'success';
+      const isError = mode === 'error';
+
+      plateEl.classList.toggle('ring-1', isScanning);
+      plateEl.classList.toggle('ring-primary/30', isScanning);
+      plateEl.classList.toggle('ring-2', isSuccess || isError);
+      plateEl.classList.toggle('ring-tertiary/30', isSuccess);
+      plateEl.classList.toggle('border-tertiary/30', isSuccess);
+      plateEl.classList.toggle('ring-error/30', isError);
+      plateEl.classList.toggle('border-error/30', isError);
+    }
+
+    function mockAnprPlate() {
+      const plates = ['59A-123.45', '51H-7742', '30E-882.10', '43A-909.22', '76C-445.55', '60A-112.56'];
+      return plates[Math.floor(Math.random() * plates.length)];
+    }
+
+    async function runAnpr(prefix) {
+      if (!state.online) {
+        setAnprUi(prefix, 'offline');
+        return { ok: false, plate: null };
+      }
+
+      setAnprUi(prefix, 'scanning');
+      await simulateDelay(650);
+
+      const ok = Math.random() > 0.08;
+      if (!ok) {
+        setAnprUi(prefix, 'error');
+        return { ok: false, plate: null };
+      }
+
+      const plate = mockAnprPlate();
+      setAnprUi(prefix, 'success', plate);
+      return { ok: true, plate };
+    }
+
     function computeFeeVnd(startedAtMs) {
       const minutes = Math.max(1, Math.floor((Date.now() - startedAtMs) / 60000));
       const base = 5000;
@@ -908,11 +992,11 @@
 
     async function runEntryScan() {
       const card = ensureId(document.getElementById('entryCard').value);
-      const plate = ensureId(document.getElementById('entryPlate').value);
       const sim = document.getElementById('entrySim').value;
 
       if (!state.online) {
-        queueEvent({ type: 'ENTRY', id: card || 'UNKNOWN', plate, createdAt: Date.now() });
+        setAnprUi('entry', 'offline');
+        queueEvent({ type: 'ENTRY', id: card || 'UNKNOWN', plate: null, createdAt: Date.now() });
         addEvent({ level: 'info', tag: 'OFFLINE', title: 'Entry queued', detail: `Queued entry event for ${card || 'UNKNOWN'}.` });
         setStatus(STATUS.offline, { message: 'Offline: entry event queued locally.', sub: 'Queue will sync when online.' });
         updateKpis();
@@ -927,9 +1011,19 @@
 
       setBusy(true);
       setStatus(STATUS.scanning, { message: 'Scanning entry credential…', sub: 'RFID read in progress.' });
-      addEvent({ level: 'info', tag: 'ENTRY', title: 'Scanning started', detail: `Card=${card}${plate ? `, Plate=${plate}` : ''}` });
+      addEvent({ level: 'info', tag: 'ENTRY', title: 'Scanning started', detail: `Card=${card}` });
 
-      await simulateDelay(1200);
+      const anpr = await runAnpr('entry');
+      if (!anpr.ok) {
+        setStatus(STATUS.error, { message: 'ANPR failed to detect plate.', sub: 'Retry scan or use exception handling policy.' });
+        addEvent({ level: 'error', tag: 'ENTRY', title: 'ANPR failed', detail: `Card=${card}` });
+        setBusy(false);
+        return;
+      }
+
+      const plate = ensureId(anpr.plate);
+
+      await simulateDelay(550);
 
       const cap = loadNumber(STORAGE.capacity, 500);
       const used = loadNumber(STORAGE.used, 0);
@@ -1053,7 +1147,11 @@
 
     async function issueTempTicket() {
       const vehicle = document.getElementById('tempVehicle').value;
-      const plate = ensureId(document.getElementById('tempPlate').value);
+      const anpr = await runAnpr('temp');
+      const plate = anpr.ok ? ensureId(anpr.plate) : '';
+      if (!anpr.ok) {
+        addEvent({ level: 'error', tag: 'TEMP', title: 'ANPR failed', detail: `Vehicle=${vehicle} (proceeding without plate)` });
+      }
 
       const cap = loadNumber(STORAGE.capacity, 500);
       const used = loadNumber(STORAGE.used, 0);
@@ -1066,6 +1164,7 @@
       const ticketId = `TMP-${Math.floor(100000 + Math.random() * 899999)}`;
 
       if (!state.online) {
+        setAnprUi('temp', 'offline');
         queueEvent({ type: 'TEMP_ISSUE', id: ticketId, vehicle, plate, createdAt: Date.now() });
         addEvent({ level: 'info', tag: 'OFFLINE', title: 'Ticket queued', detail: `Queued ticket issuance ${ticketId}.` });
         setStatus(STATUS.offline, { message: 'Offline: temporary ticket queued locally.', sub: 'Provide printed ticket ID to customer.' });
@@ -1195,6 +1294,7 @@
       document.getElementById('entryCard').value = '';
       document.getElementById('entryPlate').value = '';
       document.getElementById('entrySim').value = 'auto';
+      setAnprUi('entry', state.online ? 'idle' : 'offline');
       setStatus(state.online ? STATUS.idle : STATUS.offline, { message: state.online ? 'Ready to scan credentials at selected gate.' : 'Offline mode active. Actions are queued locally.' });
     }
 
@@ -1211,6 +1311,7 @@
       document.getElementById('tempVehicle').value = 'motorbike';
       document.getElementById('tempPlate').value = '';
       document.getElementById('tempResult').classList.add('hidden');
+      setAnprUi('temp', state.online ? 'idle' : 'offline');
       setStatus(state.online ? STATUS.idle : STATUS.offline, { message: state.online ? 'Ready to scan credentials at selected gate.' : 'Offline mode active. Actions are queued locally.' });
     }
 
@@ -1258,6 +1359,9 @@
       updateOnlineUI();
       updateKpis();
       renderEvents();
+
+      setAnprUi('entry', state.online ? 'idle' : 'offline');
+      setAnprUi('temp', state.online ? 'idle' : 'offline');
       setScreen(SCREENS.entry);
       setBusy(false);
 
