@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - IoT-SPMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'surface': '#0a0e15',
+                        'primary': '#8eabff',
+                        'primary-dim': '#2f6cf0',
+                        'error': '#ff716c'
+                    },
+                    fontFamily: {
+                        'headline': ['Space Grotesk', 'sans-serif'],
+                        'body': ['Manrope', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass { background: rgba(15, 19, 27, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .glow-blue { text-shadow: 0 0 20px rgba(47, 108, 240, 0.6); }
+    </style>
+</head>
+<body class="bg-surface text-white font-body h-screen flex items-center justify-center p-6">
+
+    <div class="w-full max-w-md glass p-10 rounded-[40px] shadow-2xl">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-headline glow-blue uppercase tracking-tighter mb-2">QUẢN TRỊ VIÊN</h1>
+            <p class="text-white/40 text-xs font-black uppercase tracking-[0.3em]">Xác thực quyền truy cập</p>
+        </div>
+
+        <form id="loginForm" class="space-y-6">
+            <div>
+                <label class="block text-[10px] font-black uppercase tracking-widest text-primary/60 mb-2 ml-1">Username</label>
+                <input type="text" id="username" required 
+                       class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-sm focus:outline-none focus:border-primary transition-all"
+                       placeholder="Nhập tên đăng nhập">
+            </div>
+
+            <div>
+                <label class="block text-[10px] font-black uppercase tracking-widest text-primary/60 mb-2 ml-1">Password</label>
+                <input type="password" id="password" required 
+                       class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-sm focus:outline-none focus:border-primary transition-all"
+                       placeholder="••••••••">
+            </div>
+
+            <div id="errorMessage" class="hidden text-error text-xs font-bold text-center bg-error/10 py-3 rounded-xl border border-error/20">
+                Thông tin đăng nhập không chính xác!
+            </div>
+
+            <button type="submit" 
+                    class="w-full bg-primary-dim hover:bg-primary text-white font-black py-4 rounded-2xl transition-all uppercase tracking-widest text-xs shadow-[0_0_20px_rgba(47,108,240,0.4)]">
+                ĐĂNG NHẬP HỆ THỐNG
+            </button>
+        </form>
+
+        <div class="mt-8 text-center">
+            <a href="launcher.html" class="text-white/20 hover:text-white text-[10px] font-black uppercase tracking-widest transition-all">
+                ← QUAY LẠI LAUNCHER
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userIn = document.getElementById('username').value;
+            const passIn = document.getElementById('password').value;
+            const errorEl = document.getElementById('errorMessage');
+
+            try {
+                const response = await fetch('../../data/users.json');
+                const users = await response.json();
+                
+                const validUser = users.find(u => u.username === userIn && u.password === passIn);
+                
+                if (validUser) {
+                    sessionStorage.setItem('isAdmin', 'true');
+                    window.location.href = "admin-control.html";
+                } else {
+                    errorEl.classList.remove('hidden');
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Lỗi kết nối dữ liệu!");
+            }
+        });
+    </script>
+</body>
+</html>
