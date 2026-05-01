@@ -6,19 +6,32 @@ Dự án được chia làm 5 phân hệ (5 Use-case lớn), mỗi phân hệ đ
 \subsection{Use-case diagram cho toàn bộ hệ thống}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\textwidth]{pictures/whole_system_UCD.drawio.png} 
+    \includegraphics[width=1.1\textwidth]{pictures/whole_ucd.drawio.png} 
     \caption{Use-case diagram cho toàn hệ thống}
     \label{UCD_All}
 \end{figure}
 
 \subsection{Quản trị Hệ thống và Tích hợp}
 \subsubsection{Tổng quan}
-Phân hệ này cho phép người dùng (sinh viên, cán bộ, giảng viên và quản trị viên) đăng nhập an toàn vào hệ thống IoT-SPMS thông qua cổng HCMUT\_SSO. Sau khi xác thực, hệ thống sẽ đồng bộ dữ liệu cá nhân từ HCMUT\_DATACORE để thiết lập phân quyền truy cập (RBAC), đồng thời hỗ trợ quản trị viên truy vết lịch sử hoạt động và xuất báo cáo. Điều này đảm bảo việc quản lý hệ thống được tập trung, bảo mật và luôn đồng nhất với cơ sở dữ liệu chính thức của nhà trường.
+Phân hệ này cho phép người dùng (sinh viên, cán bộ, giảng viên và quản trị viên) 
+đăng nhập an toàn vào hệ thống IoT-SPMS thông qua cổng HCMUT\_SSO. 
+Sau khi xác thực, hệ thống sẽ đồng bộ dữ liệu cá nhân từ HCMUT\_DATACORE 
+để thiết lập phân quyền truy cập (RBAC), đồng thời hỗ trợ quản trị viên truy vết lịch sử hoạt động 
+và xuất báo cáo. Điều này đảm bảo việc quản lý hệ thống được tập trung, bảo mật và 
+luôn đồng nhất với cơ sở dữ liệu chính thức của nhà trường.
 
 \subsubsection{Use-case diagram}
+
+Vì đây là một phân hệ khá rộng nên chúng ta sẽ chia nó thành 3 nhóm use-case chính:
+\begin{itemize}
+    \item Nhóm Xác thực và bảo mật
+    \item Nhóm Quản trị người dùng
+    \item Nhóm Giám sát và Truy vết
+\end{itemize}
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\textwidth]{pictures/UCD_Task5.png} 
+    \includegraphics[width=1.1\textwidth]{pictures/system_mngt_ucd.drawio.png}
     \caption{Use-case diagram cho Phân hệ Quản trị Hệ thống và Tích hợp}
     \label{UCD_Admin}
 \end{figure}
@@ -634,24 +647,99 @@ Phân hệ Quản lý Tính phí và Thanh toán đảm nhiệm việc tự đ�
 
 3. Người dùng chọn "Thanh toán qua BKPay".
 
-4. IoT-SPMS1 mã hóa thông tin hóa đơn và gọi API khởi tạo giao dịch sang BKPay.
+4. IoT-SPMS mã hóa thông tin hóa đơn và gọi API khởi tạo giao dịch sang BKPay.
 
 5. Hệ thống chuyển hướng (redirect) người dùng sang giao diện BKPay.
 
 6. Người dùng thao tác thanh toán trên BKPay (nhập thẻ, quét QR...).
 
-7. BKPay gọi API Webhook trả về trạng thái giao dịch thành công cho IoT-SPMS1.
+7. BKPay gọi API Webhook trả về trạng thái giao dịch thành công cho IoT-SPMS.
 
-8. IoT-SPMS1 cập nhật trạng thái hóa đơn thành "Đã thanh toán".
+8. IoT-SPMS cập nhật trạng thái hóa đơn thành "Đã thanh toán".
 \\
 \hline
 
 \textbf{Luồng ngoại lệ} & 
-\textbf{Giao dịch thất bại / Hủy bỏ}: BKPay trả về trạng thái lỗi. IoT-SPMS1 giữ nguyên trạng thái hóa đơn, hiển thị thông báo "Thanh toán thất bại" cho người dùng.- Mất kết nối API: IoT-SPMS1 không gọi được BKPay, hiển thị thông báo "Cổng thanh toán đang bảo trì".
+\textbf{EF1: Giao dịch thất bại / Hủy bỏ}: BKPay trả về trạng thái lỗi. IoT-SPMS giữ nguyên trạng thái hóa đơn, hiển thị thông báo "Thanh toán thất bại" cho người dùng.\newline
+\textbf{EF2: Mất kết nối API}: IoT-SPMS không gọi được BKPay, hiển thị thông báo "Cổng thanh toán đang bảo trì".
 \\
 \hline
 
 \textbf{Hậu điều kiện} & Hóa đơn được cập nhật trạng thái chuẩn xác. Số dư/khoản nợ của người dùng được khấu trừ.\\
+\hline
+\end{xltabular}
+
+\newpage
+\noindent \textbf{Use Case: Xem hóa đơn và lịch sử giao dịch} \\
+\renewcommand{\arraystretch}{1.6}
+\begin{xltabular}{\textwidth}{|l|X|}
+\hline
+\textbf{Thuộc tính} & \textbf{Chi tiết} \\
+\hline
+\textbf{Tên} & Xem hóa đơn và lịch sử giao dịch \\
+\hline
+\textbf{Tác nhân} & Thành viên trường \\
+\hline
+\textbf{Mô tả} & Người dùng tra cứu hóa đơn hiện tại theo chu kỳ và xem danh sách giao dịch thanh toán đã phát sinh (thành công/thất bại). \\
+\hline
+\textbf{Tiền điều kiện} & Người dùng đã đăng nhập; hệ thống đã tạo Billing Record (nếu đến kỳ chốt) hoặc có dữ liệu giao dịch trước đó. \\
+\hline
+\textbf{Luồng chính} &
+1. Người dùng truy cập mục "Pricing/Hóa đơn".
+
+2. Hệ thống hiển thị hóa đơn gần nhất (mã hóa đơn, chu kỳ, số tiền, trạng thái) và nút thao tác (Thanh toán/Làm mới).
+
+3. Người dùng chuyển sang tab "Giao dịch".
+
+4. Hệ thống hiển thị danh sách các giao dịch theo thời gian (mã giao dịch, số tiền, trạng thái, thời điểm).
+\\
+\hline
+
+\textbf{Luồng ngoại lệ} &
+\textbf{Không có hóa đơn/giao dịch}: Hệ thống hiển thị thông báo "Chưa có dữ liệu" và ẩn các thao tác không phù hợp.
+\\
+\hline
+
+\textbf{Hậu điều kiện} & Người dùng nắm được khoản phí cần thanh toán và trạng thái giao dịch phục vụ đối soát cá nhân.\\
+\hline
+\end{xltabular}
+
+\newpage
+\noindent \textbf{Use Case: Xử lý Webhook/Callback từ BKPay} \\
+\renewcommand{\arraystretch}{1.6}
+\begin{xltabular}{\textwidth}{|l|X|}
+\hline
+\textbf{Thuộc tính} & \textbf{Chi tiết} \\
+\hline
+\textbf{Tên} & Xử lý Webhook/Callback từ BKPay \\
+\hline
+\textbf{Tác nhân} & Hệ thống BKPay \\
+\hline
+\textbf{Mô tả} & BKPay gửi thông báo bất đồng bộ (webhook/callback) về kết quả giao dịch để IoT-SPMS cập nhật trạng thái hóa đơn và giao dịch. \\
+\hline
+\textbf{Tiền điều kiện} & Một giao dịch đã được khởi tạo; endpoint webhook của IoT-SPMS sẵn sàng; BKPay có khả năng ký/đính kèm HMAC. \\
+\hline
+\textbf{Luồng chính} &
+1. BKPay gửi webhook chứa: mã giao dịch, mã hóa đơn, trạng thái (SUCCESS/FAILED/CANCELED), thời gian, chữ ký (HMAC).
+
+2. IoT-SPMS kiểm tra tính toàn vẹn (verify HMAC) và kiểm tra tính hợp lệ (invoiceId/txId tồn tại).
+
+3. IoT-SPMS áp dụng cơ chế idempotency: nếu webhook trùng lặp, hệ thống không cập nhật lại trạng thái đã chốt.
+
+4. Nếu trạng thái SUCCESS: cập nhật giao dịch "Thành công" và hóa đơn "Đã thanh toán" (ghi nhận paidAt).
+
+5. Ghi log/audit trail phục vụ đối soát.
+\\
+\hline
+
+\textbf{Luồng ngoại lệ} &
+\textbf{EF1: Chữ ký không hợp lệ}: Từ chối xử lý, trả mã lỗi; ghi log cảnh báo bảo mật.\newline
+\textbf{EF2: Thiếu dữ liệu / không tìm thấy hóa đơn}: Trả lỗi và ghi log; không thay đổi dữ liệu.\newline
+\textbf{EF3: Lỗi CSDL khi cập nhật}: Rollback transaction và trả lỗi để BKPay retry.
+\\
+\hline
+
+\textbf{Hậu điều kiện} & Trạng thái hóa đơn/giao dịch được đồng bộ chuẩn xác với BKPay và có thể truy vết.\\
 \hline
 \end{xltabular}
 
