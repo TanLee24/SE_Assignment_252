@@ -138,12 +138,12 @@
 <body class="bg-surface selection:bg-primary-container selection:text-on-primary-container">
   <!-- Top Navigation Bar -->
   <header id="admin-nav" class="fixed top-0 w-full z-50 bg-[#10131b]/80 backdrop-blur-2xl border-b border-[#424654]/15 shadow-[0px_20px_40px_rgba(47,108,240,0.08)]"></header>
-  <!-- Online Toggle (floating, preserved from original) -->
-  <div class="fixed top-4 lg:top-6 right-4 lg:right-8 z-[60] flex items-center gap-4">
-    <button id="onlineToggle" class="flex items-center gap-1.5 lg:gap-2 bg-surface-container-high px-3 py-1.5 lg:px-4 lg:py-2 rounded-full border border-outline-variant/15 hover:bg-surface-variant/30 transition-colors active:scale-95">
-      <span id="onlineDot" class="pulse-dot bg-tertiary w-1.5 h-1.5 lg:w-2.5 lg:h-2.5"></span>
-      <span id="onlineLabel" class="text-[10px] lg:text-xs font-bold tracking-widest uppercase text-tertiary">ONLINE</span>
-      <span class="material-symbols-outlined text-[#dfe2ed]/60 text-sm lg:text-base">wifi</span>
+  <!-- Online Toggle (floating) -->
+  <div class="fixed bottom-6 lg:bottom-8 right-6 lg:right-8 z-[60] flex items-center gap-4 shadow-2xl rounded-full">
+    <button id="onlineToggle" class="flex items-center gap-1.5 lg:gap-2 bg-surface-container-highest px-4 py-2 lg:px-5 lg:py-2.5 rounded-full border border-outline-variant/30 hover:bg-surface-variant transition-colors active:scale-95 shadow-[0px_10px_20px_rgba(0,0,0,0.4)]">
+      <span id="onlineDot" class="pulse-dot bg-tertiary w-2 h-2 lg:w-2.5 lg:h-2.5"></span>
+      <span id="onlineLabel" class="text-xs font-bold tracking-widest uppercase text-tertiary">ONLINE</span>
+      <span class="material-symbols-outlined text-on-surface-variant text-base">wifi</span>
     </button>
   </div>
 

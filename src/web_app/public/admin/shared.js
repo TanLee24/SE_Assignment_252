@@ -160,8 +160,8 @@ function renderAdminNav(activePage) {
 
     const navLinks = [
         { key: 'dashboard',        label: 'Dashboard',         icon: 'dashboard',           href: 'admin_dashboard.html' },
-        { key: 'access_control',   label: 'Access Control',    icon: 'shield_locked',       href: 'access_control.html' },
         { key: 'users',            label: 'Users',             icon: 'person_search',       href: 'users.html' },
+        { key: 'access_control',   label: 'Access Control',    icon: 'shield_locked',       href: 'access_control.html' },
         { key: 'iot_monitoring',   label: 'IoT Monitoring',    icon: 'sensors',             href: 'iot_monitoring.html' },
         { key: 'dynamic_guidance', label: 'LED Control',       icon: 'signpost',            href: 'dynamic_guidance.html' },
         { key: 'sync',             label: 'Data Sync',         icon: 'sync',                href: 'sync.html' },
@@ -174,8 +174,8 @@ function renderAdminNav(activePage) {
     const linksHtml = navLinks.map(l => {
         const isActive = l.key === activePage;
         const cls = isActive
-            ? `font-['Space_Grotesk'] font-bold tracking-tight text-[#b3c5ff] border-b-2 border-[#2f6cf0] h-full flex items-center px-2 text-xs xl:text-sm`
-            : `font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-2 xl:px-3 py-2 rounded-lg text-xs xl:text-sm whitespace-nowrap`;
+            ? `font-headline font-bold tracking-tight text-primary border-b-2 border-primary-container h-full flex items-center px-2 text-xs xl:text-sm`
+            : `font-headline font-bold tracking-tight text-on-surface-variant hover:bg-surface-variant/50 hover:text-primary transition-all duration-300 px-2 xl:px-3 py-2 rounded-lg text-xs xl:text-sm whitespace-nowrap`;
         return `<a class="${cls}" href="${l.href}">${l.label}</a>`;
     }).join('\n');
 
@@ -183,11 +183,11 @@ function renderAdminNav(activePage) {
     const mobileLinksHtml = navLinks.map(l => {
         const isActive = l.key === activePage;
         const activeCls = isActive
-            ? 'bg-[#2f6cf0]/15 text-[#b3c5ff] border-l-2 border-[#2f6cf0]'
-            : 'text-[#dfe2ed]/70 hover:bg-[#31353d]/40 hover:text-[#b3c5ff]';
+            ? 'bg-primary/15 text-primary border-l-2 border-primary-container'
+            : 'text-on-surface-variant hover:bg-surface-variant/40 hover:text-primary';
         return `<a class="flex items-center gap-4 px-6 py-3.5 ${activeCls} transition-all" href="${l.href}" onclick="closeMobileNav()">
             <span class="material-symbols-outlined text-lg">${l.icon}</span>
-            <span class="font-['Manrope'] font-semibold text-sm">${l.label}</span>
+            <span class="font-body font-semibold text-sm">${l.label}</span>
         </a>`;
     }).join('\n');
 
@@ -197,13 +197,13 @@ function renderAdminNav(activePage) {
     headerEl.innerHTML = `
     <div class="flex justify-between items-center h-16 lg:h-20 px-4 lg:px-8 w-full max-w-[1920px] mx-auto">
         <!-- Hamburger (mobile/tablet) -->
-        <button class="lg:hidden p-2 text-[#dfe2ed]/70 hover:text-[#b3c5ff] active:scale-90 transition-all" onclick="toggleMobileNav()" id="hamburgerBtn" aria-label="Menu">
+        <button class="lg:hidden p-2 text-on-surface-variant hover:text-primary active:scale-90 transition-all" onclick="toggleMobileNav()" id="hamburgerBtn" aria-label="Menu">
             <span class="material-symbols-outlined text-2xl">menu</span>
         </button>
 
         <!-- Brand -->
         <a href="admin_dashboard.html" class="flex items-center gap-2">
-            <span class="text-lg lg:text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#b3c5ff] to-[#2f6cf0] font-['Space_Grotesk']">HCMUT Smart Parking</span>
+            <span class="text-lg lg:text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-container font-headline">HCMUT Smart Parking</span>
         </a>
 
         <!-- Desktop Nav -->
@@ -213,17 +213,32 @@ function renderAdminNav(activePage) {
 
         <!-- Right Actions -->
         <div class="flex items-center gap-2 lg:gap-4">
-            <button class="hidden sm:block p-2 text-[#dfe2ed]/60 hover:text-[#b3c5ff] active:scale-95 transition-transform" title="Notifications">
+            <button class="hidden sm:block p-2 text-on-surface-variant hover:text-primary active:scale-95 transition-transform" title="Notifications">
                 <span class="material-symbols-outlined">notifications</span>
             </button>
-            <button class="hidden sm:block p-2 text-[#dfe2ed]/60 hover:text-[#b3c5ff] active:scale-95 transition-transform" title="Settings">
+            <button class="hidden sm:block p-2 text-on-surface-variant hover:text-primary active:scale-95 transition-transform" title="Settings">
                 <span class="material-symbols-outlined">settings</span>
             </button>
-            <div class="flex items-center gap-2 bg-[#262a32] px-2 lg:px-3 py-1.5 rounded-full cursor-pointer" onclick="logout()" title="Đăng xuất">
-                <div class="w-8 h-8 rounded-full bg-[#2f6cf0] flex items-center justify-center text-xs font-bold text-white">
-                    ${displayName.charAt(0).toUpperCase()}
+            <div class="relative group">
+                <div class="flex items-center gap-2 bg-surface-container-high px-2 lg:px-3 py-1.5 rounded-full cursor-pointer hover:bg-surface-variant transition-colors" title="Tài khoản">
+                    <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-xs font-bold text-white">
+                        ${displayName.charAt(0).toUpperCase()}
+                    </div>
+                    <span class="hidden sm:inline font-label text-[10px] lg:text-xs font-bold text-primary uppercase tracking-widest">${user ? getRoleLabel(user.role) : 'Admin'}</span>
                 </div>
-                <span class="hidden sm:inline font-label text-[10px] lg:text-xs font-bold text-[#b3c5ff] uppercase tracking-widest">${user ? getRoleLabel(user.role) : 'Admin'}</span>
+                <!-- Dropdown menu -->
+                <div class="absolute right-0 mt-2 w-48 bg-surface-container-highest border border-outline-variant/15 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[100] transform origin-top-right scale-95 group-hover:scale-100">
+                    <div class="p-3 border-b border-outline-variant/10">
+                        <p class="text-sm font-bold text-on-surface truncate">${displayName}</p>
+                        <p class="text-[10px] text-on-surface-variant uppercase tracking-widest truncate">${user ? user.email : 'admin@hcmut.edu.vn'}</p>
+                    </div>
+                    <div class="p-2">
+                        <button onclick="logout()" class="w-full text-left px-3 py-2 text-sm text-error hover:bg-error/10 rounded-lg transition-colors flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">logout</span>
+                            Đăng xuất
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -232,25 +247,25 @@ function renderAdminNav(activePage) {
     <div id="mobileNavOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] hidden opacity-0 transition-opacity duration-300" onclick="closeMobileNav()"></div>
 
     <!-- Mobile Drawer -->
-    <nav id="mobileNavDrawer" class="fixed top-0 left-0 h-full w-72 bg-[#0a0e15] z-[210] transform -translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
-        <div class="flex items-center justify-between p-5 border-b border-[#424654]/15">
-            <span class="text-lg font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#b3c5ff] to-[#2f6cf0] font-['Space_Grotesk']">IoT-SPMS</span>
-            <button class="p-1 text-[#dfe2ed]/60 hover:text-[#b3c5ff] active:scale-90 transition-all" onclick="closeMobileNav()">
+    <nav id="mobileNavDrawer" class="fixed top-0 left-0 h-full w-72 bg-surface-container-lowest z-[210] transform -translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+        <div class="flex items-center justify-between p-5 border-b border-outline-variant/15">
+            <span class="text-lg font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-container font-headline">IoT-SPMS</span>
+            <button class="p-1 text-on-surface-variant hover:text-primary active:scale-90 transition-all" onclick="closeMobileNav()">
                 <span class="material-symbols-outlined">close</span>
             </button>
         </div>
         <div class="flex-1 overflow-y-auto py-2 space-y-1">
             ${mobileLinksHtml}
         </div>
-        <div class="p-4 border-t border-[#424654]/15">
+        <div class="p-4 border-t border-outline-variant/15">
             <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 rounded-full bg-[#2f6cf0] flex items-center justify-center text-sm font-bold text-white">${displayName.charAt(0).toUpperCase()}</div>
-                <div>
-                    <p class="text-sm font-bold text-[#dfe2ed]">${displayName}</p>
-                    <p class="text-[10px] text-[#b3c5ff] uppercase tracking-widest font-bold">${user ? getRoleLabel(user.role) : 'Admin'}</p>
+                <div class="w-10 h-10 rounded-full bg-primary-container shrink-0 flex items-center justify-center text-sm font-bold text-white">${displayName.charAt(0).toUpperCase()}</div>
+                <div class="truncate">
+                    <p class="text-sm font-bold text-on-surface truncate">${displayName}</p>
+                    <p class="text-[10px] text-primary uppercase tracking-widest font-bold truncate">${user ? getRoleLabel(user.role) : 'Admin'}</p>
                 </div>
             </div>
-            <button onclick="logout()" class="w-full py-2.5 rounded-lg bg-[#d7383b]/10 border border-[#d7383b]/20 text-[#ffb4ab] text-sm font-bold flex items-center justify-center gap-2 hover:bg-[#d7383b]/20 transition-all">
+            <button onclick="logout()" class="w-full py-2.5 rounded-lg bg-error/10 border border-error/20 text-error text-sm font-bold flex items-center justify-center gap-2 hover:bg-error/20 transition-all">
                 <span class="material-symbols-outlined text-sm">logout</span>
                 Đăng xuất
             </button>
