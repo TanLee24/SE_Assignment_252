@@ -137,46 +137,23 @@
 
 <body class="bg-surface selection:bg-primary-container selection:text-on-primary-container">
   <!-- Top Navigation Bar -->
-  <header class="fixed top-0 w-full z-50 bg-[#10131b]/80 backdrop-blur-2xl border-b border-[#424654]/15 shadow-[0px_20px_40px_rgba(47,108,240,0.08)]">
-    <div class="flex justify-between items-center h-20 px-8 w-full max-w-[1920px] mx-auto">
-      <div class="flex items-center gap-4">
-        <span class="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#b3c5ff] to-[#2f6cf0] font-['Space_Grotesk']">HCMUT Smart Parking</span>
-      </div>
+  <header id="admin-nav" class="fixed top-0 w-full z-50 bg-[#10131b]/80 backdrop-blur-2xl border-b border-[#424654]/15 shadow-[0px_20px_40px_rgba(47,108,240,0.08)]"></header>
+  <!-- Online Toggle (floating, preserved from original) -->
+  <div class="fixed top-4 lg:top-6 right-4 lg:right-8 z-[60] flex items-center gap-4">
+    <button id="onlineToggle" class="flex items-center gap-1.5 lg:gap-2 bg-surface-container-high px-3 py-1.5 lg:px-4 lg:py-2 rounded-full border border-outline-variant/15 hover:bg-surface-variant/30 transition-colors active:scale-95">
+      <span id="onlineDot" class="pulse-dot bg-tertiary w-1.5 h-1.5 lg:w-2.5 lg:h-2.5"></span>
+      <span id="onlineLabel" class="text-[10px] lg:text-xs font-bold tracking-widest uppercase text-tertiary">ONLINE</span>
+      <span class="material-symbols-outlined text-[#dfe2ed]/60 text-sm lg:text-base">wifi</span>
+    </button>
+  </div>
 
-      <nav class="hidden md:flex gap-6 items-center h-full">
-        <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-4 py-2 rounded-lg" href="admin_dashboard.html">Dashboard</a>
-        <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#b3c5ff] border-b-2 border-[#2f6cf0] h-full flex items-center px-2" href="access_control.html">Access Control</a>
-        <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-4 py-2 rounded-lg" href="users.html">Users</a>
-        <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-4 py-2 rounded-lg" href="sync.html">Data Sync</a>
-        <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-4 py-2 rounded-lg" href="analytics.html">Analytics</a>
-        <a class="font-['Space_Grotesk'] font-bold tracking-tight text-[#dfe2ed]/60 hover:bg-[#31353d]/50 hover:text-[#b3c5ff] transition-all duration-300 px-4 py-2 rounded-lg" href="logs.html">Audit Logs</a>
-      </nav>
-
-      <div class="flex items-center gap-4">
-        <button id="onlineToggle" class="flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant/15 hover:bg-surface-variant/30 transition-colors active:scale-95">
-          <span id="onlineDot" class="pulse-dot bg-tertiary"></span>
-          <span id="onlineLabel" class="text-xs font-bold tracking-widest uppercase text-tertiary">ONLINE</span>
-          <span class="material-symbols-outlined text-[#dfe2ed]/60">wifi</span>
-        </button>
-
-        <button class="p-2 text-[#dfe2ed]/60 hover:text-[#b3c5ff] active:scale-95 transition-transform" title="Notifications">
-          <span class="material-symbols-outlined">notifications</span>
-        </button>
-
-        <button class="p-2 text-[#dfe2ed]/60 hover:text-[#b3c5ff] active:scale-95 transition-transform" title="Settings">
-          <span class="material-symbols-outlined">settings</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main class="pt-32 pb-20 px-8 max-w-[1920px] mx-auto min-h-screen">
+  <main class="pt-24 lg:pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-[1920px] mx-auto min-h-screen">
     <!-- Page Header -->
-    <section class="mb-10">
+    <section class="mb-8 lg:mb-10">
       <div class="flex flex-col lg:flex-row justify-between items-start gap-6">
         <div>
-          <h1 class="font-headline text-5xl md:text-6xl font-bold tracking-tighter mb-2">Access <span class="text-gradient-primary">Control</span></h1>
-          <p class="font-body text-on-surface-variant text-lg max-w-3xl">Gate operations console for entry/exit validation, temporary tickets, exception handling, and offline-first queueing.</p>
+          <h1 class="font-headline text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter mb-2">Access <span class="text-gradient-primary">Control</span></h1>
+          <p class="font-body text-on-surface-variant text-sm lg:text-lg max-w-3xl">Gate operations console for entry/exit validation, temporary tickets, exception handling, and offline-first queueing.</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full lg:w-auto">
@@ -1368,6 +1345,15 @@
       if (!state.online) {
         setStatus(STATUS.offline, { message: 'Offline mode active. Actions are queued locally.' });
       }
+    })();
+  </script>
+  <script src="shared.js"></script>
+  <script>
+    // Auth guard + nav
+    (function() {
+      const user = requireAdmin();
+      if (!user) return;
+      renderAdminNav('access_control');
     })();
   </script>
 </body>
