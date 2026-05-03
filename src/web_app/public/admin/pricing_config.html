@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Cấu hình Giá | HCMUT Smart Parking</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: { extend: {
+                colors: {
+                    "surface": "#10131b", "surface-container-lowest": "#0a0e15",
+                    "surface-container-low": "#181c23", "surface-container": "#1c2027",
+                    "surface-container-high": "#262a32", "surface-container-highest": "#31353d",
+                    "surface-variant": "#31353d", "surface-bright": "#353941",
+                    "on-surface": "#dfe2ed", "on-surface-variant": "#c3c6d7",
+                    "primary": "#b3c5ff", "primary-container": "#2f6cf0",
+                    "on-primary": "#002b75",
+                    "outline-variant": "#424654", "outline": "#8d90a0",
+                    "tertiary": "#00dbe7", "tertiary-container": "#008188",
+                    "error": "#ffb4ab", "error-container": "#93000a",
+                    "secondary": "#b3c5ff", "secondary-container": "#244592",
+                    "background": "#10131b",
+                },
+                fontFamily: { headline: ["Space Grotesk"], body: ["Manrope"], label: ["Manrope"] }
+            }}
+        }
+    </script>
+    <style>
+        body { background-color: #10131b; color: #dfe2ed; font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .luminous-depth {
+            background: linear-gradient(145deg, rgba(28, 32, 39, 0.8) 0%, rgba(16, 19, 27, 0.9) 100%);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface overflow-x-hidden">
+
+<!-- Top Navigation -->
+<header id="admin-nav" class="fixed top-0 w-full z-50 bg-[#10131b]/80 backdrop-blur-2xl border-b border-[#424654]/15 shadow-[0px_20px_40px_rgba(47,108,240,0.08)]"></header>
+
+<main class="pt-24 lg:pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-[1920px] mx-auto min-h-screen">
+    <header class="mb-8 lg:mb-10">
+        <h1 class="font-headline text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-2">Cấu hình <span class="bg-gradient-to-r from-[#b3c5ff] to-[#2f6cf0] bg-clip-text text-transparent">Bảng Giá</span></h1>
+        <p class="text-on-surface-variant font-body text-sm lg:text-base max-w-2xl">Quản lý giá gửi xe theo loại phương tiện, nhóm người dùng, và thời lượng. Thay đổi sẽ được áp dụng ngay sau khi lưu.</p>
+    </header>
+
+    <!-- Rate Tables -->
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-10">
+        <!-- Motorcycle Rates -->
+        <section class="luminous-depth rounded-2xl p-6 lg:p-8">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="p-2.5 bg-tertiary-container/20 rounded-lg">
+                    <span class="material-symbols-outlined text-tertiary text-xl" style="font-variation-settings: 'FILL' 1;">two_wheeler</span>
+                </div>
+                <div>
+                    <h2 class="font-headline text-xl font-bold">Xe Máy / Xe đạp điện</h2>
+                    <p class="text-xs text-on-surface-variant">Mã: MOTO / EBIKE</p>
+                </div>
+            </div>
+            <div class="overflow-x-auto -mx-6 lg:-mx-8">
+                <table class="w-full min-w-[480px]">
+                    <thead>
+                        <tr class="bg-surface-container-highest/20">
+                            <th class="px-6 lg:px-8 py-3 text-left text-[10px] uppercase tracking-widest text-outline font-bold">Nhóm</th>
+                            <th class="px-4 py-3 text-left text-[10px] uppercase tracking-widest text-outline font-bold">Ban ngày</th>
+                            <th class="px-4 py-3 text-left text-[10px] uppercase tracking-widest text-outline font-bold">Qua đêm</th>
+                            <th class="px-4 py-3 text-left text-[10px] uppercase tracking-widest text-outline font-bold">Tháng</th>
+                        </tr>
+                    </thead>
+                    <tbody id="motoRates"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Car Rates -->
+        <section class="luminous-depth rounded-2xl p-6 lg:p-8">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="p-2.5 bg-primary-container/20 rounded-lg">
+                    <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+                </div>
+                <div>
+                    <h2 class="font-headline text-xl font-bold">Ô Tô</h2>
+                    <p class="text-xs text-on-surface-variant">Mã: CAR</p>
+                </div>
+            </div>
+            <div class="overflow-x-auto -mx-6 lg:-mx-8">
+                <table class="w-full min-w-[480px]">
+                    <thead>
+                        <tr class="bg-surface-container-highest/20">
+                            <th class="px-6 lg:px-8 py-3 text-left text-[10px] uppercase tracking-widest text-outline font-bold">Nhóm</th>
+                            <th class="px-4 py-3 text-left text-[10px] uppercase tracking-widest text-outline font-bold">Ban ngày</th>
+                            <th class="px-4 py-3 text-left text-[10px] uppercase tracking-widest text-outline font-bold">Qua đêm</th>
+                            <th class="px-4 py-3 text-left text-[10px] uppercase tracking-widest text-outline font-bold">Tháng</th>
+                        </tr>
+                    </thead>
+                    <tbody id="carRates"></tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- Policies -->
+    <section class="luminous-depth rounded-2xl p-6 lg:p-8 mb-10">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="p-2.5 bg-secondary-container/20 rounded-lg">
+                <span class="material-symbols-outlined text-secondary text-xl">policy</span>
+            </div>
+            <h2 class="font-headline text-xl font-bold">Chính sách Đặc biệt</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="policyCards"></div>
+    </section>
+
+    <!-- Action Bar -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-end">
+        <button onclick="resetToDefaults()" class="px-8 py-4 rounded-xl border border-outline-variant/20 text-sm font-bold hover:bg-white/5 transition-all order-2 sm:order-1">
+            <span class="material-symbols-outlined text-sm mr-2 align-middle">restart_alt</span>
+            Khôi phục mặc định
+        </button>
+        <button onclick="saveConfig()" class="px-8 py-4 rounded-xl bg-gradient-to-br from-[#2f6cf0] to-[#b3c5ff] text-on-primary font-bold text-sm shadow-[0_8px_20px_rgba(47,108,240,0.3)] hover:shadow-[0_0_30px_rgba(47,108,240,0.5)] active:scale-[0.98] transition-all order-1 sm:order-2">
+            <span class="material-symbols-outlined text-sm mr-2 align-middle">save</span>
+            Lưu cấu hình
+        </button>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer id="admin-footer" class="w-full py-6 mt-auto bg-[#0a0e15] border-t border-[#424654]/10"></footer>
+
+<script src="shared.js"></script>
+<script>
+    // Default pricing data
+    const DEFAULT_PRICING = {
+        moto: [
+            { group: 'Sinh viên',       groupKey: 'student', day: 4000,   overnight: 6000,   monthly: 100000 },
+            { group: 'Giảng viên / CB', groupKey: 'staff',   day: 5000,   overnight: 8000,   monthly: 120000 },
+            { group: 'Khách ngoài',     groupKey: 'visitor', day: 8000,   overnight: 12000,  monthly: null },
+        ],
+        car: [
+            { group: 'Sinh viên',       groupKey: 'student', day: 10000,  overnight: 20000,  monthly: 300000 },
+            { group: 'Giảng viên / CB', groupKey: 'staff',   day: 12000,  overnight: 25000,  monthly: 350000 },
+            { group: 'Khách ngoài',     groupKey: 'visitor', day: 20000,  overnight: 40000,  monthly: null },
+        ],
+        policies: [
+            { id: 'free_15min', label: 'Miễn phí 15 phút đầu', desc: 'Xe ra trong vòng 15 phút kể từ lúc vào không tính phí.', enabled: true },
+            { id: 'peak_surcharge', label: 'Phụ thu giờ cao điểm', desc: '+20% phí gửi xe từ 7:00-8:30 và 17:00-18:30 các ngày trong tuần.', enabled: false },
+            { id: 'lost_ticket', label: 'Phí mất vé', desc: '50.000 VND cho xe máy, 200.000 VND cho ô tô. Yêu cầu CMND/CCCD.', enabled: true },
+            { id: 'monthly_renewal', label: 'Tự động gia hạn tháng', desc: 'Tự động trừ BKPay khi hết hạn vé tháng nếu tài khoản đủ số dư.', enabled: true },
+            { id: 'weekend_discount', label: 'Giảm giá cuối tuần', desc: 'Giảm 30% phí gửi xe vào thứ 7 và Chủ nhật.', enabled: false },
+            { id: 'ev_discount', label: 'Ưu đãi xe điện', desc: 'Giảm 50% phí gửi xe cho tất cả xe điện (có nhãn EV).', enabled: false },
+        ]
+    };
+
+    let currentPricing = null;
+
+    (function boot() {
+        const user = requireAdmin();
+        if (!user) return;
+        renderAdminNav('pricing_config');
+        renderAdminFooter();
+
+        // Load from localStorage or use defaults
+        const saved = localStorage.getItem('spms_pricing_config');
+        currentPricing = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(DEFAULT_PRICING));
+
+        renderRates();
+        renderPolicies();
+    })();
+
+    function renderRates() {
+        renderRateTable('motoRates', currentPricing.moto, 'moto');
+        renderRateTable('carRates', currentPricing.car, 'car');
+    }
+
+    function renderRateTable(tbodyId, rates, type) {
+        const tbody = document.getElementById(tbodyId);
+        tbody.innerHTML = '';
+
+        rates.forEach((r, i) => {
+            const tr = document.createElement('tr');
+            tr.className = 'hover:bg-surface-bright/30 transition-colors';
+            tr.innerHTML = `
+                <td class="px-6 lg:px-8 py-4 text-sm font-semibold text-on-surface whitespace-nowrap">${r.group}</td>
+                <td class="px-4 py-4">
+                    <input type="number" value="${r.day}" data-type="${type}" data-idx="${i}" data-field="day"
+                        class="w-24 bg-surface-container-highest border border-outline-variant/15 rounded-lg p-2.5 text-sm text-on-surface font-headline text-right focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                        onchange="updateRate(this)"/>
+                </td>
+                <td class="px-4 py-4">
+                    <input type="number" value="${r.overnight}" data-type="${type}" data-idx="${i}" data-field="overnight"
+                        class="w-24 bg-surface-container-highest border border-outline-variant/15 rounded-lg p-2.5 text-sm text-on-surface font-headline text-right focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                        onchange="updateRate(this)"/>
+                </td>
+                <td class="px-4 py-4">
+                    ${r.monthly !== null
+                        ? `<input type="number" value="${r.monthly}" data-type="${type}" data-idx="${i}" data-field="monthly"
+                            class="w-28 bg-surface-container-highest border border-outline-variant/15 rounded-lg p-2.5 text-sm text-on-surface font-headline text-right focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                            onchange="updateRate(this)"/>`
+                        : `<span class="text-xs text-on-surface-variant/50 italic px-2">Không hỗ trợ</span>`
+                    }
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function updateRate(el) {
+        const type = el.dataset.type;
+        const idx = parseInt(el.dataset.idx);
+        const field = el.dataset.field;
+        const value = parseInt(el.value) || 0;
+        currentPricing[type][idx][field] = value;
+    }
+
+    function renderPolicies() {
+        const container = document.getElementById('policyCards');
+        container.innerHTML = '';
+
+        currentPricing.policies.forEach((p, i) => {
+            const card = document.createElement('div');
+            card.className = `bg-surface-container-low rounded-xl p-5 flex flex-col gap-3 ${p.enabled ? 'border border-tertiary/10' : 'border border-outline-variant/10 opacity-60'}`;
+            card.innerHTML = `
+                <div class="flex items-start justify-between gap-3">
+                    <div class="flex-1">
+                        <h4 class="font-headline text-sm font-bold mb-1 ${p.enabled ? 'text-on-surface' : 'text-on-surface-variant'}">${p.label}</h4>
+                        <p class="text-xs text-on-surface-variant leading-relaxed">${p.desc}</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+                        <input type="checkbox" ${p.enabled ? 'checked' : ''} class="sr-only peer" onchange="togglePolicy(${i}, this.checked)"/>
+                        <div class="w-10 h-5 bg-surface-container-highest peer-focus:ring-2 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-5 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-outline after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#2f6cf0] peer-checked:after:bg-white"></div>
+                    </label>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function togglePolicy(idx, enabled) {
+        currentPricing.policies[idx].enabled = enabled;
+        renderPolicies();
+    }
+
+    function saveConfig() {
+        localStorage.setItem('spms_pricing_config', JSON.stringify(currentPricing));
+        showToast('Cấu hình giá đã được lưu thành công!', 'success');
+    }
+
+    function resetToDefaults() {
+        currentPricing = JSON.parse(JSON.stringify(DEFAULT_PRICING));
+        localStorage.removeItem('spms_pricing_config');
+        renderRates();
+        renderPolicies();
+        showToast('Đã khôi phục về cấu hình mặc định.', 'info');
+    }
+</script>
+</body>
+</html>

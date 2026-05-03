@@ -3,10 +3,9 @@
     "id": "USR-001",
     "username": "admin",
     "password": "admin123",
-    "role": "super_admin",
+    "role": "admin",
     "fullName": "Nguyễn Văn An",
     "email": "an.nguyen@hcmut.edu.vn",
-    "department": "Phòng Quản trị",
     "cardId": "CARD-A006"
   },
   {
@@ -16,7 +15,6 @@
     "role": "admin",
     "fullName": "Nguyễn Thị Thảo",
     "email": "thao.nguyen@hcmut.edu.vn",
-    "department": "Phòng Quản trị",
     "cardId": "CARD-B003"
   },
   {
@@ -26,7 +24,6 @@
     "role": "admin",
     "fullName": "Lê Văn Tuấn",
     "email": "tuan.le@hcmut.edu.vn",
-    "department": "Phòng Kỹ thuật IoT",
     "cardId": "CARD-A005"
   },
   {
@@ -36,7 +33,6 @@
     "role": "guard",
     "fullName": "Bùi Văn Hùng",
     "email": "hung.bui@hcmut.edu.vn",
-    "department": "Bảo vệ",
     "cardId": "CARD-B001"
   },
   {
@@ -46,7 +42,6 @@
     "role": "guard",
     "fullName": "Nguyễn Văn Linh",
     "email": "linh.nguyen@hcmut.edu.vn",
-    "department": "Bảo vệ",
     "cardId": "CARD-B002"
   },
   {
@@ -56,7 +51,6 @@
     "role": "staff",
     "fullName": "Phạm Thị Mai",
     "email": "mai.pham@hcmut.edu.vn",
-    "department": "Phòng Đào tạo",
     "cardId": "CARD-A004"
   },
   {
@@ -66,7 +60,6 @@
     "role": "staff",
     "fullName": "Đỗ Quang Khoa",
     "email": "khoa.do@hcmut.edu.vn",
-    "department": "Phòng Công nghệ Thông tin",
     "cardId": "CARD-C001"
   },
   {
@@ -76,7 +69,6 @@
     "role": "student",
     "fullName": "Trần Minh Khoa",
     "email": "khoa.tran@hcmut.edu.vn",
-    "department": "Khoa Khoa học Máy tính",
     "cardId": "CARD-A001"
   },
   {
@@ -86,7 +78,6 @@
     "role": "student",
     "fullName": "Lê Thị Hương",
     "email": "huong.le@hcmut.edu.vn",
-    "department": "Khoa Điện - Điện tử",
     "cardId": "CARD-A002"
   },
   {
@@ -96,7 +87,6 @@
     "role": "student",
     "fullName": "Nguyễn Văn Bình",
     "email": "binh.nguyen@hcmut.edu.vn",
-    "department": "Khoa Cơ khí",
     "cardId": "CARD-A003"
   }
 ]
