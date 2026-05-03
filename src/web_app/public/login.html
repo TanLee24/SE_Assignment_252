@@ -175,7 +175,7 @@
             if (raw) {
                 try {
                     const user = JSON.parse(raw);
-                    const adminRoles = ['super_admin', 'admin', 'guard'];
+                    const adminRoles = ['admin', 'guard'];
                     if (adminRoles.includes(user.role)) {
                         window.location.href = 'admin/admin_dashboard.html';
                     } else {
@@ -251,7 +251,7 @@
                 await new Promise(r => setTimeout(r, 500));
 
                 // Redirect based on role
-                const adminRoles = ['super_admin', 'admin', 'guard'];
+                const adminRoles = ['admin', 'guard'];
                 if (adminRoles.includes(user.role)) {
                     window.location.href = 'admin/admin_dashboard.html';
                 } else {

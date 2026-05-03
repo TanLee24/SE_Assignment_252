@@ -152,36 +152,36 @@
     <section class="mb-8 lg:mb-10">
       <div class="flex flex-col lg:flex-row justify-between items-start gap-6">
         <div>
-          <h1 class="font-headline text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter mb-2">Access <span class="text-gradient-primary">Control</span></h1>
-          <p class="font-body text-on-surface-variant text-sm lg:text-lg max-w-3xl">Gate operations console for entry/exit validation, temporary tickets, exception handling, and offline-first queueing.</p>
+          <h1 class="font-headline text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter mb-2">Kiểm soát <span class="text-gradient-primary">Ra vào</span></h1>
+          <p class="font-body text-on-surface-variant text-sm lg:text-lg max-w-3xl">Bảng điều khiển hoạt động cổng để xác thực ra/vào, cấp vé tạm, xử lý ngoại lệ và lưu hàng đợi khi offline.</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full lg:w-auto">
           <div class="bg-surface-container-low p-5 rounded-lg min-w-[220px]">
             <div class="flex items-center gap-2 mb-2">
               <span class="material-symbols-outlined text-xs text-primary">local_parking</span>
-              <span class="font-label text-[10px] uppercase tracking-[0.1em] text-on-surface-variant">Occupancy</span>
+              <span class="font-label text-[10px] uppercase tracking-[0.1em] text-on-surface-variant">Sức chứa</span>
             </div>
             <div class="font-headline text-3xl font-bold text-primary"><span id="kpiUsed">0</span>/<span id="kpiCap">0</span></div>
-            <p class="text-xs text-on-surface-variant mt-1">Live capacity guard for Entry Gate.</p>
+            <p class="text-xs text-on-surface-variant mt-1">Giám sát sức chứa trực tiếp tại Cổng vào.</p>
           </div>
 
           <div class="bg-surface-container-low p-5 rounded-lg min-w-[220px]">
             <div class="flex items-center gap-2 mb-2">
               <span class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_10px_#00dbe7]"></span>
-              <span class="font-label text-[10px] uppercase tracking-[0.1em] text-on-surface-variant">Barrier</span>
+              <span class="font-label text-[10px] uppercase tracking-[0.1em] text-on-surface-variant">Thanh chắn</span>
             </div>
-            <div class="font-headline text-3xl font-bold text-tertiary" id="kpiBarrier">READY</div>
-            <p class="text-xs text-on-surface-variant mt-1">Motor controller state (simulated).</p>
+            <div class="font-headline text-3xl font-bold text-tertiary" id="kpiBarrier">SẴN SÀNG</div>
+            <p class="text-xs text-on-surface-variant mt-1">Trạng thái điều khiển động cơ (mô phỏng).</p>
           </div>
 
           <div class="bg-surface-container-low p-5 rounded-lg min-w-[220px]">
             <div class="flex items-center gap-2 mb-2">
               <span class="material-symbols-outlined text-xs text-primary">cloud_queue</span>
-              <span class="font-label text-[10px] uppercase tracking-[0.1em] text-on-surface-variant">Offline Queue</span>
+              <span class="font-label text-[10px] uppercase tracking-[0.1em] text-on-surface-variant">Hàng đợi Offline</span>
             </div>
             <div class="font-headline text-3xl font-bold text-primary" id="kpiQueue">0</div>
-            <p class="text-xs text-on-surface-variant mt-1">Pending events waiting for sync.</p>
+            <p class="text-xs text-on-surface-variant mt-1">Các sự kiện đang chờ đồng bộ.</p>
           </div>
         </div>
       </div>
@@ -189,8 +189,8 @@
       <div id="offlineBanner" class="hidden mt-6 bg-error-container/20 border border-error/20 rounded-lg px-6 py-4 flex items-start gap-3">
         <span class="material-symbols-outlined text-error">cloud_off</span>
         <div>
-          <p class="font-headline font-bold text-error">Offline Mode</p>
-          <p class="text-sm text-on-surface-variant">Transactions are queued locally. You can continue issuing temporary tickets and logging gate actions in degraded mode.</p>
+          <p class="font-headline font-bold text-error">Chế độ Offline</p>
+          <p class="text-sm text-on-surface-variant">Các giao dịch đang được lưu cục bộ. Bạn vẫn có thể tiếp tục cấp vé tạm và ghi nhận hoạt động cổng trong chế độ này.</p>
         </div>
       </div>
     </section>
@@ -198,11 +198,11 @@
     <!-- Screen Tabs -->
     <section class="mb-8">
       <div class="flex flex-wrap gap-2 bg-surface-container-lowest p-2 rounded-full ring-1 ring-outline-variant/15 w-fit">
-        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all bg-primary-container text-on-primary-container shadow-[0_4px_12px_rgba(47,108,240,0.35)]" data-screen="entry">Entry Gate</button>
-        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all text-[#dfe2ed]/60 hover:text-[#dfe2ed]" data-screen="exit">Exit Gate</button>
-        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all text-[#dfe2ed]/60 hover:text-[#dfe2ed]" data-screen="temp">Temporary Ticket</button>
-        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all text-[#dfe2ed]/60 hover:text-[#dfe2ed]" data-screen="exceptions">Exception Handling</button>
-        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all text-[#dfe2ed]/60 hover:text-[#dfe2ed]" data-screen="offline">Offline Mode</button>
+        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all bg-primary-container text-on-primary-container shadow-[0_4px_12px_rgba(47,108,240,0.35)]" data-screen="entry">Cổng Vào</button>
+        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all text-[#dfe2ed]/60 hover:text-[#dfe2ed]" data-screen="exit">Cổng Ra</button>
+        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all text-[#dfe2ed]/60 hover:text-[#dfe2ed]" data-screen="temp">Vé Tạm</button>
+        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all text-[#dfe2ed]/60 hover:text-[#dfe2ed]" data-screen="exceptions">Xử lý Ngoại lệ</button>
+        <button class="ac-tab px-5 py-2 rounded-full text-xs font-bold tracking-widest uppercase transition-all text-[#dfe2ed]/60 hover:text-[#dfe2ed]" data-screen="offline">Chế độ Offline</button>
       </div>
     </section>
 
@@ -213,9 +213,9 @@
         <section class="glass-card rounded-lg p-8 glow-hover">
           <div class="flex items-start justify-between gap-4">
             <div>
-              <p class="text-[10px] font-bold tracking-[0.3em] text-on-surface-variant uppercase font-label" id="statePrefix">STATE</p>
-              <h2 class="font-headline text-3xl font-bold tracking-tight mt-1" id="stateTitle">IDLE</h2>
-              <p class="text-sm text-on-surface-variant mt-2" id="stateMessage">Ready to scan credentials at selected gate.</p>
+              <p class="text-[10px] font-bold tracking-[0.3em] text-on-surface-variant uppercase font-label" id="statePrefix">TRẠNG THÁI</p>
+              <h2 class="font-headline text-3xl font-bold tracking-tight mt-1" id="stateTitle">SẴN SÀNG</h2>
+              <p class="text-sm text-on-surface-variant mt-2" id="stateMessage">Sẵn sàng quét thẻ tại cổng đã chọn.</p>
             </div>
             <div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center border border-outline-variant/15">
               <span class="material-symbols-outlined text-primary" id="stateIcon">qr_code_scanner</span>
@@ -226,10 +226,10 @@
             <div id="statusDot" class="pulse-dot bg-primary"></div>
             <div class="flex-1">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-bold tracking-widest uppercase" id="statusLabel">IDLE</span>
-                <span class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant" id="statusHint">Select a screen to begin</span>
+                <span class="text-xs font-bold tracking-widest uppercase" id="statusLabel">SẴN SÀNG</span>
+                <span class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant" id="statusHint">Chọn một màn hình để bắt đầu</span>
               </div>
-              <div class="text-xs text-on-surface-variant mt-1" id="statusSub">No pending operations.</div>
+              <div class="text-xs text-on-surface-variant mt-1" id="statusSub">Không có thao tác nào đang chờ.</div>
             </div>
           </div>
         </section>
@@ -237,18 +237,18 @@
         <!-- Entry Gate Screen -->
         <section class="ac-screen space-y-6" data-screen="entry">
           <section class="bg-surface-container-low rounded-lg p-8">
-            <h3 class="font-headline text-xl font-bold mb-2">Entry Gate</h3>
-            <p class="text-sm text-on-surface-variant mb-6">Validate card → check capacity → open barrier → create active parking session.</p>
+            <h3 class="font-headline text-xl font-bold mb-2">Cổng Vào</h3>
+            <p class="text-sm text-on-surface-variant mb-6">Xác thực thẻ → kiểm tra chỗ trống → mở thanh chắn → tạo phiên đỗ xe.</p>
 
             <div class="space-y-4">
               <div>
-                <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">RFID / Card UID</label>
+                <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">RFID / UID thẻ</label>
                 <input id="entryCard" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary/40" placeholder="e.g., CARD-7F2A91" />
               </div>
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Plate (optional)</label>
+                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Biển số (tùy chọn)</label>
                   <div id="entryAnprCam" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg overflow-hidden relative h-28">
                     <img id="entryAnprCamImg" class="w-full h-full object-cover opacity-60" alt="Entry ANPR camera preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyzzioJr-43sEgueO2lknd74RBy07GA8NzNyfr88GkXmsSzJGqyKIl4_FKXp0M_NIK64BNungdVgCt1VdATKSgIdWgXkYcHqvYqyhVWFI8xYRQBFR9kxTXdrDblWC3OLECPeAOWII2yXeIeDUNtNvFQHkZjjks-legJucHK210oGwsevGjbiTlKeVnWmdCL5IDUKNhLAch9xigwb2Poj_o4urSzrb34Z21fsI6Ch5CPWozCmZlT3z29mt51GOTV73QsErf8Oa9K34" />
                     <div class="absolute top-2 left-2 flex gap-2">
@@ -256,18 +256,18 @@
                       <div id="entryAnprBadge" class="bg-primary/20 text-primary text-[8px] px-2 py-1 rounded font-black uppercase tracking-[0.2em]">IDLE</div>
                     </div>
                     <div id="entryAnprOverlay" class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <div class="bg-black/50 text-white text-[10px] font-black uppercase tracking-[0.35em] px-3 py-2 rounded">CAMERA READY</div>
+                      <div class="bg-black/50 text-white text-[10px] font-black uppercase tracking-[0.35em] px-3 py-2 rounded">CAMERA ĐÃ SẴN SÀNG</div>
                     </div>
                   </div>
-                  <input id="entryPlate" readonly class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary/40 font-mono tracking-wider" placeholder="ANPR detected plate" />
+                  <input id="entryPlate" readonly class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary/40 font-mono tracking-wider" placeholder="ANPR đã nhận diện biển số" />
                 </div>
                 <div>
-                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Simulate Outcome</label>
+                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Mô phỏng Kết quả</label>
                   <select id="entrySim" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary/40">
-                    <option value="auto">AUTO (normal)</option>
-                    <option value="success">SUCCESS</option>
-                    <option value="card_invalid">ERROR: Card Invalid</option>
-                    <option value="full">ERROR: Parking Full</option>
+                    <option value="auto">TỰ ĐỘNG (bình thường)</option>
+                    <option value="success">THÀNH CÔNG</option>
+                    <option value="card_invalid">LỖI: Thẻ không hợp lệ</option>
+                    <option value="full">LỖI: Bãi đỗ đã đầy</option>
                   </select>
                 </div>
               </div>
@@ -275,15 +275,15 @@
               <div class="flex gap-3 pt-2">
                 <button id="entryScan" class="flex-1 px-6 py-3 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-bold shadow-[0px_10px_30px_rgba(47,108,240,0.25)] hover:shadow-[0px_0px_20px_rgba(47,108,240,0.55)] transition-all active:scale-95">
                   <span class="material-symbols-outlined mr-2">login</span>
-                  Start Scan
+                  Bắt đầu quét
                 </button>
                 <button id="entryReset" class="px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold border border-outline-variant/15 hover:bg-surface-bright transition-colors active:scale-95">
-                  Reset
+                  Làm lại
                 </button>
               </div>
 
               <div class="text-xs text-on-surface-variant">
-                Interaction flow: Operator clicks <span class="text-primary">Start Scan</span> → system enters <span class="text-primary">scanning</span> → success opens barrier & logs session, or error reports exception.
+                Luồng hoạt động: Người vận hành nhấn <span class="text-primary">Bắt đầu quét</span> → hệ thống chuyển sang <span class="text-primary">đang quét</span> → thành công mở thanh chắn & lưu phiên, hoặc báo lỗi ngoại lệ.
               </div>
             </div>
           </section>
@@ -292,30 +292,30 @@
         <!-- Exit Gate Screen -->
         <section class="ac-screen hidden space-y-6" data-screen="exit">
           <section class="bg-surface-container-low rounded-lg p-8">
-            <h3 class="font-headline text-xl font-bold mb-2">Exit Gate</h3>
-            <p class="text-sm text-on-surface-variant mb-6">Validate ticket/card → compute fee → confirm payment → close session → open barrier.</p>
+            <h3 class="font-headline text-xl font-bold mb-2">Cổng Ra</h3>
+            <p class="text-sm text-on-surface-variant mb-6">Xác thực vé/thẻ → tính phí → xác nhận thanh toán → đóng phiên → mở thanh chắn.</p>
 
             <div class="space-y-4">
               <div>
-                <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Ticket ID / Card UID</label>
+                <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Mã vé / UID thẻ</label>
                 <input id="exitId" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary/40" placeholder="e.g., CARD-7F2A91 or TMP-104822" />
               </div>
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Payment Method</label>
+                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Phương thức thanh toán</label>
                   <select id="exitPay" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary/40">
-                    <option value="cash">Cash</option>
-                    <option value="card">Card</option>
-                    <option value="wallet">E-Wallet</option>
+                    <option value="cash">Tiền mặt</option>
+                    <option value="card">Thẻ</option>
+                    <option value="wallet">Ví điện tử</option>
                   </select>
                 </div>
                 <div>
-                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Simulate Outcome</label>
+                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Mô phỏng Kết quả</label>
                   <select id="exitSim" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary/40">
-                    <option value="auto">AUTO (normal)</option>
-                    <option value="success">SUCCESS</option>
-                    <option value="mismatch">ERROR: Ticket Mismatch</option>
+                    <option value="auto">TỰ ĐỘNG (bình thường)</option>
+                    <option value="success">THÀNH CÔNG</option>
+                    <option value="mismatch">LỖI: Vé không khớp</option>
                   </select>
                 </div>
               </div>
@@ -323,29 +323,29 @@
               <div class="flex gap-3 pt-2">
                 <button id="exitScan" class="flex-1 px-6 py-3 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-bold shadow-[0px_10px_30px_rgba(47,108,240,0.25)] hover:shadow-[0px_0px_20px_rgba(47,108,240,0.55)] transition-all active:scale-95">
                   <span class="material-symbols-outlined mr-2">logout</span>
-                  Start Scan
+                  Bắt đầu quét
                 </button>
                 <button id="exitReset" class="px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold border border-outline-variant/15 hover:bg-surface-bright transition-colors active:scale-95">
-                  Reset
+                  Làm lại
                 </button>
               </div>
 
               <div id="exitFeePanel" class="hidden mt-4 bg-surface-container-high rounded-lg p-4 border border-outline-variant/10">
                 <div class="flex items-center justify-between">
                   <div>
-                    <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Calculated Fee</p>
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Phí tính toán</p>
                     <p class="font-headline text-3xl font-bold text-primary" id="exitFee">0</p>
                   </div>
                   <button id="exitConfirm" class="px-6 py-3 rounded-xl bg-tertiary/15 text-tertiary font-bold border border-tertiary/25 hover:bg-tertiary/20 transition-colors active:scale-95">
                     <span class="material-symbols-outlined mr-2">payments</span>
-                    Confirm Payment & Open
+                    Xác nhận thanh toán & Mở cổng
                   </button>
                 </div>
-                <p class="text-xs text-on-surface-variant mt-2">On confirm: session closes and occupancy decreases.</p>
+                <p class="text-xs text-on-surface-variant mt-2">Khi xác nhận: đóng phiên đỗ xe và giải phóng chỗ trống.</p>
               </div>
 
               <div class="text-xs text-on-surface-variant">
-                Interaction flow: Start Scan → system validates & computes fee → operator confirms payment → barrier opens.
+                Luồng hoạt động: Bắt đầu quét → hệ thống xác thực & tính phí → người vận hành xác nhận thanh toán → thanh chắn mở.
               </div>
             </div>
           </section>
@@ -354,20 +354,20 @@
         <!-- Temporary Ticket Screen -->
         <section class="ac-screen hidden space-y-6" data-screen="temp">
           <section class="bg-surface-container-low rounded-lg p-8">
-            <h3 class="font-headline text-xl font-bold mb-2">Temporary Ticket</h3>
-            <p class="text-sm text-on-surface-variant mb-6">Issue visitor ticket → open entry barrier → track session by ticket ID (no card required).</p>
+            <h3 class="font-headline text-xl font-bold mb-2">Vé Tạm</h3>
+            <p class="text-sm text-on-surface-variant mb-6">Cấp vé khách → mở thanh chắn vào → theo dõi phiên qua mã vé (không cần thẻ).</p>
 
             <div class="space-y-4">
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Vehicle Type</label>
+                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Loại phương tiện</label>
                   <select id="tempVehicle" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary/40">
-                    <option value="motorbike">Motorbike</option>
-                    <option value="car">Car</option>
+                    <option value="motorbike">Xe máy</option>
+                    <option value="car">Ô tô</option>
                   </select>
                 </div>
                 <div>
-                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Plate (optional)</label>
+                  <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Biển số (tùy chọn)</label>
                   <div id="tempAnprCam" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg overflow-hidden relative h-28">
                     <img id="tempAnprCamImg" class="w-full h-full object-cover opacity-60" alt="Temporary ticket ANPR camera preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyzzioJr-43sEgueO2lknd74RBy07GA8NzNyfr88GkXmsSzJGqyKIl4_FKXp0M_NIK64BNungdVgCt1VdATKSgIdWgXkYcHqvYqyhVWFI8xYRQBFR9kxTXdrDblWC3OLECPeAOWII2yXeIeDUNtNvFQHkZjjks-legJucHK210oGwsevGjbiTlKeVnWmdCL5IDUKNhLAch9xigwb2Poj_o4urSzrb34Z21fsI6Ch5CPWozCmZlT3z29mt51GOTV73QsErf8Oa9K34" />
                     <div class="absolute top-2 left-2 flex gap-2">
@@ -375,37 +375,37 @@
                       <div id="tempAnprBadge" class="bg-primary/20 text-primary text-[8px] px-2 py-1 rounded font-black uppercase tracking-[0.2em]">IDLE</div>
                     </div>
                     <div id="tempAnprOverlay" class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <div class="bg-black/50 text-white text-[10px] font-black uppercase tracking-[0.35em] px-3 py-2 rounded">CAMERA READY</div>
+                      <div class="bg-black/50 text-white text-[10px] font-black uppercase tracking-[0.35em] px-3 py-2 rounded">CAMERA ĐÃ SẴN SÀNG</div>
                     </div>
                   </div>
-                  <input id="tempPlate" readonly class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary/40 font-mono tracking-wider" placeholder="ANPR detected plate" />
+                  <input id="tempPlate" readonly class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-1 focus:ring-primary/40 font-mono tracking-wider" placeholder="ANPR đã nhận diện biển số" />
                 </div>
               </div>
 
               <div class="flex gap-3 pt-2">
                 <button id="tempIssue" class="flex-1 px-6 py-3 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-bold shadow-[0px_10px_30px_rgba(47,108,240,0.25)] hover:shadow-[0px_0px_20px_rgba(47,108,240,0.55)] transition-all active:scale-95">
                   <span class="material-symbols-outlined mr-2">confirmation_number</span>
-                  Issue Ticket
+                  Cấp vé
                 </button>
-                <button id="tempReset" class="px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold border border-outline-variant/15 hover:bg-surface-bright transition-colors active:scale-95">Reset</button>
+                <button id="tempReset" class="px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold border border-outline-variant/15 hover:bg-surface-bright transition-colors active:scale-95">Làm lại</button>
               </div>
 
               <div id="tempResult" class="hidden mt-4 bg-surface-container-high rounded-lg p-4 border border-outline-variant/10">
-                <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Issued Ticket</p>
+                <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Vé Đã Cấp</p>
                 <div class="flex items-center justify-between gap-4">
                   <div>
                     <p class="font-headline text-3xl font-bold text-primary" id="tempTicketId">TMP-000000</p>
-                    <p class="text-xs text-on-surface-variant mt-1" id="tempIssuedAt">Issued at: --</p>
+                    <p class="text-xs text-on-surface-variant mt-1" id="tempIssuedAt">Đã cấp lúc: --</p>
                   </div>
                   <div class="w-16 h-16 rounded-xl bg-surface-container-low flex items-center justify-center border border-outline-variant/10">
                     <span class="material-symbols-outlined text-primary">qr_code_2</span>
                   </div>
                 </div>
-                <p class="text-xs text-on-surface-variant mt-3">Use this Ticket ID at Exit Gate for validation and fee calculation.</p>
+                <p class="text-xs text-on-surface-variant mt-3">Sử dụng Mã vé này tại Cổng ra để xác thực và tính phí.</p>
               </div>
 
               <div class="text-xs text-on-surface-variant">
-                Interaction flow: Issue Ticket → success returns Ticket ID → barrier opens → session tracked until exit.
+                Luồng hoạt động: Nhấn Cấp vé → nếu thành công trả về Mã vé → thanh chắn mở → theo dõi phiên cho đến khi xe ra.
               </div>
             </div>
           </section>
@@ -414,33 +414,33 @@
         <!-- Exception Handling Screen -->
         <section class="ac-screen hidden space-y-6" data-screen="exceptions">
           <section class="bg-surface-container-low rounded-lg p-8">
-            <h3 class="font-headline text-xl font-bold mb-2">Exception Handling</h3>
-            <p class="text-sm text-on-surface-variant mb-6">Operator tools to resolve common gate exceptions without breaking the audit trail.</p>
+            <h3 class="font-headline text-xl font-bold mb-2">Xử lý Ngoại lệ</h3>
+            <p class="text-sm text-on-surface-variant mb-6">Công cụ cho người vận hành giải quyết ngoại lệ cổng mà không làm hỏng nhật ký.</p>
 
             <div class="space-y-4">
               <div>
-                <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Exception Type</label>
+                <label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Loại Ngoại lệ</label>
                 <select id="exType" class="mt-2 w-full bg-surface-container-highest border border-outline-variant/15 rounded-lg py-3 px-4 text-on-surface focus:outline-none focus:ring-1 focus:ring-primary/40">
-                  <option value="card_invalid">Card Invalid / Not Registered</option>
-                  <option value="full">Parking Full</option>
-                  <option value="mismatch">Entry/Exit Mismatch</option>
-                  <option value="sensor_timeout">Sensor Timeout</option>
+                  <option value="card_invalid">Thẻ không hợp lệ / Chưa đăng ký</option>
+                  <option value="full">Bãi đỗ đã đầy</option>
+                  <option value="mismatch">Sai lệch Vào/Ra</option>
+                  <option value="sensor_timeout">Quá thời gian cảm biến</option>
                 </select>
               </div>
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <button id="exSimulate" class="px-6 py-3 rounded-xl bg-error/10 text-error font-bold border border-error/20 hover:bg-error/15 transition-colors active:scale-95">
                   <span class="material-symbols-outlined mr-2">report</span>
-                  Simulate Error
+                  Mô phỏng Lỗi
                 </button>
                 <button id="exOverride" class="px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold border border-outline-variant/15 hover:bg-surface-bright transition-colors active:scale-95">
                   <span class="material-symbols-outlined mr-2">admin_panel_settings</span>
-                  Manual Override
+                  Ghi đè thủ công
                 </button>
               </div>
 
               <div class="text-xs text-on-surface-variant">
-                Interaction flow: Select exception → system displays <span class="text-error">error</span> state → operator may apply Manual Override (logged) if policy allows.
+                Luồng hoạt động: Chọn lỗi → hệ thống báo <span class="text-error">lỗi</span> → người vận hành dùng Ghi đè thủ công (có lưu lại) nếu được phép.
               </div>
             </div>
           </section>
@@ -449,34 +449,34 @@
         <!-- Offline Mode Screen -->
         <section class="ac-screen hidden space-y-6" data-screen="offline">
           <section class="bg-surface-container-low rounded-lg p-8">
-            <h3 class="font-headline text-xl font-bold mb-2">Offline Mode</h3>
-            <p class="text-sm text-on-surface-variant mb-6">When connectivity is lost, actions are stored locally and synced later.</p>
+            <h3 class="font-headline text-xl font-bold mb-2">Chế độ Offline</h3>
+            <p class="text-sm text-on-surface-variant mb-6">Khi mất mạng, các thao tác được lưu trữ cục bộ và có thể đồng bộ sau.</p>
 
             <div class="space-y-4">
               <div class="flex flex-col sm:flex-row gap-3">
                 <button id="offlineQueueEntry" class="flex-1 px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold border border-outline-variant/15 hover:bg-surface-bright transition-colors active:scale-95">
                   <span class="material-symbols-outlined mr-2">playlist_add</span>
-                  Queue Entry Event
+                  Lưu sự kiện Vào
                 </button>
                 <button id="offlineQueueExit" class="flex-1 px-6 py-3 rounded-xl bg-surface-container-highest text-on-surface font-bold border border-outline-variant/15 hover:bg-surface-bright transition-colors active:scale-95">
                   <span class="material-symbols-outlined mr-2">playlist_add</span>
-                  Queue Exit Event
+                  Lưu sự kiện Ra
                 </button>
               </div>
 
               <div class="flex flex-col sm:flex-row gap-3">
                 <button id="offlineSync" class="flex-1 px-6 py-3 rounded-xl bg-tertiary/15 text-tertiary font-bold border border-tertiary/25 hover:bg-tertiary/20 transition-colors active:scale-95">
                   <span class="material-symbols-outlined mr-2">sync</span>
-                  Sync Queue (online only)
+                  Đồng bộ Hàng đợi (cần online)
                 </button>
                 <button id="offlineClear" class="flex-1 px-6 py-3 rounded-xl bg-error/10 text-error font-bold border border-error/20 hover:bg-error/15 transition-colors active:scale-95">
                   <span class="material-symbols-outlined mr-2">delete</span>
-                  Clear Queue
+                  Xóa Hàng đợi
                 </button>
               </div>
 
               <div class="text-xs text-on-surface-variant">
-                Interaction flow: Offline → queue actions → back Online → Sync Queue → events applied to local sessions/occupancy and logged.
+                Luồng hoạt động: Offline → lưu thao tác → khi Online lại → Đồng bộ → các sự kiện cập nhật phiên/chỗ trống và ghi log.
               </div>
             </div>
           </section>
@@ -488,42 +488,42 @@
         <section class="bg-surface-container-low rounded-lg p-8">
           <div class="flex items-center justify-between gap-6">
             <div>
-              <p class="text-[10px] uppercase tracking-[0.3em] text-on-surface-variant font-bold">Gate Telemetry</p>
-              <h3 class="font-headline text-2xl font-bold mt-1" id="telemetryTitle">ENTRY GATE</h3>
-              <p class="text-sm text-on-surface-variant mt-2">Real-time indicators aligned to the system state machine.</p>
+              <p class="text-[10px] uppercase tracking-[0.3em] text-on-surface-variant font-bold">Phép đo Từ xa</p>
+              <h3 class="font-headline text-2xl font-bold mt-1" id="telemetryTitle">CỔNG VÀO</h3>
+              <p class="text-sm text-on-surface-variant mt-2">Chỉ báo thời gian thực đồng bộ với trạng thái hệ thống.</p>
             </div>
             <div class="flex items-center gap-3 bg-surface-container-high px-4 py-2 rounded-full border border-outline-variant/15">
               <span id="telemetryDot" class="pulse-dot bg-primary"></span>
-              <span class="text-xs font-bold tracking-widest uppercase" id="telemetryStatus">IDLE</span>
+              <span class="text-xs font-bold tracking-widest uppercase" id="telemetryStatus">SẴN SÀNG</span>
             </div>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
             <div class="bg-surface-container-high rounded-lg p-5">
               <div class="flex items-center justify-between">
-                <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Scanner</p>
+                <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Máy quét</p>
                 <span class="material-symbols-outlined text-primary">nfc</span>
               </div>
-              <p class="font-headline text-2xl font-bold mt-3" id="telemetryScanner">READY</p>
-              <p class="text-xs text-on-surface-variant mt-1">RFID/QR validation.</p>
+              <p class="font-headline text-2xl font-bold mt-3" id="telemetryScanner">SẴN SÀNG</p>
+              <p class="text-xs text-on-surface-variant mt-1">Xác thực RFID/QR.</p>
             </div>
 
             <div class="bg-surface-container-high rounded-lg p-5">
               <div class="flex items-center justify-between">
-                <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Barrier</p>
+                <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Thanh chắn</p>
                 <span class="material-symbols-outlined text-tertiary">door_front</span>
               </div>
-              <p class="font-headline text-2xl font-bold mt-3" id="telemetryBarrier">CLOSED</p>
-              <p class="text-xs text-on-surface-variant mt-1">Actuator state.</p>
+              <p class="font-headline text-2xl font-bold mt-3" id="telemetryBarrier">ĐÓNG</p>
+              <p class="text-xs text-on-surface-variant mt-1">Trạng thái bộ truyền động.</p>
             </div>
 
             <div class="bg-surface-container-high rounded-lg p-5">
               <div class="flex items-center justify-between">
-                <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Policy</p>
+                <p class="text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-bold">Chính sách</p>
                 <span class="material-symbols-outlined text-on-surface">gpp_good</span>
               </div>
-              <p class="font-headline text-2xl font-bold mt-3" id="telemetryPolicy">ENFORCED</p>
-              <p class="text-xs text-on-surface-variant mt-1">Capacity & mismatch guards.</p>
+              <p class="font-headline text-2xl font-bold mt-3" id="telemetryPolicy">ĐÃ ÁP DỤNG</p>
+              <p class="text-xs text-on-surface-variant mt-1">Bảo vệ chỗ trống & sai lệch.</p>
             </div>
           </div>
         </section>
@@ -532,9 +532,9 @@
           <div class="flex items-center justify-between mb-6">
             <h3 class="font-headline text-xl font-bold flex items-center gap-3">
               <span class="material-symbols-outlined text-tertiary">history</span>
-              Access Event Log
+              Nhật ký Ra/Vào
             </h3>
-            <button id="clearEvents" class="text-xs font-bold tracking-widest uppercase text-[#dfe2ed]/60 hover:text-[#b3c5ff] transition-colors">Clear</button>
+            <button id="clearEvents" class="text-xs font-bold tracking-widest uppercase text-[#dfe2ed]/60 hover:text-[#b3c5ff] transition-colors">Xóa</button>
           </div>
 
           <div id="eventList" class="space-y-4"></div>
@@ -557,16 +557,7 @@
     </section>
   </main>
 
-  <footer class="w-full py-6 bg-[#0a0e15] border-t border-[#424654]/10">
-    <div class="flex flex-col md:flex-row justify-between items-center px-12 gap-4">
-      <div class="font-['Manrope'] text-[10px] uppercase tracking-[0.05em] text-[#dfe2ed]/40">© 2026 HCMUT IoT Labs. Kinetic Grid Systems.</div>
-      <div class="flex gap-8">
-        <a class="font-['Manrope'] text-[10px] uppercase tracking-[0.05em] text-[#dfe2ed]/40 hover:text-[#00dbe7] transition-colors" href="#">System Status</a>
-        <a class="font-['Manrope'] text-[10px] uppercase tracking-[0.05em] text-[#dfe2ed]/40 hover:text-[#00dbe7] transition-colors" href="#">Documentation</a>
-        <a class="font-['Manrope'] text-[10px] uppercase tracking-[0.05em] text-[#dfe2ed]/40 hover:text-[#00dbe7] transition-colors" href="#">Support</a>
-      </div>
-    </div>
-  </footer>
+  <footer id="admin-footer" class="w-full py-6 bg-surface-container-lowest border-t border-outline-variant/10"></footer>
 
   <script>
     const STORAGE = {
@@ -672,7 +663,7 @@
       state.online = isOnline;
       localStorage.setItem(STORAGE.online, isOnline ? '1' : '0');
       if (!isOnline && state.status !== STATUS.scanning) {
-        setStatus(STATUS.offline, { message: 'Connectivity lost. Switching to offline-first queueing.' });
+        setStatus(STATUS.offline, { message: 'Mất kết nối mạng. Đã chuyển sang chế độ hàng đợi offline.' });
       }
       updateOnlineUI();
       updateKpis();
@@ -697,18 +688,18 @@
       });
 
       const titleMap = {
-        [SCREENS.entry]: 'ENTRY GATE',
-        [SCREENS.exit]: 'EXIT GATE',
-        [SCREENS.temp]: 'TEMP TICKET',
-        [SCREENS.exceptions]: 'EXCEPTION HANDLING',
-        [SCREENS.offline]: 'OFFLINE MODE'
+        [SCREENS.entry]: 'CỔNG VÀO',
+        [SCREENS.exit]: 'CỔNG RA',
+        [SCREENS.temp]: 'VÉ TẠM',
+        [SCREENS.exceptions]: 'XỬ LÝ NGOẠI LỆ',
+        [SCREENS.offline]: 'CHẾ ĐỘ OFFLINE'
       };
-      document.getElementById('telemetryTitle').textContent = titleMap[screen] || 'ACCESS CONTROL';
+      document.getElementById('telemetryTitle').textContent = titleMap[screen] || 'KIỂM SOÁT RA VÀO';
 
       if (state.online) {
-        setStatus(STATUS.idle, { message: 'Ready. Select an action and start scan.' });
+        setStatus(STATUS.idle, { message: 'Sẵn sàng. Chọn một màn hình và bắt đầu quét.' });
       } else {
-        setStatus(STATUS.offline, { message: 'Offline mode active. Actions are queued locally.' });
+        setStatus(STATUS.offline, { message: 'Chế độ Offline. Các thao tác sẽ được lưu cục bộ.' });
       }
     }
 
@@ -726,11 +717,11 @@
       const telemetryStatus = document.getElementById('telemetryStatus');
 
       const cfg = {
-        [STATUS.idle]: { color: 'bg-primary', text: 'IDLE', hint: 'Awaiting operator', sub: 'No pending operations.', icon: 'qr_code_scanner' },
-        [STATUS.scanning]: { color: 'bg-primary', text: 'SCANNING', hint: 'Sensor active', sub: 'Validating credential…', icon: 'radar' },
-        [STATUS.success]: { color: 'bg-tertiary', text: 'SUCCESS', hint: 'Policy passed', sub: 'Barrier operation completed.', icon: 'check_circle' },
-        [STATUS.error]: { color: 'bg-error', text: 'ERROR', hint: 'Attention required', sub: 'Exception raised. Resolve or override.', icon: 'error' },
-        [STATUS.offline]: { color: 'bg-error', text: 'OFFLINE', hint: 'Degraded mode', sub: 'Actions are queued locally.', icon: 'cloud_off' }
+        [STATUS.idle]: { color: 'bg-primary', text: 'SẴN SÀNG', hint: 'Đang chờ', sub: 'Không có thao tác nào.', icon: 'qr_code_scanner' },
+        [STATUS.scanning]: { color: 'bg-primary', text: 'ĐANG QUÉT', hint: 'Cảm biến bật', sub: 'Đang xác thực...', icon: 'radar' },
+        [STATUS.success]: { color: 'bg-tertiary', text: 'THÀNH CÔNG', hint: 'Hợp lệ', sub: 'Đã đóng/mở thanh chắn.', icon: 'check_circle' },
+        [STATUS.error]: { color: 'bg-error', text: 'LỖI', hint: 'Cần chú ý', sub: 'Phát hiện ngoại lệ. Cần xử lý.', icon: 'error' },
+        [STATUS.offline]: { color: 'bg-error', text: 'OFFLINE', hint: 'Bị giới hạn', sub: 'Các thao tác được lưu cục bộ.', icon: 'cloud_off' }
       };
 
       const c = cfg[status] || cfg[STATUS.idle];
@@ -758,35 +749,35 @@
 
       if (!state.online) {
         scanner.textContent = 'OFFLINE';
-        barrier.textContent = 'MANUAL';
-        policy.textContent = 'DEGRADED';
+        barrier.textContent = 'THỦ CÔNG';
+        policy.textContent = 'GIẢM THIỂU';
         return;
       }
 
       if (state.status === STATUS.scanning) {
-        scanner.textContent = 'ACTIVE';
-        barrier.textContent = 'LOCKED';
-        policy.textContent = 'ENFORCED';
+        scanner.textContent = 'HOẠT ĐỘNG';
+        barrier.textContent = 'ĐANG KHÓA';
+        policy.textContent = 'ĐÃ ÁP DỤNG';
         return;
       }
 
       if (state.status === STATUS.success) {
-        scanner.textContent = 'READY';
-        barrier.textContent = 'OPENED';
-        policy.textContent = 'ENFORCED';
+        scanner.textContent = 'SẴN SÀNG';
+        barrier.textContent = 'ĐÃ MỞ';
+        policy.textContent = 'ĐÃ ÁP DỤNG';
         return;
       }
 
       if (state.status === STATUS.error) {
-        scanner.textContent = 'READY';
-        barrier.textContent = 'CLOSED';
-        policy.textContent = 'ENFORCED';
+        scanner.textContent = 'SẴN SÀNG';
+        barrier.textContent = 'ĐÓNG';
+        policy.textContent = 'ĐÃ ÁP DỤNG';
         return;
       }
 
-      scanner.textContent = 'READY';
-      barrier.textContent = 'CLOSED';
-      policy.textContent = 'ENFORCED';
+      scanner.textContent = 'SẴN SÀNG';
+      barrier.textContent = 'ĐÓNG';
+      policy.textContent = 'ĐÃ ÁP DỤNG';
     }
 
     function updateOnlineUI() {
@@ -818,7 +809,7 @@
       document.getElementById('kpiCap').textContent = String(cap);
       document.getElementById('kpiUsed').textContent = String(used);
       document.getElementById('kpiQueue').textContent = String(queue.length);
-      document.getElementById('kpiBarrier').textContent = state.status === STATUS.success ? 'OPEN' : 'READY';
+      document.getElementById('kpiBarrier').textContent = state.status === STATUS.success ? 'MỞ' : 'SẴN SÀNG';
 
       document.getElementById('offlineSync').disabled = !state.online;
       document.getElementById('offlineSync').classList.toggle('opacity-40', !state.online);
@@ -847,7 +838,7 @@
       if (events.length === 0) {
         const empty = document.createElement('div');
         empty.className = 'bg-surface-container-high rounded-lg p-6 text-sm text-on-surface-variant';
-        empty.textContent = 'No events yet. Start a scan to generate audit entries.';
+        empty.textContent = 'Chưa có sự kiện nào. Hãy bắt đầu quét để tạo nhật ký.';
         list.appendChild(empty);
         return;
       }
@@ -907,11 +898,11 @@
       if (!badge || !overlay || !plateEl) return;
 
       const map = {
-        idle: { badge: 'IDLE', badgeClass: 'bg-primary/20 text-primary', overlay: 'CAMERA READY', plate: '' },
-        scanning: { badge: 'SCANNING', badgeClass: 'bg-primary/20 text-primary', overlay: 'ANPR DETECTING…', plate: 'DETECTING…' },
-        success: { badge: 'SUCCESS', badgeClass: 'bg-tertiary/15 text-tertiary', overlay: 'PLATE LOCKED', plate: plateValue },
-        error: { badge: 'ERROR', badgeClass: 'bg-error/15 text-error', overlay: 'ANPR FAILED', plate: '' },
-        offline: { badge: 'OFFLINE', badgeClass: 'bg-error/15 text-error', overlay: 'OFFLINE MODE', plate: '' }
+        idle: { badge: 'SẴN SÀNG', badgeClass: 'bg-primary/20 text-primary', overlay: 'CAMERA ĐÃ SẴN SÀNG', plate: '' },
+        scanning: { badge: 'ĐANG QUÉT', badgeClass: 'bg-primary/20 text-primary', overlay: 'ĐANG NHẬN DIỆN...', plate: 'ĐANG NHẬN DIỆN...' },
+        success: { badge: 'THÀNH CÔNG', badgeClass: 'bg-tertiary/15 text-tertiary', overlay: 'ĐÃ KHÓA BIỂN SỐ', plate: plateValue },
+        error: { badge: 'LỖI', badgeClass: 'bg-error/15 text-error', overlay: 'NHẬN DIỆN LỖI', plate: '' },
+        offline: { badge: 'OFFLINE', badgeClass: 'bg-error/15 text-error', overlay: 'CHẾ ĐỘ OFFLINE', plate: '' }
       };
       const cfg = map[mode] || map.idle;
 
@@ -974,26 +965,26 @@
       if (!state.online) {
         setAnprUi('entry', 'offline');
         queueEvent({ type: 'ENTRY', id: card || 'UNKNOWN', plate: null, createdAt: Date.now() });
-        addEvent({ level: 'info', tag: 'OFFLINE', title: 'Entry queued', detail: `Queued entry event for ${card || 'UNKNOWN'}.` });
-        setStatus(STATUS.offline, { message: 'Offline: entry event queued locally.', sub: 'Queue will sync when online.' });
+        addEvent({ level: 'info', tag: 'OFFLINE', title: 'Lưu sự kiện vào', detail: `Đã lưu sự kiện vào cho ${card || 'KHÔNG RÕ'}.` });
+        setStatus(STATUS.offline, { message: 'Offline: thao tác vào đã lưu cục bộ.', sub: 'Hàng đợi sẽ đồng bộ khi có mạng.' });
         updateKpis();
         return;
       }
 
       if (!card) {
-        setStatus(STATUS.error, { message: 'Missing Card UID.', sub: 'Provide RFID/Card UID and retry.' });
-        addEvent({ level: 'error', tag: 'ENTRY', title: 'Scan rejected', detail: 'Card UID is required.' });
+        setStatus(STATUS.error, { message: 'Thiếu UID thẻ.', sub: 'Vui lòng nhập RFID/UID thẻ và thử lại.' });
+        addEvent({ level: 'error', tag: 'ENTRY', title: 'Từ chối quét', detail: 'Cần nhập UID thẻ.' });
         return;
       }
 
       setBusy(true);
-      setStatus(STATUS.scanning, { message: 'Scanning entry credential…', sub: 'RFID read in progress.' });
-      addEvent({ level: 'info', tag: 'ENTRY', title: 'Scanning started', detail: `Card=${card}` });
+      setStatus(STATUS.scanning, { message: 'Đang quét thẻ...', sub: 'Đang đọc RFID.' });
+      addEvent({ level: 'info', tag: 'ENTRY', title: 'Bắt đầu quét', detail: `Thẻ=${card}` });
 
       const anpr = await runAnpr('entry');
       if (!anpr.ok) {
-        setStatus(STATUS.error, { message: 'ANPR failed to detect plate.', sub: 'Retry scan or use exception handling policy.' });
-        addEvent({ level: 'error', tag: 'ENTRY', title: 'ANPR failed', detail: `Card=${card}` });
+        setStatus(STATUS.error, { message: 'ANPR không nhận diện được biển số.', sub: 'Quét lại hoặc xử lý ngoại lệ.' });
+        addEvent({ level: 'error', tag: 'ENTRY', title: 'Lỗi ANPR', detail: `Thẻ=${card}` });
         setBusy(false);
         return;
       }
@@ -1010,15 +1001,15 @@
         : sim;
 
       if (outcome === 'card_invalid') {
-        setStatus(STATUS.error, { message: 'Card invalid / not registered.', sub: 'Deny entry or issue temporary ticket.' });
-        addEvent({ level: 'error', tag: 'ENTRY', title: 'Card invalid', detail: `Card=${card}` });
+        setStatus(STATUS.error, { message: 'Thẻ không hợp lệ / Chưa đăng ký.', sub: 'Từ chối vào hoặc cấp vé tạm.' });
+        addEvent({ level: 'error', tag: 'ENTRY', title: 'Thẻ không hợp lệ', detail: `Thẻ=${card}` });
         setBusy(false);
         return;
       }
 
       if (outcome === 'full') {
-        setStatus(STATUS.error, { message: 'Parking is full.', sub: 'Capacity guard blocked entry.' });
-        addEvent({ level: 'error', tag: 'ENTRY', title: 'Capacity full', detail: `Used=${used}/${cap}` });
+        setStatus(STATUS.error, { message: 'Bãi đỗ đã đầy.', sub: 'Hệ thống chặn vào do hết chỗ.' });
+        addEvent({ level: 'error', tag: 'ENTRY', title: 'Đầy sức chứa', detail: `Sử dụng=${used}/${cap}` });
         setBusy(false);
         return;
       }
@@ -1028,8 +1019,8 @@
       saveSessions(sessions);
       saveNumber(STORAGE.used, used + 1);
 
-      setStatus(STATUS.success, { message: 'Entry granted. Barrier opened.', sub: 'Session created and occupancy incremented.', icon: 'check_circle' });
-      addEvent({ level: 'success', tag: 'ENTRY', title: 'Entry granted', detail: `Session opened for ${card}.` });
+      setStatus(STATUS.success, { message: 'Cho phép vào. Đã mở thanh chắn.', sub: 'Đã tạo phiên đỗ xe và giảm chỗ trống.', icon: 'check_circle' });
+      addEvent({ level: 'success', tag: 'ENTRY', title: 'Cho phép vào', detail: `Đã mở phiên cho ${card}.` });
 
       setBusy(false);
       updateKpis();
@@ -1045,21 +1036,21 @@
 
       if (!state.online) {
         queueEvent({ type: 'EXIT', id: id || 'UNKNOWN', pay, createdAt: Date.now() });
-        addEvent({ level: 'info', tag: 'OFFLINE', title: 'Exit queued', detail: `Queued exit event for ${id || 'UNKNOWN'}.` });
-        setStatus(STATUS.offline, { message: 'Offline: exit event queued locally.', sub: 'Barrier requires manual policy in offline mode.' });
+        addEvent({ level: 'info', tag: 'OFFLINE', title: 'Lưu sự kiện ra', detail: `Đã lưu sự kiện ra cho ${id || 'KHÔNG RÕ'}.` });
+        setStatus(STATUS.offline, { message: 'Offline: thao tác ra đã lưu cục bộ.', sub: 'Thanh chắn cần được mở thủ công ở chế độ offline.' });
         updateKpis();
         return;
       }
 
       if (!id) {
-        setStatus(STATUS.error, { message: 'Missing Ticket/Card ID.', sub: 'Provide an ID and retry.' });
-        addEvent({ level: 'error', tag: 'EXIT', title: 'Scan rejected', detail: 'Ticket/Card ID is required.' });
+        setStatus(STATUS.error, { message: 'Thiếu Mã vé/UID thẻ.', sub: 'Vui lòng nhập ID và thử lại.' });
+        addEvent({ level: 'error', tag: 'EXIT', title: 'Từ chối quét', detail: 'Cần nhập Mã vé/UID thẻ.' });
         return;
       }
 
       setBusy(true);
-      setStatus(STATUS.scanning, { message: 'Scanning exit credential…', sub: 'Looking up active session.' });
-      addEvent({ level: 'info', tag: 'EXIT', title: 'Scanning started', detail: `ID=${id}, Payment=${pay}` });
+      setStatus(STATUS.scanning, { message: 'Đang quét thẻ ra...', sub: 'Đang tra cứu phiên hoạt động.' });
+      addEvent({ level: 'info', tag: 'EXIT', title: 'Bắt đầu quét', detail: `ID=${id}, Trả bằng=${pay}` });
 
       await simulateDelay(1200);
 
@@ -1071,8 +1062,8 @@
         : sim;
 
       if (outcome === 'mismatch' || !session) {
-        setStatus(STATUS.error, { message: 'Entry/Exit mismatch.', sub: 'No active session found for provided ID.' });
-        addEvent({ level: 'error', tag: 'EXIT', title: 'Mismatch', detail: `No session found for ${id}.` });
+        setStatus(STATUS.error, { message: 'Sai lệch Vào/Ra.', sub: 'Không tìm thấy phiên hoạt động cho ID cung cấp.' });
+        addEvent({ level: 'error', tag: 'EXIT', title: 'Sai lệch', detail: `Không có phiên đỗ xe nào cho ${id}.` });
         setBusy(false);
         return;
       }
@@ -1083,8 +1074,8 @@
       document.getElementById('exitFee').textContent = formatMoneyVnd(fee);
       document.getElementById('exitFeePanel').classList.remove('hidden');
 
-      setStatus(STATUS.success, { message: 'Session verified. Awaiting payment confirmation.', sub: 'Confirm to open barrier and close session.', icon: 'payments' });
-      addEvent({ level: 'success', tag: 'EXIT', title: 'Session verified', detail: `Fee computed for ${id}: ${formatMoneyVnd(fee)}.` });
+      setStatus(STATUS.success, { message: 'Đã xác minh phiên. Chờ xác nhận thanh toán.', sub: 'Xác nhận để mở thanh chắn và đóng phiên.', icon: 'payments' });
+      addEvent({ level: 'success', tag: 'EXIT', title: 'Đã xác minh phiên', detail: `Đã tính phí cho ${id}: ${formatMoneyVnd(fee)}.` });
 
       setBusy(false);
       updateKpis();
@@ -1092,19 +1083,19 @@
 
     function confirmExitPayment() {
       if (!state.online) {
-        setStatus(STATUS.offline, { message: 'Offline: cannot finalize payment.', sub: 'Queue the action and sync when online.' });
+        setStatus(STATUS.offline, { message: 'Offline: không thể hoàn tất thanh toán.', sub: 'Vui lòng lưu thao tác ra và đồng bộ sau.' });
         return;
       }
 
       if (!state.pendingExit) {
-        setStatus(STATUS.error, { message: 'No pending exit payment.', sub: 'Run scan first.' });
+        setStatus(STATUS.error, { message: 'Không có thanh toán nào đang chờ.', sub: 'Vui lòng quét thẻ trước.' });
         return;
       }
 
       const { id, fee, pay } = state.pendingExit;
       const sessions = loadSessions();
       if (!sessions[id]) {
-        setStatus(STATUS.error, { message: 'Session missing.', sub: 'It may have been cleared already.' });
+        setStatus(STATUS.error, { message: 'Không tìm thấy phiên.', sub: 'Phiên đỗ xe có thể đã bị xóa.' });
         return;
       }
 
@@ -1117,8 +1108,8 @@
       document.getElementById('exitFeePanel').classList.add('hidden');
       state.pendingExit = null;
 
-      setStatus(STATUS.success, { message: 'Payment confirmed. Barrier opened.', sub: `Exit completed via ${pay}.` });
-      addEvent({ level: 'success', tag: 'EXIT', title: 'Exit completed', detail: `Closed session ${id}. Paid ${formatMoneyVnd(fee)} via ${pay}.` });
+      setStatus(STATUS.success, { message: 'Thanh toán thành công. Đã mở thanh chắn.', sub: `Đã hoàn tất ra cổng bằng ${pay}.` });
+      addEvent({ level: 'success', tag: 'EXIT', title: 'Đã ra cổng', detail: `Đóng phiên ${id}. Đã thu ${formatMoneyVnd(fee)} qua ${pay}.` });
       updateKpis();
     }
 
@@ -1127,14 +1118,14 @@
       const anpr = await runAnpr('temp');
       const plate = anpr.ok ? ensureId(anpr.plate) : '';
       if (!anpr.ok) {
-        addEvent({ level: 'error', tag: 'TEMP', title: 'ANPR failed', detail: `Vehicle=${vehicle} (proceeding without plate)` });
+        addEvent({ level: 'error', tag: 'TEMP', title: 'Lỗi ANPR', detail: `Xe=${vehicle} (tiếp tục mà không cần biển số)` });
       }
 
       const cap = loadNumber(STORAGE.capacity, 500);
       const used = loadNumber(STORAGE.used, 0);
       if (state.online && used >= cap) {
-        setStatus(STATUS.error, { message: 'Parking is full.', sub: 'Cannot issue ticket for entry.' });
-        addEvent({ level: 'error', tag: 'TEMP', title: 'Ticket blocked', detail: `Capacity full: ${used}/${cap}` });
+        setStatus(STATUS.error, { message: 'Bãi đỗ đã đầy.', sub: 'Không thể cấp vé vào.' });
+        addEvent({ level: 'error', tag: 'TEMP', title: 'Từ chối cấp vé', detail: `Đầy sức chứa: ${used}/${cap}` });
         return;
       }
 
@@ -1143,18 +1134,18 @@
       if (!state.online) {
         setAnprUi('temp', 'offline');
         queueEvent({ type: 'TEMP_ISSUE', id: ticketId, vehicle, plate, createdAt: Date.now() });
-        addEvent({ level: 'info', tag: 'OFFLINE', title: 'Ticket queued', detail: `Queued ticket issuance ${ticketId}.` });
-        setStatus(STATUS.offline, { message: 'Offline: temporary ticket queued locally.', sub: 'Provide printed ticket ID to customer.' });
+        addEvent({ level: 'info', tag: 'OFFLINE', title: 'Đã lưu thao tác cấp vé', detail: `Đã lưu thao tác cấp vé ${ticketId}.` });
+        setStatus(STATUS.offline, { message: 'Offline: vé tạm đã được lưu cục bộ.', sub: 'Vui lòng ghi lại ID vé cho khách.' });
         document.getElementById('tempTicketId').textContent = ticketId;
-        document.getElementById('tempIssuedAt').textContent = `Issued at (offline): ${new Date().toLocaleString('vi-VN')}`;
+        document.getElementById('tempIssuedAt').textContent = `Đã cấp lúc (offline): ${new Date().toLocaleString('vi-VN')}`;
         document.getElementById('tempResult').classList.remove('hidden');
         updateKpis();
         return;
       }
 
       setBusy(true);
-      setStatus(STATUS.scanning, { message: 'Issuing temporary ticket…', sub: 'Generating ticket & opening entry barrier.' });
-      addEvent({ level: 'info', tag: 'TEMP', title: 'Issuing ticket', detail: `Vehicle=${vehicle}${plate ? `, Plate=${plate}` : ''}` });
+      setStatus(STATUS.scanning, { message: 'Đang cấp vé tạm...', sub: 'Đang tạo vé & mở thanh chắn vào.' });
+      addEvent({ level: 'info', tag: 'TEMP', title: 'Đang cấp vé', detail: `Xe=${vehicle}${plate ? `, Biển số=${plate}` : ''}` });
 
       await simulateDelay(900);
 
@@ -1177,22 +1168,22 @@
     function simulateException() {
       const type = document.getElementById('exType').value;
       const map = {
-        card_invalid: { msg: 'Card invalid / not registered.', sub: 'Deny entry or issue temporary ticket.' },
-        full: { msg: 'Parking full.', sub: 'Capacity guard blocked entry.' },
-        mismatch: { msg: 'Entry/Exit mismatch.', sub: 'No active session found.' },
-        sensor_timeout: { msg: 'Sensor timeout.', sub: 'Retry scan or switch to manual override.' }
+        card_invalid: { msg: 'Thẻ không hợp lệ / Chưa đăng ký.', sub: 'Từ chối vào hoặc cấp vé tạm.' },
+        full: { msg: 'Bãi đỗ đã đầy.', sub: 'Hệ thống chặn vào do hết chỗ.' },
+        mismatch: { msg: 'Sai lệch Vào/Ra.', sub: 'Không tìm thấy phiên hoạt động.' },
+        sensor_timeout: { msg: 'Quá thời gian cảm biến.', sub: 'Quét lại hoặc dùng chức năng ghi đè thủ công.' }
       };
       const d = map[type] || map.sensor_timeout;
       setStatus(STATUS.error, { message: d.msg, sub: d.sub });
-      addEvent({ level: 'error', tag: 'EXCEPTION', title: 'Exception raised', detail: `${d.msg} (${type})` });
+      addEvent({ level: 'error', tag: 'EXCEPTION', title: 'Có ngoại lệ', detail: `${d.msg} (${type})` });
       updateKpis();
     }
 
     function manualOverride() {
-      addEvent({ level: 'info', tag: 'OVERRIDE', title: 'Manual override', detail: 'Operator override requested (policy-controlled).' });
+      addEvent({ level: 'info', tag: 'OVERRIDE', title: 'Ghi đè thủ công', detail: 'Yêu cầu ghi đè từ người vận hành (có kiểm soát).' });
       setStatus(state.online ? STATUS.success : STATUS.offline, {
-        message: state.online ? 'Manual override applied. Barrier opened (logged).' : 'Offline: override queued locally.',
-        sub: state.online ? 'Ensure policy compliance and audit follow-up.' : 'Sync when online to persist audit entry.',
+        message: state.online ? 'Đã ghi đè thủ công. Thanh chắn mở (có lưu nhật ký).' : 'Offline: thao tác ghi đè được lưu cục bộ.',
+        sub: state.online ? 'Hãy đảm bảo tuân thủ chính sách và báo cáo.' : 'Đồng bộ khi có mạng để lưu sự kiện.',
         icon: 'admin_panel_settings'
       });
       if (!state.online) queueEvent({ type: 'OVERRIDE', createdAt: Date.now() });
@@ -1208,19 +1199,19 @@
 
     async function syncQueue() {
       if (!state.online) {
-        setStatus(STATUS.offline, { message: 'Still offline.', sub: 'Cannot sync queue without connectivity.' });
+        setStatus(STATUS.offline, { message: 'Vẫn đang offline.', sub: 'Không thể đồng bộ hàng đợi khi mất mạng.' });
         return;
       }
 
       const queue = loadQueue();
       if (queue.length === 0) {
-        addEvent({ level: 'info', tag: 'SYNC', title: 'Queue empty', detail: 'No offline events to sync.' });
+        addEvent({ level: 'info', tag: 'SYNC', title: 'Hàng đợi trống', detail: 'Không có sự kiện offline nào để đồng bộ.' });
         return;
       }
 
       setBusy(true);
-      setStatus(STATUS.scanning, { message: 'Syncing offline queue…', sub: `Applying ${queue.length} queued events.` });
-      addEvent({ level: 'info', tag: 'SYNC', title: 'Sync started', detail: `${queue.length} events` });
+      setStatus(STATUS.scanning, { message: 'Đang đồng bộ hàng đợi offline...', sub: `Đang áp dụng ${queue.length} sự kiện trong hàng đợi.` });
+      addEvent({ level: 'info', tag: 'SYNC', title: 'Bắt đầu đồng bộ', detail: `${queue.length} sự kiện` });
 
       await simulateDelay(900);
 
@@ -1254,8 +1245,8 @@
       saveNumber(STORAGE.used, used);
       saveQueue([]);
 
-      setStatus(STATUS.success, { message: 'Sync completed.', sub: 'Offline events applied locally and logged.' });
-      addEvent({ level: 'success', tag: 'SYNC', title: 'Sync completed', detail: 'Queue flushed and state updated.' });
+      setStatus(STATUS.success, { message: 'Đồng bộ hoàn tất.', sub: 'Các sự kiện offline đã được áp dụng và lưu nhật ký.' });
+      addEvent({ level: 'success', tag: 'SYNC', title: 'Đồng bộ hoàn tất', detail: 'Đã làm sạch hàng đợi và cập nhật trạng thái.' });
 
       setBusy(false);
       updateKpis();
@@ -1263,7 +1254,7 @@
 
     function clearQueue() {
       saveQueue([]);
-      addEvent({ level: 'info', tag: 'QUEUE', title: 'Queue cleared', detail: 'Offline queue has been cleared by operator.' });
+      addEvent({ level: 'info', tag: 'QUEUE', title: 'Đã xóa hàng đợi', detail: 'Hàng đợi offline đã được người vận hành làm trống.' });
       updateKpis();
     }
 
@@ -1272,7 +1263,7 @@
       document.getElementById('entryPlate').value = '';
       document.getElementById('entrySim').value = 'auto';
       setAnprUi('entry', state.online ? 'idle' : 'offline');
-      setStatus(state.online ? STATUS.idle : STATUS.offline, { message: state.online ? 'Ready to scan credentials at selected gate.' : 'Offline mode active. Actions are queued locally.' });
+      setStatus(state.online ? STATUS.idle : STATUS.offline, { message: state.online ? 'Sẵn sàng quét thẻ tại cổng.' : 'Chế độ Offline đang bật. Các thao tác được lưu cục bộ.' });
     }
 
     function resetExit() {
@@ -1281,7 +1272,7 @@
       document.getElementById('exitSim').value = 'auto';
       document.getElementById('exitFeePanel').classList.add('hidden');
       state.pendingExit = null;
-      setStatus(state.online ? STATUS.idle : STATUS.offline, { message: state.online ? 'Ready to scan credentials at selected gate.' : 'Offline mode active. Actions are queued locally.' });
+      setStatus(state.online ? STATUS.idle : STATUS.offline, { message: state.online ? 'Sẵn sàng quét thẻ tại cổng.' : 'Chế độ Offline đang bật. Các thao tác được lưu cục bộ.' });
     }
 
     function resetTemp() {
@@ -1289,14 +1280,14 @@
       document.getElementById('tempPlate').value = '';
       document.getElementById('tempResult').classList.add('hidden');
       setAnprUi('temp', state.online ? 'idle' : 'offline');
-      setStatus(state.online ? STATUS.idle : STATUS.offline, { message: state.online ? 'Ready to scan credentials at selected gate.' : 'Offline mode active. Actions are queued locally.' });
+      setStatus(state.online ? STATUS.idle : STATUS.offline, { message: state.online ? 'Sẵn sàng quét thẻ tại cổng.' : 'Chế độ Offline đang bật. Các thao tác được lưu cục bộ.' });
     }
 
     function queueQuick(type) {
       const id = type === 'ENTRY' ? `CARD-OFF-${Math.floor(Math.random() * 9999)}` : `TMP-OFF-${Math.floor(Math.random() * 9999)}`;
       queueEvent({ type, id, createdAt: Date.now() });
-      addEvent({ level: 'info', tag: 'OFFLINE', title: `${type} queued`, detail: `Queued ${type} event (${id}).` });
-      setStatus(STATUS.offline, { message: `Queued ${type} event.`, sub: 'Sync when online to apply.' });
+      addEvent({ level: 'info', tag: 'OFFLINE', title: `Đã lưu thao tác ${type}`, detail: `Đã lưu sự kiện ${type} (${id}).` });
+      setStatus(STATUS.offline, { message: `Đã lưu sự kiện ${type}.`, sub: 'Đồng bộ khi có mạng để áp dụng.' });
     }
 
     function wireEvents() {
@@ -1343,7 +1334,7 @@
       setBusy(false);
 
       if (!state.online) {
-        setStatus(STATUS.offline, { message: 'Offline mode active. Actions are queued locally.' });
+        setStatus(STATUS.offline, { message: 'Chế độ Offline đang bật. Các thao tác được lưu cục bộ.' });
       }
     })();
   </script>
@@ -1354,6 +1345,7 @@
       const user = requireAdmin();
       if (!user) return;
       renderAdminNav('access_control');
+      if (typeof renderAdminFooter === 'function') renderAdminFooter();
     })();
   </script>
 </body>

@@ -52,9 +52,8 @@
             <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/50">search</span>
             <input class="w-full bg-surface-container-low text-on-surface placeholder:text-outline/50 border-none rounded-full py-3 pl-12 pr-6 focus:ring-2 focus:ring-primary/40 transition-all text-sm" id="searchInput" placeholder="Tìm theo MSSV, tên, email..." type="text" oninput="filterUsers()"/>
         </div>
-        <select id="roleFilter" class="bg-surface-container-low text-on-surface border-none rounded-full py-3 px-6 text-sm focus:ring-2 focus:ring-primary/40" onchange="filterUsers()">
+        <select id="roleFilter" class="bg-surface-container-low border border-outline-variant/15 rounded-xl px-4 py-3 text-sm text-on-surface focus:ring-2 focus:ring-primary/50 outline-none transition-all" onchange="filterUsers()">
             <option value="">Tất cả vai trò</option>
-            <option value="super_admin">Super Admin</option>
             <option value="admin">Admin</option>
             <option value="guard">Bảo vệ</option>
             <option value="staff">Cán bộ</option>
@@ -66,15 +65,14 @@
     <!-- User Table -->
     <section class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-2xl">
         <div class="overflow-x-auto pb-4">
-            <div class="grid grid-cols-[1fr_1.5fr_2fr_1.5fr_1fr_1fr] px-6 py-4 text-xs font-label uppercase tracking-widest text-outline min-w-[900px] gap-4">
+            <div class="grid grid-cols-[1fr_2fr_2.5fr_1.5fr_1fr] px-6 py-4 text-xs font-label uppercase tracking-widest text-outline min-w-[800px] gap-4">
             <div>ID / MSSV</div>
             <div>Họ tên</div>
             <div>Email</div>
-            <div>Phòng ban</div>
             <div>Vai trò</div>
             <div class="text-right">Thao tác</div>
             </div>
-            <div class="space-y-3 p-4 sm:p-6 min-w-[900px]" id="userTableBody">
+            <div class="space-y-3 p-4 sm:p-6 min-w-[800px]" id="userTableBody">
                 <div class="text-center text-on-surface-variant py-8">Đang tải...</div>
             </div>
         </div>
@@ -91,7 +89,6 @@
             <div>
                 <label class="block text-[10px] font-label uppercase tracking-widest text-outline mb-2">Vai trò mới</label>
                 <select id="modalRoleSelect" class="w-full bg-surface-container-highest border border-outline-variant/15 rounded-xl py-3.5 px-4 text-on-surface focus:ring-2 focus:ring-primary/50 outline-none transition-all">
-                    <option value="super_admin">Super Admin</option>
                     <option value="admin">Admin</option>
                     <option value="guard">Bảo vệ</option>
                     <option value="staff">Cán bộ / Nhân viên</option>
@@ -144,14 +141,13 @@
 
         users.forEach((u, i) => {
             const row = document.createElement('div');
-            row.className = `grid grid-cols-[1fr_1.5fr_2fr_1.5fr_1fr_1fr] items-center px-6 py-4 rounded-md hover:bg-surface-container-high transition-colors gap-4 ${i % 2 === 0 ? 'bg-surface-container-low' : 'bg-surface-container-low/50'}`;
+            row.className = `grid grid-cols-[1fr_2fr_2.5fr_1.5fr_1fr] items-center px-6 py-4 rounded-md hover:bg-surface-container-high transition-colors gap-4 ${i % 2 === 0 ? 'bg-surface-container-low' : 'bg-surface-container-low/50'}`;
             row.setAttribute('data-user-id', u.id);
 
             row.innerHTML = `
                 <div class="font-headline text-primary truncate" title="${u.username || u.id}">${u.username || u.id}</div>
                 <div class="font-body font-semibold truncate" title="${u.fullName}">${u.fullName}</div>
                 <div class="font-body text-sm text-on-surface-variant truncate" title="${u.email}">${u.email}</div>
-                <div class="font-body text-sm text-on-surface-variant truncate" title="${u.department || '—'}">${u.department || '—'}</div>
                 <div class="truncate">${getRoleBadge(u.role)}</div>
                 <div class="text-right flex items-center justify-end gap-2">
                     <button class="text-primary/60 hover:text-primary transition-all flex items-center gap-1 active:scale-95" onclick="openModal('${u.id}', '${u.fullName.replace(/'/g, "\\'")}', '${u.role}')">

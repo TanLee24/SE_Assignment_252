@@ -27,7 +27,7 @@ function requireAdmin() {
         window.location.href = '../login.html';
         return null;
     }
-    const adminRoles = ['super_admin', 'admin', 'guard'];
+    const adminRoles = ['admin', 'guard'];
     if (!adminRoles.includes(user.role)) {
         window.location.href = '../index.html';
         return null;
@@ -127,7 +127,6 @@ function getLevelIcon(level) {
 // ─── Role Helpers ────────────────────────────────────────────
 function getRoleBadge(role) {
     const map = {
-        super_admin: { cls: 'bg-[#008188]/20 text-[#00dbe7]', text: 'Super Admin' },
         admin:       { cls: 'bg-[#008188]/20 text-[#00dbe7]', text: 'Admin' },
         guard:       { cls: 'bg-[#244592] text-[#9eb6ff]', text: 'Bảo vệ' },
         staff:       { cls: 'bg-[#2f6cf0]/20 text-[#b3c5ff]', text: 'Cán bộ' },
@@ -139,7 +138,6 @@ function getRoleBadge(role) {
 
 function getRoleLabel(role) {
     const map = {
-        super_admin: 'Super Admin',
         admin: 'Admin',
         guard: 'Bảo vệ',
         staff: 'Cán bộ / Nhân viên',
@@ -241,13 +239,22 @@ function renderAdminNav(activePage) {
                 </div>
             </div>
         </div>
-    </div>
+    </div>`;
 
+    // Mobile Drawer Overlay & Drawer (appended to body to avoid z-index/height issues with fixed parent)
+    let drawerContainer = document.getElementById('mobileNavContainer');
+    if (!drawerContainer) {
+        drawerContainer = document.createElement('div');
+        drawerContainer.id = 'mobileNavContainer';
+        document.body.appendChild(drawerContainer);
+    }
+
+    drawerContainer.innerHTML = `
     <!-- Mobile Drawer Overlay -->
     <div id="mobileNavOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] hidden opacity-0 transition-opacity duration-300" onclick="closeMobileNav()"></div>
 
     <!-- Mobile Drawer -->
-    <nav id="mobileNavDrawer" class="fixed top-0 left-0 h-full w-72 bg-surface-container-lowest z-[210] transform -translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+    <nav id="mobileNavDrawer" class="fixed top-0 left-0 h-[100dvh] w-72 bg-[#0a0e15] z-[210] transform -translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
         <div class="flex items-center justify-between p-5 border-b border-outline-variant/15">
             <span class="text-lg font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-container font-headline">IoT-SPMS</span>
             <button class="p-1 text-on-surface-variant hover:text-primary active:scale-90 transition-all" onclick="closeMobileNav()">
@@ -308,7 +315,7 @@ function renderAdminFooter() {
             © 2026 HCMUT IoT Labs · Kinetic Grid Systems
         </div>
         <div class="flex gap-8">
-            <span class="font-['Manrope'] text-[10px] uppercase tracking-[0.05em] text-[#dfe2ed]/40">System Status: Operational</span>
+            <span class="font-['Manrope'] text-[10px] uppercase tracking-[0.05em] text-[#dfe2ed]/40">Trạng thái hệ thống: Hoạt động</span>
         </div>
     </div>`;
 }
