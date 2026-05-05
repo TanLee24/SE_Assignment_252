@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Điều khiển Bảng chỉ dẫn | Operator | IoT-SPMS</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: { extend: {
+                colors: {
+                    "surface": "#10131b", "on-surface": "#dfe2ed", "on-surface-variant": "#c3c6d7",
+                    "primary": "#b3c5ff", "primary-container": "#2f6cf0", "on-primary": "#002b75",
+                    "outline-variant": "#424654", "tertiary": "#00dbe7", "error": "#ffb4ab",
+                    "surface-container-low": "#181c23", "surface-container-high": "#262a32",
+                    "surface-container-highest": "#31353d",
+                },
+                fontFamily: { headline: ["Space Grotesk"], body: ["Manrope"] }
+            }}
+        }
+    </script>
+    <style>
+        body { background-color: #10131b; color: #dfe2ed; font-family: 'Manrope', sans-serif; overflow-x: hidden; }
+        .glass-card { background: rgba(49, 53, 61, 0.4); backdrop-filter: blur(20px); border: 1px solid rgba(66, 70, 84, 0.15); }
+        .led-preview { background: #000; border: 4px solid #1b2029; border-radius: 20px; padding: 2rem; min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: inset 0 0 50px rgba(0,0,0,0.9); }
+        .led-text-main { text-shadow: 0 0 10px currentColor, 0 0 20px currentColor; letter-spacing: 0.1em; }
+        .pulse-error { animation: pulse-error 2s infinite; }
+        @keyframes pulse-error { 0%, 100% { opacity: 1; text-shadow: 0 0 20px #ffb4ab; } 50% { opacity: 0.5; text-shadow: 0 0 5px #ffb4ab; } }
+    </style>
+</head>
+<body class="bg-surface">
+
+<header id="guard-nav" class="fixed top-0 w-full z-50 bg-[#10131b]/80 backdrop-blur-2xl border-b border-[#424654]/15 shadow-[0px_20px_40px_rgba(47,108,240,0.08)]"></header>
+
+<main class="pt-24 lg:pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-[1920px] mx-auto min-h-screen">
+    <header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+            <h1 class="font-headline text-3xl md:text-5xl font-bold tracking-tighter mb-2">Điều khiển <span class="text-gradient-primary">Bảng chỉ dẫn</span></h1>
+            <p class="text-on-surface-variant text-sm lg:text-base">Ghi đè thông điệp hệ thống để điều phối giao thông tại cổng và các nút giao.</p>
+        </div>
+        <div class="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-primary">
+            <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+            Signage Network: Online
+        </div>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <!-- Left: Control Interface -->
+        <div class="space-y-6">
+            <!-- Emergency Global Override -->
+            <section class="glass-card rounded-[32px] p-8 border-error/20">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="material-symbols-outlined text-error">emergency_home</span>
+                    <h2 class="font-headline text-xl font-bold text-error">Ghi đè Toàn cục (Khẩn cấp)</h2>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-xs text-on-surface-variant italic">Nội dung này sẽ hiển thị trên TẤT CẢ các bảng LED trong khuôn viên trường.</p>
+                    <input type="text" id="globalOverride" placeholder="VD: SỰ CỐ - VUI LÒNG DI CHUYỂN THEO CHỈ DẪN" class="w-full bg-error/5 border border-error/20 rounded-2xl py-4 px-6 text-sm text-error font-bold uppercase tracking-widest focus:ring-2 focus:ring-error transition-all placeholder:text-error/30" oninput="updateLivePreviews()">
+                    <div class="flex gap-2">
+                        <button onclick="document.getElementById('globalOverride').value='LỐI VÀO TẠM ĐÓNG'; updateLivePreviews()" class="px-3 py-1.5 rounded-lg bg-error/10 text-error text-[10px] font-black uppercase tracking-widest border border-error/20 hover:bg-error/20">Hết chỗ / Đóng cổng</button>
+                        <button onclick="document.getElementById('globalOverride').value='SỰ CỐ KỸ THUẬT'; updateLivePreviews()" class="px-3 py-1.5 rounded-lg bg-error/10 text-error text-[10px] font-black uppercase tracking-widest border border-error/20 hover:bg-error/20">Sự cố</button>
+                        <button onclick="document.getElementById('globalOverride').value=''; updateLivePreviews()" class="px-3 py-1.5 rounded-lg bg-surface-container-highest text-on-surface-variant text-[10px] font-black uppercase tracking-widest border border-outline-variant/20 hover:bg-surface-bright">Xóa ghi đè</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Individual Zone Signage Controls -->
+            <div id="zoneSignageControls" class="space-y-6">
+                <!-- Injected via JS -->
+                 <div class="text-center py-10 animate-pulse text-on-surface-variant text-sm">Đang tải cấu hình bảng chỉ dẫn...</div>
+            </div>
+
+            <!-- Sync Button -->
+            <button onclick="applySignageSync()" class="w-full py-5 rounded-[24px] bg-gradient-to-br from-primary-dim to-primary text-on-primary font-black text-sm uppercase tracking-[0.3em] shadow-xl shadow-primary/20 hover:scale-[1.01] active:scale-95 transition-all">
+                ĐỒNG BỘ XUỐNG CÁC THIẾT BỊ
+            </button>
+        </div>
+
+        <!-- Right: Visual Previews (The "Wall") -->
+        <div class="space-y-8">
+            <section class="glass-card rounded-[40px] p-10 min-h-screen sticky top-32">
+                <div class="flex items-center justify-between mb-10">
+                    <h2 class="font-headline text-2xl font-bold flex items-center gap-3">
+                        <span class="material-symbols-outlined text-tertiary">nest_display</span>
+                        Mô phỏng Bảng LED
+                    </h2>
+                    <span class="px-3 py-1 rounded-full bg-surface-container-highest text-[10px] font-black text-on-surface-variant uppercase tracking-widest">Live View</span>
+                </div>
+
+                <div class="space-y-10" id="previewWall">
+                    <!-- Global/Entrance Preview -->
+                    <div class="space-y-4">
+                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-outline-variant ml-4">Bảng Cổng Chính (ID: LED-G01)</p>
+                        <div class="led-preview" id="previewGlobal">
+                            <span class="text-tertiary font-headline text-xl font-black led-text-main">HỆ THỐNG ĐIỀU HƯỚNG</span>
+                            <span class="text-on-surface/40 text-sm font-mono tracking-widest" id="previewGlobalSub">—</span>
+                        </div>
+                    </div>
+
+                    <!-- Zone Previews Injected here -->
+                    <div id="zonePreviewWall" class="grid grid-cols-1 gap-8"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+
+<script src="shared.js"></script>
+<script>
+    let parkingData = null;
+    const user = requireGuard();
+
+    if (user) {
+        injectNavbar('signage');
+        initSignageControl();
+    }
+
+    async function initSignageControl() {
+        parkingData = await loadParkingStatus();
+        if (!parkingData) return;
+
+        renderControls();
+        updateLivePreviews();
+    }
+
+    function renderControls() {
+        const container = document.getElementById('zoneSignageControls');
+        container.innerHTML = '';
+
+        const zoneColors = { A: 'tertiary', B: 'primary', C: 'error' };
+
+        parkingData.zones.forEach(zone => {
+            const color = zoneColors[zone.id] || 'primary';
+            const card = document.createElement('div');
+            card.className = 'glass-card rounded-[32px] p-8 space-y-6';
+            
+            card.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <h3 class="font-headline text-xl font-bold text-${color}">Bảng chỉ dẫn ${zone.name}</h3>
+                    <div class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                        <span class="text-[10px] font-black uppercase text-on-surface-variant tracking-widest">Thiết bị Sẵn sàng</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black text-outline uppercase ml-2 tracking-widest">Chế độ</label>
+                        <select id="mode-${zone.id}" class="w-full bg-surface-container-high border-none rounded-2xl py-3 px-4 text-xs font-bold focus:ring-2 focus:ring-primary transition-all" onchange="updateLivePreviews()">
+                            <option value="AUTO">TỰ ĐỘNG (SYSTEM)</option>
+                            <option value="MANUAL">THỦ CÔNG (OVERRIDE)</option>
+                        </select>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black text-outline uppercase ml-2 tracking-widest">Thông điệp</label>
+                        <select id="preset-${zone.id}" class="w-full bg-surface-container-high border-none rounded-2xl py-3 px-4 text-xs font-bold focus:ring-2 focus:ring-primary transition-all" onchange="updateLivePreviews()">
+                            <option value="DEFAULT">HIỂN THỊ CHỖ TRỐNG</option>
+                            <option value="FULL">THÔNG BÁO HẾT CHỖ</option>
+                            <option value="MAINTENANCE">ĐANG BẢO TRÌ</option>
+                            <option value="CUSTOM">VĂN BẢN TỰ CHỌN...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="custom-container-${zone.id}" class="hidden">
+                    <label class="text-[10px] font-black text-outline uppercase ml-2 tracking-widest mb-2 block">Văn bản tùy chỉnh</label>
+                    <input type="text" id="custom-${zone.id}" placeholder="VD: ƯU TIÊN GIẢNG VIÊN" class="w-full bg-surface-container-high border-none rounded-2xl py-4 px-6 text-sm font-mono text-primary uppercase tracking-widest focus:ring-2 focus:ring-primary transition-all" oninput="updateLivePreviews()">
+                </div>
+            `;
+            container.appendChild(card);
+        });
+
+        // Initialize Previews in the wall
+        const wall = document.getElementById('zonePreviewWall');
+        wall.innerHTML = '';
+        parkingData.zones.forEach(zone => {
+            const div = document.createElement('div');
+            div.className = 'space-y-4';
+            div.innerHTML = `
+                <p class="text-[10px] font-black uppercase tracking-[0.2em] text-outline-variant ml-4">Bảng ${zone.name} (ID: LED-${zone.id}01)</p>
+                <div class="led-preview" id="preview-${zone.id}"></div>
+            `;
+            wall.appendChild(div);
+        });
+    }
+
+    function updateLivePreviews() {
+        if (!parkingData) return;
+
+        const globalOverride = document.getElementById('globalOverride').value;
+        const glbPreview = document.getElementById('previewGlobal');
+        const glbSub = document.getElementById('previewGlobalSub');
+
+        // Global/Entrance Preview Logic
+        if (globalOverride) {
+            glbPreview.innerHTML = `<span class="text-error font-headline text-2xl font-black led-text-main pulse-error">${globalOverride.toUpperCase()}</span>`;
+            glbSub.textContent = "EMERGENCY OVERRIDE ACTIVE";
+        } else {
+            const totalAvail = parkingData.zones.reduce((sum, z) => sum + z.available, 0);
+            glbPreview.innerHTML = `
+                <span class="text-tertiary font-headline text-xl font-black led-text-main">HỆ THỐNG ĐIỀU HƯỚNG</span>
+                <span class="text-on-surface/40 text-sm font-mono tracking-widest">CÒN ${totalAvail} CHỖ TRỐNG</span>
+            `;
+            glbSub.textContent = "SYNCED WITH IOT SENSORS";
+        }
+
+        // Zone Previews Logic
+        const zoneColors = { A: '#00dbe7', B: '#b3c5ff', C: '#ffb4ab' };
+
+        parkingData.zones.forEach(zone => {
+            const mode = document.getElementById(`mode-${zone.id}`).value;
+            const preset = document.getElementById(`preset-${zone.id}`).value;
+            const customInput = document.getElementById(`custom-${zone.id}`);
+            const customContainer = document.getElementById(`custom-container-${zone.id}`);
+            const previewEl = document.getElementById(`preview-${zone.id}`);
+            const color = zoneColors[zone.id] || '#b3c5ff';
+
+            if (preset === 'CUSTOM') customContainer.classList.remove('hidden');
+            else customContainer.classList.add('hidden');
+
+            if (globalOverride) {
+                previewEl.innerHTML = `<span class="text-error font-headline text-xl font-black led-text-main pulse-error">${globalOverride.toUpperCase()}</span>`;
+                return;
+            }
+
+            if (mode === 'AUTO') {
+                previewEl.innerHTML = `
+                    <span style="color: ${color}; font-family: 'Space Grotesk'; font-weight: 900; font-size: 1.25rem; letter-spacing: 0.1em;">${zone.name.toUpperCase()}</span>
+                    <span class="text-6xl font-headline font-black text-on-surface">${zone.available}</span>
+                    <span class="text-[10px] text-on-surface-variant font-black uppercase tracking-[0.3em]">CHỖ TRỐNG</span>
+                `;
+            } else {
+                let msg = '';
+                let textColor = color;
+                switch(preset) {
+                    case 'FULL': msg = 'KHU VỰC ĐÃ ĐẦY'; textColor = '#ffb4ab'; break;
+                    case 'MAINTENANCE': msg = 'ĐANG BẢO TRÌ'; textColor = '#8d90a0'; break;
+                    case 'CUSTOM': msg = customInput.value || 'NO TEXT'; break;
+                    default: msg = `AVAILABLE: ${zone.available}`;
+                }
+                previewEl.innerHTML = `<span style="color: ${textColor}; font-family: 'Space Grotesk'; font-weight: 900; font-size: 1.5rem; text-align: center;" class="led-text-main italic">${msg.toUpperCase()}</span>`;
+            }
+        });
+    }
+
+    function applySignageSync() {
+        const globalOverride = document.getElementById('globalOverride').value;
+        const config = {
+            timestamp: new Date().toISOString(),
+            operator: user.username,
+            globalOverride: globalOverride,
+            zones: parkingData.zones.map(z => ({
+                id: z.id,
+                mode: document.getElementById(`mode-${z.id}`).value,
+                preset: document.getElementById(`preset-${z.id}`).value,
+                custom: document.getElementById(`custom-${z.id}`).value
+            }))
+        };
+
+        localStorage.setItem('spms_signage_config', JSON.stringify(config));
+        alert('Đã đẩy cấu hình bảng chỉ dẫn thành công. Các thiết bị LED đang cập nhật...');
+    }
+</script>
+</body>
+</html>
