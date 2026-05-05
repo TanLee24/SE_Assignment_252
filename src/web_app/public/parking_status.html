@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Trạng thái bãi đỗ xe | IoT-SPMS</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: { extend: {
+                colors: {
+                    "surface": "#0a0e15", "surface-dim": "#0a0e15", "surface-container-lowest": "#000000",
+                    "surface-container-low": "#0f131b", "surface-container": "#151a22",
+                    "surface-container-high": "#1b2029", "surface-container-highest": "#202630",
+                    "on-surface": "#f1f3fe", "on-surface-variant": "#a8abb5",
+                    "primary": "#8eabff", "primary-container": "#799dff", "primary-dim": "#2f6cf0",
+                    "on-primary": "#002971", "tertiary": "#e5eeff", "error": "#ff716c",
+                    "background": "#0a0e15",
+                },
+                fontFamily: { headline: ["Space Grotesk"], body: ["Manrope"] }
+            }}
+        }
+    </script>
+    <style>
+        body { background-color: #0a0e15; color: #f1f3fe; font-family: 'Manrope', sans-serif; }
+        .glass { background: rgba(32, 38, 48, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(68, 72, 80, 0.2); }
+        .glow-blue { text-shadow: 0 0 20px rgba(47, 108, 240, 0.6); }
+        .pulse { animation: pulse 2s infinite; } @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+
+<nav class="fixed top-0 w-full z-50 bg-[#0a0e15]/60 backdrop-blur-xl border-b border-[#444850]/15 flex justify-between items-center px-8 h-20">
+    <a href="index.html" class="text-2xl font-bold bg-gradient-to-br from-[#2f6cf0] to-[#8eabff] bg-clip-text text-transparent font-headline tracking-tight">
+        IoT-SPMS
+    </a>
+    <div class="flex items-center gap-6">
+        <a href="login.html" class="bg-gradient-to-br from-[#2f6cf0] to-[#8eabff] text-on-primary px-6 py-2 rounded-full font-bold text-sm">Đăng nhập</a>
+    </div>
+</nav>
+
+<main class="pt-32 pb-20 px-8 max-w-7xl mx-auto">
+    <header class="mb-16 text-center">
+        <h1 class="text-5xl font-headline font-bold mb-4 tracking-tight">Trạng thái bãi đỗ xe <span class="text-primary-dim italic">Thời gian thực</span></h1>
+        <p class="text-on-surface-variant text-lg">Hệ thống giám sát occupancy qua mạng lưới cảm biến IoT.</p>
+        <div class="mt-6 flex justify-center items-center gap-3 text-xs font-bold uppercase tracking-widest">
+            <span class="flex items-center gap-1.5 text-primary"><span class="w-2 h-2 bg-primary rounded-full pulse"></span> Live System</span>
+            <span class="text-outline">/</span>
+            <span id="lastUpdate" class="text-on-surface-variant">Cập nhật: ...</span>
+        </div>
+    </header>
+
+    <!-- Zone Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <!-- Card Template -->
+        <div id="zoneCardsContainer" class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Loading -->
+            <div class="glass p-10 rounded-[40px] animate-pulse h-64"></div>
+            <div class="glass p-10 rounded-[40px] animate-pulse h-64"></div>
+            <div class="glass p-10 rounded-[40px] animate-pulse h-64"></div>
+        </div>
+    </div>
+
+    <!-- Map Mini View -->
+    <section class="glass rounded-[40px] p-12 overflow-hidden relative min-h-[500px] flex items-center justify-center">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-dim/5 to-transparent"></div>
+        <div class="relative z-10 text-center">
+            <div class="w-20 h-20 rounded-2xl bg-primary-dim/20 flex items-center justify-center mx-auto mb-8 border border-primary-dim/30">
+                <span class="material-symbols-outlined text-4xl text-primary-dim">map</span>
+            </div>
+            <h3 class="text-3xl font-headline font-bold mb-4">Sơ đồ Campus</h3>
+            <p class="text-on-surface-variant mb-10 max-w-md mx-auto">Vui lòng sử dụng hệ thống điều hướng tại các nút giao để được hướng dẫn chi tiết nhất.</p>
+            <a href="dynamic_guidance/launcher.html" class="px-10 py-4 rounded-full border border-primary text-primary font-bold hover:bg-primary hover:text-on-primary transition-all uppercase tracking-widest text-xs">Mở hệ thống điều hướng</a>
+        </div>
+    </section>
+</main>
+
+<script>
+    async function fetchStatus() {
+        try {
+            const res = await fetch('../data/dynamic_guidance/parking_status.json');
+            const data = await res.json();
+            renderStatus(data);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    function renderStatus(data) {
+        document.getElementById('lastUpdate').textContent = `Cập nhật: ${new Date(data.timestamp).toLocaleTimeString('vi-VN')}`;
+        
+        const container = document.getElementById('zoneCardsContainer');
+        container.innerHTML = '';
+
+        data.zones.forEach(z => {
+            const percentage = Math.round((z.available / z.total) * 100);
+            const isFull = z.available === 0;
+            const isLow = z.available < (z.total * 0.1) && !isFull;
+
+            const card = document.createElement('div');
+            card.className = `glass p-10 rounded-[40px] flex flex-col justify-between transition-all hover:scale-[1.02] border-l-8 ${isFull ? 'border-l-error' : isLow ? 'border-l-yellow-400' : 'border-l-primary'}`;
+            
+            card.innerHTML = `
+                <div>
+                    <span class="text-on-surface-variant text-xs font-black uppercase tracking-widest block mb-2">KHU VỰC</span>
+                    <h2 class="text-6xl font-headline font-bold mb-6">${z.id}</h2>
+                    <div class="space-y-1">
+                        <div class="text-sm font-bold">${z.name}</div>
+                        <div class="text-xs text-on-surface-variant uppercase tracking-widest">${z.total} chỗ tổng cộng</div>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <div class="flex justify-between items-end mb-2">
+                        <div class="text-4xl font-headline font-bold ${isFull ? 'text-error' : 'text-primary'}">${z.available}</div>
+                        <div class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Chỗ trống</div>
+                    </div>
+                    <div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+                        <div class="h-full ${isFull ? 'bg-error' : isLow ? 'bg-yellow-400' : 'bg-primary'}" style="width: ${percentage}%"></div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    fetchStatus();
+    setInterval(fetchStatus, 30000);
+</script>
+</body>
+</html>
