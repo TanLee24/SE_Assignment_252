@@ -175,11 +175,12 @@
             if (raw) {
                 try {
                     const user = JSON.parse(raw);
-                    const adminRoles = ['admin', 'guard'];
-                    if (adminRoles.includes(user.role)) {
+                    if (user.role === 'admin') {
                         window.location.href = 'admin/admin_dashboard.html';
+                    } else if (user.role === 'guard') {
+                        window.location.href = 'guard/dashboard.html';
                     } else {
-                        window.location.href = 'index.html';
+                        window.location.href = 'user/dashboard.html';
                     }
                 } catch {}
             }
@@ -251,11 +252,12 @@
                 await new Promise(r => setTimeout(r, 500));
 
                 // Redirect based on role
-                const adminRoles = ['admin', 'guard'];
-                if (adminRoles.includes(user.role)) {
+                if (user.role === 'admin') {
                     window.location.href = 'admin/admin_dashboard.html';
+                } else if (user.role === 'guard') {
+                    window.location.href = 'guard/dashboard.html';
                 } else {
-                    window.location.href = 'index.html';
+                    window.location.href = 'user/dashboard.html';
                 }
 
             } catch (err) {

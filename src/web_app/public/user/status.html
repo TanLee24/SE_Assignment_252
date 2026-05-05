@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Trạng thái bãi đỗ | IoT-SPMS</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: { extend: {
+                colors: {
+                    "surface": "#10131b", "surface-dim": "#10131b", "surface-container-lowest": "#0a0e15",
+                    "surface-container-low": "#181c23", "surface-container": "#1c2027",
+                    "surface-container-high": "#262a32", "surface-container-highest": "#31353d",
+                    "surface-variant": "#31353d", "surface-bright": "#353941",
+                    "on-surface": "#dfe2ed", "on-surface-variant": "#c3c6d7",
+                    "primary": "#b3c5ff", "primary-container": "#2f6cf0", "primary-dim": "#2f6cf0",
+                    "on-primary": "#002b75", "on-primary-container": "#fffcff",
+                    "outline-variant": "#424654", "outline": "#8d90a0",
+                    "tertiary": "#00dbe7", "tertiary-container": "#008188",
+                    "error": "#ffb4ab", "error-container": "#93000a",
+                    "secondary": "#b3c5ff", "secondary-container": "#244592",
+                    "background": "#10131b",
+                },
+                fontFamily: { headline: ["Space Grotesk"], body: ["Manrope"], label: ["Manrope"] }
+            }}
+        }
+    </script>
+    <style>
+        body { background-color: #10131b; color: #dfe2ed; font-family: 'Manrope', sans-serif; overflow-x: hidden; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(49, 53, 61, 0.4); backdrop-filter: blur(20px); border: 1px solid rgba(66, 70, 84, 0.15); }
+        .pulse { animation: pulse 2s infinite; } @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    </style>
+</head>
+<body class="bg-surface selection:bg-primary-container selection:text-on-primary-container">
+
+<header id="user-nav" class="fixed top-0 w-full z-50 bg-[#10131b]/80 backdrop-blur-2xl border-b border-[#424654]/15 shadow-[0px_20px_40px_rgba(47,108,240,0.08)]"></header>
+
+<main class="pt-24 lg:pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto min-h-screen">
+    <header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+            <h1 class="font-headline text-3xl sm:text-5xl font-bold tracking-tighter mb-2">Trạng thái bãi đỗ</h1>
+            <p class="text-on-surface-variant text-sm lg:text-base">Theo dõi occupancy thời gian thực từ mạng lưới cảm biến IoT Campus.</p>
+        </div>
+        <div class="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-primary">
+            <span class="w-2 h-2 bg-primary rounded-full pulse"></span>
+            Hệ thống đang hoạt động
+        </div>
+    </header>
+
+    <!-- Zone Grid -->
+    <div id="zoneCardsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <!-- Loading states -->
+        <div class="glass-card p-10 rounded-[32px] animate-pulse h-64"></div>
+        <div class="glass-card p-10 rounded-[32px] animate-pulse h-64"></div>
+        <div class="glass-card p-10 rounded-[32px] animate-pulse h-64"></div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="glass-card p-8 rounded-[32px]">
+            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">info</span>
+                Ghi chú trạng thái
+            </h3>
+            <div class="space-y-4 text-sm text-on-surface-variant">
+                <div class="flex gap-4">
+                    <div class="w-1 h-auto bg-primary rounded-full"></div>
+                    <p><strong class="text-on-surface">Available:</strong> Khu vực còn nhiều chỗ trống. Bạn có thể di chuyển tới đây.</p>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-1 h-auto bg-yellow-400 rounded-full"></div>
+                    <p><strong class="text-on-surface">Nearly Full:</strong> Khu vực sắp hết chỗ. Ưu tiên các xe đã có lịch hẹn hoặc thẻ thành viên.</p>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-1 h-auto bg-error rounded-full"></div>
+                    <p><strong class="text-on-surface">Full:</strong> Khu vực đã hết chỗ. Vui lòng di chuyển tới các khu vực lân cận theo hướng dẫn của bảo vệ.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card p-8 rounded-[32px] bg-gradient-to-br from-primary-container/10 to-transparent">
+            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">navigation</span>
+                Điều hướng nhanh
+            </h3>
+            <p class="text-sm text-on-surface-variant mb-6">Bạn đang tìm kiếm vị trí đỗ xe cụ thể? Sử dụng hệ thống launcher để xem sơ đồ chi tiết các nút giao.</p>
+            <a href="../dynamic_guidance/launcher.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-surface-container-highest border border-outline-variant/30 text-xs font-bold uppercase tracking-widest hover:bg-surface-bright transition-all">
+                MỞ BẢN ĐỒ ĐIỀU HƯỚNG
+                <span class="material-symbols-outlined text-sm">open_in_new</span>
+            </a>
+        </div>
+    </div>
+</main>
+
+<script src="shared.js"></script>
+<script>
+    const user = requireUser();
+    if (user) {
+        injectNavbar('status');
+        fetchStatus();
+        setInterval(fetchStatus, 30000);
+    }
+
+    async function fetchStatus() {
+        try {
+            const data = await loadParkingStatus();
+            if (data) renderStatus(data);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    function renderStatus(data) {
+        const container = document.getElementById('zoneCardsContainer');
+        container.innerHTML = '';
+
+        data.zones.forEach(z => {
+            const percentage = Math.round((z.available / z.total) * 100);
+            const isFull = z.available === 0;
+            const isLow = z.available < (z.total * 0.1) && !isFull;
+
+            const card = document.createElement('div');
+            card.className = `glass-card p-10 rounded-[32px] flex flex-col justify-between transition-all hover:scale-[1.02] border-l-4 ${isFull ? 'border-l-error' : isLow ? 'border-l-yellow-400' : 'border-l-primary'}`;
+            
+            card.innerHTML = `
+                <div>
+                    <span class="text-on-surface-variant text-[10px] font-black uppercase tracking-[0.2em] block mb-2">KHU VỰC</span>
+                    <h2 class="text-5xl font-headline font-bold mb-6">${z.id}</h2>
+                    <div class="space-y-1">
+                        <div class="text-sm font-bold text-on-surface">${z.name}</div>
+                        <div class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">${z.total} CHỖ TỔNG CỘNG</div>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <div class="flex justify-between items-end mb-3">
+                        <div class="text-4xl font-headline font-bold ${isFull ? 'text-error' : 'text-primary'}">${z.available}</div>
+                        <div class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant mb-1">CHỖ TRỐNG</div>
+                    </div>
+                    <div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+                        <div class="h-full ${isFull ? 'bg-error' : isLow ? 'bg-yellow-400' : 'bg-primary'} transition-all duration-1000" style="width: ${percentage}%"></div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+</script>
+</body>
+</html>
