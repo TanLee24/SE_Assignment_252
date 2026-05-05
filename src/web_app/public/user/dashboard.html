@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>User Dashboard | IoT-SPMS</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: { extend: {
+                colors: {
+                    "surface": "#10131b", "surface-dim": "#10131b", "surface-container-lowest": "#0a0e15",
+                    "surface-container-low": "#181c23", "surface-container": "#1c2027",
+                    "surface-container-high": "#262a32", "surface-container-highest": "#31353d",
+                    "surface-variant": "#31353d", "surface-bright": "#353941",
+                    "on-surface": "#dfe2ed", "on-surface-variant": "#c3c6d7",
+                    "primary": "#b3c5ff", "primary-container": "#2f6cf0", "primary-dim": "#2f6cf0",
+                    "on-primary": "#002b75", "on-primary-container": "#fffcff",
+                    "outline-variant": "#424654", "outline": "#8d90a0",
+                    "tertiary": "#00dbe7", "tertiary-container": "#008188",
+                    "error": "#ffb4ab", "error-container": "#93000a",
+                    "secondary": "#b3c5ff", "secondary-container": "#244592",
+                    "background": "#10131b",
+                },
+                fontFamily: { headline: ["Space Grotesk"], body: ["Manrope"], label: ["Manrope"] }
+            }}
+        }
+    </script>
+    <style>
+        body { background-color: #10131b; color: #dfe2ed; font-family: 'Manrope', sans-serif; overflow-x: hidden; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(49, 53, 61, 0.4); backdrop-filter: blur(20px); border: 1px solid rgba(66, 70, 84, 0.15); }
+        .text-gradient-primary { background: linear-gradient(135deg, #b3c5ff 0%, #2f6cf0 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(47, 108, 240, 0.3); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(47, 108, 240, 0.5); }
+    </style>
+</head>
+<body class="bg-surface selection:bg-primary-container selection:text-on-primary-container">
+
+<header id="user-nav" class="fixed top-0 w-full z-50 bg-[#10131b]/80 backdrop-blur-2xl border-b border-[#424654]/15 shadow-[0px_20px_40px_rgba(47,108,240,0.08)]"></header>
+
+<main class="pt-24 lg:pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto min-h-screen">
+    <!-- Welcome -->
+    <section class="mb-10">
+        <h1 class="font-headline text-3xl sm:text-5xl font-bold tracking-tighter mb-2">Xin chào, <span class="text-gradient-primary" id="userNameDisplay">...</span></h1>
+        <p class="text-on-surface-variant text-sm lg:text-base">Xem lại lịch sử đỗ xe và quản lý tài khoản của bạn.</p>
+    </section>
+
+    <!-- KPI Summary -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="glass-card p-6 rounded-2xl flex items-center gap-5">
+            <div class="h-14 w-14 rounded-full bg-primary-container/20 flex items-center justify-center text-primary border border-primary/20">
+                <span class="material-symbols-outlined text-3xl">history</span>
+            </div>
+            <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">Tháng này</p>
+                <div class="text-3xl font-headline font-bold" id="statMonthlySessions">0</div>
+                <p class="text-[10px] text-on-surface-variant mt-1">Lượt đỗ xe</p>
+            </div>
+        </div>
+        <div class="glass-card p-6 rounded-2xl flex items-center gap-5">
+            <div class="h-14 w-14 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary border border-tertiary/20">
+                <span class="material-symbols-outlined text-3xl">payments</span>
+            </div>
+            <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">Phí gửi xe tháng này</p>
+                <div class="text-3xl font-headline font-bold text-tertiary" id="statUnpaidBalance">0 đ</div>
+                <p class="text-[10px] text-on-surface-variant mt-1">Cần thanh toán</p>
+            </div>
+        </div>
+        <div class="glass-card p-6 rounded-2xl flex items-center gap-5">
+            <div class="h-14 w-14 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface border border-outline-variant/30">
+                <span class="material-symbols-outlined text-3xl">directions_car</span>
+            </div>
+            <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">Trạng thái hiện tại</p>
+                <div class="text-xl font-bold" id="statCurrentStatus">Đang trống</div>
+                <p class="text-[10px] text-on-surface-variant mt-1" id="statCurrentDetail">—</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed History Table (Primary Focus) -->
+    <div class="w-full">
+        <div class="glass-card rounded-2xl overflow-hidden flex flex-col max-h-[700px]">
+            <div class="p-6 border-b border-outline-variant/15 flex items-center justify-between shrink-0">
+                <h3 class="text-xl font-headline font-bold">Lịch sử đỗ xe toàn bộ</h3>
+                <div class="flex items-center gap-4">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span> Đồng bộ thời gian thực
+                    </span>
+                </div>
+            </div>
+            <div class="overflow-x-auto flex-1 custom-scrollbar overflow-y-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-surface-container-low text-[10px] text-on-surface-variant uppercase tracking-widest font-black sticky top-0 z-10">
+                        <tr>
+                            <th class="px-6 py-4">Ngày</th>
+                            <th class="px-6 py-4">Thời gian</th>
+                            <th class="px-6 py-4">Vị trí</th>
+                            <th class="px-6 py-4">Biển số</th>
+                            <th class="px-6 py-4 text-right">Phí</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody" class="text-sm divide-y divide-outline-variant/10">
+                        <!-- Rows will be injected -->
+                    </tbody>
+                </table>
+                <div id="historyEmpty" class="hidden p-20 text-center text-on-surface-variant">
+                    <span class="material-symbols-outlined text-6xl opacity-20 mb-4 block">history_toggle_off</span>
+                    Chưa có lịch sử đỗ xe nào được ghi nhận.
+                </div>
+            </div>
+            <div class="p-4 border-t border-outline-variant/10 bg-surface-container-low/30 text-center shrink-0">
+                <p class="text-[10px] text-on-surface-variant uppercase tracking-[0.2em] font-bold">Cuộn để xem thêm dữ liệu lịch sử</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="shared.js"></script>
+<script>
+    const user = requireUser();
+    if (user) {
+        document.getElementById('userNameDisplay').textContent = user.fullName;
+        injectNavbar('dashboard');
+        loadDashboardData();
+    }
+
+    async function loadDashboardData() {
+        const sessions = await loadSessions();
+        
+        // Filter user sessions
+        const userSessions = sessions.filter(s => s.cardId === user.cardId);
+        const sortedSessions = userSessions.sort((a, b) => new Date(b.entryTime) - new Date(a.entryTime));
+        
+        // Stats
+        const currentMonth = new Date().getMonth();
+        const thisMonthSessions = userSessions.filter(s => new Date(s.entryTime).getMonth() === currentMonth);
+        document.getElementById('statMonthlySessions').textContent = thisMonthSessions.length;
+
+        // Active Session Status
+        const activeSession = userSessions.find(s => s.status === 'active');
+        const statStatus = document.getElementById('statCurrentStatus');
+        const statDetail = document.getElementById('statCurrentDetail');
+
+        if (activeSession) {
+            statStatus.textContent = 'Đang đỗ';
+            statStatus.classList.add('text-primary');
+            statDetail.textContent = `Ô ${activeSession.spotId} (${activeSession.zone})`;
+        } else {
+            statStatus.textContent = 'Đang trống';
+            statDetail.textContent = 'Chưa ghi nhận xe';
+        }
+
+        // Full History Table
+        const tableBody = document.getElementById('historyTableBody');
+        const historyEmpty = document.getElementById('historyEmpty');
+        
+        const completedSessions = sortedSessions.filter(s => s.status !== 'active');
+        
+        if (completedSessions.length > 0) {
+            tableBody.innerHTML = '';
+            completedSessions.forEach(s => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-white/5 transition-all';
+                row.innerHTML = `
+                    <td class="px-6 py-4 font-bold">${formatDate(s.entryTime)}</td>
+                    <td class="px-6 py-4 text-on-surface-variant">${formatTime(s.entryTime)} - ${formatTime(s.exitTime)}</td>
+                    <td class="px-6 py-4"><span class="px-2 py-0.5 rounded bg-surface-container-highest text-[10px] font-bold">Khu ${s.zone} - ${s.spotId}</span></td>
+                    <td class="px-6 py-4 font-mono text-xs">${s.plateNumber}</td>
+                    <td class="px-6 py-4 text-tertiary font-bold text-right">${formatVND(s.feeVnd)}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+            historyEmpty.classList.add('hidden');
+        } else {
+            historyEmpty.classList.remove('hidden');
+        }
+
+        // Unpaid Balance calculation
+        const allInvoices = JSON.parse(localStorage.getItem('spms_invoices_v1') || '[]');
+        const userInvoices = allInvoices.filter(inv => inv.cardId === user.cardId);
+        const unpaidInv = userInvoices.find(inv => inv.status === 'UNPAID');
+        
+        document.getElementById('statUnpaidBalance').textContent = unpaidInv ? formatVND(unpaidInv.amount) : '0 đ';
+    }
+</script>
+</body>
+</html>
