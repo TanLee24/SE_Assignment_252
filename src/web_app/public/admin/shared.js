@@ -27,9 +27,13 @@ function requireAdmin() {
         window.location.href = '../login.html';
         return null;
     }
-    const adminRoles = ['admin', 'guard'];
-    if (!adminRoles.includes(user.role)) {
-        window.location.href = '../index.html';
+    // Only 'admin' allowed here. 'guard' has its own dashboard now.
+    if (user.role !== 'admin') {
+        if (user.role === 'guard') {
+            window.location.href = '../guard/dashboard.html';
+        } else {
+            window.location.href = '../user/dashboard.html';
+        }
         return null;
     }
     return user;
