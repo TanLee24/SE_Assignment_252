@@ -28,14 +28,12 @@
         };
 
         const icon = btn.querySelector('[data-theme-icon]');
-        const label = btn.querySelector('[data-theme-label]');
 
         if (icon) icon.textContent = iconMap[mode] || iconMap.system;
-        if (label) label.textContent = `Theme: ${modeLabel}`;
 
         btn.setAttribute('data-mode', mode);
-        btn.setAttribute('title', `Theme: ${modeLabel} (current ${resolved})`);
-        btn.setAttribute('aria-label', `Theme: ${modeLabel}`);
+        btn.setAttribute('title', `Theme ${modeLabel} (current ${resolved})`);
+        btn.setAttribute('aria-label', `Theme ${modeLabel}`);
     }
 
     function applyTheme(mode) {
@@ -72,7 +70,6 @@
         btn.className = 'spms-theme-toggle';
         btn.innerHTML = `
             <span class="material-symbols-outlined" data-theme-icon aria-hidden="true">desktop_windows</span>
-            <span data-theme-label>Theme: System</span>
         `;
 
         btn.addEventListener('click', () => {

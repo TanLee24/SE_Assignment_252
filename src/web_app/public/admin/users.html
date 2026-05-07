@@ -118,15 +118,19 @@
         renderAdminNav('users');
         renderAdminFooter();
 
-        // Load users
+        // Load users from main users data store
         allUsers = await loadUsers() || [];
 
-        // Merge any local role overrides
+        // One-time migration from legacy overrides into main users DB
         const overrides = JSON.parse(localStorage.getItem('spms_role_overrides') || '{}');
-        allUsers = allUsers.map(u => ({
-            ...u,
-            role: overrides[u.id] || u.role,
-        }));
+        if (overrides && typeof overrides === 'object' && Object.keys(overrides).length > 0) {
+            allUsers = allUsers.map(u => ({
+                ...u,
+                role: overrides[u.id] || u.role,
+            }));
+            await saveUsers(allUsers);
+            localStorage.removeItem('spms_role_overrides');
+        }
 
         renderTable(allUsers);
     })();
@@ -186,18 +190,16 @@
         document.getElementById('roleModal').classList.add('hidden');
     }
 
-    function saveRole() {
+    async function saveRole() {
         const userId = document.getElementById('modalUserId').value;
         const newRole = document.getElementById('modalRoleSelect').value;
-
-        // Update local overrides
-        const overrides = JSON.parse(localStorage.getItem('spms_role_overrides') || '{}');
-        overrides[userId] = newRole;
-        localStorage.setItem('spms_role_overrides', JSON.stringify(overrides));
 
         // Update in-memory
         const user = allUsers.find(u => u.id === userId);
         if (user) user.role = newRole;
+
+        // Persist into main users data store
+        await saveUsers(allUsers);
 
         renderTable(allUsers);
         closeModal();
