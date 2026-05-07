@@ -1,0 +1,57 @@
+﻿:root {
+    color-scheme: dark;
+}
+
+.spms-theme-toggle {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    background: rgba(16, 19, 27, 0.78);
+    color: #f1f3fe;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
+    transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.spms-theme-toggle:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.32);
+}
+
+.spms-theme-toggle:active {
+    transform: scale(0.97);
+}
+
+.spms-theme-toggle .material-symbols-outlined {
+    font-size: 1.15rem;
+}
+
+:root.theme-light {
+    color-scheme: light;
+    filter: invert(1) hue-rotate(180deg);
+}
+
+:root.theme-light img,
+:root.theme-light video,
+:root.theme-light iframe,
+:root.theme-light [data-no-theme-invert='true'] {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+:root.theme-light .spms-theme-toggle {
+    filter: invert(1) hue-rotate(180deg);
+    border-color: rgba(15, 23, 42, 0.2);
+    background: rgba(246, 248, 252, 0.9);
+    color: #0f172a;
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.14);
+}

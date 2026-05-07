@@ -6,6 +6,7 @@
 
 // ─── Data Paths ──────────────────────────────────────────────
 const DATA_BASE = '../../data';
+const USERS_DB_KEY = 'spms_users_db_v1';
 const DATA_PATHS = {
     users: `${DATA_BASE}/users.json`,
     sessions: `${DATA_BASE}/sessions.json`,
@@ -56,7 +57,27 @@ async function loadJSON(path) {
     }
 }
 
-async function loadUsers() { return await loadJSON(DATA_PATHS.users); }
+function safeParseJSON(raw, fallback) {
+    try { return JSON.parse(raw); } catch { return fallback; }
+}
+
+async function loadUsers() {
+    const cached = safeParseJSON(localStorage.getItem(USERS_DB_KEY) || '[]', []);
+    if (Array.isArray(cached) && cached.length > 0) {
+        return cached;
+    }
+
+    const users = await loadJSON(DATA_PATHS.users);
+    const normalized = Array.isArray(users) ? users : [];
+    localStorage.setItem(USERS_DB_KEY, JSON.stringify(normalized));
+    return normalized;
+}
+
+async function saveUsers(users) {
+    if (!Array.isArray(users)) return false;
+    localStorage.setItem(USERS_DB_KEY, JSON.stringify(users));
+    return true;
+}
 async function loadSessions() {
     const d = await loadJSON(DATA_PATHS.sessions);
     return d ? d.sessions : [];
