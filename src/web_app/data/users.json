@@ -88,5 +88,14 @@
     "fullName": "Nguyễn Văn Bình",
     "email": "binh.nguyen@hcmut.edu.vn",
     "cardId": "CARD-A003"
+  },
+  {
+    "id": "USR-011",
+    "username": "tandz",
+    "password": "tandz123",
+    "role": "admin",
+    "fullName": "Lê Hoàng Tân",
+    "email": "tan.le2407@hcmut.edu.vn",
+    "cardId": "CARD-B011"
   }
 ]

@@ -1,0 +1,59 @@
+﻿:root {
+    color-scheme: dark;
+}
+
+.spms-theme-toggle {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    padding: 0.55rem 0.9rem;
+    background: rgba(16, 19, 27, 0.78);
+    color: #f1f3fe;
+    font-family: Manrope, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
+    transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.spms-theme-toggle:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.32);
+}
+
+.spms-theme-toggle:active {
+    transform: scale(0.97);
+}
+
+.spms-theme-toggle .material-symbols-outlined {
+    font-size: 1rem;
+}
+
+:root.theme-light {
+    color-scheme: light;
+    filter: invert(1) hue-rotate(180deg);
+}
+
+:root.theme-light img,
+:root.theme-light video,
+:root.theme-light iframe,
+:root.theme-light [data-no-theme-invert='true'] {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+:root.theme-light .spms-theme-toggle {
+    filter: invert(1) hue-rotate(180deg);
+    border-color: rgba(15, 23, 42, 0.2);
+    background: rgba(246, 248, 252, 0.9);
+    color: #0f172a;
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.14);
+}
