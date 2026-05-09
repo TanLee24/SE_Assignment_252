@@ -190,7 +190,7 @@
         // Unpaid Balance calculation
         const allInvoices = JSON.parse(localStorage.getItem('spms_invoices_v1') || '[]');
         const userInvoices = allInvoices.filter(inv => inv.cardId === user.cardId);
-        const unpaidInv = userInvoices.find(inv => inv.status === 'UNPAID');
+        const unpaidInv = userInvoices.find(inv => ['UNPAID', 'PENDING', 'FAILED', 'PROCESSING'].includes(inv.status));
         
         document.getElementById('statUnpaidBalance').textContent = unpaidInv ? formatVND(unpaidInv.amount) : '0 đ';
     }
