@@ -158,13 +158,28 @@
         </button>
       </div>
 
+      <div class="mt-3 flex flex-col sm:flex-row gap-3">
+        <button id="insufficientBtn"
+          class="h-11 px-5 rounded-full bg-surface-container-high text-on-surface font-bold border border-outline-variant/20 hover:bg-surface-bright active:scale-95 transition-all text-xs uppercase tracking-widest">
+          Số dư không đủ
+        </button>
+        <button id="timeoutBtn"
+          class="h-11 px-5 rounded-full bg-surface-container-high text-on-surface font-bold border border-outline-variant/20 hover:bg-surface-bright active:scale-95 transition-all text-xs uppercase tracking-widest">
+          Timeout
+        </button>
+        <button id="connectionBtn"
+          class="h-11 px-5 rounded-full bg-surface-container-high text-on-surface font-bold border border-outline-variant/20 hover:bg-surface-bright active:scale-95 transition-all text-xs uppercase tracking-widest">
+          Mất kết nối
+        </button>
+      </div>
+
       <p class="mt-4 text-xs text-on-surface-variant">
         Khi bấm xác nhận, BKPay sẽ redirect về IoT-SPMS và trả “webhook” (mô phỏng) để cập nhật hóa đơn.
       </p>
     </div>
   </main>
 
-  <script>
+  <!-- <script>
     const STORAGE = {
       txs: 'spms_transactions_v1',
       audit: 'spms_audit_logs_v1',
@@ -279,7 +294,9 @@
       if (!tx) return;
       redirectResult(tx.id, 'cancelled');
     });
-  </script>
+  </script> -->
+  <script src="./assets/scripts/pricing-services.js"></script>
+  <script type="module" src="./assets/scripts/bkpay-page.js"></script>
 </body>
 
 </html>
