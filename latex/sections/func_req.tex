@@ -142,7 +142,7 @@ Phân hệ này cho phép quản lý tự động quy trình ra vào bãi đỗ 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.1\textwidth]{pictures/task1_usecase_diagram.png} 
+    \includegraphics[width=1.1\textwidth]{pictures/task1_usecase_diagram_v2.png} 
     \caption{Use-case diagram cho Phân hệ Quản lý kiểm soát ra vào}
     \label{UCD_1}
 \end{figure}
@@ -293,6 +293,7 @@ Phân hệ này cho phép quản lý tự động quy trình ra vào bãi đỗ 
 \hline
 \end{xltabular}
 
+\newpage
 \subsection{Giám sát IoT và trạng thái bãi đỗ}
 \subsubsection{Tổng quan}
 Phân hệ này chịu trách nhiệm thu thập và xử lý dữ liệu từ mạng lưới cảm biến IoT để giám sát tình trạng sức chứa (trống/có xe) của bãi đỗ theo thời gian thực. Thông qua các cổng giao tiếp (IoT Gateway), hệ thống liên tục cập nhật trạng thái từng ô đỗ, đồng thời tích hợp các cơ chế chịu lỗi thông minh như tự động lọc dữ liệu nhiễu, giám sát kết nối và cô lập các thiết bị phần cứng gặp sự cố. Nhờ đó, phân hệ cung cấp cho nhân viên vận hành một sơ đồ bãi xe trực quan, chính xác và đóng vai trò là nguồn dữ liệu nền tảng thiết yếu để tự động hóa việc điều hướng giao thông trong khuôn viên trường.
@@ -402,6 +403,7 @@ Phân hệ này chịu trách nhiệm thu thập và xử lý dữ liệu từ m
 \hline
 \end{xltabular}
 
+\newpage
 \subsection{Điều hướng Giao thông}
 \subsubsection{Tổng quan}
 Phân hệ Điều hướng Giao thông đóng vai trò cốt lõi trong việc tối ưu hóa luồng phương tiện và nâng cao trải nghiệm của người dùng trong khuôn viên trường đại học. Dựa trên nguồn dữ liệu thời gian thực được luân chuyển từ phân hệ Giám sát IoT, hệ thống tự động phân tích tình trạng sức chứa của từng khu vực (còn chỗ, gần đầy, hoặc hết chỗ) để tính toán luồng di chuyển tối ưu. Các thông tin chỉ dẫn này sau đó được truyền tải liên tục thành các lệnh điều khiển động lên mạng lưới bảng hiển thị LED đặt tại các cổng và nút giao quan trọng, giúp tài xế nhanh chóng tìm được vị trí đỗ hoặc chuyển hướng sang các bãi xe thay thế. Đồng thời, phân hệ cung cấp giao diện quản lý để cấu hình vị trí bảng chỉ dẫn và phát đi các thông báo thủ công khi có sự kiện đặc biệt.
@@ -414,7 +416,6 @@ Phân hệ Điều hướng Giao thông đóng vai trò cốt lõi trong việc 
     \label{UCD_3}
 \end{figure}
 
-\newpage
 \subsubsection{Use-case scenarios}
 \noindent \textbf{Use Case: Hiển thị trạng thái bãi đỗ xe} \\
 \renewcommand{\arraystretch}{1.6}
@@ -534,6 +535,7 @@ Phân hệ Điều hướng Giao thông đóng vai trò cốt lõi trong việc 
 \hline
 \end{xltabular}
 
+\newpage
 \subsection{Quản lý Tính phí và Thanh toán}
 \subsubsection{Tổng quan}
 Phân hệ Quản lý Tính phí và Thanh toán đảm nhiệm việc tự động hóa toàn bộ quy trình tài chính liên quan đến hoạt động gửi xe trong khuôn viên trường. Phân hệ cung cấp các công cụ chuyên sâu để Quản trị viên cấu hình linh hoạt chính sách giá và quyền lợi đỗ xe cho từng nhóm đối tượng cụ thể (sinh viên, cán bộ, giảng viên). Thay vì thu phí thủ công từng lượt, hệ thống sẽ tự động tổng hợp các phiên gửi xe theo chu kỳ thời gian, tính toán chi phí phát sinh và cho phép người dùng khởi tạo yêu cầu thanh toán thông qua việc tích hợp trực tiếp với nền tảng BKPay. Nhờ cơ chế theo dõi nợ phí và cập nhật trạng thái giao dịch tự động qua Webhook/Callback, phân hệ này đảm bảo tính minh bạch, độ chính xác tuyệt đối và sự tiện lợi tối đa trong công tác đối soát tài chính.
@@ -669,7 +671,6 @@ Phân hệ Quản lý Tính phí và Thanh toán đảm nhiệm việc tự đ�
 \hline
 \end{xltabular}
 
-\newpage
 \noindent \textbf{Use Case: Xem hóa đơn và lịch sử giao dịch} \\
 \renewcommand{\arraystretch}{1.6}
 \begin{xltabular}{\textwidth}{|l|X|}
@@ -704,7 +705,6 @@ Phân hệ Quản lý Tính phí và Thanh toán đảm nhiệm việc tự đ�
 \hline
 \end{xltabular}
 
-\newpage
 \noindent \textbf{Use Case: Xử lý Webhook/Callback từ BKPay} \\
 \renewcommand{\arraystretch}{1.6}
 \begin{xltabular}{\textwidth}{|l|X|}
@@ -743,6 +743,7 @@ Phân hệ Quản lý Tính phí và Thanh toán đảm nhiệm việc tự đ�
 \hline
 \end{xltabular}
 
+\newpage
 \subsection{Các yêu cầu chức năng phi tương tác}
 \subsubsection{Tổng quan}
 Hệ thống bao gồm một số quy trình nền không tương tác, chạy tự động để đảm bảo tính toàn vẹn dữ liệu, liên lạc kịp thời và kiểm soát truy cập phù hợp. Các trường hợp sử dụng này được kích hoạt bởi các sự kiện hệ thống hoặc các tác vụ theo lịch trình (cron jobs) và không yêu cầu người dùng tương tác trực tiếp để thực thi. Chúng rất cần thiết cho việc tự động hóa và tăng độ tin cậy của Hệ thống Quản lý Bãi đỗ xe thông minh.
@@ -756,7 +757,6 @@ Hệ thống bao gồm một số quy trình nền không tương tác, chạy t
 \end{figure}
 
 \subsubsection{Use-case scenarios}
-\newpage
 \noindent \textbf{Use Case: Tự động đồng bộ dữ liệu} \\
 \renewcommand{\arraystretch}{1.6}
 \begin{xltabular}{\textwidth}{|l|X|}
@@ -949,7 +949,6 @@ Hệ thống bao gồm một số quy trình nền không tương tác, chạy t
 \hline
 \end{xltabular}
 
-\newpage
 \noindent \textbf{Use Case: Tự động báo cáo thống kê hiệu suất} \\
 \renewcommand{\arraystretch}{1.6}
 \begin{xltabular}{\textwidth}{|l|X|}
