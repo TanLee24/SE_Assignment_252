@@ -1,0 +1,78 @@
+\section{Kịch bản kiểm thử (Test Cases)}
+
+\subsection{Điều hướng Động và Giám sát Thời gian thực}
+
+% TC_DG_01
+\textbf{TC\_DG\_01: Xem trạng thái bãi đỗ xe tổng quát}
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \rowcolor[HTML]{EFEFEF} 
+        \textbf{Mã kịch bản} & \textbf{TC\_DG\_01} \\ \hline
+        \textbf{Mô tả} & Kiểm tra việc người dùng xem trạng thái occupancy tổng quát của tất cả các khu vực đỗ xe. \\ \hline
+        \textbf{Tiền điều kiện} & 1. Hệ thống đang hoạt động. \newline 2. Tệp \texttt{parking\_status.json} chứa dữ liệu khu vực hợp lệ (A, B, C). \\ \hline
+        \textbf{Dữ liệu nhập} & 1. Truy cập trang \texttt{parking\_status.html}. \\ \hline
+        \textbf{Kết quả mong đợi} & 1. Các thẻ thông tin cho Khu vực A, B và C được hiển thị. \newline 2. Mỗi thẻ hiển thị đúng số "Chỗ trống" và "Tổng cộng". \newline 3. Thanh tiến trình được tô màu dựa trên trạng thái (ví dụ: Đỏ khi đầy, Xanh khi còn chỗ). \\ \hline
+    \end{tabularx}
+\end{table}
+
+% TC_DG_02
+\textbf{TC\_DG\_02: Logic biển báo điều hướng toàn cục}
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \rowcolor[HTML]{EFEFEF} 
+        \textbf{Mã kịch bản} & \textbf{TC\_DG\_02} \\ \hline
+        \textbf{Mô tả} & Kiểm tra logic biển báo điều hướng toàn cục: tự động xác định và chỉ hướng tới khu vực còn nhiều chỗ trống nhất. \\ \hline
+        \textbf{Tiền điều kiện} & 1. Trang \texttt{global-display.html} đang mở. \newline 2. Khu vực B có 42 chỗ trống, Khu vực A có 15, Khu vực C đã đầy. \\ \hline
+        \textbf{Dữ liệu nhập} & 1. Tải trang và đợi hệ thống đồng bộ dữ liệu. \\ \hline
+        \textbf{Kết quả mong đợi} & 1. Mũi tên điều hướng màu xanh trên bản đồ chỉ về hướng Khu vực B. \newline 2. Giao diện làm nổi bật Khu vực B là điểm đến được đề xuất. \\ \hline
+    \end{tabularx}
+\end{table}
+
+% TC_DG_03
+\textbf{TC\_DG\_03: Bản đồ occupancy chi tiết khu vực}
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \rowcolor[HTML]{EFEFEF} 
+        \textbf{Mã kịch bản} & \textbf{TC\_DG\_03} \\ \hline
+        \textbf{Mô tả} & Kiểm tra bản đồ chi tiết từng khu vực hiển thị đúng trạng thái của từng ô đỗ (Trống vs. Đã có xe). \\ \hline
+        \textbf{Tiền điều kiện} & 1. Trang \texttt{local-display.html?zone=A} đang mở. \newline 2. Dữ liệu IoT báo cáo ô A-01 đã có xe và ô A-02 đang trống. \\ \hline
+        \textbf{Dữ liệu nhập} & 1. Kiểm tra các thành phần bản đồ SVG của Khu vực A. \\ \hline
+        \textbf{Kết quả mong đợi} & 1. Ô A-01 được hiển thị màu ĐỎ (màu lỗi/đầy). \newline 2. Ô A-02 được hiển thị màu XANH LÁ (màu thành công/trống). \newline 3. Chỉ báo "BẠN Ở ĐÂY" được đặt đúng vị trí lối vào. \\ \hline
+    \end{tabularx}
+\end{table}
+
+% TC_DG_04
+\textbf{TC\_DG\_04: Ghi đè thông báo quản trị hệ thống}
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \rowcolor[HTML]{EFEFEF} 
+        \textbf{Mã kịch bản} & \textbf{TC\_DG\_04} \\ \hline
+        \textbf{Mô tả} & Kiểm tra khả năng ghi đè thông báo của quản trị viên lên tất cả các màn hình điều hướng trong trường hợp khẩn cấp. \\ \hline
+        \textbf{Tiền điều kiện} & 1. Quản trị viên đã truy cập vào \texttt{admin-control.html}. \newline 2. Một thiết bị hiển thị toàn cục (Global Display) đang hoạt động. \\ \hline
+        \textbf{Dữ liệu nhập} & 1. Tại ô "Ghi đè thông báo khẩn", nhập nội dung: "BÃI XE TẠM ĐÓNG - SỰ CỐ KỸ THUẬT". \newline 2. Nhấn nút "Đẩy cập nhật xuống hệ thống". \newline 3. Xác nhận tại hộp thoại hiện lên. \\ \hline
+        \textbf{Kết quả mong đợi} & 1. Màn hình điều hướng toàn cục ngay lập tức hiển thị lớp phủ (overlay) toàn màn hình với nội dung: "BÃI XE TẠM ĐÓNG - SỰ CỐ KỸ THUẬT". \newline 2. Các thông tin về bản đồ và số lượng chỗ trống bị ẩn đi. \\ \hline
+    \end{tabularx}
+\end{table}
+
+% TC_DG_05
+\textbf{TC\_DG\_05: Đồng bộ dữ liệu thời gian thực (Heartbeat)}
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|X|}
+        \hline
+        \rowcolor[HTML]{EFEFEF} 
+        \textbf{Mã kịch bản} & \textbf{TC\_DG\_05} \\ \hline
+        \textbf{Mô tả} & Kiểm tra việc tự động cập nhật dữ liệu (Heartbeat) mà không cần tải lại trang. \\ \hline
+        \textbf{Tiền điều kiện} & 1. Trang \texttt{parking\_status.html} hoặc các bảng LED đang mở. \\ \hline
+        \textbf{Dữ liệu nhập} & 1. Đợi chu kỳ làm mới của hệ thống (từ 5 đến 30 giây tùy trang). \newline 2. Thay đổi dữ liệu trạng thái bãi xe (giả lập qua Admin Control). \\ \hline
+        \textbf{Kết quả mong đợi} & 1. Thời gian "Cập nhật" trên trang trạng thái thay đổi. \newline 2. Các con số chỗ trống và mũi tên điều hướng tự động cập nhật trạng thái mới nhất mà không gây giật lag giao diện. \\ \hline
+    \end{tabularx}
+\end{table}
