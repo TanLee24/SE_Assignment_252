@@ -1,8 +1,8 @@
 \newpage
-\section{Implementation View}
+\section{Triển khai hệ thống}
 Phần này trình bày cách thức triển khai hệ thống IoT-SPMS trong thực tế, bao gồm kiến trúc, cấu trúc thư mục, công nghệ sử dụng và quy trình tương tác các thành phần.
 
-\subsection{Overview of System Architecture}
+\subsection{Tổng quan kiến trúc hệ thống}
 
 Hệ thống IoT-SPMS được thiết kế theo kiến trúc phân tầng (Layered Architecture) kết hợp với mô hình dịch vụ (Service-Oriented Architecture) nhằm đạt được tính mô-đun hóa, dễ bảo trì và mở rộng.
 
@@ -25,7 +25,7 @@ Ngoài ra, hệ thống tích hợp với các hệ thống bên ngoài:
     \item LED Displays: Hiển thị trạng thái bãi đỗ và điều hướng giao thông
 \end{itemize}
 
-\subsection{Architectural Layer Design}
+\subsection{Thiết kế tầng kiến trúc}
 
 \subsubsection{Tầng Presentation}
 
@@ -127,78 +127,27 @@ Tầng Data Access cung cấp các Repository để trừu tượng hóa việc 
 \begin{figure}[htbp]
     \begin{verbatim}
         ├── src/
-        │   ├── iot/                        # Phần mềm IoT (placeholder)
-        │   └── web_app/                    # Ứng dụng web chính
-        │       ├── data/                   # Dữ liệu JSON
-        │       │   ├── users.json          # Danh sách người dùng
-        │       │   ├── sessions.json       # Lịch sử phiên đỗ xe
-        │       │   ├── transactions.json   # Giao dịch thanh toán
-        │       │   ├── audit_log.json      # Nhật ký hệ thống
+        │   ├── iot/                        
+        │   └── web_app/                    
+        │       ├── data/                   
         │       │   └── dynamic_guidance/
-        │       │       └── parking_status.json  # Trạng thái bãi đỗ
-        │       │
-        │       └── public/                 # Tài nguyên web tĩnh
-        │           ├── index.html          # Trang chủ
-        │           ├── login.html          # Trang đăng nhập
-        │           ├── theme.css           # Stylesheet chung
-        │           ├── theme.js            # JavaScript chung
-        │           │
-        │           ├── admin/              # Giao diện Quản trị viên
-        │           │   ├── admin_dashboard.html
-        │           │   ├── users.html
-        │           │   ├── access_control.html
-        │           │   ├── pricing_config.html
-        │           │   ├── analytics.html
-        │           │   ├── logs.html
-        │           │   ├── iot_monitoring.html
-        │           │   ├── sync.html
-        │           │   ├── dynamic_guidance.html
-        │           │   └── shared.js       # Module chung cho admin
-        │           │
-        │           ├── user/               # Giao diện Người dùng
-        │           │   ├── dashboard.html
-        │           │   ├── status.html
-        │           │   ├── history.html
-        │           │   ├── billing.html
-        │           │   └── shared.js       # Module chung cho user
-        │           │
-        │           ├── guard/              # Giao diện Nhân viên vận hành
-        │           │   ├── dashboard.html
-        │           │   ├── status.html
-        │           │   ├── signage.html
-        │           │   └── shared.js       # Module chung cho guard
-        │           │
-        │           ├── pricing/            # Giao diện Thanh toán
-        │           │   ├── payment.html
-        │           │   ├── bkpay.html
-        │           │   ├── pricing.html
+        │       └── public/                 
+        │           ├── admin/             
+        │           ├── user/               
+        │           ├── guard/             
+        │           ├── pricing/            
         │           │   └── assets/
         │           │       └── scripts/
-        │           │           ├── pricing-services.js     # BillingService
-        │           │           ├── pricing-page.js         # Logic trang pricing
-        │           │           ├── bkpay-page.js           # Logic trang BKPay
-        │           │           ├── billing-page.js         # Logic trang billing
-        │           │           └── pricing-services.js     # PaymentService
-        │           │
-        │           ├── dynamic_guidance/   # Bảng LED & Điều hướng
-        │           │   ├── admin-control.html
-        │           │   ├── global-display.html
-        │           │   ├── launcher.html
-        │           │   ├── local-display.html
+        │           ├── dynamic_guidance/  
         │           │   └── assets/
         │           │       └── scripts/
-        │           │           ├── admin.js        # GuidanceDisplayService
-        │           │           ├── core.js         # Core logic
-        │           │           └── signage.js      # Signage control
-        │           │
-        │           └── iot_monitoring/     # Giám sát IoT
-        │               └── parking.html
+        │           └── iot_monitoring/     
     \end{verbatim}
     \caption{Cấu trúc thư mục hệ thống IoT-SPMS}
     \label{folder_structure}
 \end{figure}
 
-\subsection{UML Architectural Diagram}
+\subsection{Sơ đồ UML kiến trúc}
 
 \begin{figure}[H]
     \centering
@@ -227,7 +176,7 @@ Sơ đồ trên thể hiện các thành phần chính (Components) và mối qu
     \item \textbf{Data Storage}: Các tệp JSON lưu trữ dữ liệu nội bộ
 \end{itemize}
 
-\subsection{Deployment Diagram}
+\subsection{Sơ đồ triển khai}
 
 \begin{figure}[H]
     \centering
@@ -269,7 +218,7 @@ Hệ thống được triển khai trên các nút (nodes) như sau:
     \end{itemize}
 \end{itemize}
 
-\subsection{Implementation Logic (Interaction Flow)}
+\subsection{Luồng triển khai (Luồng tương tác)}
 
 \subsubsection{Luồng 1: Đăng nhập \& Phân quyền}
 
@@ -379,7 +328,7 @@ Hệ thống được triển khai trên các nút (nodes) như sau:
     \item Quản trị viên có thể xuất báo cáo, lọc theo khoảng thời gian, actor, severity
 \end{enumerate}
 
-\subsection{Technology Stack Summary}
+\subsection{Tóm tắt công nghệ}
 
 Hệ thống IoT-SPMS sử dụng stack công nghệ sau:
 
@@ -422,9 +371,9 @@ Hệ thống IoT-SPMS sử dụng stack công nghệ sau:
     \label{tech_stack}
 \end{table}
 
-\subsection{Key Implementation Details}
+\subsection{Chi tiết triển khai chính}
 
-\subsubsection{State Management for Payment}
+\subsubsection{Quản lý trạng thái thanh toán}
 
 Hệ thống quản lý trạng thái hóa đơn (Invoice) theo mô hình State Machine:
 
@@ -445,7 +394,7 @@ Hệ thống quản lý trạng thái hóa đơn (Invoice) theo mô hình State 
     \label{invoice_state}
 \end{table}
 
-\subsubsection{Idempotency for Webhook}
+\subsubsection{Cơ chế idempotency cho webhook}
 
 PaymentService triển khai cơ chế idempotency cho webhook callback từ BKPay bằng cách lưu trữ Transaction status. Khi nhận callback lặp cùng transaction ID, hệ thống sẽ:
 \begin{itemize}
