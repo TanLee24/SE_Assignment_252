@@ -1,1 +1,0 @@
-logos, icons, images,... used for the web app
