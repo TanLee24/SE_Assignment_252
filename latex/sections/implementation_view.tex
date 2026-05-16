@@ -1,5 +1,5 @@
 \newpage
-\section{Triển khai hệ thống}
+\section{Implementation View}
 Phần này trình bày cách thức triển khai hệ thống IoT-SPMS trong thực tế, bao gồm kiến trúc, cấu trúc thư mục, công nghệ sử dụng và quy trình tương tác các thành phần.
 
 \subsection{Tổng quan kiến trúc hệ thống}
@@ -410,7 +410,7 @@ PaymentService triển khai cơ chế idempotency cho webhook callback từ BKPa
     \item Audit log rõ ràng
 \end{itemize}
 
-\subsubsection{Data Synchronization Strategy}
+\subsubsection{Chiến lược đồng bộ hóa dữ liệu}
 
 \begin{itemize}
     \item \textbf{User Data}: Đồng bộ định kỳ từ DATACORE (caching locally)
@@ -419,7 +419,7 @@ PaymentService triển khai cơ chế idempotency cho webhook callback từ BKPa
     \item \textbf{Parking Status}: Updated real-time từ IoT Gateways (near real-time, max 5 sec delay)
 \end{itemize}
 
-\subsubsection{Error Handling Strategy}
+\subsubsection{Chiến lược xử lý lỗi}
 
 Hệ thống triển khai chiến lược xử lý lỗi toàn diện:
 
@@ -431,7 +431,7 @@ Hệ thống triển khai chiến lược xử lý lỗi toàn diện:
     \item \textbf{Database Error}: Rollback transaction nếu thất bại ở giữa quá trình
 \end{itemize}
 
-\subsection{Security Considerations}
+\subsection{Cân nhắc về bảo mật}
 
 \begin{itemize}
     \item \textbf{Authentication}: Sử dụng JWT + HCMUT\_SSO, không lưu password
@@ -442,6 +442,6 @@ Hệ thống triển khai chiến lược xử lý lỗi toàn diện:
     \item \textbf{Input Validation}: Kiểm tra và sanitize toàn bộ user input
 \end{itemize}
 
-\subsection{Summary}
+\subsection{Tổng kết}
 
 Implementation View của hệ thống IoT-SPMS được thiết kế theo kiến trúc phân tầng chuẩn với 3 tầng chính (Presentation, Business Logic, Data Access). Hệ thống tích hợp seamlessly với các hệ thống bên ngoài (SSO, DATACORE, BKPay, IoT Gateways) thông qua các API endpoint và protocols chuẩn. Mỗi thành phần được triển khai với các hành động cụ thể (interaction flows) đảm bảo tính chính xác, an toàn, và khả năng chịu lỗi. Technology stack được lựa chọn đơn giản nhưng hiệu quả: HTML5/CSS3/JavaScript cho frontend, Node.js cho backend, JSON để lưu trữ, và các API chuẩn để tích hợp. Chiến lược xử lý lỗi, đồng bộ dữ liệu, và quản lý trạng thái được triển khai toàn diện để đảm bảo hệ thống hoạt động ổn định 24/7 trong môi trường sản xuất.
